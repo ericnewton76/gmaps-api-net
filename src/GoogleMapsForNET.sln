@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps.Core", "Google.Api.Maps\Google.Api.Maps.Core.csproj", "{44C0377C-9B5C-4B25-9735-FECF5D165C1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps.Core", "Google.Api.Maps.Core\Google.Api.Maps.Core.csproj", "{44C0377C-9B5C-4B25-9735-FECF5D165C1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps.Core.Test", "Google.Api.Maps.Test\Google.Api.Maps.Core.Test.csproj", "{55C59856-FB23-43F6-9A2A-42EDA45A6A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps.Core.Test", "Google.Api.Maps.Core.Test\Google.Api.Maps.Core.Test.csproj", "{55C59856-FB23-43F6-9A2A-42EDA45A6A35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
