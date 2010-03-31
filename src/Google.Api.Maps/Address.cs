@@ -15,18 +15,31 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using Google.Api.Maps.Service.Geocoding;
 
-namespace Google.Api.Maps.Service.Elevation
+namespace Google.Api.Maps
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	public class ElevationResult
+	public class Address : AddressBase
 	{
-		[JsonProperty("location")]
-		public GeographicPosition Location { get; set; }
+		[AddressComponent(AddressType.Route)]
+		public string Street { get; set; }
 
-		[JsonProperty("elevation")]
-		public decimal Elevation { get; set; }
+		[AddressComponent(AddressType.StreetNumber)]
+		public int Number { get; set; }
+
+		[AddressComponent(AddressType.PostalCode)]
+		public string PostalCode { get; set; }
+
+		[AddressComponent(AddressType.Neighborhood, AddressType.Locality, AddressType.AdministrativeAreaLevel3)]
+		public Location City { get; set; }
+
+		[AddressComponent(AddressType.AdministrativeAreaLevel2)]
+		public Location County { get; set; }
+
+		[AddressComponent(AddressType.AdministrativeAreaLevel1)]
+		public Location State { get; set; }
+
+		[AddressComponent(AddressType.Country)]
+		public Location Country { get; set; }
 	}
 }

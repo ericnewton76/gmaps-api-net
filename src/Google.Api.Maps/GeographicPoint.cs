@@ -15,18 +15,30 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
-using Google.Api.Maps.Service.Geocoding;
-
-namespace Google.Api.Maps.Service.Elevation
+namespace Google.Api.Maps
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	public class ElevationResult
+	public struct GeographicPoint
 	{
-		[JsonProperty("location")]
-		public GeographicPosition Location { get; set; }
+		public Coordinate Latitude { get; set; }
+		public Coordinate Longitude { get; set; }
+		public Elevation Altitude { get; set; }
 
-		[JsonProperty("elevation")]
-		public decimal Elevation { get; set; }
+		public GeographicPoint(Coordinate latitude, Coordinate longitude)
+			: this()
+		{
+			Latitude = latitude;
+			Longitude = longitude;
+		}
+
+		public GeographicPoint(Coordinate latitude, Coordinate longitude, Elevation elevation)
+			: this(latitude, longitude)
+		{
+			Altitude = elevation;
+		}
+
+		public override string ToString()
+		{
+			return Latitude + "," + Longitude;
+		}
 	}
 }

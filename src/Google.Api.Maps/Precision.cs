@@ -15,17 +15,14 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
-
-namespace Google.Api.Maps.Service
+namespace Google.Api.Maps
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	public class GeographicPosition
+	public enum Precision
 	{
-		[JsonProperty("lat")]
-		public decimal Latitude { get; set; }
-
-		[JsonProperty("lng")]
-		public decimal Longitude { get; set; }
+		Unknown,
+		Exact,
+		Interpolated,
+		Approximate,
+		Centered
 	}
 }

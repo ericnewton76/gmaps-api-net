@@ -16,17 +16,16 @@
  */
 
 using Newtonsoft.Json;
-using Google.Api.Maps.Service.Geocoding;
 
-namespace Google.Api.Maps.Service.Elevation
+namespace Google.Api.Maps.Service.Geocoding
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class ElevationResult
+	public class GeographicPosition
 	{
-		[JsonProperty("location")]
-		public GeographicPosition Location { get; set; }
+		[JsonProperty("lat")]
+		public decimal Latitude { get; set; }
 
-		[JsonProperty("elevation")]
-		public decimal Elevation { get; set; }
+		[JsonProperty("lng")]
+		public decimal Longitude { get; set; }
 	}
 }

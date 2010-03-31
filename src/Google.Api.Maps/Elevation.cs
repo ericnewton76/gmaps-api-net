@@ -15,18 +15,43 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
-using Google.Api.Maps.Service.Geocoding;
+using System.Globalization;
 
-namespace Google.Api.Maps.Service.Elevation
+namespace Google.Api.Maps
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	public class ElevationResult
+	public struct Elevation
 	{
-		[JsonProperty("location")]
-		public GeographicPosition Location { get; set; }
+		/// <summary>
+		/// Creates an Elevation object from a decimal value.
+		/// </summary>
+		/// <param name="e"></param>
+		/// <returns></returns>
+		public static implicit operator Elevation(decimal meters)
+		{
+			return new Elevation { _meters = meters };
+		}
 
-		[JsonProperty("elevation")]
-		public decimal Elevation { get; set; }
+		/// <summary>
+		/// Creates a decimal value from an Elevation object.
+		/// </summary>
+		/// <param name="elevation"></param>
+		/// <returns></returns>
+		public static implicit operator decimal(Elevation elevation)
+		{
+			return elevation._meters;
+		}
+
+		public Elevation(decimal meters)
+			: this()
+		{
+			_meters = meters;
+		}
+
+		public override string ToString()
+		{
+			return _meters.ToString(CultureInfo.InvariantCulture);
+		}
+
+		private decimal _meters;
 	}
 }

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Google.Api.Maps")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Google Maps API for .NET")]
+[assembly: AssemblyDescription("Google Maps API for .NET main library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Google.Api.Maps")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyCompany("Luis Farzati")]
+[assembly: AssemblyProduct("Google Maps API for .NET")]
+[assembly: AssemblyCopyright("Copyright © Luis Farzati 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3861a7da-7dd7-41fd-9bfe-e37baa5a108b")]
+[assembly: Guid("0b886e98-2b42-4b4a-83db-0a16354b692c")]
 
 // Version information for an assembly consists of the following four values:
 //

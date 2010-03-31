@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{077D91A6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAddressMap", "Samples\SearchAddressMap\SearchAddressMap.csproj", "{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps", "Google.Api.Maps\Google.Api.Maps.csproj", "{B23A726B-AAA5-47C3-8BBC-7E2054E8F7DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps", "Google.Api.Maps\Google.Api.Maps.csproj", "{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,10 @@ Global
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B23A726B-AAA5-47C3-8BBC-7E2054E8F7DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B23A726B-AAA5-47C3-8BBC-7E2054E8F7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B23A726B-AAA5-47C3-8BBC-7E2054E8F7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B23A726B-AAA5-47C3-8BBC-7E2054E8F7DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

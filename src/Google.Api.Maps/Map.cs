@@ -1,62 +1,22 @@
-﻿using Google.Api.Maps.Service;
-using Google.Api.Maps.Service.Geocoding;
-using System.Collections.Generic;
-using System;
+﻿/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 namespace Google.Api.Maps
 {
-    public struct Coordinate
-    {
-        private decimal decimalDegrees;
-
-        public int Degrees
-        {
-            get
-            {
-                return (int)Math.Floor(Math.Abs(decimalDegrees));
-            }
-            set
-            {
-
-            }
-        }
-
-    }
-
-    public struct GeographicPoint
-    {
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
-        public decimal Elevation { get; set; }
-    }
-
-    public class Location
-    {
-        public LocationType Precision { get; set; }
-        public string Name { get; set; }
-        public string ShortName { get; set; }
-    }
-
-    public class Address : Location
-    {
-        public string Street { get; set; }
-        public int Number { get; set; }
-        public int? Floor { get; set; }
-        public string Room { get; set; }
-        public Dictionary<AddressType,Location> AdministrativeArea { get; set; }
-        public Location Country { get; set; }
-    }
-
-    public class ApproximateAddress : Location
-    {
-        public string Street { get; set; }
-        public int Number { get; set; }
-        public int? Floor { get; set; }
-        public string Room { get; set; }
-        public Dictionary<AddressType, Location> AdministrativeArea { get; set; }
-        public Location Country { get; set; }
-    }
-
     public class Map
     {
         public Location Location { get; set; }
