@@ -15,13 +15,46 @@
  * limitations under the License.
  */
 
+using System.Linq;
 using Google.Api.Maps.Service.Geocoding;
 
 namespace Google.Api.Maps
 {
-	public abstract class AddressBase : Location
+	public abstract class AddressBase : HierarchicalLocation
 	{
-		public Location Parent { get; set; }
-		protected AddressComponent[] Components { get; set; }
-	}
+        public string Street
+        {
+            get
+            {
+                return Components.HavingType(AddressType.Route).DefaultIfEmpty(new AddressComponent()).FirstOrDefault().LongName;
+            }
+        }
+
+        public StreetNumber Number
+        {
+            get
+            {
+                return Components.HavingType(AddressType.StreetNumber).DefaultIfEmpty(new AddressComponent()).FirstOrDefault().LongName;
+            }
+        }
+
+        public string PostalCode
+        {
+            get
+            {
+                return Components.HavingType(AddressType.PostalCode).DefaultIfEmpty(new AddressComponent()).FirstOrDefault().LongName;
+            }
+        }
+
+        public Location Country
+        {
+            get
+            {
+                return new Location
+                {
+                    Name = Components.HavingType(AddressType.Country).DefaultIfEmpty(new AddressComponent()).FirstOrDefault().LongName
+                };
+            }
+        }
+    }
 }

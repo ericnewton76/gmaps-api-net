@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using Google.Api.Maps.Service.Geocoding;
+
 namespace Google.Api.Maps
 {
 	public class Location
@@ -22,6 +24,7 @@ namespace Google.Api.Maps
 		public GeographicPoint Coordinates { get; set; }
 		public Precision Precision { get; set; }
 		public string Name { get; set; }
+        public AddressComponent[] Components { get; set; }
 		
 		public override string ToString()
 		{

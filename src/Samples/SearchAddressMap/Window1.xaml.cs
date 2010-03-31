@@ -47,9 +47,7 @@ namespace Google.Api.Maps.Service.Samples.SearchAddressMap
 
 		private void searchButton_Click(object sender, RoutedEventArgs e)
 		{
-			var request = new GeocodingRequest();
-			request.Address = searchTextBox.Text;
-			request.Sensor = "false";
+            var request = new GeocodingRequest(searchTextBox.Text, "false");
 			var response = GeocodingService.GetResponse(request);
 
 			if (response.Status == ServiceResponseStatus.Ok)

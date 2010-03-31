@@ -63,6 +63,19 @@ namespace Google.Api.Maps.Service.Elevation
 		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
 		public string Sensor { get; set; }
 
+        public ElevationRequest(string locations, string sensor)
+        {
+            Locations = locations;
+            Sensor = sensor;
+        }
+
+        public ElevationRequest(string path, string samples, string sensor)
+        {
+            Path = path;
+            Samples = samples;
+            Sensor = sensor;
+        }
+
 		internal Uri ToUri()
 		{
 			var url = "json?"

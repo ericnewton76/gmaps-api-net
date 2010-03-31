@@ -18,6 +18,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Google.Api.Maps.Service.Geocoding;
+using System;
 
 namespace Google.Api.Maps.Service.Test
 {
@@ -32,7 +33,7 @@ namespace Google.Api.Maps.Service.Test
 			var expectedResultCount = 0;
 
 			// test
-			var request = new GeocodingRequest();
+			var request = new GeocodingRequest(String.Empty, String.Empty);
 			var response = GeocodingService.GetResponse(request);
 
 			// asserts
@@ -68,9 +69,8 @@ namespace Google.Api.Maps.Service.Test
 			var expectedNortheastLongitude = -122.0811574m;
 
 			// test
-			var request = new GeocodingRequest();
-			request.Address = "1600 Amphitheatre Parkway, Mountain View, CA";
-			request.Sensor = "false";
+			var address = "1600 Amphitheatre Parkway, Mountain View, CA";
+            var request = new GeocodingRequest(address, "false");
 			var response = GeocodingService.GetResponse(request);
 
 			// asserts
@@ -127,9 +127,8 @@ namespace Google.Api.Maps.Service.Test
 			var expectedNortheastLongitude = -73.9581434m;
 
 			// test
-			var request = new GeocodingRequest();
-			request.LatitudeLongitude = "40.714224,-73.961452";
-			request.Sensor = "false";
+            var coordinates  = "40.714224,-73.961452";
+            var request = new GeocodingRequest(coordinates, "false");
 			var response = GeocodingService.GetResponse(request);
 
 			// asserts

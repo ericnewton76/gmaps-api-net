@@ -76,6 +76,18 @@ namespace Google.Api.Maps.Service.Geocoding
 		/// <remarks>Required.</remarks>
 		public string Sensor { get; set; }
 
+        public GeocodingRequest(string address, string sensor)
+        {
+            Address = address;
+            Sensor = sensor;
+        }
+
+        public GeocodingRequest(string latitude, string longitude, string sensor)
+        {
+            LatitudeLongitude = latitude + "," + longitude;
+            Sensor = sensor;
+        }
+
 		internal Uri ToUri()
 		{
 			var url = "json?"

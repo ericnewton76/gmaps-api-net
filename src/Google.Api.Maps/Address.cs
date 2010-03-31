@@ -15,31 +15,42 @@
  * limitations under the License.
  */
 
+using System.Linq;
 using Google.Api.Maps.Service.Geocoding;
 
 namespace Google.Api.Maps
 {
 	public class Address : AddressBase
 	{
-		[AddressComponent(AddressType.Route)]
-		public string Street { get; set; }
-
-		[AddressComponent(AddressType.StreetNumber)]
-		public int Number { get; set; }
-
-		[AddressComponent(AddressType.PostalCode)]
-		public string PostalCode { get; set; }
-
-		[AddressComponent(AddressType.Neighborhood, AddressType.Locality, AddressType.AdministrativeAreaLevel3)]
-		public Location City { get; set; }
-
-		[AddressComponent(AddressType.AdministrativeAreaLevel2)]
-		public Location County { get; set; }
-
-		[AddressComponent(AddressType.AdministrativeAreaLevel1)]
-		public Location State { get; set; }
-
-		[AddressComponent(AddressType.Country)]
-		public Location Country { get; set; }
+        public Location City 
+        {
+            get
+            {
+                return new Location
+                {
+                    Name = Components.HavingType(AddressType.AdministrativeAreaLevel3).DefaultIfEmpty(new AddressComponent()).FirstOrDefault().LongName
+                };
+            }
+        }
+        public Location County
+        {
+            get
+            {
+                return new Location
+                {
+                    Name = Components.HavingType(AddressType.AdministrativeAreaLevel2).DefaultIfEmpty(new AddressComponent()).FirstOrDefault().LongName
+                };
+            }
+        }
+        public Location State
+        {
+            get 
+            { 
+                return new Location 
+                {
+                    Name = Components.HavingType(AddressType.AdministrativeAreaLevel1).DefaultIfEmpty(new AddressComponent()).FirstOrDefault().LongName
+                };
+            }
+        }
 	}
 }

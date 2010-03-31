@@ -15,10 +15,11 @@
  * limitations under the License.
  */
 
+using System;
 using System.Linq;
 using System.Net;
-using NUnit.Framework;
 using Google.Api.Maps.Service.Elevation;
+using NUnit.Framework;
 
 namespace Google.Api.Maps.Service.Test
 {
@@ -30,7 +31,7 @@ namespace Google.Api.Maps.Service.Test
 		public void GetElevationWithoutParameters()
 		{
 			// test
-			var request = new ElevationRequest();
+            var request = new ElevationRequest(String.Empty, String.Empty);
 			var response = ElevationService.GetResponse(request);
 		}
 
@@ -45,9 +46,8 @@ namespace Google.Api.Maps.Service.Test
 			var expectedLocationLongitude = -104.9847034m;
 			
 			// test
-			var request = new ElevationRequest();
-			request.Locations = "39.7391536,-104.9847034";
-			request.Sensor = "false";
+            var coordinates = "39.7391536,-104.9847034";
+            var request = new ElevationRequest(coordinates, "false");
 			var response = ElevationService.GetResponse(request);
 
 			// asserts
@@ -72,9 +72,8 @@ namespace Google.Api.Maps.Service.Test
 			var expectedLocationLongitude2 = -116.8666670m;
 
 			// test
-			var request = new ElevationRequest();
-			request.Locations = "39.7391536,-104.9847034|36.455556,-116.866667";
-			request.Sensor = "false";
+            var locations = "39.7391536,-104.9847034|36.455556,-116.866667";
+            var request = new ElevationRequest(locations, "false");
 			var response = ElevationService.GetResponse(request);
 
 			// asserts
