@@ -43,6 +43,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Direction\DirectionLeg.cs" />
+    <Compile Include="Direction\DirectionRequest.cs" />
+    <Compile Include="Direction\DirectionResponse.cs" />
+    <Compile Include="Direction\DirectionRoute.cs" />
+    <Compile Include="Direction\DirectionService.cs" />
+    <Compile Include="Direction\DirectionStep.cs" />
+    <Compile Include="Direction\DirectionWaypoint.cs" />
+    <Compile Include="Direction\KeyValue.cs" />
+    <Compile Include="Direction\Polyline.cs" />
+    <Compile Include="Direction\TravelMode.cs" />
     <Compile Include="Elevation\ElevationRequest.cs" />
     <Compile Include="Elevation\ElevationResponse.cs" />
     <Compile Include="Elevation\ElevationResult.cs" />
@@ -53,6 +63,7 @@
     <Compile Include="Geocoding\Geometry.cs" />
     <Compile Include="Geocoding\GeocodingRequest.cs" />
     <Compile Include="Geocoding\GeocodingResponse.cs" />
+    <Compile Include="GeographicPosition.cs" />
     <Compile Include="ServiceResponseStatus.cs" />
     <Compile Include="Geocoding\GeocodingResult.cs" />
     <Compile Include="Geocoding\GeocodingService.cs" />
