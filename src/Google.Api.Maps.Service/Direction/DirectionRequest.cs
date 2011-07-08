@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Google.Api.Maps.Service;
 
 namespace Google.Api.Maps.Service.Direction
 {
     public class DirectionRequest
     {
-        public DirectionWaypoint Origin { get; set; }
-        public DirectionWaypoint Destination { get; set; }
+        public Waypoint Origin { get; set; }
+        public Waypoint Destination { get; set; }
 
         public TravelMode Mode { get; set; }
 
@@ -23,14 +24,14 @@ namespace Google.Api.Maps.Service.Direction
 
         public bool Sensor { get; set; }
 
-        private SortedList<int, DirectionWaypoint> waypoints;
-        public SortedList<int, DirectionWaypoint> Waypoints
+        private SortedList<int, Waypoint> waypoints;
+        public SortedList<int, Waypoint> Waypoints
         {
             get
             {
                 if (waypoints == null)
                 {
-                    waypoints = new SortedList<int, DirectionWaypoint>();
+                    waypoints = new SortedList<int, Waypoint>();
                 }
                 return waypoints;
             }
@@ -40,7 +41,7 @@ namespace Google.Api.Maps.Service.Direction
             }
         }
 
-        public void Add(DirectionWaypoint location)
+        public void Add(Waypoint location)
         {
             Waypoints.Add(Waypoints.Count, location);
         }
@@ -51,7 +52,7 @@ namespace Google.Api.Maps.Service.Direction
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (DirectionWaypoint waypoint in Waypoints.Values)
+            foreach (Waypoint waypoint in Waypoints.Values)
             {
                 sb.AppendFormat("{0}|", waypoint.ToString());
             }
