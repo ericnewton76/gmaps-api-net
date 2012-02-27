@@ -65,12 +65,13 @@ namespace Google.Maps.Elevation
 
 		internal Uri ToUri()
 		{
-			var url = "json?"
+			var qsb = new Internal.QueryStringBuilder()
 				.Append("locations=", Locations)
 				.Append("path=", Path)
 				.Append("samples=", Samples)
-				.Append("sensor=", Sensor)
-				.TrimEnd('&');
+				.Append("sensor=", Sensor);
+
+			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
 		}

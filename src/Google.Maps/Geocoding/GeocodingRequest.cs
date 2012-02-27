@@ -78,14 +78,15 @@ namespace Google.Maps.Geocoding
 
 		internal Uri ToUri()
 		{
-			var url = "json?"
+			var qsb = new Internal.QueryStringBuilder()
 				.Append("address=", Address)
 				.Append("latlng=", LatitudeLongitude)
 				.Append("bounds=", Bounds)
 				.Append("region=", Region)
 				.Append("language=", Language)
-				.Append("sensor=", Sensor)
-				.TrimEnd('&');
+				.Append("sensor=", Sensor);
+
+			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
 		}

@@ -62,7 +62,6 @@
     <Compile Include="Elevation\ElevationResponse.cs" />
     <Compile Include="Elevation\ElevationResult.cs" />
     <Compile Include="Elevation\ElevationService.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Geocoding\AddressComponent.cs" />
     <Compile Include="Geocoding\AddressType.cs" />
     <Compile Include="Geocoding\Geometry.cs" />

@@ -145,16 +145,20 @@ namespace Google.Maps.DistanceMatrix
         /// <returns></returns>
         internal Uri ToUri()
         {
-            var url = "json?"
+            var qsb = new Internal.QueryStringBuilder()
                 .Append("origins=", WaypointsToUri(waypointsOrigin))
                 .Append("destinations=", WaypointsToUri(WaypointsDestination))
                 .Append("mode=", Mode.ToString())
                 .Append("language=", Language)
                 .Append("units=",Units.ToString())
                 .Append("sensor=", Sensor ? "true" : "false")
-                .Append("avoid=", Avoid.ToString())
-                .TrimEnd('&');
+                .Append("avoid=", Avoid.ToString());
+
+			var url = "json?" + qsb.ToString();
+
             return new Uri(url, UriKind.Relative);
-        }//end method
-    }//end class
-}//end namespace
+        }
+
+    }
+
+}
