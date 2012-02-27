@@ -20,12 +20,12 @@ using Newtonsoft.Json;
 namespace Google.Maps
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GeographicPosition
+	public class LatLng
 	{
 		/// <summary>
 		/// Constructs an empty GeographicPosition
 		/// </summary>
-		public GeographicPosition()
+		public LatLng()
 		{
 		}
 		/// <summary>
@@ -33,7 +33,7 @@ namespace Google.Maps
 		/// </summary>
 		/// <param name="latitude"></param>
 		/// <param name="longitude"></param>
-		public GeographicPosition(decimal latitude, decimal longitude)
+		public LatLng(decimal latitude, decimal longitude)
 		{
 			this.Latitude = latitude;
 			this.Longitude = longitude;

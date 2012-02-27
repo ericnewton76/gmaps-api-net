@@ -23,9 +23,9 @@ namespace Google.Maps.Geocoding
 	public class Viewport
 	{
 		[JsonProperty("southwest")]
-		public GeographicPosition Southwest { get; set; }
+		public LatLng Southwest { get; set; }
 
 		[JsonProperty("northeast")]
-		public GeographicPosition Northeast { get; set; }
+		public LatLng Northeast { get; set; }
 	}
 }

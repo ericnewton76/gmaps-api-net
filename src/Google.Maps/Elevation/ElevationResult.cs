@@ -23,7 +23,7 @@ namespace Google.Maps.Elevation
 	public class ElevationResult
 	{
 		[JsonProperty("location")]
-		public GeographicPosition Location { get; set; }
+		public LatLng Location { get; set; }
 
 		[JsonProperty("elevation")]
 		public decimal Elevation { get; set; }

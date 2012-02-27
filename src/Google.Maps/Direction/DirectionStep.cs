@@ -13,10 +13,10 @@ namespace Google.Maps.Direction
         public TravelMode TravelMode { get; set; }
 
         [JsonProperty("start_location")]
-        public GeographicPosition StartLocation { get; set; }
+        public LatLng StartLocation { get; set; }
 
         [JsonProperty("end_location")]
-        public GeographicPosition EndLocation { get; set; }
+        public LatLng EndLocation { get; set; }
 
         [JsonProperty("polyline")]
         public Polyline Polyline { get; set; }
@@ -32,7 +32,7 @@ namespace Google.Maps.Direction
 
         public DirectionStep() { }
 
-        public DirectionStep(GeographicPosition start, GeographicPosition end)
+        public DirectionStep(LatLng start, LatLng end)
         {
             StartLocation = start;
             EndLocation = end;
@@ -40,8 +40,8 @@ namespace Google.Maps.Direction
 
         public DirectionStep(decimal startLat, decimal startLng, decimal endLat, decimal endLng)
         {
-            StartLocation = new GeographicPosition(startLat, startLng);
-            EndLocation = new GeographicPosition(endLat, endLng);
+            StartLocation = new LatLng(startLat, startLng);
+            EndLocation = new LatLng(endLat, endLng);
         }
     }
 }

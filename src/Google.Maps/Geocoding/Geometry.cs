@@ -27,7 +27,7 @@ namespace Google.Maps.Geocoding
 		/// lookups, this field is typically the most important.
 		/// </summary>
 		[JsonProperty("location")]
-		public GeographicPosition Location { get; set; }
+		public LatLng Location { get; set; }
 
 		/// <summary>
 		/// Stores additional data about the specified location.

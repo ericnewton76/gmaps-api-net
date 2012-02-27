@@ -19,10 +19,10 @@ namespace Google.Maps.Direction
         public ValueText Distance { get; set; }
 
         [JsonProperty("start_location")]
-        public GeographicPosition StartLocation { get; set; }
+        public LatLng StartLocation { get; set; }
 
         [JsonProperty("end_location")]
-        public GeographicPosition EndLocation { get; set; }
+        public LatLng EndLocation { get; set; }
 
         [JsonProperty("start_address")]
         public string StartAddress { get; set; }
