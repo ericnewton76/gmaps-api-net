@@ -8,7 +8,7 @@
     <ProjectGuid>{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Google.Api.Maps.Service.Samples.SearchAddressMap</RootNamespace>
+    <RootNamespace>SearchAddressMap</RootNamespace>
     <AssemblyName>SearchAddressMap</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

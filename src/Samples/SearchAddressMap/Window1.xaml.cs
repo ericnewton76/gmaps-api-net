@@ -5,8 +5,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Google.Api.Maps.Service.Geocoding;
 using Google.Api.Maps.Service.StaticMaps;
+using Google.Api.Maps.Service;
 
-namespace Google.Api.Maps.Service.Samples.SearchAddressMap
+namespace SearchAddressMap
 {
 	/// <summary>
 	/// Interaction logic for Window1.xaml

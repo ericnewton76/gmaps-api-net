@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Google.Api.Maps.Service.Samples.SearchAddressMap
+namespace SearchAddressMap
 {
 	/// <summary>
 	/// Sample application to demonstrate how to use the service library

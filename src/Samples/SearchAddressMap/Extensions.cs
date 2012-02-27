@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Controls;
 using Google.Api.Maps.Service.Geocoding;
 
-namespace Google.Api.Maps.Service.Samples.SearchAddressMap
+namespace SearchAddressMap
 {
 	internal static class Extensions
 	{
