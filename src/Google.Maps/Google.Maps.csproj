@@ -41,8 +41,11 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
     <Compile Include="Direction\DirectionRequest.cs" />
     <Compile Include="Direction\DirectionResponse.cs" />
@@ -65,8 +68,18 @@
     <Compile Include="Geocoding\Geometry.cs" />
     <Compile Include="Geocoding\GeocodingRequest.cs" />
     <Compile Include="Geocoding\GeocodingResponse.cs" />
+    <Compile Include="GMapsImageFormats.cs" />
+    <Compile Include="Internal\ConvertUtil.cs" />
+    <Compile Include="Internal\QueryStringBuilder.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="LatLng.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="MapMarker.cs" />
+    <Compile Include="MapMarkersCollection.cs" />
+    <Compile Include="MapTypes.cs" />
+    <Compile Include="MarkerSizes.cs" />
+    <Compile Include="Path.cs" />
+    <Compile Include="PolylineEncoder.cs" />
     <Compile Include="ServiceResponseStatus.cs" />
     <Compile Include="Geocoding\GeocodingResult.cs" />
     <Compile Include="Geocoding\GeocodingService.cs" />
@@ -75,7 +88,8 @@
     <Compile Include="Geocoding\Viewport.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticMaps\StaticMap.cs" />
+    <Compile Include="StaticMaps\StaticMapRequest.cs" />
+    <Compile Include="StaticMaps\StaticMapService.cs" />
     <Compile Include="TravelMode.cs" />
     <Compile Include="Units.cs" />
     <Compile Include="Waypoint.cs" />
