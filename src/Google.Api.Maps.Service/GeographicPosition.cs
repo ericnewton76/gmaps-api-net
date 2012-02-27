@@ -16,30 +16,16 @@
  */
 
 using Newtonsoft.Json;
-using System.Globalization;
 
 namespace Google.Api.Maps.Service
 {
-    [JsonObject(MemberSerialization.OptIn)]
-    public class GeographicPosition
-    {
-        [JsonProperty("lat")]
-        public decimal Latitude { get; set; }
+	[JsonObject(MemberSerialization.OptIn)]
+	public class GeographicPosition
+	{
+		[JsonProperty("lat")]
+		public decimal Latitude { get; set; }
 
-        [JsonProperty("lng")]
-        public decimal Longitude { get; set; }
-
-        public GeographicPosition() { }
-
-        public GeographicPosition(decimal latitude, decimal longitude)
-        {
-            this.Latitude = latitude;
-            this.Longitude = longitude;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0},{1}", Latitude.ToString(new CultureInfo("en")), Longitude.ToString(new CultureInfo("en")));
-        }
-    }
+		[JsonProperty("lng")]
+		public decimal Longitude { get; set; }
+	}
 }

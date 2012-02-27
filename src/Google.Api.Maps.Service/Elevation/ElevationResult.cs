@@ -16,7 +16,6 @@
  */
 
 using Newtonsoft.Json;
-using Google.Api.Maps.Service.Geocoding;
 
 namespace Google.Api.Maps.Service.Elevation
 {

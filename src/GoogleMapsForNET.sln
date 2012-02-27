@@ -11,10 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{077D91A6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAddressMap", "Samples\SearchAddressMap\SearchAddressMap.csproj", "{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps", "Google.Api.Maps\Google.Api.Maps.csproj", "{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Api.Maps.Test", "Google.Api.Maps.Test\Google.Api.Maps.Test.csproj", "{35E4C1E4-4D57-4C02-93B7-EDEAF725AFA9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,21 +29,12 @@ Global
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8AEEB44-3834-4B1E-BCAA-0333F26745D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35E4C1E4-4D57-4C02-93B7-EDEAF725AFA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35E4C1E4-4D57-4C02-93B7-EDEAF725AFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35E4C1E4-4D57-4C02-93B7-EDEAF725AFA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35E4C1E4-4D57-4C02-93B7-EDEAF725AFA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{55C59856-FB23-43F6-9A2A-42EDA45A6A35} = {077D91A6-703F-43AB-9AEF-F18A66E23415}
-		{35E4C1E4-4D57-4C02-93B7-EDEAF725AFA9} = {077D91A6-703F-43AB-9AEF-F18A66E23415}
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE} = {B74E7466-5EBB-4FB1-9AF0-B0C57C139612}
 	EndGlobalSection
 EndGlobal

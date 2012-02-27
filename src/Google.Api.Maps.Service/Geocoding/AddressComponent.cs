@@ -42,10 +42,5 @@ namespace Google.Api.Maps.Service.Geocoding
 		/// </summary>
 		[JsonProperty("types")]
 		public AddressType[] Types { get; set; }
-
-        public override string ToString()
-        {
-            return LongName;
-        }
 	}
 }

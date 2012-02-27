@@ -22,24 +22,17 @@ namespace Google.Api.Maps.Service.Geocoding
 		Unknown,
 
 		/// <summary>
-		/// Indicates that the returned result is a precise geocode for which we
-		/// have location information accurate down to street address precision.
+		/// Indicates that the returned result is a precise geocode for which we have
+		/// location information accurate down to street address precision.
 		/// </summary>
 		Rooftop,
 
 		/// <summary>
-		/// Indicates that the returned result reflects an approximation (usually
-		/// on a road) interpolated between two precise points (such as
-		/// intersections). Interpolated results are generally returned when
-		/// rooftop geocodes are unavailable for a street address.
+		/// Indicates that the returned result reflects an approximation (usually on
+		/// a road) interpolated between two precise points (such as intersections).
+		/// Interpolated results are generally returned when rooftop geocodes are
+		/// unavailable for a street address.
 		/// </summary>
-		/// <remarks>
-		/// Address interpolation is a technique in which Google takes the total
-		/// total number of addresses in a given block and assume an even
-		/// distribution of the addresses along that block. For example, if
-		/// there are ten addresses for the 800 block of Main Street, it is
-		/// assumed that the fifth address is located at the halfway point.
-		/// </remarks>
 		RangeInterpolated,
 
 		/// <summary>
