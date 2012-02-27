@@ -19,135 +19,135 @@ namespace Google.Maps.Geocoding
 {
 	public enum AddressType
 	{
-		Unknown,
+		Unknown = 0,
 
 		/// <summary>
 		/// Indicates a precise street address.
 		/// </summary>
-		StreetAddress,
+		StreetAddress = 1,
 
 		/// <summary>
 		/// Indicates a named route (such as "US 101").
 		/// </summary>
-		Route,
+		Route = 2,
 
 		/// <summary>
 		/// Indicates a major intersection, usually of two major roads.
 		/// </summary>
-		Intersection,
+		Intersection = 3,
 
 		/// <summary>
 		/// Indicates a political entity. Usually, this type indicates a polygon of
 		/// some civil administration.
 		/// </summary>
-		Political,
+		Political = 4,
 
 		/// <summary>
 		/// Indicates the national political entity, and is typically the highest
 		/// order type returned by the Geocoder.
 		/// </summary>
-		Country,
+		Country = 5,
 
 		/// <summary>
 		/// Indicates a first-order civil entity below the country level. Within the
 		/// United States, these administrative levels are states. Not all nations
 		/// exhibit these administrative levels.
 		/// </summary>
-		AdministrativeAreaLevel1,
+		AdministrativeAreaLevel1 = 6,
 
 		/// <summary>
 		/// Indicates a second-order civil entity below the country level. Within the
 		/// United States, these administrative levels are counties. Not all nations
 		/// exhibit these administrative levels.
 		/// </summary>
-		AdministrativeAreaLevel2,
+		AdministrativeAreaLevel2 = 7,
 
 		/// <summary>
 		/// Indicates a third-order civil entity below the country level. This type
 		/// indicates a minor civil division. Not all nations exhibit these
 		/// administrative levels.
 		/// </summary>
-		AdministrativeAreaLevel3,
+		AdministrativeAreaLevel3 = 8,
 
 		/// <summary>
 		/// Indicates a commonly-used alternative name for the entity.
 		/// </summary>
-		ColloquialArea,
+		ColloquialArea = 9,
 
 		/// <summary>
 		/// Indicates an incorporated city or town political entity.
 		/// </summary>
-		Locality,
+		Locality = 10,
 
 		/// <summary>
 		/// Indicates an first-order civil entity below a locality.
 		/// </summary>
-		Sublocality,
+		Sublocality = 11,
 
 		/// <summary>
 		/// Indicates a named neighborhood.
 		/// </summary>
-		Neighborhood,
+		Neighborhood = 12,
 
 		/// <summary>
 		/// Indicates a named location, usually a building or collection of
 		/// buildings with a common name.
 		/// </summary>
-		Premise,
+		Premise = 13,
 
 		/// <summary>
 		/// Indicates a first-order entity below a named location, usually a
 		/// singular building within a collection of buildings with a common
 		/// name.
 		/// </summary>
-		Subpremise,
+		Subpremise = 14,
 
 		/// <summary>
 		/// Indicates a postal code as used to address postal mail within the
 		/// country.
 		/// </summary>
-		PostalCode,
+		PostalCode = 15,
 
 		/// <summary>
 		/// Indicates a prominent natural feature.
 		/// </summary>
-		NaturalFeature,
+		NaturalFeature = 16,
 
 		/// <summary>
 		/// Indicates an airport.
 		/// </summary>
-		Airport,
+		Airport = 17,
 
 		/// <summary>
 		/// Indicates a named park.
 		/// </summary>
-		Park,
+		Park = 18,
 
 		/// <summary>
 		/// Indicates a named point of interest. Typically, these "POI"s are
 		/// prominent local entities that don't easily fit in another category
 		/// such as "Empire State Building" or "Statue of Liberty."
 		/// </summary>
-		PointOfInterest,
+		PointOfInterest = 19,
 
 		/// <summary>
 		/// Indicates a specific postal box.
 		/// </summary>
-		PostBox,
+		PostBox = 20,
 
 		/// <summary>
 		/// Indicates the precise street number.
 		/// </summary>
-		StreetNumber,
+		StreetNumber = 21,
 
 		/// <summary>
 		/// Indicates the floor of a building address.
 		/// </summary>
-		Floor,
+		Floor = 22,
 
 		/// <summary>
 		/// Indicates the room of a building address.
 		/// </summary>
-		Room
+		Room = 23
 	}
 }
