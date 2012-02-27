@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
-using Google.Api.Maps.Service.Geocoding;
+using Google.Maps.Geocoding;
 
 namespace SearchAddressMap
 {

@@ -3,9 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Google.Api.Maps.Service.Geocoding;
-using Google.Api.Maps.Service.StaticMaps;
-using Google.Api.Maps.Service;
+using Google.Maps.Geocoding;
+using Google.Maps.StaticMaps;
+using Google.Maps;
 
 namespace SearchAddressMap
 {
@@ -23,14 +23,14 @@ namespace SearchAddressMap
 		{
 			if (resultsTreeView.SelectedItem == null) return;
 
-			var location = ((GeographicPosition)((TreeViewItem)resultsTreeView.SelectedItem).Tag);
-			var map = new StaticMap();
-			map.Center = location.Latitude.ToString() + "," + location.Longitude;
-			map.Zoom = zoomSlider.Value.ToString("0");
-			map.Size = "332x332";
-			map.Markers = map.Center;
-			map.MapType = ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString();
-			map.Sensor = "false";
+			var location = ((LatLng)((TreeViewItem)resultsTreeView.SelectedItem).Tag);
+			var map = new StaticMapRequest();
+			map.Center = location;
+			map.Zoom = Convert.ToInt32(zoomSlider.Value);
+			map.Size = new System.Drawing.Size(332, 332);
+			map.Markers.Add(map.Center);
+			map.MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(),true);
+			map.Sensor = false;
 
 			var image = new BitmapImage();
 			image.BeginInit();
