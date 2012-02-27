@@ -17,9 +17,9 @@
 
 using System.Linq;
 using NUnit.Framework;
-using Google.Api.Maps.Service.Geocoding;
+using Google.Maps.Geocoding;
 
-namespace Google.Api.Maps.Service.Test
+namespace Google.Maps.Test
 {
 	[TestFixture]
 	class GeocodingServiceTests

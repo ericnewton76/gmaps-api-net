@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace Google.Api.Maps.Service
+namespace Google.Maps
 {
 	public enum ServiceResponseStatus
 	{

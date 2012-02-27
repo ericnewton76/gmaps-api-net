@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Globalization;
-namespace Google.Api.Maps.Service.Direction
+namespace Google.Maps.Direction
 {
     public class DirectionService
     {

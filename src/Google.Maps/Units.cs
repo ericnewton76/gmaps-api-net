@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Google.Api.Maps.Service
+namespace Google.Maps
 {
     /// <summary>
     ///  When you calculate Directions Matrix, you may specify which Unit system mode to use. 

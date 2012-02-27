@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Google.Api.Maps.Service;
+using Google.Maps;
 
-namespace Google.Api.Maps.Service.Direction
+namespace Google.Maps.Direction
 {
     public class DirectionRequest
     {

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace Google.Api.Maps.Service.Geocoding
+namespace Google.Maps.Geocoding
 {
 	public enum AddressType
 	{

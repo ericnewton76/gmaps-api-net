@@ -16,10 +16,10 @@
  */
 
 using System;
-using Google.Api.Maps.Service.Geocoding;
+using Google.Maps.Geocoding;
 using Newtonsoft.Json;
 
-namespace Google.Api.Maps.Service
+namespace Google.Maps
 {
 	#region Private extensions
 

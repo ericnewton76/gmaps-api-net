@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Google.Api.Maps.Service.StaticMaps
+namespace Google.Maps.StaticMaps
 {
 	/// <summary>
 	/// The Google Static Maps API returns an image (either GIF, PNG or JPEG)

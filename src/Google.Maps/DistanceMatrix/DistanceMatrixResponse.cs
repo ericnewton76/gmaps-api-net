@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Google.Api.Maps.Service.DistanceMatrix
+namespace Google.Maps.DistanceMatrix
 {
     /// <summary>
     /// 

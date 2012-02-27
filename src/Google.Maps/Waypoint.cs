@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Google.Api.Maps.Service
+namespace Google.Maps
 {
     public class Waypoint
     {

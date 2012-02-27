@@ -20,7 +20,7 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace Google.Api.Maps.Service
+namespace Google.Maps
 {
 	/// <summary>
 	/// Provides an intuitive and simple HTTP client wrapper.

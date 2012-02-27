@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Google.Api.Maps.Service.Geocoding
+namespace Google.Maps.Geocoding
 {
 	/// <summary>
 	/// Provides a request for the Google Maps Geocoding web service.

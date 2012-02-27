@@ -17,10 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using Google.Api.Maps.Service;
+using Google.Maps;
 using System.Text;
 
-namespace Google.Api.Maps.Service.DistanceMatrix
+namespace Google.Maps.DistanceMatrix
 {
     /// <summary>
     /// Provides a request for the Google Distance Matrix web service.

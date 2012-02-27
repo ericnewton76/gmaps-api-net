@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Google.Api.Maps.Service
+namespace Google.Maps
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class ValueText

@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Google.Api.Maps.Service.Elevation
+namespace Google.Maps.Elevation
 {
 	/// <summary>
 	/// Provides a request for the Google Maps Elevation web service.

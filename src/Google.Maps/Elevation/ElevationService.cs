@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Google.Api.Maps.Service.Elevation
+namespace Google.Maps.Elevation
 {
 	/// <summary>
 	/// The Elevation service provides elevation data for all locations on the

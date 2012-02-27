@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Google.Api.Maps.Service.DistanceMatrix
+namespace Google.Maps.DistanceMatrix
 {
     /// <summary>
     /// Directions may be calculated that adhere to certain restrictions. 

@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Google.Api.Maps.Service.Geocoding
+namespace Google.Maps.Geocoding
 {
 	/// <summary>
 	/// Provides a direct way to access a geocoder via an HTTP request.

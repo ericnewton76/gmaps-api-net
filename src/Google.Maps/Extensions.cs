@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Google.Api.Maps.Service
+namespace Google.Maps
 {
 	internal static class Extensions
 	{

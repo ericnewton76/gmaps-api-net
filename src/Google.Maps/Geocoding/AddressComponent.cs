@@ -17,7 +17,7 @@
 
 using Newtonsoft.Json;
 
-namespace Google.Api.Maps.Service.Geocoding
+namespace Google.Maps.Geocoding
 {
 	public class AddressComponent
 	{

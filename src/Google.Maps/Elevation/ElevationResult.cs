@@ -17,7 +17,7 @@
 
 using Newtonsoft.Json;
 
-namespace Google.Api.Maps.Service.Elevation
+namespace Google.Maps.Elevation
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class ElevationResult

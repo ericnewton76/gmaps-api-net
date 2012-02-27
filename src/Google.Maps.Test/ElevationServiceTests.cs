@@ -18,9 +18,9 @@
 using System.Linq;
 using System.Net;
 using NUnit.Framework;
-using Google.Api.Maps.Service.Elevation;
+using Google.Maps.Elevation;
 
-namespace Google.Api.Maps.Service.Test
+namespace Google.Maps.Test
 {
 	[TestFixture]
 	public class ElevationServiceTests
