@@ -21,11 +21,10 @@ using Newtonsoft.Json;
 
 namespace Google.Maps
 {
-	#region Private extensions
 
-	internal static class JsonEnumTypeConverterExtensions
+	public class JsonEnumTypeConverter : JsonConverter
 	{
-		public static ServiceResponseStatus AsResponseStatus(this string s)
+		public static ServiceResponseStatus AsResponseStatus(string s)
 		{
 			var result = ServiceResponseStatus.Unknown;
 
@@ -51,7 +50,7 @@ namespace Google.Maps
 			return result;
 		}
 
-		public static AddressType AsAddressType(this string s)
+		public static AddressType AsAddressType(string s)
 		{
 			var result = AddressType.Unknown;
 
@@ -131,7 +130,7 @@ namespace Google.Maps
 			return result;
 		}
 
-		public static LocationType AsLocationType(this string s)
+		public static LocationType AsLocationType(string s)
 		{
 			var result = LocationType.Unknown;
 
@@ -153,12 +152,7 @@ namespace Google.Maps
 
 			return result;
 		}
-	}
-
-	#endregion
-
-	public class JsonEnumTypeConverter : JsonConverter
-	{
+	
 		public override bool CanConvert(Type objectType)
 		{
 			return
@@ -172,13 +166,13 @@ namespace Google.Maps
 			object result = null;
 
 			if(objectType == typeof(ServiceResponseStatus))
-				result = reader.Value.ToString().AsResponseStatus();
+				result = AsResponseStatus(reader.Value.ToString());
 
 			if (objectType == typeof(AddressType))
-				result = reader.Value.ToString().AsAddressType();
+				result = AsAddressType(reader.Value.ToString());
 
 			if (objectType == typeof(LocationType))
-				result = reader.Value.ToString().AsLocationType();
+				result = AsLocationType(reader.Value.ToString());
 
 			return result;
 		}
