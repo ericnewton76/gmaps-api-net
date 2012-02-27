@@ -22,6 +22,24 @@ namespace Google.Api.Maps.Service
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GeographicPosition
 	{
+		/// <summary>
+		/// Constructs an empty GeographicPosition
+		/// </summary>
+		public GeographicPosition()
+		{
+		}
+		/// <summary>
+		/// Constructs a GeographicPosition instance with latitude and longitude coordinates.
+		/// </summary>
+		/// <param name="latitude"></param>
+		/// <param name="longitude"></param>
+		public GeographicPosition(decimal latitude, decimal longitude)
+		{
+			this.Latitude = latitude;
+			this.Longitude = longitude;
+		}
+
+
 		[JsonProperty("lat")]
 		public decimal Latitude { get; set; }
 
