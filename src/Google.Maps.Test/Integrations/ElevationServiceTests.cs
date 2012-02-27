@@ -20,7 +20,7 @@ using System.Net;
 using NUnit.Framework;
 using Google.Maps.Elevation;
 
-namespace Google.Maps.Test
+namespace Google.Maps.Test.Integrations
 {
 	[TestFixture]
 	public class ElevationServiceTests

@@ -19,7 +19,7 @@ using System.Linq;
 using NUnit.Framework;
 using Google.Maps.Geocoding;
 
-namespace Google.Maps.Test
+namespace Google.Maps.Test.Integrations
 {
 	[TestFixture]
 	class GeocodingServiceTests
