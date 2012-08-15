@@ -17,10 +17,12 @@
 
 using Newtonsoft.Json;
 using System;
+using System.Globalization;
 
 namespace Google.Maps
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[Serializable]
 	public class LatLng : Location
 	{
 		public LatLng()
@@ -36,6 +38,7 @@ namespace Google.Maps
 			this.Latitude = latitude;
 			this.Longitude = longitude;
 		}
+
 		/// <summary>
 		/// Create a new latlng instance with the given latitude and longitude coordinates.
 		/// </summary>
@@ -108,8 +111,8 @@ namespace Google.Maps
 
 				if (parts.Length != 2) throw new FormatException("Missing data for points.");
 
-				decimal latitude = decimal.Parse(parts[0].Trim());
-				decimal longitude = decimal.Parse(parts[1].Trim());
+				decimal latitude = decimal.Parse(parts[0].Trim(), CultureInfo.InvariantCulture);
+				decimal longitude = decimal.Parse(parts[1].Trim(), CultureInfo.InvariantCulture);
 
 				LatLng latlng = new LatLng(latitude, longitude);
 
