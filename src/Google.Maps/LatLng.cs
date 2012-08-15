@@ -35,8 +35,8 @@ namespace Google.Maps
 		/// <param name="longitude"></param>
 		public LatLng(decimal latitude, decimal longitude)
 		{
-			this.Latitude = latitude;
-			this.Longitude = longitude;
+			this._latitude = Convert.ToDouble(latitude);
+			this._longitude = Convert.ToDouble(longitude);
 		}
 
 		/// <summary>
@@ -46,8 +46,8 @@ namespace Google.Maps
 		/// <param name="longitude"></param>
 		public LatLng(double latitude, double longitude)
 		{
-			this.Latitude = Convert.ToDecimal(latitude);
-			this.Longitude = Convert.ToDecimal(longitude);
+			this._latitude = latitude;
+			this._longitude = longitude;
 		}
 		/// <summary>
 		/// Create a new latlng instance with the given latitude and longitude coordinates.
@@ -56,21 +56,30 @@ namespace Google.Maps
 		/// <param name="longitude"></param>
 		public LatLng(float latitude, float longitude)
 		{
-			this.Latitude = Convert.ToDecimal(latitude);
-			this.Longitude = Convert.ToDecimal(longitude);
+			this._latitude = Convert.ToDouble(latitude);
+			this._longitude = Convert.ToDouble(longitude);
 		}
+
+		private double _latitude;
+		private double _longitude;
 
 		/// <summary>
 		/// Gets or sets the latitude coordinate
 		/// </summary>
 		[JsonProperty("lat")]
-		public decimal Latitude { get; set; }
+		public double Latitude
+		{
+			get { return _latitude; }
+		}
 
 		/// <summary>
 		/// Gets or sets the longitude coordinate
 		/// </summary>
 		[JsonProperty("lng")]
-		public decimal Longitude { get; set; }
+		public double Longitude
+		{
+			get { return _longitude; }
+		}
 
 		/// <summary>
 		/// Gets the string representation of the latitude and longitude coordinates.  Decimals set to 6 places.
@@ -111,8 +120,8 @@ namespace Google.Maps
 
 				if (parts.Length != 2) throw new FormatException("Missing data for points.");
 
-				decimal latitude = decimal.Parse(parts[0].Trim(), CultureInfo.InvariantCulture);
-				decimal longitude = decimal.Parse(parts[1].Trim(), CultureInfo.InvariantCulture);
+				double latitude = double.Parse(parts[0].Trim(), CultureInfo.InvariantCulture);
+				double longitude = double.Parse(parts[1].Trim(), CultureInfo.InvariantCulture);
 
 				LatLng latlng = new LatLng(latitude, longitude);
 

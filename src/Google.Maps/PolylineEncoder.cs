@@ -20,7 +20,7 @@ namespace Google.Maps
         /// <returns>Encoded coordinate string</returns>
         public static string EncodeCoordinates(IEnumerable<LatLng> coordinates)
         {
-            decimal oneEFive = Convert.ToDecimal(1e5);
+            double oneEFive = Convert.ToDouble(1e5);
 
             int plat = 0;
             int plng = 0;
