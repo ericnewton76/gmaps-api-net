@@ -8,6 +8,7 @@ namespace Google.Maps
     /// <summary>
     /// A general free-text location, usually for specifying an address or particular place for Google Maps.
     /// </summary>
+	[Serializable]
     public class Location
     {
 		protected Location()
