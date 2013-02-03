@@ -16,8 +16,8 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 using HttpUtility = System.Web.HttpUtility;
 using Google.Maps.Internal;
