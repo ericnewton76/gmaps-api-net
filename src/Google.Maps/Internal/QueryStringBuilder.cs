@@ -29,6 +29,12 @@ namespace Google.Maps.Internal
             return _sb.ToString();
         }
 
+		/// <summary>
+		/// Appends a key/value pair when the value isn't null.
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
         public QueryStringBuilder Append(string key, string value)
         {
             if (string.IsNullOrEmpty(value) == false)
@@ -38,6 +44,11 @@ namespace Google.Maps.Internal
             }
             return this;
         }
+		/// <summary>
+		/// Appends a value when the string isn't null.
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
         public QueryStringBuilder Append(string value)
         {
             if (string.IsNullOrEmpty(value) == false)
