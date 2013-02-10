@@ -161,7 +161,7 @@ namespace Google.Maps
 				|| objectType == typeof(LocationType);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			object result = null;
 
