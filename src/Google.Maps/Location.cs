@@ -45,6 +45,11 @@ namespace Google.Maps
 				;
         }
 
+		/// <summary>
+		/// implicitly converts a System.String to Google.Maps.Location
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		public static implicit operator Location(string value)
 		{
 			return new Location(value);
