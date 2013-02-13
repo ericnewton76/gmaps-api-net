@@ -6,16 +6,15 @@ properties {
   $signAssemblies = $false
   $signKeyPath = "D:\Development\Releases\newtonsoft.snk"
   $buildDocumentation = $false
-  $buildNuGet = $false
+  $buildNuGet = $true
   $treatWarningsAsErrors = $false
   
-  $baseDir  = resolve-path .
-  $buildDir = "$baseDir\_build_output"
+  $baseDir  = resolve-path "."
+  $buildDir = "$baseDir"
   $sourceDir = "$baseDir\src"
   $toolsDir = "$baseDir\_build-tools"
   $docDir = "$baseDir\Doc"
-  $releaseDir = "$baseDir\Release"
-  $workingDir = "$baseDir\Working"
+  $workingDir = "$baseDir\_build_output\Working"
   $builds = @(
 	@{Name = "GoogleMapsForNET"; TestsName = $null; Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
     #@{Name = "Newtonsoft.Json"; TestsName = "Newtonsoft.Json.Tests"; Constants=""; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"; Sign=$true},
@@ -78,7 +77,7 @@ task Package -depends Build {
   if ($buildNuGet)
   {
     New-Item -Path $workingDir\NuGet -ItemType Directory
-    Copy-Item -Path "$buildDir\GMaps-Api-Net.nuspec" -Destination "$workingDir\NuGet\GMaps-Api-Net.nuspec" -recurse
+    Copy-Item -Path "$toolsDir\GMaps-Api-Net.nuspec" -Destination "$workingDir\NuGet\GMaps-Api-Net.nuspec" -recurse
     
     foreach ($build in $builds)
     {
@@ -95,7 +94,7 @@ task Package -depends Build {
       }
     }
   
-    exec { .\Tools\NuGet.exe pack "$workingDir\GMaps-Api-Net.nuspec" -Symbols }
+    exec { .\_build-tools\NuGet.exe pack "$workingDir\NuGet\GMaps-Api-Net.nuspec" -Symbols }
     move -Path .\*.nupkg -Destination $workingDir\NuGet
   }
   
