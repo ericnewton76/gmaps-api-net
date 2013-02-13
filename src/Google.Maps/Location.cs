@@ -44,5 +44,10 @@ namespace Google.Maps
 				.Replace("%2c",",")
 				;
         }
+
+		public static implicit operator Location(string value)
+		{
+			return new Location(value);
+		}
     }
 }

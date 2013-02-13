@@ -31,5 +31,16 @@ namespace Google.Maps.Test
 
 			Assert.AreEqual(expected, actual);
 		}
+
+		[Test]
+		public void Location_implicit_string()
+		{
+			Location l = "City Hall, New York, NY";
+
+			string expected = "City Hall, New York, NY";
+			string actual = l.ToString();
+
+			Assert.AreEqual(expected, actual);
+		}
 	}
 }
