@@ -101,7 +101,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Integrations\GeocodingServiceTests_JSON\GetGeocodingForAddress-1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
+    <None Include="Integrations\json_queries\address=1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

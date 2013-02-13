@@ -15,16 +15,17 @@ namespace Google.Maps.Test.Integrations
 		{
 		}
 
-		private string _resourceName;
 		private string _resourcePath;
-		public void SetSourceFile(string testFixtureName, string resourceName)
-		{
-			this._resourceName = resourceName + ".json";
-			this._resourcePath = "Google.Maps.Test.Integrations." + testFixtureName + "." + resourceName + ".json";
-		}
+		public string ResourcePath { get { return this._resourcePath; } }
 
 		protected override System.IO.StreamReader GetStreamReader(Uri uri)
 		{
+			string queryString = uri.Query;
+			queryString = queryString.Replace("&sensor=false",""); //clear off sensor=false
+			queryString = queryString.Replace("&sensor=true", ""); // clear off sensor=true
+
+			this._resourcePath = "Google.Maps.Test.Integrations.json_queries." + queryString + ".json";
+
 			Stream resourceStream = S_testAssembly.GetManifestResourceStream(this._resourcePath);
 			return new StreamReader(resourceStream);
 		}
