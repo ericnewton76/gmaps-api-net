@@ -18,34 +18,21 @@ namespace Google.Maps.Test
             private GeocodingRequest _instance = new GeocodingRequest();
 
             private static Type S_instanceType;
-            private static MethodInfo _GetBoundsStr;
 			private static MethodInfo _ToUri;
 
             static GeocodingRequestAccessor()
             {
                 S_instanceType = typeof(GeocodingRequest);
-                _GetBoundsStr = S_instanceType.GetMethod("GetBoundsStr", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { typeof(Viewport) }, new ParameterModifier[] { });
-				Ensure(_GetBoundsStr, "GetBoundsStr");
-				_ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { });
-				Ensure(_ToUri, "ToUri");
+
+				try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { }); }
+				catch { }
+				finally { Ensure(_ToUri, "ToUri"); }
             }
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
 			{
 				if (methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
 			}
-
-            public string GetBoundsStr(Viewport bounds)
-            {
-                try
-                {
-                    return (string)_GetBoundsStr.Invoke(_instance, new object[] { bounds });
-                }
-                catch (TargetInvocationException ex)
-                {
-                    throw ex.InnerException;
-                }
-            }
 
 			#region Protected/Private interface
 			public Uri ToUri()
