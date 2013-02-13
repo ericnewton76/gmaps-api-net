@@ -19,12 +19,15 @@ namespace Google.Maps.Test
 
             private static Type S_instanceType;
             private static MethodInfo _GetBoundsStr;
+			private static MethodInfo _ToUri;
 
             static GeocodingRequestAccessor()
             {
                 S_instanceType = typeof(GeocodingRequest);
                 _GetBoundsStr = S_instanceType.GetMethod("GetBoundsStr", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { typeof(Viewport) }, new ParameterModifier[] { });
 				Ensure(_GetBoundsStr, "GetBoundsStr");
+				_ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { });
+				Ensure(_ToUri, "ToUri");
             }
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
@@ -43,7 +46,35 @@ namespace Google.Maps.Test
                     throw ex.InnerException;
                 }
             }
-        }
+
+			#region Protected/Private interface
+			public Uri ToUri()
+			{
+				try
+				{
+					return (Uri)_ToUri.Invoke(_instance, new object[] { });
+				}
+				catch (TargetInvocationException ex)
+				{
+					throw ex.InnerException;
+				}
+			}
+			#endregion
+
+			#region Public interface copy
+			public Location Address 
+			{ 
+				get { return _instance.Address; }
+				set { this._instance.Address = value; }
+			}
+			public bool? Sensor
+			{
+				get { return this._instance.Sensor; }
+				set { this._instance.Sensor = value; }
+			}
+			#endregion
+
+		}
 
 		//[Test]
 		//[ExpectedException(typeof(InvalidOperationException))]

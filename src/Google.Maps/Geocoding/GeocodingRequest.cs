@@ -25,18 +25,11 @@ namespace Google.Maps.Geocoding
 	public class GeocodingRequest
 	{
 		/// <summary>
-		/// The address that you want to geocode.
+		/// The address that you want to geocode.  Use LatLng to perform a reverse geocoding request.
 		/// </summary>
+		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#ReverseGeocoding"/>
 		/// <remarks>Required if latlng not present.</remarks>
 		public Location Address { get; set; }
-
-		/// <summary>
-		/// The textual latitude/longitude value for which you wish to obtain
-		/// the closest, human-readable address.
-		/// </summary>
-		/// <remarks>Required if address not present.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#ReverseGeocoding"/>
-		public string LatitudeLongitude { get; set; }
 
 		/// <summary>
 		/// The bounding box of the viewport within which to bias geocode
@@ -74,17 +67,25 @@ namespace Google.Maps.Geocoding
 		/// with a location sensor. This value must be either true or false.
 		/// </summary>
 		/// <remarks>Required.</remarks>
-		public string Sensor { get; set; }
+		public bool? Sensor { get; set; }
 
 		internal Uri ToUri()
 		{
-			var qsb = new Internal.QueryStringBuilder()
-				.Append("address=", Address.GetAsUrlParameter())
-				.Append("latlng=", LatitudeLongitude)
-				.Append("bounds=", Bounds)
+			var qsb = new Internal.QueryStringBuilder();
+
+			if(this.Address.GetType() == typeof(LatLng))
+			{
+				qsb.Append("latlng=", Address.GetAsUrlParameter());
+			}
+			else
+			{
+				qsb.Append("address=", Address.GetAsUrlParameter());
+			}
+				
+			qsb.Append("bounds=", Bounds)
 				.Append("region=", Region)
 				.Append("language=", Language)
-				.Append("sensor=", Sensor);
+				.Append("sensor=", Sensor.Value.ToString());
 
 			var url = "json?" + qsb.ToString();
 

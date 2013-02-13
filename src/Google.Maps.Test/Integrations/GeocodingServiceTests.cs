@@ -70,7 +70,7 @@ namespace Google.Maps.Test.Integrations
 			// test
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway, Mountain View, CA";
-			request.Sensor = "false";
+			request.Sensor = false;
 			var response = GeocodingService.GetResponse(request);
 
 			// asserts
@@ -128,8 +128,8 @@ namespace Google.Maps.Test.Integrations
 
 			// test
 			var request = new GeocodingRequest();
-			request.LatitudeLongitude = "40.714224,-73.961452";
-			request.Sensor = "false";
+			request.Address = new LatLng(40.714224,-73.961452);
+			request.Sensor = false;
 			var response = GeocodingService.GetResponse(request);
 
 			// asserts
