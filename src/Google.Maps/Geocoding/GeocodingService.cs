@@ -27,8 +27,11 @@ namespace Google.Maps.Geocoding
 	/// </summary>
 	public static class GeocodingService
 	{
-		public static readonly Uri ApiUrl = 
-			new Uri("http://maps.google.com/maps/api/geocode/");
+		private static Uri _ApiUrl = new Uri("https://maps.google.com/maps/api/geocode/");
+		/// <summary>
+		/// Gets or sets the Api Uri to use for requests.
+		/// </summary>
+		public static Uri ApiUrl { get; set; }
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Geocoding web
