@@ -161,7 +161,7 @@ task Test -depends Build {
 
         Write-Host -ForegroundColor Green "Running tests " $name
         Write-Host
-        exec { .\_build-tools\NUnit.Runners.2.6.2\tools\nunit-console.exe "$testsDir\Bin\$finalDir\$name.dll" /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
+        exec { .\_build-tools\NUnit.Runners\tools\nunit-console.exe "$testsDir\Bin\$finalDir\$name.dll" /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
     }
   }
 }
