@@ -123,9 +123,9 @@ namespace Google.Maps.Test
 			var req = new GeocodingRequestAccessor();
 			
 			req.Sensor = false;
-			req.Address = new LatLng(-30f, 40f);
+			req.Address = new LatLng(-30.1d, 40.2d); //using -30.1f,40.2f gives precision error beyond 6 digits when using format "R". strange.
 
-			Uri expected = new Uri("json?latlng=-30.000000,40.000000&sensor=false", UriKind.Relative);
+			Uri expected = new Uri("json?latlng=-30.1,40.2&sensor=false", UriKind.Relative);
 			Uri actual = req.ToUri();
 
 			Assert.AreEqual(expected, actual);
