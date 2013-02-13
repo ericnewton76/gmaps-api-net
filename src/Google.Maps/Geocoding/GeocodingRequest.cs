@@ -72,6 +72,7 @@ namespace Google.Maps.Geocoding
 		internal Uri ToUri()
 		{
 			EnsureSensor();
+			if (Address == null) throw new InvalidOperationException("Address property is not set.");
 
 			var qsb = new Internal.QueryStringBuilder();
 

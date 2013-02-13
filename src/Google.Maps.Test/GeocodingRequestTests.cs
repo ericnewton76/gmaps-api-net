@@ -143,5 +143,16 @@ namespace Google.Maps.Test
 			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
 		}
 
+		[Test]
+		[ExpectedException(typeof(InvalidOperationException))]
+		public void GetUrl_no_Address_set()
+		{
+			var req = new GeocodingRequestAccessor();
+			//req.Address = something;
+
+			var actual = req.ToUri();
+
+			Assert.Fail("Should've encountered an InvalidOperationException due to Address property not being set.");
+		}
     }
 }
