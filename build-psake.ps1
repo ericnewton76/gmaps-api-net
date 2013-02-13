@@ -1,7 +1,7 @@
 properties { 
   $zipFileName = "GMapsApiNet.zip"
-  $majorVersion = "0.9"
-  $majorWithReleaseVersion = "0.9.4"
+  $majorVersion = "0.10"
+  $majorWithReleaseVersion = "0.10.0"
   $version = GetVersion $majorWithReleaseVersion
   $signAssemblies = $false
   $signKeyPath = "D:\Development\Releases\newtonsoft.snk"
@@ -13,10 +13,11 @@ properties {
   $buildDir = "$baseDir"
   $sourceDir = "$baseDir\src"
   $toolsDir = "$baseDir\_build-tools"
+  $testsDir = "$baseDir\_build_output\Testing"
   $docDir = "$baseDir\Doc"
   $workingDir = "$baseDir\_build_output\Working"
   $builds = @(
-	@{Name = "GoogleMapsForNET"; TestsName = $null; Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
+	@{Name = "GoogleMapsForNET"; TestsName = "Google.Maps.Test"; Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
     #@{Name = "Newtonsoft.Json"; TestsName = "Newtonsoft.Json.Tests"; Constants=""; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"; Sign=$true},
     #@{Name = "Newtonsoft.Json.Portable"; TestsName = "Newtonsoft.Json.Tests.Portable"; Constants="PORTABLE"; FinalDir="Portable"; NuGetDir = "portable-net40+sl4+wp7+win8"; Framework="net-4.0"; Sign=$true},
     #@{Name = "Newtonsoft.Json.WinRT"; TestsName = $null; Constants="NETFX_CORE"; FinalDir="WinRT"; NuGetDir = "winrt45"; Framework="net-4.5"; Sign=$true},
@@ -38,18 +39,25 @@ task Clean {
   if (Test-Path -path $workingDir)
   {
     Write-Output "Deleting Working Directory"
-    
     del $workingDir -Recurse -Force
   }
   
-  New-Item -Path $workingDir -ItemType Directory
+  if (Test-Path -path $testsDir)
+  {
+	Write-Output "Deleting Testing directory"
+	del $testsDir -Recurse -Force
+  }
+  
 }
 
 # Build each solution, optionally signed
 task Build -depends Clean { 
+
   Write-Host -ForegroundColor Green "Updating assembly version"
   Write-Host
   Update-AssemblyInfoFiles $sourceDir ($majorVersion + '.0.0') $version
+
+  New-Item -Path $workingDir -ItemType Directory
 
   foreach ($build in $builds)
   {
@@ -60,18 +68,18 @@ task Build -depends Clean {
     Write-Host -ForegroundColor Green "Building " $name
     Write-Host -ForegroundColor Green "Signed " $sign
     Write-Host
-    exec { msbuild "/t:Clean;Rebuild" /p:Configuration=Release "/p:Platform=Any CPU" /p:OutputPath=bin\Release\$finalDir\ /p:AssemblyOriginatorKeyFile=$signKeyPath "/p:SignAssembly=$sign" "/p:TreatWarningsAsErrors=$treatWarningsAsErrors" (GetConstants $build.Constants $sign) ".\Src\$name.sln" | Out-Default } "Error building $name"
+    exec { msbuild "/t:Clean;Rebuild" /p:Configuration=Release "/p:Platform=Any CPU" /p:OutputPath=$workingDir\bin\Release\$finalDir\ /p:AssemblyOriginatorKeyFile=$signKeyPath "/p:SignAssembly=$sign" "/p:TreatWarningsAsErrors=$treatWarningsAsErrors" (GetConstants $build.Constants $sign) ".\Src\$name.sln" | Out-Default } "Error building $name"
   }
 }
 
 # Optional build documentation, add files to final zip
-task Package -depends Build {
+task Package -depends Test {
   foreach ($build in $builds)
   {
     $name = $build.TestsName
     $finalDir = $build.FinalDir
     
-    robocopy "$sourceDir\Google.Maps\bin\Release\$finalDir" $workingDir\Package\Bin\$finalDir /NP /XO /XF *.pri | Out-Default
+    #robocopy "$sourceDir\Google.Maps\bin\Release\$finalDir" $workingDir\Package\Bin\$finalDir /NP /XO /XF *.pri | Out-Default
   }
   
   if ($buildNuGet)
@@ -89,7 +97,7 @@ task Package -depends Build {
         
         foreach ($frameworkDir in $frameworkDirs)
         {
-          robocopy "$sourceDir\Google.Maps\bin\Release\$finalDir" $workingDir\NuGet\lib\$frameworkDir /NP /XO /XF *.pri | Out-Default
+          robocopy "$workingDir\bin\Release\$finalDir" $workingDir\NuGet\lib\$frameworkDir /NP /XO /XF *.pri | Out-Default
         }
       }
     }
@@ -98,28 +106,28 @@ task Package -depends Build {
     move -Path .\*.nupkg -Destination $workingDir\NuGet
   }
   
-  if ($buildDocumentation)
-  {
-    $mainBuild = $builds | where { $_.Name -eq "Newtonsoft.Json" } | select -first 1
-    $mainBuildFinalDir = $mainBuild.FinalDir
-    $documentationSourcePath = "$workingDir\Package\Bin\$mainBuildFinalDir"
-    Write-Host -ForegroundColor Green "Building documentation from $documentationSourcePath"
-
-    # Sandcastle has issues when compiling with .NET 4 MSBuild - http://shfb.codeplex.com/Thread/View.aspx?ThreadId=50652
-    exec { msbuild "/t:Clean;Rebuild" /p:Configuration=Release "/p:DocumentationSourcePath=$documentationSourcePath" $docDir\doc.shfbproj | Out-Default } "Error building documentation. Check that you have Sandcastle, Sandcastle Help File Builder and HTML Help Workshop installed."
-    
-    move -Path $workingDir\Documentation\LastBuild.log -Destination $workingDir\Documentation.log
-  }
+#  if ($buildDocumentation)
+#  {
+#    $mainBuild = $builds | where { $_.Name -eq "Newtonsoft.Json" } | select -first 1
+#    $mainBuildFinalDir = $mainBuild.FinalDir
+#    $documentationSourcePath = "$workingDir\Package\Bin\$mainBuildFinalDir"
+#    Write-Host -ForegroundColor Green "Building documentation from $documentationSourcePath"
+#
+#    # Sandcastle has issues when compiling with .NET 4 MSBuild - http://shfb.codeplex.com/Thread/View.aspx?ThreadId=50652
+#    exec { msbuild "/t:Clean;Rebuild" /p:Configuration=Release "/p:DocumentationSourcePath=$documentationSourcePath" $docDir\doc.shfbproj | Out-Default } "Error building documentation. Check that you have Sandcastle, Sandcastle Help File Builder and HTML Help Workshop installed."
+#    
+#    move -Path $workingDir\Documentation\LastBuild.log -Destination $workingDir\Documentation.log
+#  }
+#
+#  Copy-Item -Path $docDir\readme.txt -Destination $workingDir\Package\
+#  Copy-Item -Path $docDir\versions.txt -Destination $workingDir\Package\Bin\
+#
+#  robocopy $sourceDir $workingDir\Package\Source\Src /MIR /NP /XD .svn bin obj TestResults AppPackages /XF *.suo *.user | Out-Default
+#  robocopy $buildDir $workingDir\Package\Source\Build /MIR /NP /XD .svn | Out-Default
+#  robocopy $docDir $workingDir\Package\Source\Doc /MIR /NP /XD .svn | Out-Default
+#  robocopy $toolsDir $workingDir\Package\Source\Tools /MIR /NP /XD .svn | Out-Default
   
-  Copy-Item -Path $docDir\readme.txt -Destination $workingDir\Package\
-  Copy-Item -Path $docDir\versions.txt -Destination $workingDir\Package\Bin\
-
-  robocopy $sourceDir $workingDir\Package\Source\Src /MIR /NP /XD .svn bin obj TestResults AppPackages /XF *.suo *.user | Out-Default
-  robocopy $buildDir $workingDir\Package\Source\Build /MIR /NP /XD .svn | Out-Default
-  robocopy $docDir $workingDir\Package\Source\Doc /MIR /NP /XD .svn | Out-Default
-  robocopy $toolsDir $workingDir\Package\Source\Tools /MIR /NP /XD .svn | Out-Default
-  
-  exec { .\Tools\7-zip\7za.exe a -tzip $workingDir\$zipFileName $workingDir\Package\* | Out-Default } "Error zipping"
+#  exec { .\Tools\7-zip\7za.exe a -tzip $workingDir\$zipFileName $workingDir\Package\* | Out-Default } "Error zipping"
 }
 
 # Unzip package to a location
@@ -128,7 +136,13 @@ task Deploy -depends Package {
 }
 
 # Run tests on deployed files
-task Test -depends Deploy {
+#task Test -depends Deploy {
+task Test -depends Build {
+  if ((Test-Path -path $testsDir) -eq $false)
+  {
+	New-Item -Path $testsDir -ItemType Directory
+  }
+
   foreach ($build in $builds)
   {
     $name = $build.TestsName
@@ -137,15 +151,17 @@ task Test -depends Deploy {
         $finalDir = $build.FinalDir
         $framework = $build.Framework
         
+		exec { msbuild /p:Configuration=Release /p:OutDir=$testsDir\bin\$finalDir\ $sourceDir\$name\$name.csproj }
+		
         Write-Host -ForegroundColor Green "Copying test assembly $name to deployed directory"
         Write-Host
-        robocopy ".\Src\Newtonsoft.Json.Tests\bin\Release\$finalDir" $workingDir\Deployed\Bin\$finalDir /MIR /NP /XO /XF LinqBridge.dll | Out-Default
+        #robocopy ".\Src\Google.Maps\bin\Release\$finalDir" $workingDir\Deployed\Bin\$finalDir /MIR /NP /XO /XF LinqBridge.dll | Out-Default
         
-        Copy-Item -Path ".\Src\Newtonsoft.Json.Tests\bin\Release\$finalDir\Newtonsoft.Json.Tests.dll" -Destination $workingDir\Deployed\Bin\$finalDir\
+        #Copy-Item -Path "$testsDir\bin\$finalDir\*" -Destination $workingDir\Testing\Bin\$finalDir\
 
         Write-Host -ForegroundColor Green "Running tests " $name
         Write-Host
-        exec { .\Tools\NUnit\nunit-console.exe "$workingDir\Deployed\Bin\$finalDir\Newtonsoft.Json.Tests.dll" /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
+        exec { .\_build-tools\NUnit.Runners.2.6.2\tools\nunit-console.exe "$testsDir\Bin\$finalDir\$name.dll" /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
     }
   }
 }
