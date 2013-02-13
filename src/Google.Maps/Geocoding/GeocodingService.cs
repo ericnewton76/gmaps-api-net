@@ -27,7 +27,15 @@ namespace Google.Maps.Geocoding
 	/// </summary>
 	public static class GeocodingService
 	{
-		private static Uri _ApiUrl = new Uri("https://maps.google.com/maps/api/geocode/");
+		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
+		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
+		
+		static GeocodingService()
+		{
+			//use the HTTPS uri by default.
+			ApiUrl = HttpsUri;
+		}
+
 		/// <summary>
 		/// Gets or sets the Api Uri to use for requests.
 		/// </summary>
