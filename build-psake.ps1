@@ -82,30 +82,6 @@ task Package -depends Test {
     #robocopy "$sourceDir\Google.Maps\bin\Release\$finalDir" $workingDir\Package\Bin\$finalDir /NP /XO /XF *.pri | Out-Default
   }
   
-  if ($buildNuGet)
-  {
-    New-Item -Path $workingDir\NuGet -ItemType Directory
-    Copy-Item -Path "$toolsDir\GMaps-Api-Net.nuspec" -Destination "$workingDir\NuGet\GMaps-Api-Net.nuspec" -recurse
-    
-    foreach ($build in $builds)
-    {
-      if ($build.NuGetDir -ne $null)
-      {
-        $name = $build.TestsName
-        $finalDir = $build.FinalDir
-        $frameworkDirs = $build.NuGetDir.Split(",")
-        
-        foreach ($frameworkDir in $frameworkDirs)
-        {
-          robocopy "$workingDir\bin\Release\$finalDir" $workingDir\NuGet\lib\$frameworkDir /NP /XO /XF *.pri | Out-Default
-        }
-      }
-    }
-  
-    exec { .\_build-tools\NuGet.exe pack "$workingDir\NuGet\GMaps-Api-Net.nuspec" -Symbols }
-    move -Path .\*.nupkg -Destination $workingDir\NuGet
-  }
-  
 #  if ($buildDocumentation)
 #  {
 #    $mainBuild = $builds | where { $_.Name -eq "Newtonsoft.Json" } | select -first 1
@@ -135,6 +111,29 @@ task Deploy -depends Package {
   exec { .\Tools\7-zip\7za.exe x -y "-o$workingDir\Deployed" $workingDir\$zipFileName | Out-Default } "Error unzipping"
 }
 
+task NugetPackage -depends Test {
+    New-Item -Path $workingDir\NuGet -ItemType Directory
+    Copy-Item -Path "$baseDir\GMaps-Api-Net.nuspec" -Destination "$workingDir\NuGet\GMaps-Api-Net.nuspec" -recurse
+    
+    foreach ($build in $builds)
+    {
+      if ($build.NuGetDir -ne $null)
+      {
+        $name = $build.TestsName
+        $finalDir = $build.FinalDir
+        $frameworkDirs = $build.NuGetDir.Split(",")
+        
+        foreach ($frameworkDir in $frameworkDirs)
+        {
+          robocopy "$workingDir\bin\Release\$finalDir" $workingDir\NuGet\lib\$frameworkDir /NP /XO /XF *.pri | Out-Default
+        }
+      }
+    }
+  
+    exec { .\_build-tools\NuGet.exe pack "$workingDir\NuGet\GMaps-Api-Net.nuspec" -Symbols }
+    move -Path .\*.nupkg -Destination $workingDir\NuGet
+}
+
 # Run tests on deployed files
 #task Test -depends Deploy {
 task Test -depends Build {
@@ -161,7 +160,7 @@ task Test -depends Build {
 
         Write-Host -ForegroundColor Green "Running tests " $name
         Write-Host
-        exec { .\_build-tools\NUnit.Runners\tools\nunit-console.exe "$testsDir\Bin\$finalDir\$name.dll" /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
+        exec { .\_build-tools\NUnit.Runners\tools\nunit-console.exe "$testsDir\Bin\$finalDir\$name.dll" /labels /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
     }
   }
 }
