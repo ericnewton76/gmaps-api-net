@@ -28,6 +28,16 @@ namespace Google.Maps.Test.Integrations
 			this._resourcePath = "Google.Maps.Test.Integrations.json_queries." + queryString.ToString() + ".json";
 
 			Stream resourceStream = S_testAssembly.GetManifestResourceStream(this._resourcePath);
+
+			if (resourceStream == null)
+			{
+				string message = string.Format(
+@"Failed to find resource for query '{0}'.
+Resource path used: '{1}'
+Ensure a file exists at that resource path and the file has its Build Action set to ""Embedded Resource"".", queryString.ToString(), this._resourcePath);
+				throw new FileNotFoundException(message);
+			}
+
 			return new StreamReader(resourceStream);
 		}
 	}
