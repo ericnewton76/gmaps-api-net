@@ -20,11 +20,12 @@ namespace Google.Maps.Test.Integrations
 
 		protected override System.IO.StreamReader GetStreamReader(Uri uri)
 		{
-			string queryString = uri.Query;
-			queryString = queryString.Replace("&sensor=false",""); //clear off sensor=false
-			queryString = queryString.Replace("&sensor=true", ""); // clear off sensor=true
+			System.Text.StringBuilder queryString = new StringBuilder(uri.Query);
+			queryString.Remove(0, 1); //remove the initial "?"
+			queryString.Replace("&sensor=false",""); //clear off sensor=false
+			queryString.Replace("&sensor=true", ""); // clear off sensor=true
 
-			this._resourcePath = "Google.Maps.Test.Integrations.json_queries." + queryString + ".json";
+			this._resourcePath = "Google.Maps.Test.Integrations.json_queries." + queryString.ToString() + ".json";
 
 			Stream resourceStream = S_testAssembly.GetManifestResourceStream(this._resourcePath);
 			return new StreamReader(resourceStream);
