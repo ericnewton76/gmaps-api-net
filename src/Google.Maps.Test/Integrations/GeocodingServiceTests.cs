@@ -80,7 +80,7 @@ namespace Google.Maps.Test.Integrations
 			Assert.AreEqual(expectedFormattedAddress, response.Results.Single().FormattedAddress, "FormattedAddress");
 			Assert.IsTrue(
 				expectedComponentTypes.OrderBy(x => x).SequenceEqual(
-					response.Results.Single().Components.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
+					response.Results.Single().AddressComponents.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
 			Assert.AreEqual(expectedLatitude, response.Results.Single().Geometry.Location.Latitude, "Latitude");
 			Assert.AreEqual(expectedLongitude, response.Results.Single().Geometry.Location.Longitude, "Longitude");
 			Assert.AreEqual(expectedLocationType, response.Results.Single().Geometry.LocationType, "LocationType");
@@ -141,7 +141,7 @@ namespace Google.Maps.Test.Integrations
 			Assert.AreEqual(expectedFormattedAddress, response.Results.First().FormattedAddress, "FormattedAddress");
 			Assert.IsTrue(
 				expectedComponentTypes.OrderBy(x => x).SequenceEqual(
-					response.Results.First().Components.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
+					response.Results.First().AddressComponents.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
 			Assert.AreEqual(expectedLatitude, response.Results.First().Geometry.Location.Latitude, "Latitude");
 			Assert.AreEqual(expectedLongitude, response.Results.First().Geometry.Location.Longitude, "Longitude");
 			Assert.AreEqual(expectedLocationType, response.Results.First().Geometry.LocationType, "LocationType");

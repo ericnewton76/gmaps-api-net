@@ -86,9 +86,10 @@
     <Compile Include="Elevation\ElevationService.cs" />
     <Compile Include="Geocoding\AddressComponent.cs" />
     <Compile Include="Geocoding\AddressType.cs" />
+    <Compile Include="Geocoding\GeocodeResponse.cs" />
     <Compile Include="Geocoding\Geometry.cs" />
     <Compile Include="Geocoding\GeocodingRequest.cs" />
-    <Compile Include="Geocoding\GeocodingResponse.cs" />
+    <Compile Include="Geocoding\Result.cs" />
     <Compile Include="GMapsImageFormats.cs" />
     <Compile Include="Internal\ConvertUtil.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />
@@ -102,7 +103,6 @@
     <Compile Include="Path.cs" />
     <Compile Include="PolylineEncoder.cs" />
     <Compile Include="ServiceResponseStatus.cs" />
-    <Compile Include="Geocoding\GeocodingResult.cs" />
     <Compile Include="Geocoding\GeocodingService.cs" />
     <Compile Include="JsonEnumTypeConverter.cs" />
     <Compile Include="Geocoding\LocationType.cs" />

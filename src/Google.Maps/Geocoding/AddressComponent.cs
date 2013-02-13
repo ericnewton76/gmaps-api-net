@@ -16,9 +16,11 @@
  */
 
 using Newtonsoft.Json;
+using System;
 
 namespace Google.Maps.Geocoding
 {
+	[Serializable]
 	public class AddressComponent
 	{
 		/// <summary>

@@ -16,11 +16,13 @@
  */
 
 using Newtonsoft.Json;
+using System;
 
 namespace Google.Maps.Geocoding
 {
+	[Serializable]
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GeocodingResult
+	public class Result
 	{
 		/// <summary>
 		/// Indicates the type of the returned result. This array contains a
@@ -50,7 +52,7 @@ namespace Google.Maps.Geocoding
 		/// route), "New York" (the city) and "NY" (the US state).
 		/// </summary>
 		[JsonProperty("address_components")]
-		public AddressComponent[] Components { get; set; }
+		public AddressComponent[] AddressComponents { get; set; }
 
 		[JsonProperty("geometry")]
 		public Geometry Geometry { get; set; }

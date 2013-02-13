@@ -7,7 +7,7 @@ namespace SearchAddressMap
 {
 	internal static class Extensions
 	{
-		public static TreeViewItem[] ToTree(this GeocodingResult[] results)
+		public static TreeViewItem[] ToTree(this Result[] results)
 		{
 			var nodes = new List<TreeViewItem>();
 
@@ -17,7 +17,7 @@ namespace SearchAddressMap
 				node.Header = "(" + result.Types.FirstOrDefault() + ") " + result.FormattedAddress;
 				node.Tag = result.Geometry.Location;
 
-				foreach (var component in result.Components)
+				foreach (var component in result.AddressComponents)
 				{
 					node.Items.Add(new TreeViewItem
 					{

@@ -16,16 +16,18 @@
  */
 
 using Newtonsoft.Json;
+using System;
 
 namespace Google.Maps.Geocoding
 {
+	[Serializable]
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GeocodingResponse
+	public class GeocodeResponse
 	{
 		[JsonProperty("status")]
 		public ServiceResponseStatus Status { get; set; }
 
 		[JsonProperty("results")]
-		public GeocodingResult[] Results { get; set; }
+		public Result[] Results { get; set; }
 	}
 }

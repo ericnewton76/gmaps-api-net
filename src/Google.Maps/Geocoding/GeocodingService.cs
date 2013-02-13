@@ -40,10 +40,10 @@ namespace Google.Maps.Geocoding
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
-		public static GeocodingResponse GetResponse(GeocodingRequest request)
+		public static GeocodeResponse GetResponse(GeocodingRequest request)
 		{
 			var url = new Uri(ApiUrl, request.ToUri());
-			return Http.Get(url).As<GeocodingResponse>();
+			return Http.Get(url).As<GeocodeResponse>();
 		}
 	}
 }
