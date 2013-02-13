@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>gmaps-api-net</id>
+        <version>0.9.4</version>
+        <title />
+        <authors>Eric Newton</authors>
+        <owners>Eric Newton,Luis Farzati</owners>
+        <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+        <projectUrl>http://github.com/ericnewton76/gmaps-api-net</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A library for interacting with Google Maps API web services using C# or VB.Net</description>
+        <tags>google-maps,maps,c#</tags>
+    </metadata>
+    <files>
+        <file src="lib\net\_._" target="lib\net\_._" />
+    </files>
+</package>
