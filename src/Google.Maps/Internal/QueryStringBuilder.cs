@@ -44,6 +44,16 @@ namespace Google.Maps.Internal
             }
             return this;
         }
+		//public QueryStringBuilder Append(string key, System.Nullable<T> value)
+		//{
+		//    if (value != null)
+		//    {
+		//        if (_sb.Length > 0) _sb.Append("&");
+		//        _sb.Append(key).Append("=").Append(value);
+		//    }
+		//    return this;
+		//}
+
 		/// <summary>
 		/// Appends a value when the string isn't null.
 		/// </summary>
