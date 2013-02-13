@@ -71,25 +71,32 @@ namespace Google.Maps.Geocoding
 
 		internal Uri ToUri()
 		{
+			EnsureSensor();
+
 			var qsb = new Internal.QueryStringBuilder();
 
 			if(this.Address.GetType() == typeof(LatLng))
 			{
-				qsb.Append("latlng=", Address.GetAsUrlParameter());
+				qsb.Append("latlng", Address.GetAsUrlParameter());
 			}
 			else
 			{
-				qsb.Append("address=", Address.GetAsUrlParameter());
+				qsb.Append("address", Address.GetAsUrlParameter());
 			}
 				
-			qsb.Append("bounds=", Bounds)
-				.Append("region=", Region)
-				.Append("language=", Language)
-				.Append("sensor=", Sensor.Value.ToString());
+			qsb.Append("bounds", Bounds)
+				.Append("region", Region)
+				.Append("language", Language)
+				.Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
+		}
+
+		private void EnsureSensor()
+		{
+			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
 	}
 }

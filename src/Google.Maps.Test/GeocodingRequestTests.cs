@@ -117,5 +117,31 @@ namespace Google.Maps.Test
 			Assert.AreEqual(expected, actual);
 		}
 
+		[Test]
+		public void LatLng_for_address_will_invoke_reverse_geocoding()
+		{
+			var req = new GeocodingRequestAccessor();
+			
+			req.Sensor = false;
+			req.Address = new LatLng(-30f, 40f);
+
+			Uri expected = new Uri("json?latlng=-30.000000,40.000000&sensor=false", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		[ExpectedException(typeof(InvalidOperationException))]
+		public void GetUrl_sensor_not_set_should_throw_error()
+		{
+			var req = new GeocodingRequestAccessor();
+			req.Address = "New York, NY";
+
+			var actual = req.ToUri();
+
+			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
+		}
+
     }
 }
