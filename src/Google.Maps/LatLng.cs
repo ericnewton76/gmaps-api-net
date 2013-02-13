@@ -82,14 +82,27 @@ namespace Google.Maps
 		}
 
 		/// <summary>
-		/// Gets the string representation of the latitude and longitude coordinates.  Decimals set to 6 places.
+		/// Gets the string representation of the latitude and longitude coordinates.  Default format is "N6" for 6 decimal precision.
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return string.Format(
-				System.Globalization.CultureInfo.InvariantCulture, //google uses en-US standard for the maps api currently.
-				"{0:0.000000},{1:0.000000}", this.Latitude, this.Longitude);
+			return this.ToString("N6");
+		}
+
+		/// <summary>
+		/// Gets the string representation of the latitude and longitude coordinates.  The format is applies to a System.Double, so any format applicable for System.Double will work.
+		/// </summary>
+		/// <param name="format"></param>
+		/// <returns></returns>
+		public string ToString(string format)
+		{
+			System.Text.StringBuilder sb = new System.Text.StringBuilder(50); //default to 50 in the internal array.
+			sb.Append(this.Latitude.ToString(format, System.Globalization.CultureInfo.InvariantCulture));
+			sb.Append(",");
+			sb.Append(this.Longitude.ToString(format, System.Globalization.CultureInfo.InvariantCulture));
+			
+			return sb.ToString();
 		}
 
 		/// <summary>
@@ -100,7 +113,7 @@ namespace Google.Maps
 		{
 			//we're not returning crazy characters so just return the string.  
 			//prevents the comma from being converted to %2c, expanding the single character to three characters.
-			return this.ToString();
+			return this.ToString("R");
 		}
 
 		#region Parse

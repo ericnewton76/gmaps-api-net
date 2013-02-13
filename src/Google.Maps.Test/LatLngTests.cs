@@ -22,11 +22,13 @@ namespace Google.Maps.Test
         }
 
 		[Test]
-		public void GetAsUrlEncoded()
+		[TestCase(-35.3353d, 95.4454d, "-35.3353,95.4454")]
+		[TestCase(40.7142330d, -73.9612910d, "40.714233,-73.961291")]
+		public void GetAsUrlEncoded(double lat, double lng, string expected)
 		{
-			LatLng latlng = new LatLng(-35.3353m, 95.4454m);
+			LatLng latlng = new LatLng(lat,lng);
 
-			string expected = "-35.335300,95.445400";
+			//string expected = "-35.335300,95.445400";
 			string actual = latlng.GetAsUrlParameter();
 
 			//note, if this test starts failing, it may be because the 'comma' is being (in some circles' opinion) "properly" url encoded to %2c

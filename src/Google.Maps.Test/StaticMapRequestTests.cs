@@ -151,10 +151,10 @@ namespace Google.Maps.Test
         {
             StaticMapRequestAccessor accessor = new StaticMapRequestAccessor();
 
-            LatLng first = new LatLng(30.0, -60.0);
+            LatLng first = new LatLng(30.1, -60.2);
             accessor.Path = new Path(first);
 
-            string expected = "path=30.000000,-60.000000";
+            string expected = "path=30.1,-60.2";
             string actual = accessor.GetPathsStr();
 
             Assert.AreEqual(expected, actual);
@@ -164,12 +164,12 @@ namespace Google.Maps.Test
         {
             StaticMapRequestAccessor accessor = new StaticMapRequestAccessor();
 
-            LatLng first = new LatLng(30.0, -60.0);
-            LatLng second = new LatLng(40.0, -70.0);
+            LatLng first = new LatLng(30.1, -60.2);
+            LatLng second = new LatLng(40.3, -70.4);
             
             accessor.Path = new Path(first,second);
 
-            string expected = "path=30.000000,-60.000000%7C40.000000,-70.000000";
+            string expected = "path=30.1,-60.2%7C40.3,-70.4";
             string actual = accessor.GetPathsStr();
 
             Assert.AreEqual(expected, actual);
