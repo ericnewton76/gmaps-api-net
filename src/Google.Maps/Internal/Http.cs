@@ -36,17 +36,22 @@ namespace Google.Maps.Internal
 				RequestUri = uri;
 			}
 
+			protected virtual StreamReader GetStreamReader(Uri uri)
+			{
+				WebResponse response = WebRequest.Create(uri).GetResponse();
+
+				StreamReader sr = new StreamReader(response.GetResponseStream());
+				return sr;
+			}
+
 			public virtual string AsString()
 			{
 				var output = String.Empty;
 
-				var response = WebRequest.Create(RequestUri).GetResponse();
-				using (var reader = new StreamReader(response.GetResponseStream()))
+				using (var reader = GetStreamReader(this.RequestUri))
 				{
 					output = reader.ReadToEnd();
-					reader.Close();
 				}
-				response.Close();
 
 				return output;
 			}
@@ -55,10 +60,10 @@ namespace Google.Maps.Internal
 			{
 				T output = null;
 
-				using (var stringReader = new StringReader(AsString()))
+				using (var reader = GetStreamReader(this.RequestUri))
 				{
-					var jsonReader = new JsonTextReader(stringReader);
-					var serializer = new JsonSerializer();
+					JsonTextReader jsonReader = new JsonTextReader(reader);
+					JsonSerializer serializer = new JsonSerializer();
 					serializer.Converters.Add(new JsonEnumTypeConverter());
 					output = serializer.Deserialize<T>(jsonReader);
 				}
