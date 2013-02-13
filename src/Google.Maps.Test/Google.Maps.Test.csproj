@@ -67,9 +67,10 @@
     <None Include="Integrations\ElevationServiceTests.cs">
       <SubType>Code</SubType>
     </None>
-    <None Include="Integrations\GeocodingServiceTests.cs">
+    <Compile Include="Integrations\GeocodingServiceTests.cs">
       <SubType>Code</SubType>
-    </None>
+    </Compile>
+    <Compile Include="Integrations\HttpGetResponseFromResource.cs" />
     <Compile Include="LatLngTests.cs" />
     <Compile Include="LocationTests.cs" />
     <Compile Include="PolylineEncodingTests.cs" />
@@ -100,7 +101,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Integrations\GeocodingServiceTests_JSON\GetGeocodingForAddress-1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
+    <EmbeddedResource Include="Integrations\GeocodingServiceTests_JSON\GetGeocodingForAddress-1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
