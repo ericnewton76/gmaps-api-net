@@ -87,6 +87,17 @@ namespace Google.Maps.Test
 		//    Assert.AreEqual(expected, actual);
 		//}
 
+		[Test]
+		public void Implicit_Address_set_from_string()
+		{
+			var req = new GeocodingRequest();
+			req.Address = "New York, NY";
+
+			string expected = "New York, NY";
+			string actual = req.Address.ToString();
+
+			Assert.AreEqual(expected, actual);
+		}
 
     }
 }

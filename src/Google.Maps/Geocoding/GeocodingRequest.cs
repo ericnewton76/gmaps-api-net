@@ -28,7 +28,7 @@ namespace Google.Maps.Geocoding
 		/// The address that you want to geocode.
 		/// </summary>
 		/// <remarks>Required if latlng not present.</remarks>
-		public string Address { get; set; }
+		public Location Address { get; set; }
 
 		/// <summary>
 		/// The textual latitude/longitude value for which you wish to obtain
@@ -79,7 +79,7 @@ namespace Google.Maps.Geocoding
 		internal Uri ToUri()
 		{
 			var qsb = new Internal.QueryStringBuilder()
-				.Append("address=", Address)
+				.Append("address=", Address.GetAsUrlParameter())
 				.Append("latlng=", LatitudeLongitude)
 				.Append("bounds=", Bounds)
 				.Append("region=", Region)

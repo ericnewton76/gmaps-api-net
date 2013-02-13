@@ -217,5 +217,17 @@ namespace Google.Maps.Test
 
 			Assert.Ignore();
 		}
+
+		[Test]
+		public void Implicit_Address_set_from_string()
+		{
+			var map = new StaticMapRequest();
+			map.Center = "New York, NY";
+
+			string expected = "New York, NY";
+			string actual = map.Center.ToString();
+
+			Assert.AreEqual(expected, actual);
+		}
     }
 }
