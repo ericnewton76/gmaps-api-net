@@ -11,5 +11,8 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A library for interacting with Google Maps API web services using C# or VB.Net</description>
         <tags>google-maps,maps,c#</tags>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="4.5" />
+        </dependencies>
     </metadata>
 </package>
