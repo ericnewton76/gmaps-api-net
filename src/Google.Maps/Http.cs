@@ -69,7 +69,29 @@ namespace Google.Maps
 
 		public static HttpGetResponse Get(Uri uri)
 		{
-			return new HttpGetResponse(uri);
+			return Factory.CreateResponse(uri);
 		}
+
+		/// <summary>
+		/// Gets or sets the factory that provides HttpGetResponse instances. Crude depency injection for the time being.
+		/// </summary>
+		public static HttpGetResponseFactory Factory = new HttpGetResponseFactory();
+
+		/// <summary>
+		/// A factory class for building HttpGetResponse instances.
+		/// </summary>
+		public class HttpGetResponseFactory
+		{
+			/// <summary>
+			/// Builds a standard HttpGetResponse instance.
+			/// </summary>
+			/// <param name="uri"></param>
+			/// <returns></returns>
+			public virtual HttpGetResponse CreateResponse(Uri uri)
+			{
+				return new HttpGetResponse(uri);
+			}
+		}
+
 	}
 }
