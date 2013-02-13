@@ -36,14 +36,16 @@ namespace Google.Maps.Test.Integrations
 		}
 
 		[Test]
-		public void GetGeocodingWithoutParameters()
+		public void Empty_address()
 		{
 			// expectations
-			var expectedStatus = ServiceResponseStatus.RequestDenied;
+			var expectedStatus = ServiceResponseStatus.ZeroResults;
 			var expectedResultCount = 0;
 
 			// test
 			var request = new GeocodingRequest();
+			request.Sensor = false;
+			request.Address = "";
 			var response = GeocodingService.GetResponse(request);
 
 			// asserts
