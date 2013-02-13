@@ -43,7 +43,7 @@ namespace Google.Maps.Geocoding
 		public static GeocodeResponse GetResponse(GeocodingRequest request)
 		{
 			var url = new Uri(ApiUrl, request.ToUri());
-			return Http.Get(url).As<GeocodeResponse>();
+			return Internal.Http.Get(url).As<GeocodeResponse>();
 		}
 	}
 }

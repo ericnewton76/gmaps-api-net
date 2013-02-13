@@ -12,7 +12,7 @@ namespace Google.Maps.Direction
         public DirectionResponse GetResponse(DirectionRequest request)
         {
             var url = new Uri(ApiUrl, request.ToUri());
-            return Http.Get(url).As<DirectionResponse>();
+            return Internal.Http.Get(url).As<DirectionResponse>();
 
           
         }

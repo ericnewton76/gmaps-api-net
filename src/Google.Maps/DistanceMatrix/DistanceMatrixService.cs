@@ -14,7 +14,7 @@ namespace Google.Maps.DistanceMatrix
         {
             var url = new Uri(ApiUrl, request.ToUri());
             Console.WriteLine(url.ToString());
-            return Http.Get(url).As<DistanceMatrixResponse>();
+			return Internal.Http.Get(url).As<DistanceMatrixResponse>();
         }//end method
     }//end class
 }//end namespace

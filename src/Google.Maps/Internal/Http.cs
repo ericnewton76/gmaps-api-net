@@ -20,12 +20,12 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace Google.Maps
+namespace Google.Maps.Internal
 {
 	/// <summary>
 	/// Provides an intuitive and simple HTTP client wrapper.
 	/// </summary>
-	internal static class Http
+	public static class Http
 	{
 		public class HttpGetResponse
 		{
@@ -36,7 +36,7 @@ namespace Google.Maps
 				requestUri = uri;
 			}
 
-			public string AsString()
+			public virtual string AsString()
 			{
 				var output = String.Empty;
 
@@ -51,7 +51,7 @@ namespace Google.Maps
 				return output;
 			}
 
-			public T As<T>() where T : class
+			public virtual T As<T>() where T : class
 			{
 				T output = null;
 

@@ -43,7 +43,7 @@ namespace Google.Maps.Elevation
 		public static ElevationResponse GetResponse(ElevationRequest request)
 		{
 			var url = new Uri(ApiUrl, request.ToUri());
-			return Http.Get(url).As<ElevationResponse>();
+			return Internal.Http.Get(url).As<ElevationResponse>();
 		}
 	}
 }

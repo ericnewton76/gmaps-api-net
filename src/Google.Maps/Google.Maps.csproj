@@ -92,6 +92,7 @@
     <Compile Include="Geocoding\Result.cs" />
     <Compile Include="GMapsImageFormats.cs" />
     <Compile Include="Internal\ConvertUtil.cs" />
+    <Compile Include="Internal\Http.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="LatLng.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="JsonEnumTypeConverter.cs" />
     <Compile Include="Geocoding\LocationType.cs" />
     <Compile Include="Geocoding\Viewport.cs" />
-    <Compile Include="Http.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticMaps\StaticMapRequest.cs" />
     <Compile Include="StaticMaps\StaticMapService.cs" />
