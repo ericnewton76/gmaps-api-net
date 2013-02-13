@@ -42,5 +42,16 @@ namespace Google.Maps.Test
 
 			Assert.AreEqual(expected, actual);
 		}
+
+		[Test]
+		public void Location_with_spaces_gives_empty_url()
+		{
+			Location l = "    ";
+
+			string expected = "";
+			string actual = l.GetAsUrlParameter();
+
+			Assert.AreEqual(expected, actual);
+		}
 	}
 }
