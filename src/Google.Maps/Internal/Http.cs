@@ -29,18 +29,18 @@ namespace Google.Maps.Internal
 	{
 		public class HttpGetResponse
 		{
-			private Uri requestUri;
+			protected Uri RequestUri { get; set; }
 
 			public HttpGetResponse(Uri uri)
 			{
-				requestUri = uri;
+				RequestUri = uri;
 			}
 
 			public virtual string AsString()
 			{
 				var output = String.Empty;
 
-				var response = WebRequest.Create(requestUri).GetResponse();
+				var response = WebRequest.Create(RequestUri).GetResponse();
 				using (var reader = new StreamReader(response.GetResponseStream()))
 				{
 					output = reader.ReadToEnd();
