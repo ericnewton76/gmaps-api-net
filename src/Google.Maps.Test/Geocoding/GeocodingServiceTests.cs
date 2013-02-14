@@ -18,12 +18,23 @@
 using System.Linq;
 using NUnit.Framework;
 using Google.Maps.Geocoding;
+using System;
 
 namespace Google.Maps.Test.Integrations
 {
 	[TestFixture]
 	class GeocodingServiceTests
 	{
+
+		private static double GetTolerance(double expected, int decimalPrecision)
+		{
+			int magnitude = 1 +(expected==0.0 ? -1 : Convert.ToInt32(Math.Floor(Math.Log10(expected))));
+			int precision = 15 - magnitude;
+
+			double tolerance = 1.0 / Math.Pow(10,precision);
+
+			return tolerance;
+		}
 
 		private static AddressComponent MakeAddressComponent(string shortName, string longName, params AddressType[] types)
 		{
@@ -175,9 +186,17 @@ namespace Google.Maps.Test.Integrations
 			var expectedResult = expected.Results.First(); var actualResult = actual.Results.First();
 			Assert.AreEqual(expectedResult.Types, actualResult.Types, "Result.First().Types");
 			Assert.AreEqual(expectedResult.FormattedAddress, actualResult.FormattedAddress, "Resut.First().FormattedAddress");
+
+			Assert.That(expectedResult.AddressComponents, Is.EquivalentTo(actualResult.AddressComponents));
 			//Assert.IsTrue(
 			//    expectedComponentTypes.OrderBy(x => x).SequenceEqual(
 			//        response.Results.Single().AddressComponents.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
+
+			//tolerance needed when testing doubles
+			//http://stackoverflow.com/questions/4787125/evaluate-if-two-doubles-are-equal-based-on-a-given-precision-not-within-a-certa
+			//double tolerance = GetTolerance(expectedResult.Geometry.Viewport.Southwest.Latitude, 7);
+			//Assert.That(expectedResult.Geometry.Viewport.Southwest, Is.EqualTo(actualResult.Geometry.Viewport.Southwest).Within(latlngTolerance));
+			Assert.That(expectedResult.Geometry.Viewport.Southwest, Is.EqualTo(actualResult.Geometry.Viewport.Southwest).Within(0.0000001d));
 			//Assert.AreEqual(expectedLatitude, response.Results.Single().Geometry.Location.Latitude, "Latitude");
 			//Assert.AreEqual(expectedLongitude, response.Results.Single().Geometry.Location.Longitude, "Longitude");
 			//Assert.AreEqual(expectedLocationType, response.Results.Single().Geometry.LocationType, "LocationType");
