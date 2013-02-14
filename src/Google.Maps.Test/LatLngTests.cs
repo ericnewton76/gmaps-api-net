@@ -7,19 +7,19 @@ using Google.Maps;
 
 namespace Google.Maps.Test
 {
-    [TestFixture]
-    public class LatLngTests
-    {
-        [Test]
-        public void ToString_default_format()
-        {
-            LatLng latlng = new LatLng(-35.3353m, 95.4454m);
+	[TestFixture]
+	public class LatLngTests
+	{
+		[Test]
+		public void ToString_default_format()
+		{
+			LatLng latlng = new LatLng(-35.3353m, 95.4454m);
 
-            string expected = "-35.335300,95.445400";
-            string actual = latlng.ToString();
+			string expected = "-35.335300,95.445400";
+			string actual = latlng.ToString();
 
-            Assert.AreEqual(expected, actual);
-        }
+			Assert.AreEqual(expected, actual);
+		}
 
 		[Test]
 		[TestCase(-35.3353d, 95.4454d, "-35.3353,95.4454")]
@@ -35,40 +35,40 @@ namespace Google.Maps.Test
 			Assert.AreEqual(expected, actual);
 		}
 
-        [Test]
-        public void Parse_test()
-        {
-            string value = "40.714224,-73.961452";
+		[Test]
+		public void Parse_test()
+		{
+			string value = "40.714224,-73.961452";
 
-            LatLng expected = new LatLng(40.714224m, -73.961452m);
-            LatLng actual = LatLng.Parse(value);
+			LatLng expected = new LatLng(40.714224m, -73.961452m);
+			LatLng actual = LatLng.Parse(value);
 
-            Assert.AreEqual(expected.Latitude, actual.Latitude);
-            Assert.AreEqual(expected.Longitude, actual.Longitude);
-        }
+			Assert.AreEqual(expected.Latitude, actual.Latitude);
+			Assert.AreEqual(expected.Longitude, actual.Longitude);
+		}
 
-        [Test]
-        public void ToString_using_invariant_culture_settings()
-        {
-            LatLng test = new LatLng(40.714224m, -73.961452m);
+		[Test]
+		public void ToString_using_invariant_culture_settings()
+		{
+			LatLng test = new LatLng(40.714224m, -73.961452m);
 
-            System.Globalization.CultureInfo savedCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+			System.Globalization.CultureInfo savedCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
 
-            try
-            {
-                //change the thread culture
-                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("nl-BE");//belgium uses different numbering
+			try
+			{
+				//change the thread culture
+				System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("nl-BE");//belgium uses different numbering
 
-                string expected = "40.714224,-73.961452";
-                string actual = test.ToString();
+				string expected = "40.714224,-73.961452";
+				string actual = test.ToString();
 
-                Assert.AreEqual(expected, actual);
-            }
-            finally
-            {
-                System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;
-            }
-        }
+				Assert.AreEqual(expected, actual);
+			}
+			finally
+			{
+				System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;
+			}
+		}
 
-    }
+	}
 }

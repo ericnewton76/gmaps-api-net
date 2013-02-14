@@ -8,26 +8,26 @@ using System.Reflection;
 
 namespace Google.Maps.Test
 {
-    [TestFixture]
-    public class GeocodingRequestTests
-    {
+	[TestFixture]
+	public class GeocodingRequestTests
+	{
 
 
-        public class GeocodingRequestAccessor
-        {
-            private GeocodingRequest _instance = new GeocodingRequest();
+		public class GeocodingRequestAccessor
+		{
+			private GeocodingRequest _instance = new GeocodingRequest();
 
-            private static Type S_instanceType;
+			private static Type S_instanceType;
 			private static MethodInfo _ToUri;
 
-            static GeocodingRequestAccessor()
-            {
-                S_instanceType = typeof(GeocodingRequest);
+			static GeocodingRequestAccessor()
+			{
+				S_instanceType = typeof(GeocodingRequest);
 
 				try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { }); }
 				catch { }
 				finally { Ensure(_ToUri, "ToUri"); }
-            }
+			}
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
 			{
@@ -154,5 +154,5 @@ namespace Google.Maps.Test
 
 			Assert.Fail("Should've encountered an InvalidOperationException due to Address property not being set.");
 		}
-    }
+	}
 }
