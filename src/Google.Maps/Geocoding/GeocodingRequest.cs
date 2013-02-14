@@ -40,7 +40,7 @@ namespace Google.Maps.Geocoding
 		/// from the geocoder.
 		/// </remarks>
 		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
-		public string Bounds { get; set; }
+		public Viewport Bounds { get; set; }
 
 		/// <summary>
 		/// The region code, specified as a ccTLD ("top-level domain")
@@ -85,7 +85,7 @@ namespace Google.Maps.Geocoding
 				qsb.Append("address", Address.GetAsUrlParameter());
 			}
 				
-			qsb.Append("bounds", Bounds)
+			qsb.Append("bounds", GetBoundsStr())
 				.Append("region", Region)
 				.Append("language", Language)
 				.Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
@@ -93,6 +93,16 @@ namespace Google.Maps.Geocoding
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
+		}
+
+		private string GetBoundsStr()
+		{
+			if (this.Bounds == null) return null;
+
+			string swStr = this.Bounds.Southwest.GetAsUrlParameter();
+			string neStr = this.Bounds.Northeast.GetAsUrlParameter();
+
+			return string.Concat(swStr + Constants.PIPE_URL_ENCODED + neStr);
 		}
 
 		private void EnsureSensor()

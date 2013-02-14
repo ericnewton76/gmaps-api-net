@@ -24,6 +24,32 @@ namespace Google.Maps.Test.Integrations
 	[TestFixture]
 	class GeocodingServiceTests
 	{
+
+		private static AddressComponent MakeAddressComponent(string shortName, string longName, params AddressType[] types)
+		{
+			return new AddressComponent()
+			{
+				ShortName = shortName,
+				LongName = longName,
+				Types = types
+			};
+		}
+		private static Geometry MakeGeometry(LocationType locationType, double locationLat, double locationLong, double swLat, double swLong, double neLat, double neLong)
+		{
+			return new Geometry()
+			{
+				LocationType = locationType
+				,
+				Location = new LatLng(locationLat, locationLong)
+				,
+				Viewport = new Viewport(
+				  southWest: new LatLng(swLat, swLong)
+				  , northEast: new LatLng(neLat, neLong)
+					)
+			};
+		}
+
+		#region TestFixtureSetup/TearDown
 		[TestFixtureSetUp]
 		public void FixtureSetup()
 		{
@@ -34,6 +60,7 @@ namespace Google.Maps.Test.Integrations
 		{
 			Google.Maps.Internal.Http.Factory = new Internal.Http.HttpGetResponseFactory();
 		}
+		#endregion
 
 		[Test]
 		public void Empty_address()
@@ -54,7 +81,7 @@ namespace Google.Maps.Test.Integrations
 		}
 
 		[Test]
-		public void GetGeocodingForAddress()
+		public void GetGeocodingForAddress1()
 		{
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
@@ -102,6 +129,64 @@ namespace Google.Maps.Test.Integrations
 			//Assert.AreEqual(expectedNortheastLatitude, response.Results.Single().Geometry.Viewport.Northeast.Latitude, "Northeast.Latitude");
 			//Assert.AreEqual(expectedNortheastLongitude, response.Results.Single().Geometry.Viewport.Northeast.Longitude, "Northeast.Longitude");
 		}
+
+
+		[Test]
+		public void GetGeocodingForAddress2()
+		{
+			// expectations
+			GeocodeResponse expected = new GeocodeResponse()
+			{
+				Status = ServiceResponseStatus.Ok,
+				Results = new Result[] { 
+					new Result() {
+						
+						AddressComponents = new AddressComponent[] {
+							MakeAddressComponent("11","11",	AddressType.StreetNumber)
+							, MakeAddressComponent("Wall St","Wall Street", AddressType.Route)
+							, MakeAddressComponent("Lower Manhattan", "Lower Manhattan", AddressType.Neighborhood, AddressType.Political)
+							, MakeAddressComponent("Manhattan", "Manhattan", AddressType.Sublocality, AddressType.Political)
+							, MakeAddressComponent("New York", "New York", AddressType.Locality, AddressType.Political)
+							, MakeAddressComponent("New York", "New York", AddressType.AdministrativeAreaLevel2, AddressType.Political)
+							, MakeAddressComponent("NY", "New York", AddressType.AdministrativeAreaLevel1, AddressType.Political)
+							, MakeAddressComponent("US", "United States", AddressType.Country, AddressType.Political)
+						}
+						, FormattedAddress = "11 Wall Street, New York, NY 10005, USA"
+						, Geometry = MakeGeometry(LocationType.Rooftop, 
+								40.7068599,-74.0111281 //location
+								, 40.7055109,-74.0124771 //swBound
+								, 40.7082089,-74.0097791) //neBound
+						, Types = new AddressType[] { AddressType.StreetAddress }
+					}
+				}
+			};
+
+
+			// test
+			var request = new GeocodingRequest();
+			request.Address = "11 Wall Street New York NY 10005";
+			request.Sensor = false;
+			var actual = GeocodingService.GetResponse(request);
+
+			// asserts
+			Assert.AreEqual(expected.Status, actual.Status, "Status");
+			Assert.AreEqual(expected.Results.Length, actual.Results.Length, "ResultCount");
+			
+			var expectedResult = expected.Results.First(); var actualResult = actual.Results.First();
+			Assert.AreEqual(expectedResult.Types, actualResult.Types, "Result.First().Types");
+			Assert.AreEqual(expectedResult.FormattedAddress, actualResult.FormattedAddress, "Resut.First().FormattedAddress");
+			//Assert.IsTrue(
+			//    expectedComponentTypes.OrderBy(x => x).SequenceEqual(
+			//        response.Results.Single().AddressComponents.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
+			//Assert.AreEqual(expectedLatitude, response.Results.Single().Geometry.Location.Latitude, "Latitude");
+			//Assert.AreEqual(expectedLongitude, response.Results.Single().Geometry.Location.Longitude, "Longitude");
+			//Assert.AreEqual(expectedLocationType, response.Results.Single().Geometry.LocationType, "LocationType");
+			//Assert.AreEqual(expectedSouthwestLatitude, response.Results.Single().Geometry.Viewport.Southwest.Latitude, "Southwest.Latitude");
+			//Assert.AreEqual(expectedSouthwestLongitude, response.Results.Single().Geometry.Viewport.Southwest.Longitude, "Southwest.Longitude");
+			//Assert.AreEqual(expectedNortheastLatitude, response.Results.Single().Geometry.Viewport.Northeast.Latitude, "Northeast.Latitude");
+			//Assert.AreEqual(expectedNortheastLongitude, response.Results.Single().Geometry.Viewport.Northeast.Longitude, "Northeast.Longitude");
+		}
+
 
 		//[Test]
 		//public void GetGeocodingForCoordinates()
