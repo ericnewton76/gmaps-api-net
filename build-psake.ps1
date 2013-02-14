@@ -51,11 +51,7 @@ task Clean {
 }
 
 # Build each solution, optionally signed
-task Build -depends Clean { 
-
-  Write-Host -ForegroundColor Green "Updating assembly version"
-  Write-Host
-  Update-AssemblyInfoFiles $sourceDir ($majorVersion + '.0.0') $version
+task Build -depends Clean,UpdateAssemblyInfoVersions { 
 
   New-Item -Path $workingDir -ItemType Directory
 
@@ -70,6 +66,12 @@ task Build -depends Clean {
     Write-Host
     exec { msbuild "/t:Clean;Rebuild" /p:Configuration=Release "/p:Platform=Any CPU" /p:OutputPath=$workingDir\bin\Release\$finalDir\ /p:AssemblyOriginatorKeyFile=$signKeyPath "/p:SignAssembly=$sign" "/p:TreatWarningsAsErrors=$treatWarningsAsErrors" (GetConstants $build.Constants $sign) ".\Src\$name.sln" | Out-Default } "Error building $name"
   }
+}
+
+task UpdateAssemblyInfoVersions {
+  Write-Host -ForegroundColor Green "Updating assembly version"
+  Write-Host
+  Update-AssemblyInfoFiles $sourceDir ($majorVersion + '.0.0') $version
 }
 
 # Optional build documentation, add files to final zip
@@ -111,7 +113,25 @@ task Deploy -depends Package {
   exec { .\Tools\7-zip\7za.exe x -y "-o$workingDir\Deployed" $workingDir\$zipFileName | Out-Default } "Error unzipping"
 }
 
-task NugetPackage -depends Test {
+task UpdateNuspecVersion {
+	
+	$versionNodePattern = "<version>[0-9]+(\.([0-9]+|\*)){1,3}</version>"
+	$versionOut = "<version>" + $majorWithReleaseVersion + "</version>"
+	
+	Get-ChildItem -Path $baseDir *.nuspec | ForEach-Object {
+		
+		$filename = $_.Directory.ToString() + '\' + $_.Name
+		Write-Host "$filename -> $majorWithReleaseVersion"
+		
+		(Get-Content $filename) | Foreach-Object {
+			% {$_ -replace $versionNodePattern, $versionOut }
+		} | Set-Content $filename
+		
+	}
+	
+}
+
+task NugetPackage -depends Test,UpdateNuspecVersion {
     New-Item -Path $workingDir\NuGet -ItemType Directory
     Copy-Item -Path "$baseDir\GMaps-Api-Net.nuspec" -Destination "$workingDir\NuGet\GMaps-Api-Net.nuspec" -recurse
     
