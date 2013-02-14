@@ -24,6 +24,16 @@ namespace Google.Maps.Geocoding
 	[JsonObject(MemberSerialization.OptIn)]
 	public class Viewport
 	{
+		private Viewport()
+		{
+		}
+
+		public Viewport(LatLng southWest, LatLng northEast)
+		{
+			this.Southwest = southWest;
+			this.Northeast = northEast;
+		}
+
 		[JsonProperty("southwest")]
 		public LatLng Southwest { get; set; }
 
