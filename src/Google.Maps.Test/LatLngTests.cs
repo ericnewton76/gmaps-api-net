@@ -70,5 +70,31 @@ namespace Google.Maps.Test
 			}
 		}
 
+		[Test]
+		[TestCase(30.1d,60.2d)]
+		public void Equals(double lat, double lng)
+		{
+			LatLng latLng1 = new LatLng(lat, lng);
+			LatLng latLng2 = new LatLng(lat, lng);
+
+			Assert.IsTrue(latLng1.Equals(latLng2), "Equals fails.");
+		}
+
+		[Test]
+		[TestCase(40.2d,70.3d)]
+		public void NotEquals(double lat, double lng)
+		{
+			LatLng latLng1 = new LatLng(lat, lng);
+			LatLng latLng2 = new LatLng(0d, lng);
+
+			Assert.IsFalse(latLng1.Equals(latLng2));
+
+			LatLng latLng3 = new LatLng(lat, 0d);
+			Assert.IsFalse(latLng1.Equals(latLng3));
+			
+			LatLng latLng4 = new LatLng(0d, 0d);
+			Assert.IsFalse(latLng1.Equals(latLng4));
+		}
+
 	}
 }

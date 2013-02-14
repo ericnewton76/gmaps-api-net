@@ -23,7 +23,7 @@ namespace Google.Maps
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	[Serializable]
-	public class LatLng : Location
+	public class LatLng : Location, IEquatable<LatLng>
 	{
 		public LatLng()
 		{
@@ -146,5 +146,22 @@ namespace Google.Maps
 			}
 		}
 		#endregion
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as LatLng);
+		}
+		public bool Equals(LatLng other)
+		{
+			if (other == null) return false;
+			
+			if (other.Latitude == this.Latitude && other.Longitude == this.Longitude)
+			{
+				return true;
+			}
+
+			//else
+			return false;
+		}
 	}
 }

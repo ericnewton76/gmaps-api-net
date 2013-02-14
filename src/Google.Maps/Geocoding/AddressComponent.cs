@@ -21,7 +21,7 @@ using System;
 namespace Google.Maps.Geocoding
 {
 	[Serializable]
-	public class AddressComponent
+	public class AddressComponent : IEquatable<AddressComponent>
 	{
 		/// <summary>
 		/// The full text description or name of the address component as
@@ -44,5 +44,33 @@ namespace Google.Maps.Geocoding
 		/// </summary>
 		[JsonProperty("types")]
 		public AddressType[] Types { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as AddressComponent);
+		}
+		public bool Equals(AddressComponent obj)
+		{
+			if(obj==null) return false;
+
+			if(string.Compare(this.ShortName, obj.ShortName) != 0 || string.Compare(this.LongName, obj.LongName) != 0)
+				return false;
+
+			int thisTypesLength=-1, objTypesLength = -1;
+			if(this.Types != null) thisTypesLength = this.Types.Length;
+			if(obj.Types != null) objTypesLength = obj.Types.Length;
+			
+			try {
+				for(int i=0; i < objTypesLength; i++)
+				{
+					AddressType thisType = this.Types[i];
+					AddressType objType = obj.Types[i];
+					if(thisType != objType) return false;
+				}
+			} catch { return false; }
+
+			//they seem to be equal
+			return true;
+		}
 	}
 }
