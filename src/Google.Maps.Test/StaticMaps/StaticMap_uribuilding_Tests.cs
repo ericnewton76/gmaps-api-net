@@ -16,18 +16,18 @@ namespace Google.Maps.Test
         [Test]
         public void BasicUri()
         {
+			string expected = "/maps/api/staticmap?center=30.1,-60.2&size=512x512&sensor=false";
+
 			StaticMapRequest sm = new StaticMapRequest()
             {
                 Sensor = false,
-                Center = new LatLng(30.0, -90.0)
+                Center = new LatLng(30.1, -60.2)
             };
 
-            Uri actual = sm.ToUri();
-            Uri actualRelative = actual.MakeRelativeUri(gmapsBaseUri);
+            Uri actualUri = sm.ToUri();
+			string actual = actualUri.PathAndQuery;
 
-			Uri expected = new Uri("/maps/api/json");
-
-			Assert.Inconclusive();
+			Assert.AreEqual(expected, actual);
         }
     }
 }

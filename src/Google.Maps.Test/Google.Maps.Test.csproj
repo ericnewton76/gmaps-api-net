@@ -63,19 +63,18 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeocodingRequestTests.cs" />
+    <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
+    <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
     <None Include="Integrations\ElevationServiceTests.cs">
       <SubType>Code</SubType>
     </None>
-    <Compile Include="Integrations\GeocodingServiceTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Geocoding\GeocodingRequestTests.cs" />
+    <Compile Include="Geocoding\GeocodingServiceTests.cs" />
     <Compile Include="Integrations\HttpGetResponseFromResource.cs" />
     <Compile Include="LatLngTests.cs" />
     <Compile Include="LocationTests.cs" />
     <Compile Include="PolylineEncodingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticMapRequestTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Google.Maps\Google.Maps.csproj">
