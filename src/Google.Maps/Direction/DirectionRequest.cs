@@ -24,11 +24,6 @@ namespace Google.Maps.Direction
 		[DefaultValue(TravelMode.driving)]
 		public TravelMode Mode { get; set; }
 
-		/// <summary>Unsupported, removing in a future commit.</summary>
-		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
-		// TODO: REMOVE the Bounds property. No mention in the request api for directions.
-		public string Bounds { get; set; }
-
 		/// <summary>The region code, specified as a ccTLD ("top-level domain") two-character value. See also Region biasing.</summary>
 		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
 		/// <seealso cref="https://developers.google.com/maps/documentation/directions/#RegionBiasing"/>
