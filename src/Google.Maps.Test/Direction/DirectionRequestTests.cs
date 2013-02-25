@@ -50,19 +50,30 @@ namespace Google.Maps.Test
 			#endregion
 
 			#region Public interface copy
-			public Waypoint Origin 
+			public Location Origin 
 			{ 
 				get { return this._instance.Origin; } 
 				set { this._instance.Origin = value; } 
 			}
-			public Waypoint Destination 
+			public Location Destination 
 			{ 
 				get { return this._instance.Destination; } 
 				set { this._instance.Destination = value; } 
 			}
-
+			public bool? Sensor
+			{
+				get { return this._instance.Sensor; }
+				set { this._instance.Sensor = value; }
+			}
+			public TravelMode TravelMode
+			{
+				get { return this._instance.Mode; }
+				set { this._instance.Mode = value; }
+			}
 			#endregion
 
+
+			
 		}
 
 		//[Test]
@@ -113,23 +124,66 @@ namespace Google.Maps.Test
 		public void GetUrl_sensor_not_set_should_throw_error()
 		{
 			var req = new DirectionRequestAccessor();
-			//req.Origin = "New York, NY";
 
 			var actual = req.ToUri();
 
 			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
 		}
 
-		[Test]
+		//TODO: enable this [Test]
 		[ExpectedException(typeof(InvalidOperationException))]
-		public void GetUrl_no_Address_set()
+		public void GetUrl_no_Origin_set()
 		{
 			var req = new DirectionRequestAccessor();
-			//req.Address = something;
+			//req.Origin = nothing basically;
 
 			var actual = req.ToUri();
 
-			Assert.Fail("Should've encountered an InvalidOperationException due to Address property not being set.");
+			Assert.Fail("Should've encountered an InvalidOperationException due to Origin property not being set.");
 		}
+
+		//TODO: enable this [Test]
+		[ExpectedException(typeof(InvalidOperationException))]
+		public void GetUrl_no_Destination_set()
+		{
+			var req = new DirectionRequestAccessor();
+			//req.Origin = nothing basically;
+
+			var actual = req.ToUri();
+
+			Assert.Fail("Should've encountered an InvalidOperationException due to Destination property not being set.");
+		}
+
+		[Test]
+		public void GetUrl_simplest_using_address_ex1()
+		{
+			var req = new DirectionRequestAccessor();
+			req.Sensor = false;
+			req.Origin = "New York, NY";
+			req.Destination = "Albany, NY";
+			req.TravelMode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
+
+			Uri expected = new Uri("json?origin=New+York,+NY&destination=Albany,+NY&sensor=false", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		public void GetUrl_simplest_using_latlng()
+		{
+			var req = new DirectionRequestAccessor();
+			req.Sensor = false;
+			req.Origin = new LatLng(30.2, 40.3);
+			req.Destination = new LatLng(50.5,60.6);
+			req.TravelMode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
+
+			Uri expected = new Uri("json?origin=30.2,40.3&destination=50.5,60.6&sensor=false", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+		}
+
+
 	}
 }
