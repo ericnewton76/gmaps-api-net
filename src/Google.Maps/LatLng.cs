@@ -101,7 +101,7 @@ namespace Google.Maps
 			sb.Append(this.Latitude.ToString(format, System.Globalization.CultureInfo.InvariantCulture));
 			sb.Append(",");
 			sb.Append(this.Longitude.ToString(format, System.Globalization.CultureInfo.InvariantCulture));
-			
+
 			return sb.ToString();
 		}
 
@@ -154,7 +154,7 @@ namespace Google.Maps
 		public bool Equals(LatLng other)
 		{
 			if (other == null) return false;
-			
+
 			if (other.Latitude == this.Latitude && other.Longitude == this.Longitude)
 			{
 				return true;
