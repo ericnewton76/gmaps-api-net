@@ -85,9 +85,9 @@ namespace Google.Maps.Direction
 		internal Uri ToUri()
 		{
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
-				.Append("origin", Origin.ToString())
-				.Append("destination", Destination.ToString())
-				.Append("mode", Mode.ToString())
+				.Append("origin", (Origin == null ? (string)null : Origin.ToString()))
+				.Append("destination", (Destination == null ? (string)null : Destination.ToString()))
+				.Append("mode", (Mode.ToString()))
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
