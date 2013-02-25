@@ -40,39 +40,56 @@ namespace Google.Maps.Direction
 		/// </summary>
 		public bool? Sensor { get; set; }
 
-		private SortedList<int, Waypoint> waypoints;
-		public SortedList<int, Waypoint> Waypoints
+		private List<Location> _waypoints;
+		public IEnumerable<Location> Waypoints
 		{
 			get
 			{
-				if (waypoints == null)
-				{
-					waypoints = new SortedList<int, Waypoint>();
-				}
-				return waypoints;
+				if (_waypoints == null) return new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
+				return (IEnumerable<Location>)_waypoints;
 			}
 			set
 			{
-				waypoints = value;
+				if (value == null)
+				{
+					//clear our reference.
+					_waypoints = null; return;
+				}
+				
+				//see if reference passed is a List<Location> instance.
+				List<Location> list = value as List<Location>;
+				
+				if(list == null) 
+					//build a list from the ienumerable passed in.
+					list = new List<Location>(value);
+
+				_waypoints = list;
 			}
 		}
 
-		public void Add(Waypoint location)
+		/// <summary>
+		/// Adds a waypoint to the current request.
+		/// </summary>
+		/// <remarks>Google's API specifies 8 maximum for non-business (free) consumers, and up to 23 for (registered) business customers</remarks>
+		/// <param name="waypoint"></param>
+		public void AddWaypoint(Location waypoint)
 		{
-			Waypoints.Add(Waypoints.Count, location);
+			if (waypoint == null) return;
+			if (_waypoints == null) _waypoints = new List<Location>();
+			_waypoints.Add(waypoint);
 		}
 
 		internal string WaypointsToUri()
 		{
-			if (Waypoints.Count == 0) return string.Empty;
+			if (this._waypoints == null || this._waypoints.Count == 0) return null;
 
 			StringBuilder sb = new StringBuilder();
 
-			foreach (Waypoint waypoint in Waypoints.Values)
+			foreach (Location waypoint in this._waypoints)
 			{
-				sb.AppendFormat("{0}|", waypoint.ToString());
+				if (sb.Length > 0) sb.Append("|");
+				sb.Append(waypoint.ToString());
 			}
-			sb = sb.Remove(sb.Length - 1, 1);
 
 			return sb.ToString();
 		}
