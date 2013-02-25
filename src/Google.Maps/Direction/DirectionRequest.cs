@@ -11,11 +11,11 @@ namespace Google.Maps.Direction
 		/// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
 		/// </summary>
-		public Waypoint Origin { get; set; }
+		public Location Origin { get; set; }
 		/// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
 		/// </summary>
-		public Waypoint Destination { get; set; }
+		public Location Destination { get; set; }
 
 		/// <summary>
 		/// Specifies the mode of transport to use when calculating directions. Valid values are specified in <see cref="TravelMode"/>s. 
@@ -87,9 +87,9 @@ namespace Google.Maps.Direction
 			EnsureSensor();
 
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
-				.Append("origin", (Origin == null ? (string)null : Origin.ToString()))
-				.Append("destination", (Destination == null ? (string)null : Destination.ToString()))
-				.Append("mode", (Mode.ToString()))
+				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
+				.Append("destination", (Destination == null ? (string)null : Destination.GetAsUrlParameter()))
+				.Append("mode", (Mode != TravelMode.driving ? Mode.ToString() : (string)null))
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
@@ -104,5 +104,6 @@ namespace Google.Maps.Direction
 		{
 			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
+
 	}
 }

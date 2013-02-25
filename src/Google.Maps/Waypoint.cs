@@ -2,6 +2,7 @@
 
 namespace Google.Maps
 {
+	[Obsolete("Functionality was absorbed by Location being polymorphic")]
 	public class Waypoint
 	{
 		public LatLng Position { get; set; }
