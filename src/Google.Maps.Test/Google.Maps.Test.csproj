@@ -63,6 +63,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Direction\DirectionRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
     <None Include="Integrations\ElevationServiceTests.cs">
