@@ -43,7 +43,7 @@ namespace Google.Maps.Direction
 		/// <summary>
 		///  Indicates whether or not the directions request comes from a device with a location sensor. This value must be either true or false.
 		/// </summary>
-		public bool Sensor { get; set; }
+		public bool? Sensor { get; set; }
 
 		private SortedList<int, Waypoint> waypoints;
 		public SortedList<int, Waypoint> Waypoints
@@ -84,6 +84,8 @@ namespace Google.Maps.Direction
 
 		internal Uri ToUri()
 		{
+			EnsureSensor();
+
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
 				.Append("origin", (Origin == null ? (string)null : Origin.ToString()))
 				.Append("destination", (Destination == null ? (string)null : Destination.ToString()))
@@ -91,11 +93,16 @@ namespace Google.Maps.Direction
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
-				.Append("sensor", Sensor ? "true" : "false");
+				.Append("sensor", Sensor.Value ? "true" : "false");
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
+		}
+
+		private void EnsureSensor()
+		{
+			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
 	}
 }
