@@ -49,7 +49,7 @@ namespace Google.Maps.Test.Elevation
 			// test
 			var request = new ElevationRequest();
 			request.Locations = "39.7391536,-104.9847034";
-			request.Sensor = "false";
+			request.Sensor = false;
 			var response = ElevationService.GetResponse(request);
 
 			// asserts
@@ -76,7 +76,7 @@ namespace Google.Maps.Test.Elevation
 			// test
 			var request = new ElevationRequest();
 			request.Locations = "39.7391536,-104.9847034|36.455556,-116.866667";
-			request.Sensor = "false";
+			request.Sensor = false;
 			var response = ElevationService.GetResponse(request);
 
 			// asserts
