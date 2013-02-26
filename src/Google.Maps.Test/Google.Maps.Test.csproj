@@ -67,6 +67,7 @@
     <Compile Include="Direction\DirectionServiceTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Elevation\ElevationRequestTests.cs" />
     <Compile Include="QuickExamplesTests.cs" />
     <Compile Include="Elevation\ElevationServiceTests.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
@@ -110,6 +111,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Elevation\json_queries\locations=39.739153,-104.984703!36.455556,-116.866667.json" />
+    <EmbeddedResource Include="Elevation\json_queries\locations=39.739153,-104.984703.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

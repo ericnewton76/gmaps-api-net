@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using System;
+using System.Collections.Generic;
+using Google.Maps.Internal;
 
 namespace Google.Maps.Elevation
 {
@@ -33,7 +34,30 @@ namespace Google.Maps.Elevation
 		/// </summary>
 		/// <remarks>Required if path not present.</remarks>
 		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Locations"/>
-		public string Locations { get; set; }
+		public IList<LatLng> Locations 
+		{
+			get 
+			{
+				if (_locations == null) _locations = new List<LatLng>();
+				return _locations;
+			}
+		}
+		private IList<LatLng> _locations;
+
+		/// <summary>
+		/// Easy way to add locations to the Locations collection.
+		/// </summary>
+		/// <param name="locationCollection"></param>
+		public void AddLocations(params LatLng[] locationCollection)
+		{
+			if (locationCollection == null) return;
+
+			IList<LatLng> myLocations = this.Locations;
+			foreach (LatLng item in locationCollection)
+			{
+				this.Locations.Add(item);
+			}
+		}
 
 		/// <summary>
 		/// Defines a path on the earth for which to return elevation data.
@@ -44,7 +68,15 @@ namespace Google.Maps.Elevation
 		/// </summary>
 		/// <remarks>Required if locations not present.</remarks>
 		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Paths"/>
-		public string Path { get; set; }
+		public IList<LatLng> Path
+		{
+			get
+			{
+				if (this._path == null) this._path = new List<LatLng>();
+				return this._path;
+			}
+		}
+		private IList<LatLng> _path;
 
 		/// <summary>
 		/// specifies the number of sample points along a path for which to return
@@ -52,7 +84,7 @@ namespace Google.Maps.Elevation
 		/// ordered set of equidistant points along the path.
 		/// </summary>
 		/// <remarks>Required if a path is specified.</remarks>
-		public string Samples { get; set; }
+		public int? Samples { get; set; }
 
 		/// <summary>
 		/// Specifies whether the application requesting elevation data is
@@ -68,9 +100,9 @@ namespace Google.Maps.Elevation
 			this.EnsureSensor(true);
 
 			var qsb = new Internal.QueryStringBuilder()
-				.Append("locations", Locations)
-				.Append("path", Path)
-				.Append("samples", Samples)
+				.Append("locations", RequestUtils.GetLatLngCollectionStr(this._locations))
+				.Append("path", RequestUtils.GetLatLngCollectionStr(this._path))
+				.Append("samples", (Samples.GetValueOrDefault() > 0 ? Samples.ToString() : ""))
 				.Append("sensor", (Sensor.Value ? "true" : "false"));
 
 			var url = "json?" + qsb.ToString();
@@ -85,6 +117,16 @@ namespace Google.Maps.Elevation
 				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
 				else return;
 			}
+		}
+
+		private string GetLocationsStr()
+		{
+			return null;
+		}
+
+		private string GetPathStr()
+		{
+			return null;
 		}
 	}
 }

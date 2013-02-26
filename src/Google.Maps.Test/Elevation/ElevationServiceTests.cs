@@ -23,18 +23,20 @@ using Google.Maps.Elevation;
 namespace Google.Maps.Test.Elevation
 {
 	[TestFixture]
-	[Explicit()]
-	[Category("External Integrations")]
 	public class ElevationServiceTests
 	{
-		[Test]
-		[ExpectedException(typeof(WebException))]
-		public void GetElevationWithoutParameters()
+		#region TestFixtureSetup/TearDown
+		[TestFixtureSetUp]
+		public void FixtureSetup()
 		{
-			// test
-			var request = new ElevationRequest();
-			var response = ElevationService.GetResponse(request);
+			Google.Maps.Internal.Http.Factory = new Google.Maps.Test.Integrations.HttpGetResponseFromResourceFactory("Google.Maps.Test.Elevation");
 		}
+		[TestFixtureTearDown]
+		public void FixtureTearDown()
+		{
+			Google.Maps.Internal.Http.Factory = new Internal.Http.HttpGetResponseFactory();
+		}
+		#endregion
 
 		[Test]
 		public void GetElevationForOneLocation()
@@ -42,22 +44,21 @@ namespace Google.Maps.Test.Elevation
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
 			var expectedResultCount = 1;
-			var expectedElevation = 1608.8402100m;
-			var expectedLocationLatitude = 39.7391536m;
-			var expectedLocationLongitude = -104.9847034m;
+			var expectedElevation = 1608.6m;
+			var expectedLocation = new LatLng(39.739153, -104.984703);
 			
 			// test
 			var request = new ElevationRequest();
-			request.Locations = "39.7391536,-104.9847034";
+			request.AddLocations(expectedLocation);
 			request.Sensor = false;
-			var response = ElevationService.GetResponse(request);
+			var response = new ElevationService().GetResponse(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
 			Assert.AreEqual(expectedResultCount, response.Results.Length);
-			Assert.AreEqual(expectedElevation, response.Results.Single().Elevation);
-			Assert.AreEqual(expectedLocationLatitude, response.Results.Single().Location.Latitude);
-			Assert.AreEqual(expectedLocationLongitude, response.Results.Single().Location.Longitude);
+			Assert.That(expectedElevation, Is.EqualTo(response.Results[0].Elevation).Within(0.1));
+			
+			Assert.That(expectedLocation, Is.EqualTo(response.Results[0].Location));
 		}
 
 		[Test]
@@ -66,28 +67,26 @@ namespace Google.Maps.Test.Elevation
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
 			var expectedResultCount = 2;
-			var expectedElevation1 = 1608.8402100m;
-			var expectedLocationLatitude1 = 39.7391536m;
-			var expectedLocationLongitude1 = -104.9847034m;
-			var expectedElevation2 = -50.7890358m;
-			var expectedLocationLatitude2 = 36.4555560m;
-			var expectedLocationLongitude2 = -116.8666670m;
+			var expectedElevation1 = 1608.6m;
+			var expectedLocation1 = new LatLng(39.739153,-104.984703);
+			var expectedElevation2 = -50.789m;
+			var expectedLocation2 = new LatLng(36.4555560,-116.8666670);
 
 			// test
 			var request = new ElevationRequest();
-			request.Locations = "39.7391536,-104.9847034|36.455556,-116.866667";
+			request.AddLocations(expectedLocation1, expectedLocation2);
 			request.Sensor = false;
-			var response = ElevationService.GetResponse(request);
+			var response = new ElevationService().GetResponse(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
 			Assert.AreEqual(expectedResultCount, response.Results.Length);
-			Assert.AreEqual(expectedElevation1, response.Results.First().Elevation);
-			Assert.AreEqual(expectedLocationLatitude1, response.Results.First().Location.Latitude);
-			Assert.AreEqual(expectedLocationLongitude1, response.Results.First().Location.Longitude);
-			Assert.AreEqual(expectedElevation2, response.Results.Last().Elevation);
-			Assert.AreEqual(expectedLocationLatitude2, response.Results.Last().Location.Latitude);
-			Assert.AreEqual(expectedLocationLongitude2, response.Results.Last().Location.Longitude);
+			
+			Assert.That(expectedElevation1, Is.EqualTo(response.Results[0].Elevation).Within(0.1));
+			Assert.That(expectedLocation1, Is.EqualTo(response.Results[0].Location));
+			
+			Assert.That(expectedElevation2, Is.EqualTo(response.Results[1].Elevation).Within(0.1));
+			Assert.That(expectedLocation2, Is.EqualTo(response.Results[1].Location));
 		}
 	}
 }

@@ -22,13 +22,12 @@ namespace Google.Maps.Test.Integrations
 		{
 			string outputType = uri.Segments[uri.Segments.Length - 1];
 
-			System.Text.StringBuilder queryString = new StringBuilder(uri.Query);
-			queryString.Remove(0, 1); //remove the initial "?"
+			System.Text.StringBuilder queryString = new StringBuilder(uri.OriginalString.Substring(uri.OriginalString.IndexOf("?")+1));
 			queryString.Replace("&sensor=false",""); //clear off sensor=false
 			queryString.Replace("&sensor=true", ""); // clear off sensor=true
 
 			//have to replace any remaining ampersands with $ due to filename limitations.
-			queryString.Replace("&", "$");
+			queryString.Replace("&", "$").Replace("|","!").Replace("%","~");
 
 			string resourcePath = this.BaseResourcePath + string.Format(".{0}_queries.{1}.{0}", outputType, queryString.ToString());
 
