@@ -1,7 +1,7 @@
 properties { 
   $zipFileName = "GMapsApiNet.zip"
   $majorVersion = "0.10"
-  $majorWithReleaseVersion = "0.10.0"
+  $majorWithReleaseVersion = "0.10.1"
   $version = GetVersion $majorWithReleaseVersion
   $signAssemblies = $false
   $signKeyPath = "D:\Development\Releases\newtonsoft.snk"
