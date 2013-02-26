@@ -64,12 +64,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction\DirectionRequestTests.cs" />
+    <Compile Include="Direction\DirectionServiceTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
+    <Compile Include="ValueTextComparer.cs" />
     <EmbeddedResource Include="Geocoding\json_queries\address=11+Wall+Street+New+York+NY+10005.json" />
     <EmbeddedResource Include="Geocoding\json_queries\address=1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
     <EmbeddedResource Include="Geocoding\json_queries\latlng=40.714233,-73.961291.json" />
     <EmbeddedResource Include="Geocoding\json_queries\sensor=false.json" />
+    <EmbeddedResource Include="Direction\json_queries\origin=Toronto%24destination=Montreal.json" />
+    <EmbeddedResource Include="Direction\json_queries\sensor=false.json" />
     <None Include="Integrations\ElevationServiceTests.cs">
       <SubType>Code</SubType>
     </None>
@@ -107,6 +113,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
