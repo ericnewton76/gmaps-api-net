@@ -206,19 +206,6 @@ namespace Google.Maps.Test
 		}
 
 		[Test]
-		public void Online_Sample_Works()
-		{
-			//NOTE: changes here should be reflected on the project wiki at http://code.google.com/p/gmaps-api-net/
-			var map = new StaticMapRequest();
-			map.Center = new Location("1600 Amphitheatre Parkway Mountain View, CA 94043");
-			map.Size = new System.Drawing.Size(400, 400);
-			map.Zoom = 14;
-			map.Sensor = false;
-
-			Assert.Ignore();
-		}
-
-		[Test]
 		public void Implicit_Address_set_from_string()
 		{
 			var map = new StaticMapRequest();
