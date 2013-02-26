@@ -61,19 +61,30 @@ namespace Google.Maps.Elevation
 		/// </summary>
 		/// <remarks>Required.</remarks>
 		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
-		public string Sensor { get; set; }
+		public bool? Sensor { get; set; }
 
 		internal Uri ToUri()
 		{
+			this.EnsureSensor(true);
+
 			var qsb = new Internal.QueryStringBuilder()
 				.Append("locations", Locations)
 				.Append("path", Path)
 				.Append("samples", Samples)
-				.Append("sensor", Sensor);
+				.Append("sensor", (Sensor.Value ? "true" : "false"));
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
+		}
+
+		private void EnsureSensor(bool throwIfNotSet)
+		{
+			if (Sensor == null)
+			{
+				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
+				else return;
+			}
 		}
 	}
 }
