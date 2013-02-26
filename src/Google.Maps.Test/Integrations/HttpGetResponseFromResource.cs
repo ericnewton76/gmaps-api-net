@@ -27,6 +27,9 @@ namespace Google.Maps.Test.Integrations
 			queryString.Replace("&sensor=false",""); //clear off sensor=false
 			queryString.Replace("&sensor=true", ""); // clear off sensor=true
 
+			//have to replace any remaining ampersands with $ due to filename limitations.
+			queryString.Replace("&", "$");
+
 			string resourcePath = this.BaseResourcePath + string.Format(".{0}_queries.{1}.{0}", outputType, queryString.ToString());
 
 			Stream resourceStream = S_testAssembly.GetManifestResourceStream(resourcePath);
