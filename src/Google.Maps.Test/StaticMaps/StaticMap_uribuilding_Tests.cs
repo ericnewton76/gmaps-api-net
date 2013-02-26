@@ -6,7 +6,7 @@ using Google.Maps.StaticMaps;
 using Google.Maps;
 using NUnit.Framework;
 
-namespace Google.Maps.Test
+namespace Google.Maps.Test.StaticMaps
 {
 	[TestFixture]
 	public class StaticMap_uribuilding_Tests

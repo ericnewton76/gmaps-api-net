@@ -8,7 +8,7 @@ using Google.Maps.StaticMaps;
 using System.Reflection;
 using Google.Maps;
 
-namespace Google.Maps.Test
+namespace Google.Maps.Test.StaticMaps
 {
 	[TestFixture]
 	public class StaticMapRequestTests
