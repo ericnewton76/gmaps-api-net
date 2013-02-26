@@ -27,7 +27,7 @@ namespace Google.Maps.DistanceMatrix
 	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
 	/// <see cref="http://developers.google.com/maps/documentation/distancematrix/"/>
-	public static class DistanceMatrixService
+	public class DistanceMatrixService
 	{
 		#region Http/Https Uris and Constructors
 
