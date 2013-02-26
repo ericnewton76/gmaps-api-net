@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>gmaps-api-net</id>
-        <version>0.10.0</version>
+        <version>0.10.1</version>
         <title />
         <authors>Eric Newton</authors>
         <owners>Eric Newton,Luis Farzati</owners>

@@ -100,6 +100,7 @@ namespace Google.Maps.Elevation
 			this.EnsureSensor(true);
 
 			var qsb = new Internal.QueryStringBuilder()
+
 				.Append("locations", RequestUtils.GetLatLngCollectionStr(this._locations))
 				.Append("path", RequestUtils.GetLatLngCollectionStr(this._path))
 				.Append("samples", (Samples.GetValueOrDefault() > 0 ? Samples.ToString() : ""))

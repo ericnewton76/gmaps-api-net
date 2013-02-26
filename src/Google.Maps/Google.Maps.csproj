@@ -95,8 +95,10 @@
     <Compile Include="Internal\Http.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />
     <Compile Include="Internal\RequestUtils.cs" />
+    <Compile Include="JsonCreationConverter.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="LatLng.cs" />
+    <Compile Include="LatLngComparer.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="MapMarker.cs" />
     <Compile Include="MapMarkersCollection.cs" />
@@ -114,6 +116,9 @@
     <Compile Include="StaticMaps\StaticMapService.cs" />
     <Compile Include="TravelMode.cs" />
     <Compile Include="Units.cs" />
+    <Compile Include="ViewportComparer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Waypoint.cs" />
   </ItemGroup>
   <ItemGroup>

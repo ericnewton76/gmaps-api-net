@@ -49,6 +49,7 @@ namespace Google.Maps.Test.Elevation
 			
 			// test
 			var request = new ElevationRequest();
+
 			request.AddLocations(expectedLocation);
 			request.Sensor = false;
 			var response = new ElevationService().GetResponse(request);
@@ -56,6 +57,7 @@ namespace Google.Maps.Test.Elevation
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
 			Assert.AreEqual(expectedResultCount, response.Results.Length);
+
 			Assert.That(expectedElevation, Is.EqualTo(response.Results[0].Elevation).Within(0.1));
 			
 			Assert.That(expectedLocation, Is.EqualTo(response.Results[0].Location));
@@ -67,6 +69,7 @@ namespace Google.Maps.Test.Elevation
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
 			var expectedResultCount = 2;
+
 			var expectedElevation1 = 1608.6m;
 			var expectedLocation1 = new LatLng(39.739153,-104.984703);
 			var expectedElevation2 = -50.789m;
@@ -74,12 +77,14 @@ namespace Google.Maps.Test.Elevation
 
 			// test
 			var request = new ElevationRequest();
+
 			request.AddLocations(expectedLocation1, expectedLocation2);
 			request.Sensor = false;
 			var response = new ElevationService().GetResponse(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
+
 			Assert.AreEqual(expectedResultCount, response.Results.Length);
 			
 			Assert.That(expectedElevation1, Is.EqualTo(response.Results[0].Elevation).Within(0.1));

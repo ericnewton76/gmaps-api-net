@@ -110,13 +110,12 @@ namespace Google.Maps.Test.Integrations
 				AddressType.PostalCode,
 				AddressType.Political
 			};
-			double expectedLatitude = 37.42219410;
-			double expectedLongitude = -122.08459320;
+			var expectedLocation = new LatLng(37.42219410, -122.08459320);
 			var expectedLocationType = LocationType.Rooftop;
-			double expectedSouthwestLatitude = 37.42084511970850;
-			double expectedSouthwestLongitude = -122.0859421802915;
-			double expectedNortheastLatitude = 37.42354308029149;
-			double expectedNortheastLongitude = -122.0832442197085;
+			Viewport expectedViewport = new Viewport(
+				southWest: new LatLng(37.42084511970850, -122.0859421802915),
+				northEast: new LatLng(37.42354308029149, -122.0832442197085)
+			);
 
 			// test
 			var request = new GeocodingRequest();
@@ -133,7 +132,7 @@ namespace Google.Maps.Test.Integrations
 			//    expectedComponentTypes.OrderBy(x => x).SequenceEqual(
 			//        response.Results.Single().AddressComponents.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
 			//Assert.AreEqual(expectedLatitude, response.Results.Single().Geometry.Location.Latitude, "Latitude");
-			//Assert.AreEqual(expectedLongitude, response.Results.Single().Geometry.Location.Longitude, "Longitude");
+			Assert.That(expectedLocation, Is.EqualTo(response.Results[0].Geometry.Location).Using(LatLngComparer.Within(0.000001f)), "Longitude");
 			Assert.AreEqual(expectedLocationType, response.Results.Single().Geometry.LocationType, "LocationType");
 			//Assert.AreEqual(expectedSouthwestLatitude, response.Results.Single().Geometry.Viewport.Southwest.Latitude, "Southwest.Latitude");
 			//Assert.AreEqual(expectedSouthwestLongitude, response.Results.Single().Geometry.Viewport.Southwest.Longitude, "Southwest.Longitude");
