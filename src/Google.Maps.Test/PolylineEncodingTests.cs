@@ -40,8 +40,7 @@ namespace Google.Maps.Test
 
 			LatLng[] actual = actual2.ToArray();
 
-			Assert.Inconclusive();
-			//Assert.AreEqual(expected.Length, actual.Length);
+			Assert.AreEqual(expected.Length, actual.Length, "Length");
 
 			for(int i=0; i<actual.Length;i++)
 			{
