@@ -24,7 +24,7 @@ namespace Google.Maps.Test
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway";
 			request.Sensor = false;
-			var response = GeocodingService.GetResponse(request);
+			var response = new GeocodingService().GetResponse(request);
 
 			// --break in the online version here-- //
 

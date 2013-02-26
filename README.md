@@ -30,6 +30,7 @@ Currently the service library supports full coverage of the following Google Map
   * *Direction* (thanks to malke.eklam)
   * *Direction Matrix* (thanks to mocciavinc...@gmail.com)
   * *Polyline encoding* (code based on source from [http://bit.ly/5XuDqb  briancaos.wordpress.com])
+  * coming soon, Google Business API support, using Google-supplied Client ID and private key for generating signed urls
 
 Quick Examples
 --------------
@@ -41,7 +42,7 @@ Let's suppose we want to search an address and get more information about it. We
 ```c#
 var request = new GeocodingRequest();
 request.Address = "1600 Amphitheatre Parkway";
-request.Sensor = "false";
+request.Sensor = false;
 var response = GeocodingService.GetResponse(request);
 ```
 

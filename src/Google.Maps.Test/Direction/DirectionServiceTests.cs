@@ -96,8 +96,12 @@ namespace Google.Maps.Test.Integrations
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
 			var expectedRoutesCount = 1;
+			
 			var expectedEndAddress = "Montreal, QC, Canada";
+			var expectedEndLocation = new LatLng(45.508570, -73.553770);
+			
 			var expectedStartAddress = "Toronto, ON, Canada";
+			var expectedStartLocation = new LatLng(43.653310, -79.382770);
 
 			var expectedBounds = new Viewport(
 				northEast: new LatLng(45.51048, -73.55332),
@@ -125,8 +129,11 @@ namespace Google.Maps.Test.Integrations
 
 			var currentLeg = response.Routes[0].Legs[0];
 
-			Assert.AreEqual(expectedStartAddress, currentLeg.StartAddress, "Leg.StartAddress");
-			Assert.AreEqual(expectedEndAddress, currentLeg.EndAddress, "Leg.EndAddress");
+			Assert.That(expectedStartAddress, Is.EqualTo(currentLeg.StartAddress), "Leg.StartAddress");
+			Assert.That(expectedStartLocation, Is.EqualTo(currentLeg.StartLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.StartLocation");
+			
+			Assert.That(expectedEndAddress, Is.EqualTo(currentLeg.EndAddress), "Leg.EndAddress");
+			Assert.That(expectedEndLocation, Is.EqualTo(currentLeg.EndLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.EndLocation");
 
 			Assert.That(expectedDistance, Is.EqualTo(currentLeg.Distance).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
 			Assert.That(expectedDuration, Is.EqualTo(currentLeg.Duration).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
