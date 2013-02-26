@@ -8,7 +8,7 @@ using Google.Maps.StaticMaps;
 using System.Reflection;
 using Google.Maps;
 
-namespace Google.Maps.Test
+namespace Google.Maps.Test.StaticMaps
 {
 	[TestFixture]
 	public class StaticMapRequestTests
@@ -203,19 +203,6 @@ namespace Google.Maps.Test
 			string actual = accessor.GetPathsStr();
 
 			Assert.Fail("Expected an InvalidOperationException because first point was LatLng but second point was Location.");
-		}
-
-		[Test]
-		public void Online_Sample_Works()
-		{
-			//NOTE: changes here should be reflected on the project wiki at http://code.google.com/p/gmaps-api-net/
-			var map = new StaticMapRequest();
-			map.Center = new Location("1600 Amphitheatre Parkway Mountain View, CA 94043");
-			map.Size = new System.Drawing.Size(400, 400);
-			map.Zoom = 14;
-			map.Sensor = false;
-
-			Assert.Ignore();
 		}
 
 		[Test]

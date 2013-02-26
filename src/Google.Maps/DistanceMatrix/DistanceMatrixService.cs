@@ -22,12 +22,12 @@ using System.Globalization;
 namespace Google.Maps.DistanceMatrix
 {
 	/// <summary>
-	/// 
-	/// 
-	/// 
+	/// The Google Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. The information returned is based on the recommended route 
+	/// between start and end points, as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
+	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
-	/// <see cref=""/>
-	public class DistanceMatrixService
+	/// <see cref="http://developers.google.com/maps/documentation/distancematrix/"/>
+	public static class DistanceMatrixService
 	{
 		#region Http/Https Uris and Constructors
 

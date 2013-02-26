@@ -22,11 +22,11 @@ using System.Net;
 namespace Google.Maps.StaticMaps
 {
 	/// <summary>
-	/// 
-	/// 
-	/// 
+	/// The Google Static Maps API lets you embed a Google Maps image on your web page without requiring JavaScript or any dynamic page 
+	/// loading. The Google Static Map service creates your map based on URL parameters sent through a standard HTTP request and returns the 
+	/// map as an image you can display on your web page.
 	/// </summary>
-	/// <see cref=""/>
+	/// <see cref="https://developers.google.com/maps/documentation/staticmaps/"/>
 	public class StaticMapService
 	{
 		#region Http/Https Uris and Constructors
