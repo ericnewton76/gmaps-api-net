@@ -13,16 +13,20 @@ namespace Google.Maps.Test
 	 *  This test fixture was set up to ensure that the online samples work as written and as expected.
 	 */
 	[TestFixture]
+	[Explicit()]
+	[Category("External Integrations")]
 	class QuickExamplesTests
 	{
 
 		[Test]
-		public void Example_1()
+		public void GeocodingRequest_Example()
 		{
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway";
 			request.Sensor = false;
 			var response = GeocodingService.GetResponse(request);
+
+			// --break in the online version here-- //
 
 			var result = response.Results.First();
 
@@ -34,7 +38,7 @@ namespace Google.Maps.Test
 		}
 
 		[Test]
-		public void Example_2()
+		public void StaticMapRequest_Example()
 		{
 			var map = new StaticMapRequest();
 			map.Center = new Location("1600 Amphitheatre Parkway Mountain View, CA 94043");
