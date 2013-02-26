@@ -67,6 +67,7 @@
     <Compile Include="Direction\DirectionServiceTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LatLngComparerTests.cs" />
     <Compile Include="QuickExamplesTests.cs" />
     <Compile Include="Elevation\ElevationServiceTests.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />

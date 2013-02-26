@@ -96,6 +96,7 @@
     <Compile Include="Internal\QueryStringBuilder.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="LatLng.cs" />
+    <Compile Include="LatLngComparer.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="MapMarker.cs" />
     <Compile Include="MapMarkersCollection.cs" />
