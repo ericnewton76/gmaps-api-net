@@ -94,6 +94,7 @@
     <Compile Include="Internal\ConvertUtil.cs" />
     <Compile Include="Internal\Http.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />
+    <Compile Include="JsonCreationConverter.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="LatLng.cs" />
     <Compile Include="LatLngComparer.cs" />

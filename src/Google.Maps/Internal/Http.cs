@@ -65,6 +65,7 @@ namespace Google.Maps.Internal
 					JsonTextReader jsonReader = new JsonTextReader(reader);
 					JsonSerializer serializer = new JsonSerializer();
 					serializer.Converters.Add(new JsonEnumTypeConverter());
+					serializer.Converters.Add(new JsonLocationConverter());
 					output = serializer.Deserialize<T>(jsonReader);
 				}
 
