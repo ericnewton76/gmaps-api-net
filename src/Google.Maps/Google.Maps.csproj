@@ -115,6 +115,9 @@
     <Compile Include="StaticMaps\StaticMapService.cs" />
     <Compile Include="TravelMode.cs" />
     <Compile Include="Units.cs" />
+    <Compile Include="ViewportComparer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Waypoint.cs" />
   </ItemGroup>
   <ItemGroup>
