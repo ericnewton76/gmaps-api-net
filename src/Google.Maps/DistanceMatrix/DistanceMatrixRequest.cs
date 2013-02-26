@@ -53,7 +53,7 @@ namespace Google.Maps.DistanceMatrix
 		///  
 		///  
 		/// </summary>
-		public bool Sensor { get; set; }
+		public bool? Sensor { get; set; }
 
 		/// <summary>
 		///  List of origin waypoints
@@ -145,13 +145,15 @@ namespace Google.Maps.DistanceMatrix
 		/// <returns></returns>
 		internal Uri ToUri()
 		{
+			this.EnsureSensor(true);
+
 			var qsb = new Internal.QueryStringBuilder()
 				.Append("origins", WaypointsToUri(waypointsOrigin))
 				.Append("destinations", WaypointsToUri(WaypointsDestination))
 				.Append("mode", Mode.ToString())
 				.Append("language", Language)
 				.Append("units", Units.ToString())
-				.Append("sensor", Sensor ? "true" : "false")
+				.Append("sensor", (Sensor.Value ? "true" : "false"))
 				.Append("avoid", Avoid.ToString());
 
 			var url = "json?" + qsb.ToString();
@@ -159,6 +161,14 @@ namespace Google.Maps.DistanceMatrix
 			return new Uri(url, UriKind.Relative);
 		}
 
+		private void EnsureSensor(bool throwIfNotSet)
+		{
+			if (Sensor == null)
+			{
+				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
+				else return;
+			}
+		}
 	}
 
 }
