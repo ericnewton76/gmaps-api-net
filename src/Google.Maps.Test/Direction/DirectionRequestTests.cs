@@ -14,10 +14,8 @@ namespace Google.Maps.Test
 	{
 
 
-		public class DirectionRequestAccessor
+		public class DirectionRequestAccessor : DirectionRequest
 		{
-			private DirectionRequest _instance = new DirectionRequest();
-
 			private static Type S_instanceType;
 			private static MethodInfo _ToUri;
 
@@ -40,7 +38,7 @@ namespace Google.Maps.Test
 			{
 				try
 				{
-					return (Uri)_ToUri.Invoke(_instance, new object[] { });
+					return (Uri)_ToUri.Invoke(this, new object[] { });
 				}
 				catch (TargetInvocationException ex)
 				{
@@ -49,31 +47,7 @@ namespace Google.Maps.Test
 			}
 			#endregion
 
-			#region Public interface copy
-			public Location Origin 
-			{ 
-				get { return this._instance.Origin; } 
-				set { this._instance.Origin = value; } 
-			}
-			public Location Destination 
-			{ 
-				get { return this._instance.Destination; } 
-				set { this._instance.Destination = value; } 
-			}
-			public bool? Sensor
-			{
-				get { return this._instance.Sensor; }
-				set { this._instance.Sensor = value; }
-			}
-			public TravelMode TravelMode
-			{
-				get { return this._instance.Mode; }
-				set { this._instance.Mode = value; }
-			}
-			#endregion
-
-
-			
+		
 		}
 
 		//[Test]
@@ -161,7 +135,7 @@ namespace Google.Maps.Test
 			req.Sensor = false;
 			req.Origin = "New York, NY";
 			req.Destination = "Albany, NY";
-			req.TravelMode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
+			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
 
 			Uri expected = new Uri("json?origin=New+York,+NY&destination=Albany,+NY&sensor=false", UriKind.Relative);
 			Uri actual = req.ToUri();
@@ -176,13 +150,68 @@ namespace Google.Maps.Test
 			req.Sensor = false;
 			req.Origin = new LatLng(30.2, 40.3);
 			req.Destination = new LatLng(50.5,60.6);
-			req.TravelMode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
+			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
 
 			Uri expected = new Uri("json?origin=30.2,40.3&destination=50.5,60.6&sensor=false", UriKind.Relative);
 			Uri actual = req.ToUri();
 
 			Assert.AreEqual(expected, actual);
 		}
+
+		[Test]
+		public void GetUrl_waypoints_simple_ex1()
+		{
+			var req = new DirectionRequestAccessor();
+			req.Sensor = false;
+			req.Origin = "NY";
+			req.Destination = "FL";
+			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
+
+			req.AddWaypoint("NC");
+
+			Uri expected = new Uri("json?origin=NY&destination=FL&waypoints=NC&sensor=false", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+
+		}
+
+		[Test]
+		public void GetUrl_waypoints_latlng_ex1()
+		{
+			var req = new DirectionRequestAccessor();
+			req.Sensor = false;
+			req.Origin = "NY";
+			req.Destination = "Orlando,FL";
+			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
+
+			req.AddWaypoint(new LatLng(28.452694, -80.979195));
+
+			Uri expected = new Uri("json?origin=NY&destination=Orlando,FL&waypoints=28.452694,-80.979195&sensor=false", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		public void GetUrl_waypoints_latlng_ex2()
+		{
+			var req = new DirectionRequestAccessor();
+			req.Sensor = false;
+			req.Origin = "NY";
+			req.Destination = "Orlando,FL";
+			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
+
+			req.AddWaypoint("NJ");
+			req.AddWaypoint(new LatLng(28.452694, -80.979195));
+			req.AddWaypoint("Sarasota,FL");
+
+			Uri expected = new Uri("json?origin=NY&destination=Orlando,FL&waypoints=NJ|28.452694,-80.979195|Sarasota,FL&sensor=false", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+		}
+
 
 
 	}
