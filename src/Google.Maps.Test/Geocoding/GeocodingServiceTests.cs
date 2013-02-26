@@ -64,7 +64,7 @@ namespace Google.Maps.Test.Integrations
 		[TestFixtureSetUp]
 		public void FixtureSetup()
 		{
-			Google.Maps.Internal.Http.Factory = new Google.Maps.Test.Integrations.HttpGetResponseFromResourceFactory();
+			Google.Maps.Internal.Http.Factory = new Google.Maps.Test.Integrations.HttpGetResponseFromResourceFactory("Google.Maps.Test.Geocoding");
 		}
 		[TestFixtureTearDown]
 		public void FixtureTearDown()

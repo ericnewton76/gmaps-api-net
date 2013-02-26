@@ -16,25 +16,28 @@ namespace Google.Maps.Test.Integrations
 		}
 
 		private string _resourcePath;
-		public string ResourcePath { get { return this._resourcePath; } }
+		public string BaseResourcePath { get { return this._resourcePath; } set { this._resourcePath = value; } }
 
 		protected override System.IO.StreamReader GetStreamReader(Uri uri)
 		{
+			string outputType = uri.Segments[uri.Segments.Length - 1];
+
 			System.Text.StringBuilder queryString = new StringBuilder(uri.Query);
 			queryString.Remove(0, 1); //remove the initial "?"
 			queryString.Replace("&sensor=false",""); //clear off sensor=false
 			queryString.Replace("&sensor=true", ""); // clear off sensor=true
 
-			this._resourcePath = "Google.Maps.Test.Integrations.json_queries." + queryString.ToString() + ".json";
+			string resourcePath = this.BaseResourcePath + string.Format(".{0}_queries.{1}.{0}", outputType, queryString.ToString());
 
-			Stream resourceStream = S_testAssembly.GetManifestResourceStream(this._resourcePath);
+			Stream resourceStream = S_testAssembly.GetManifestResourceStream(resourcePath);
 
 			if (resourceStream == null)
 			{
 				string message = string.Format(
 @"Failed to find resource for query '{0}'.
+BaseResourcePath: '{2}'
 Resource path used: '{1}'
-Ensure a file exists at that resource path and the file has its Build Action set to ""Embedded Resource"".", queryString.ToString(), this._resourcePath);
+Ensure a file exists at that resource path and the file has its Build Action set to ""Embedded Resource"".", queryString.ToString(), resourcePath, BaseResourcePath);
 				throw new FileNotFoundException(message);
 			}
 
@@ -44,9 +47,16 @@ Ensure a file exists at that resource path and the file has its Build Action set
 
 	public class HttpGetResponseFromResourceFactory : Google.Maps.Internal.Http.HttpGetResponseFactory
 	{
+		public HttpGetResponseFromResourceFactory(string baseResourcePath)
+		{
+			this.BaseResourcePath = baseResourcePath;
+		}
+
+		public string BaseResourcePath { get; set; }
+
 		public override Internal.Http.HttpGetResponse CreateResponse(Uri uri)
 		{
-			return new HttpGetResponseFromResource(uri);
+			return new HttpGetResponseFromResource(uri) { BaseResourcePath = this.BaseResourcePath };
 		}
 	}
 }

@@ -66,6 +66,10 @@
     <Compile Include="Direction\DirectionRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
+    <EmbeddedResource Include="Geocoding\json_queries\address=11+Wall+Street+New+York+NY+10005.json" />
+    <EmbeddedResource Include="Geocoding\json_queries\address=1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
+    <EmbeddedResource Include="Geocoding\json_queries\latlng=40.714233,-73.961291.json" />
+    <EmbeddedResource Include="Geocoding\json_queries\sensor=false.json" />
     <None Include="Integrations\ElevationServiceTests.cs">
       <SubType>Code</SubType>
     </None>
@@ -101,10 +105,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Integrations\json_queries\address=1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
-    <EmbeddedResource Include="Integrations\json_queries\latlng=40.714233,-73.961291.json" />
-    <EmbeddedResource Include="Integrations\json_queries\sensor=false.json" />
-    <EmbeddedResource Include="Integrations\json_queries\address=11+Wall+Street+New+York+NY+10005.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
