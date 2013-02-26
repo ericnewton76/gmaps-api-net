@@ -67,6 +67,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseSigningService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
     <Compile Include="Direction\DirectionRequest.cs" />
@@ -91,6 +92,9 @@
     <Compile Include="Geocoding\GeocodingRequest.cs" />
     <Compile Include="Geocoding\Result.cs" />
     <Compile Include="GMapsImageFormats.cs" />
+    <Compile Include="GoogleSigned.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Internal\ConvertUtil.cs" />
     <Compile Include="Internal\Http.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />

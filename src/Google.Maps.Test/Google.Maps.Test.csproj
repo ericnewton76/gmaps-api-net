@@ -67,6 +67,7 @@
     <Compile Include="Direction\DirectionServiceTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GoogleSignedTests.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
     <Compile Include="ValueTextComparer.cs" />
