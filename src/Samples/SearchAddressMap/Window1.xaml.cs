@@ -51,7 +51,7 @@ namespace SearchAddressMap
 			var request = new GeocodingRequest();
 			request.Address = searchTextBox.Text;
 			request.Sensor = false;
-			var response = GeocodingService.GetResponse(request);
+			var response = new GeocodingService().GetResponse(request);
 
 			if (response.Status == ServiceResponseStatus.Ok)
 			{

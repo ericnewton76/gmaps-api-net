@@ -14,24 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Globalization;
 
 namespace Google.Maps.Elevation
 {
 	/// <summary>
-	/// The Elevation service provides elevation data for all locations on the
-	/// surface of the earth, including depth locations on the ocean floor
-	/// (which return negative values). In those cases where Google does not
-	/// possess exact elevation measurements at the precise location you
-	/// request, the service will interpolate and return an averaged value
+	/// The Elevation service provides elevation data for all locations on the surface of the earth, including depth locations on the ocean floor (which return negative values). 
+	/// In those cases where Google does not possess exact elevation measurements at the precise location you request, the service will interpolate and return an averaged value
 	/// using the four nearest locations.
 	/// </summary>
 	/// <see cref="http://code.google.com/apis/maps/documentation/elevation/"/>
-	public static class ElevationService
+	public class ElevationService
 	{
-		public static readonly Uri ApiUrl =
-			new Uri("http://maps.google.com/maps/api/elevation/");
+		#region Http/Https Uris and Constructors
+
+		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/elevation/");
+		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/elevation/");
+
+		public Uri BaseUri { get; set; }
+
+		public ElevationService() : this(HttpUri)
+		{
+		}
+		public ElevationService(Uri baseUri)
+		{
+			this.BaseUri = baseUri;
+		}
+		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Elevation web
@@ -40,9 +52,9 @@ namespace Google.Maps.Elevation
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
-		public static ElevationResponse GetResponse(ElevationRequest request)
+		public ElevationResponse GetResponse(ElevationRequest request)
 		{
-			var url = new Uri(ApiUrl, request.ToUri());
+			var url = new Uri(this.BaseUri, request.ToUri());
 			return Internal.Http.Get(url).As<ElevationResponse>();
 		}
 	}

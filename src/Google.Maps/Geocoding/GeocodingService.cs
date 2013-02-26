@@ -14,8 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Globalization;
 
 namespace Google.Maps.Geocoding
 {
@@ -25,21 +27,23 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public static class GeocodingService
+	public class GeocodingService
 	{
+		#region Http/Https Uris and Constructors
+
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
-		
-		static GeocodingService()
-		{
-			//use the HTTPS uri by default.
-			ApiUrl = HttpsUri;
-		}
 
-		/// <summary>
-		/// Gets or sets the Api Uri to use for requests.
-		/// </summary>
-		public static Uri ApiUrl { get; set; }
+		public Uri BaseUri { get; set; }
+
+		public GeocodingService() : this(HttpUri)
+		{
+		}
+		public GeocodingService(Uri baseUri)
+		{
+			this.BaseUri = HttpsUri;
+		}
+		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Geocoding web
@@ -48,9 +52,9 @@ namespace Google.Maps.Geocoding
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
-		public static GeocodeResponse GetResponse(GeocodingRequest request)
+		public GeocodeResponse GetResponse(GeocodingRequest request)
 		{
-			var url = new Uri(ApiUrl, request.ToUri());
+			var url = new Uri(this.BaseUri, request.ToUri());
 			return Internal.Http.Get(url).As<GeocodeResponse>();
 		}
 	}
