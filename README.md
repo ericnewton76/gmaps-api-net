@@ -41,7 +41,7 @@ Let's suppose we want to search an address and get more information about it. We
 ```c#
 var request = new GeocodingRequest();
 request.Address = "1600 Amphitheatre Parkway";
-request.Sensor = "false";
+request.Sensor = false;
 var response = GeocodingService.GetResponse(request);
 ```
 
