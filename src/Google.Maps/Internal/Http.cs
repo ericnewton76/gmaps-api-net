@@ -38,6 +38,15 @@ namespace Google.Maps.Internal
 
 			protected virtual StreamReader GetStreamReader(Uri uri)
 			{
+				return GetStreamReader(uri, GoogleSigned.SigningInstance);
+			}
+			protected virtual StreamReader GetStreamReader(Uri uri, GoogleSigned signingInstance)
+			{
+				if (signingInstance != null)
+				{
+					uri = new Uri(signingInstance.GetSignedUri(uri));
+				}
+
 				WebResponse response = WebRequest.Create(uri).GetResponse();
 
 				StreamReader sr = new StreamReader(response.GetResponseStream());
