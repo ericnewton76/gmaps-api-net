@@ -1,6 +1,6 @@
 properties { 
-  $majorVersion = "1.4"
-  $majorWithReleaseVersion = "1.4.1"
+  $majorVersion = "0.10.2"
+  $majorWithReleaseVersion = "0.10.2"
   $version = GetVersion $majorWithReleaseVersion
   $signAssemblies = $false
   $signKeyPath = "D:\Development\Releases\newtonsoft.snk"  #path for whomever can sign the assemblies
@@ -9,19 +9,18 @@ properties {
   
   $baseDir  = resolve-path "."
   $buildDir = "$baseDir\Build"
-  $sourceDir = "$baseDir"
+  $sourceDir = "$baseDir\src"
   $toolsDir = "$baseDir\Tools"
   $testsDir = "$baseDir\Build\Testing"
   $docDir = "$baseDir\Doc"
   $workingDir = "$baseDir\Build\Working"
   $nugetBaseDir = "$baseDir\Build\NuGet"
   
-  $nuspecFile = "System.IO.Abstractions.nuspec" #filename only
-  $nuget_executible = ".\.nuget\NuGet.exe"
+  $nuget_executible = "$sourceDir\.nuget\NuGet.exe"
   
   $builds = @(
-	@{Project = "System.IO.Abstractions.csproj";Tests = ""; 						Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
-	@{Project = "TestingHelpers.csproj"; 		Tests = "TestHelpers.Tests.csproj"; Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
+	@{Project="GoogleMapsForNET.sln";	Tests="Google.Maps.Test.csproj"; 	Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
+#	@{Project="TestingHelpers.csproj";	Tests="TestHelpers.Tests.csproj";	Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
     
 	#when some 4.0 specific things come about:
 	#@{Project = "System.IO.Abstractions.net40.csproj"; Tests = "";					Constants=""; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"; Sign=$false}
@@ -72,9 +71,15 @@ task Build -depends Clean,UpdateAssemblyInfoVersions {
 
 	foreach ($build in $builds)
 	{
+	
 		$nameInfo = new-object System.IO.FileInfo([string]$build.Project)
 		$projname = $nameInfo.Name.Replace($nameInfo.Extension,"")  # chop off the extension
-		$name = (Join-Path $projname $nameInfo.Name)                # gives [name]\[name.csproj]
+		if ($nameInfo.Extension -eq ".sln") { 
+			$name = $nameInfo.Name
+		} else {
+			$name = (Join-Path $projname $nameInfo.Name)            # gives [name]\[name.csproj]
+		}
+		
 		$finalDir = $build.FinalDir
 		$sign = ($build.Sign -and $signAssemblies)
 
@@ -82,7 +87,7 @@ task Build -depends Clean,UpdateAssemblyInfoVersions {
 		Write-Host -ForegroundColor Green "Building " $name
 		Write-Host -ForegroundColor Green "Signed " $sign
 		Write-Host
-		exec { msbuild "/t:Clean;Rebuild" /p:Configuration=Release "/p:Platform=Any CPU" /p:OutputPath=$workingDir\$projname\bin\Release\$finalDir\ /p:AssemblyOriginatorKeyFile=$signKeyPath "/p:SignAssembly=$sign" "/p:TreatWarningsAsErrors=$treatWarningsAsErrors" (GetConstants $build.Constants $sign) "$sourceDir\$name" | Out-Default } "Error building $name"
+		exec { msbuild "/t:Clean;Rebuild" /p:Configuration=Release "/p:Platform=Any CPU" /p:OutputPath=$workingDir\$projname\bin\Release\$finalDir\ /p:AssemblyOriginatorKeyFile=$signKeyPath "/p:SignAssembly=$sign" "/p:TreatWarningsAsErrors=$treatWarningsAsErrors" (GetConstants $build.Constants $sign) "$sourceDir\$name" } "Error building $name"
 	}
 }
 
@@ -113,30 +118,32 @@ task Test -depends Build {
 		{
 			$nameInfo = new-object System.IO.FileInfo([string]$build.Tests)
 			$projname = $nameInfo.Name.Replace($nameInfo.Extension,"")  # chop off the extension
-			$name = (Join-Path $projname $nameInfo.Name)                # gives [name]\[name.csproj]
+			if ($nameInfo.Extension -eq ".sln") { 
+				$name = $nameInfo.Name
+			} else { #if ($nameInfo.Extension -eq ".csproj") {
+				$name = (Join-Path $projname $nameInfo.Name)            # gives [name]\[name.csproj]
+			}
 		
 			$finalDir = $build.FinalDir
-			$framework = $build.Framework
+	        $frameworkDirs = $build.Framework.Split(",")
+        
+			foreach ($frameworkDir in $frameworkDirs)
+			{
 
-			Write-Host
-			Write-Host -ForegroundColor Green "Building tests assembly $name"
-			Write-Host
-			exec { & msbuild /p:Configuration=Release /p:OutputPath=$testsDir\$projname\bin\Release\ "$sourceDir\$name" }
-			
-			Write-Host
-			Write-Host -ForegroundColor Green "Copying test assembly $name to deployed directory"
-			Write-Host
-			& robocopy /mir "$sourceDir\$projname\bin\Release" "$testsDir\$projname\bin\$finalDir"
-			
-			#robocopy ".\Src\Google.Maps\bin\Release\$finalDir" $workingDir\Deployed\Bin\$finalDir /MIR /NP /XO /XF LinqBridge.dll | Out-Default
-			
-			#Copy-Item -Path "$testsDir\bin\$finalDir\*" -Destination $workingDir\Testing\Bin\$finalDir\
+				Write-Host
+				Write-Host -ForegroundColor Green "Building tests assembly $name for $frameworkDir"
+				Write-Host -ForegroundColor Green "	OutputPath=$testsDir\$projname\bin\$frameworkDir"
+				Write-Host
+				exec { & msbuild /p:Configuration=Release /p:OutputPath=$testsDir\$projname\bin\$frameworkDir "$sourceDir\$name" }
 
-			Write-Host
-			Write-Host -ForegroundColor Green "Running tests " $projname
-			Write-Host -ForegroundColor Green "  $workingDir\TestResult.xml"
-			Write-Host
-			exec { .\Tools\NUnit.Runners\tools\nunit-console.exe "$testsDir\$projname\bin\$finalDir\$projname.dll" /labels /framework=$framework /xml:$workingDir\$projname.xml | Out-Default } "Error running $name tests"
+				Write-Host
+				Write-Host -ForegroundColor Green "Running tests $projname for $frameworkDir"
+				Write-Host -ForegroundColor Green "  $workingDir\TestResult.xml"
+				Write-Host
+				exec { .\Tools\NUnit.Runners\tools\nunit-console.exe "$testsDir\$projname\bin\$frameworkDir\$projname.dll" /labels /xml:$workingDir\$projname.xml | Out-Default } "Error running $name tests"
+				
+			}
+
 		}
 	}
 }
@@ -236,10 +243,10 @@ task NugetPackage -depends Test,PrepareNuspecFiles {
 		$projname = $nameInfo.Name.Replace($nameInfo.Extension,"")  # chop off the extension
 		$name = (Join-Path $projname $nameInfo.Name)                # gives [name]\[name.(csproj|sln)]
 			
+		$nugetPackDir = "$nugetBaseDir\$projname"
+
         $finalDir = $build.FinalDir
         $frameworkDirs = $build.NuGetDir.Split(",")
-		
-		$nugetPackDir = "$nugetBaseDir\$projname"
         
         foreach ($frameworkDir in $frameworkDirs)
         {
