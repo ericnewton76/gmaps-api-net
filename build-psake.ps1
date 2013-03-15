@@ -14,27 +14,27 @@ properties {
 	$docDir = "$baseDir\Doc"
 	$workingDir = "$baseDir\Build\Working"
 	$nugetBaseDir = "$baseDir\Build\NuGet"
-  
+
 	$versionInfo = Load-VersionInfo -path "$sourceDir\AssemblyVersion_Master.cs"
-  
+
 	$nuget_executible = "$sourceDir\.nuget\NuGet.exe"
 
    $builds = @(
 
-	@{Project="GoogleMapsForNET.sln";	Tests="Google.Maps.Test.csproj"; 	Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
+	@{Project="GoogleMapsForNET.sln";	Tests="Google.Maps.Test.csproj"; 	Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
 #	@{Project="TestingHelpers.csproj";	Tests="TestHelpers.Tests.csproj";	Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
-    
+
 	#when some 4.0 specific things come about:
 	#@{Project = "System.IO.Abstractions.net40.csproj"; Tests = "";					Constants=""; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"; Sign=$false}
 	#@{Project = "TestingHelpers.net40.csproj"; 		Tests = "TestHelpers.Tests.csproj"; Constants=""; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"; Sign=$false}
-	
+
 	#@{Project = "Newtonsoft.Json"; TestsName = "Newtonsoft.Json.Tests"; Constants=""; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"; Sign=$true},
-    #@{Project = "Newtonsoft.Json.Portable"; TestsName = "Newtonsoft.Json.Tests.Portable"; Constants="PORTABLE"; FinalDir="Portable"; NuGetDir = "portable-net40+sl4+wp7+win8"; Framework="net-4.0"; Sign=$true},
-    #@{Project = "Newtonsoft.Json.WinRT"; TestsName = $null; Constants="NETFX_CORE"; FinalDir="WinRT"; NuGetDir = "winrt45"; Framework="net-4.5"; Sign=$true},
-    #@{Project = "Newtonsoft.Json.WindowsPhone"; TestsName = $null; Constants="SILVERLIGHT;WINDOWS_PHONE"; FinalDir="WindowsPhone"; NuGetDir = "sl3-wp,sl4-windowsphone71"; Framework="net-4.0"; Sign=$true},
-    #@{Project = "Newtonsoft.Json.Silverlight"; TestsName = "Newtonsoft.Json.Tests.Silverlight"; Constants="SILVERLIGHT"; FinalDir="Silverlight"; NuGetDir = "sl4"; Framework="net-4.0"; Sign=$true},
-    #@{Project = "Newtonsoft.Json.Net35"; TestsName = "Newtonsoft.Json.Tests.Net35"; Constants="NET35"; FinalDir="Net35"; NuGetDir = "net35"; Framework="net-2.0"; Sign=$true},
-    #@{Project = "Newtonsoft.Json.Net20"; TestsName = "Newtonsoft.Json.Tests.Net20"; Constants="NET20"; FinalDir="Net20"; NuGetDir = "net20"; Framework="net-2.0"; Sign=$true}
+	#@{Project = "Newtonsoft.Json.Portable"; TestsName = "Newtonsoft.Json.Tests.Portable"; Constants="PORTABLE"; FinalDir="Portable"; NuGetDir = "portable-net40+sl4+wp7+win8"; Framework="net-4.0"; Sign=$true},
+	#@{Project = "Newtonsoft.Json.WinRT"; TestsName = $null; Constants="NETFX_CORE"; FinalDir="WinRT"; NuGetDir = "winrt45"; Framework="net-4.5"; Sign=$true},
+	#@{Project = "Newtonsoft.Json.WindowsPhone"; TestsName = $null; Constants="SILVERLIGHT;WINDOWS_PHONE"; FinalDir="WindowsPhone"; NuGetDir = "sl3-wp,sl4-windowsphone71"; Framework="net-4.0"; Sign=$true},
+	#@{Project = "Newtonsoft.Json.Silverlight"; TestsName = "Newtonsoft.Json.Tests.Silverlight"; Constants="SILVERLIGHT"; FinalDir="Silverlight"; NuGetDir = "sl4"; Framework="net-4.0"; Sign=$true},
+	#@{Project = "Newtonsoft.Json.Net35"; TestsName = "Newtonsoft.Json.Tests.Net35"; Constants="NET35"; FinalDir="Net35"; NuGetDir = "net35"; Framework="net-2.0"; Sign=$true},
+	#@{Project = "Newtonsoft.Json.Net20"; TestsName = "Newtonsoft.Json.Tests.Net20"; Constants="NET20"; FinalDir="Net20"; NuGetDir = "net20"; Framework="net-2.0"; Sign=$true}
    )
 }
 
@@ -49,29 +49,29 @@ task default -depends Test
 
 # Ensure a clean working directory
 task Clean {
-  Set-Location $baseDir
-  
-  Write-Verbose "-Working Directory:	$workingDir"
-  if (Test-Path -path $workingDir)
-  {
-    del $workingDir -Recurse -Force
-    Write-Host -ForegroundColor Green "-Deleted Working Directory: $workingDir"
-  }
-  
-  Write-Verbose "-Testing Directory:	$workingDir"
-  if (Test-Path -path $testsDir)
-  {
+	Set-Location $baseDir
+
+	Write-Verbose "-Working Directory:	$workingDir"
+	if (Test-Path -path $workingDir)
+	{
+	del $workingDir -Recurse -Force
+	Write-Host -ForegroundColor Green "-Deleted Working Directory: $workingDir"
+	}
+
+	Write-Verbose "-Testing Directory:	$workingDir"
+	if (Test-Path -path $testsDir)
+	{
 	del $testsDir -Recurse -Force
 	Write-Host -ForegroundColor Green "-Deleted Testing directory: $testsDir"
-  }
-  
-  Write-Verbose "-NuGet Directory:	$workingDir"
-  if (Test-Path -path $nugetBaseDir)
-  {
+	}
+
+	Write-Verbose "-NuGet Directory:	$workingDir"
+	if (Test-Path -path $nugetBaseDir)
+	{
 	del $nugetBaseDir -Recurse -Force
 	Write-Host -ForegroundColor Green "-Deleted NuGet base directory: $nugetBaseDir"
-  }
-  
+	}
+
 }
 
 # Build each solution, optionally signed
@@ -102,8 +102,8 @@ task Build -depends Clean,UpdateAssemblyInfoVersions {
 }
 
 task UpdateAssemblyInfoVersions {
-
 	#sanity check
+	$versionInfo
 	$assemblyVer = new-object Version($versionInfo.MajorMinorRevision + '.0')
 	$fileVer = new-object Version($versionInfo.FullString)
 
@@ -148,7 +148,8 @@ task Test -depends Build {
 				Write-Host -ForegroundColor Green "-MSBuild succeeded for"  $build.Project #"->" $outputPath
 
 				Write-Host -ForegroundColor DarkCyan "-Running tests $projname for $frameworkDir"
-				exec { & .\Tools\NUnit.Runners\tools\nunit-console.exe "$testsDir\$projname\bin\$frameworkDir\$projname.dll" /xml:$workingDir\$projname.xml } "Error running $name tests"
+				& .\Tools\NUnit.Runners\tools\nunit-console.exe "$testsDir\$projname\bin\$frameworkDir\$projname.dll" /xml:$workingDir\$projname.xml
+				Write-Host "lastexitcode: $lastexitcode"
 				Write-Host -ForegroundColor Green "-Finished tests. TestResults: $workingDir\$projname.xml"
 			}
 		}
@@ -191,7 +192,7 @@ task Package -depends Test {
 
 # Unzip package to a location
 task Deploy -depends Package {
-  exec { .\Tools\7-zip\7za.exe x -y "-o$workingDir\Deployed" $workingDir\$zipFileName | Out-Default } "Error unzipping"
+	exec { .\Tools\7-zip\7za.exe x -y "-o$workingDir\Deployed" $workingDir\$zipFileName | Out-Default } "Error unzipping"
 }
 
 task PrepareNuspecFiles {
@@ -204,7 +205,11 @@ task PrepareNuspecFiles {
 		if($build.NuGetDir -ne $null) {
 			$nameInfo = new-object System.IO.FileInfo([string]$build.Project)
 			$projname = $nameInfo.Name.Replace($nameInfo.Extension,"")  # chop off the extension
-			$name = (Join-Path $projname $nameInfo.Name)                # gives [name]\[name.csproj]
+			if ($nameInfo.Extension -eq ".sln") { 
+				$name = $nameInfo.Name
+			} else { #if ($nameInfo.Extension -eq ".csproj") {
+				$name = (Join-Path $projname $nameInfo.Name)            # gives [name]\[name.csproj]
+			}
 			
 			Get-ChildItem -Path (Join-Path $sourceDir $projname) -filter "*.nuspec" | Foreach-Object {
 		
@@ -238,41 +243,46 @@ task PrepareNuspecFiles {
 }
 
 task NugetPackage -depends Test,PrepareNuspecFiles {
-    
+
 	Write-Verbose "-Ensure Nuget directory exists: $nugetBaseDir"
 	New-Item -Path $nugetBaseDir -ItemType Directory -force | Out-Null
-    
-    foreach ($build in $builds)
-    {
-      if ($build.NuGetDir -ne $null)
-      {
-	  	$nameInfo = new-object System.IO.FileInfo([string]$build.Project)
-		$projname = $nameInfo.Name.Replace($nameInfo.Extension,"")  # chop off the extension
-		$name = (Join-Path $projname $nameInfo.Name)                # gives [name]\[name.(csproj|sln)]
+
+	foreach ($build in $builds)
+	{
+		Write-Verbose "build.NuGetDir=" $build.NuGetDir
+		if ($build.NuGetDir -ne $null)
+		{
+			$nameInfo = new-object System.IO.FileInfo([string]$build.Tests)
+			$projname = $nameInfo.Name.Replace($nameInfo.Extension,"")  # chop off the extension
+			if ($nameInfo.Extension -eq ".sln") { 
+				$name = $nameInfo.Name
+			} else { #if ($nameInfo.Extension -eq ".csproj") {
+				$name = (Join-Path $projname $nameInfo.Name)            # gives [name]\[name.csproj]
+			}
 			
-		$nugetPackDir = "$nugetBaseDir\$projname"
+			$nugetPackDir = "$nugetBaseDir\$projname"
 
-        $finalDir = $build.FinalDir
-        $frameworkDirs = $build.NuGetDir.Split(",")
-        
-        foreach ($frameworkDir in $frameworkDirs)
-        {
-			Write-Host -ForegroundColor DarkCyan "-Copy files into $nugetPackDir\lib\$frameworkDir"
-			robocopy "$workingDir\$projname\bin\Release\$finalDir" "$nugetPackDir\lib\$frameworkDir" /NP /XO /XF *.pri | Out-Null
-        }
-		
-		Get-ChildItem -Path $nugetPackDir -Filter *.nuspec | Foreach-Object {
-			$nuspecFile = (Join-Path $nugetPackDir $_.Name)
+			$finalDir = $build.FinalDir
+			$frameworkDirs = $build.NuGetDir.Split(",")
+			
+			foreach ($frameworkDir in $frameworkDirs)
+			{
+				Write-Host -ForegroundColor DarkCyan "-Copy files into $nugetPackDir\lib\$frameworkDir"
+				robocopy "$workingDir\$projname\bin\Release\$finalDir" "$nugetPackDir\lib\$frameworkDir" /NP /XO /XF *.pri | Out-Null
+			}
+			
+			Get-ChildItem -Path $nugetPackDir -Filter *.nuspec | Foreach-Object {
+				$nuspecFile = (Join-Path $nugetPackDir $_.Name)
 
-			Write-Host -ForegroundColor DarkCyan "-NuGet pack $_"
-			exec { & $nuget_executible pack $nuspecFile -Symbols -OutputDirectory $nugetPackDir } "Failed during NuGet Pack phase."
-			Write-Host -ForegroundColor Green "-NuGet pack succeeded. $nuspecFile"
+				Write-Host -ForegroundColor DarkCyan "-NuGet pack $_"
+				exec { & $nuget_executible pack $nuspecFile -Symbols -OutputDirectory $nugetPackDir } "Failed during NuGet Pack phase."
+				Write-Host -ForegroundColor Green "-NuGet pack succeeded. $nuspecFile"
+			}
+			
+			Write-Host -ForegroundColor DarkCyan "-Copy nupkg files into Nuget base: $nugetBaseDir"
+			copy -Path $nugetPackDir\*.nupkg -Destination $nugetBaseDir
 		}
-		
-		Write-Host -ForegroundColor DarkCyan "-Copy nupkg files into Nuget base: $nugetBaseDir"
-		copy -Path $nugetPackDir\*.nupkg -Destination $nugetBaseDir
-      }
-    }
+	}
 	
 	Write-Host -ForegroundColor Green "-NuGet Packages Built:"
 	Get-ChildItem -Path $nugetBaseDir -Filter *.nupkg | Foreach-Object {
@@ -292,49 +302,91 @@ task NugetPackageDeploy -depends NugetPackage
 
 function GetConstants($constants, $includeSigned)
 {
-  $signed = switch($includeSigned) { $true { ";SIGNED" } default { "" } }
+	$signed = switch($includeSigned) { $true { ";SIGNED" } default { "" } }
 
-  return "/p:DefineConstants=`"CODE_ANALYSIS;TRACE;$constants$signed`""
+	return "/p:DefineConstants=`"CODE_ANALYSIS;TRACE;$constants$signed`""
 }
 
 # Gets an integer revision number based on the date
 function Get-BuildTiming()
 {
-    $now = [DateTime]::Now
+	$now = [DateTime]::Now
 	[TimeSpan]$span = $now - (new-object DateTime($now.Year,1,1))
-    
-    Return [int]$span.TotalMinutes
+
+	Return [int]$span.TotalMinutes
 }
 
 function Load-VersionInfo([string] $path)
 {
-	[hashtable]$Return = @{}
+	[hashtable]$ver = @{}
 
-	$Return.MajorMinor = "0.10"
-	$Return.MajorMinorRevision = "0.10.2"
-
-	$Return.Build = Get-BuildTiming
-	$Return.FullString = [String]::Concat($Return.MajorMinorRevision,".",[string]$Return.Build)
+	if( (Test-Path AssemblyVersion_Master.cs) -eq $true) {
+		$matches = (Get-Content AssemblyVersion_Master.cs) -match 'AssemblyFileVersion\("?<V1>(([0-9]+)\.?){1,4}"\)'
+		$matches
+		$ver.MajorMinor = [String]::Concat($matches.V1.Captures[0].Value,".",$matches.V1.Captures[1].Value)
+		$ver.MajorMinorRevision = [String]::Concat($ver.MajorMinor, ".", $matches.V3)
+	} else {
+		$ver.MajorMinor = "0.10"
+		$ver.MajorMinorRevision = "0.10.2"
+	}
 	
-	Return $Return
+	$ver.Build = Get-BuildTiming
+	$ver.FullString = [String]::Concat($ver.MajorMinorRevision,".",[string]$ver.Build)
+	
+	Write-Host "ver:"
+	$ver
+
+	Return $ver
 }
 
 # Update any (recursively found under $sourceDir) AssemblyInfo.cs files
 function Update-AssemblyInfoFiles ([string] $sourceDir, [string] $assemblyVersionNumber, [string] $fileVersionNumber)
 {
-    $assemblyVersionPattern = 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
-    $fileVersionPattern = 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
-    $assemblyVersion = 'AssemblyVersion("' + $assemblyVersionNumber + '")';
-    $fileVersion = 'AssemblyFileVersion("' + $fileVersionNumber + '")';
-    
-    Get-ChildItem -Path $sourceDir -r -filter AssemblyInfo.cs | ForEach-Object {
-        $filename = $_.Directory.ToString() + '\' + $_.Name
-    
-        (Get-Content $filename) | ForEach-Object {
-            % {$_ -replace $assemblyVersionPattern, $assemblyVersion } |
-            % {$_ -replace $fileVersionPattern, $fileVersion }
-        } | Set-Content $filename
-		
+	$assemblyVersionPattern = 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
+	$fileVersionPattern = 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
+	$assemblyVersion = 'AssemblyVersion("' + $assemblyVersionNumber + '")';
+	$fileVersion = 'AssemblyFileVersion("' + $fileVersionNumber + '")';
+
+	Get-ChildItem -Path $sourceDir -r -filter AssemblyInfo.cs | ForEach-Object {
+		$filename = $_.Directory.ToString() + '\' + $_.Name
+
+		(Get-Content $filename) | ForEach-Object {
+			% {$_ -replace $assemblyVersionPattern, $assemblyVersion } |
+			% {$_ -replace $fileVersionPattern, $fileVersion }
+		} | Set-Content $filename
+
 		Write-Host -ForegroundColor Green "-Updated versions in:" $filename
 	}
+}
+
+[CmdletBinding()]  
+function Set-AssemblyInfoBuildNumbers(
+	[Parameter(Position=1,Mandatory=$true)] [Version] $version,
+	[Parameter(Position=2,Mandatory=$false)] [string] $fileSpec = ".\*AssemblyInfo.cs"
+	[Parameter(Position=3,Mandatory=$false)] [Version] $fileVersion
+)
+{  
+    $assemblyPattern = "[0-9]+(\.([0-9]+|\*)){1,3}"  
+    $assemblyVersionPattern = 'Assembly(File)?Version\("([0-9]+(\.([0-9]+|\*)){1,3})"\)'  
+      
+    $foundFiles = get-childitem $fileSpec -recurse  
+                         
+    #$rawVersionNumberGroup = get-content $foundFiles | select-string -pattern $assemblyVersionPattern | select -first 1 | % { $_.Matches }              
+    #$rawVersionNumber = $rawVersionNumberGroup.Groups[1].Value  
+                    
+    #$versionParts = $rawVersionNumber.Split('.')  
+    #$versionParts[3] = ([int]$versionParts[3]) + 1  
+    #$updatedAssemblyVersion = "{0}.{1}.{2}.{3}" -f $versionParts[0], $versionParts[1], $versionParts[2], $versionParts[3]  
+	#$updatedAssemblyVersion = "{0}.{1}.{2}.{3}" -f $version.Major, $version.Minor, $version.Revision, $version.Build
+	$updatedAssemblyVersion = $version.ToString()
+      
+    #$assemblyVersion  
+	$regex = new RegEx($assemblyVersionPattern,[RegexOptions]::SingleLine+[RegexOptions]::IgnoreCase)
+                  
+    foreach( $file in $foundFiles )  
+    {     
+        (Get-Content $file) | ForEach-Object {  
+                % {$_ -replace $assemblyPattern, $updatedAssemblyVersion } |                  
+            } | Set-Content $file                                 
+    }
 }
