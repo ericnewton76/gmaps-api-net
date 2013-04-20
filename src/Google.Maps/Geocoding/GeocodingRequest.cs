@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Web;
 
 namespace Google.Maps.Geocoding
 {
@@ -30,6 +31,13 @@ namespace Google.Maps.Geocoding
 		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#ReverseGeocoding"/>
 		/// <remarks>Required if latlng not present.</remarks>
 		public Location Address { get; set; }
+
+		/// <summary>
+		/// Undocumented address component filters.
+		/// Only geocoding results matching the component filters will be returned.
+		/// </summary>
+		/// <remarks>IE: country:uk|locality:stathern</remarks>
+		public string Components { get; set; }
 
 		/// <summary>
 		/// The bounding box of the viewport within which to bias geocode
@@ -86,6 +94,7 @@ namespace Google.Maps.Geocoding
 			}
 				
 			qsb.Append("bounds", GetBoundsStr())
+				.Append("components", HttpUtility.UrlEncode(Components))
 				.Append("region", Region)
 				.Append("language", Language)
 				.Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
