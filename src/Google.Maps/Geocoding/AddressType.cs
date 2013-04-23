@@ -148,6 +148,16 @@ namespace Google.Maps.Geocoding
 		/// <summary>
 		/// Indicates the room of a building address.
 		/// </summary>
-		Room = 23
+		Room = 23,
+
+		/// <summary>
+		/// (Not documented) Indicates the Postal Town (nearest large town / city for UK addresses)
+		/// </summary>
+		PostalTown = 24,
+
+		/// <summary>
+		/// (Not documented) First half of postcode for the UK
+		/// </summary>
+		PostalCodePrefix = 25
 	}
 }

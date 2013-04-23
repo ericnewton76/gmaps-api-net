@@ -36,12 +36,13 @@ namespace Google.Maps.Geocoding
 
 		public Uri BaseUri { get; set; }
 
-		public GeocodingService() : this(HttpUri)
+		public GeocodingService() : this(HttpsUri)
 		{
 		}
+
 		public GeocodingService(Uri baseUri)
 		{
-			this.BaseUri = HttpsUri;
+			this.BaseUri = baseUri;
 		}
 		#endregion
 

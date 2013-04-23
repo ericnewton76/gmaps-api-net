@@ -207,7 +207,6 @@ namespace Google.Maps.Test.Integrations
 			//Assert.AreEqual(expectedNortheastLongitude, response.Results.Single().Geometry.Viewport.Northeast.Longitude, "Northeast.Longitude");
 		}
 
-
 		//[Test]
 		//public void GetGeocodingForCoordinates()
 		//{
