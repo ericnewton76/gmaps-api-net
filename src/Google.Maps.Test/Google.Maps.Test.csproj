@@ -69,6 +69,7 @@
     <Compile Include="Direction\DirectionServiceTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Geocoding\LiveGeocodingTests.cs" />
     <Compile Include="GoogleSignedTests.cs" />
     <Compile Include="Elevation\ElevationRequestTests.cs" />
     <Compile Include="LatLngComparerTests.cs" />
