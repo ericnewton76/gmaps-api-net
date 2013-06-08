@@ -288,16 +288,13 @@ namespace Google.Maps.StaticMaps
 
 				if (currentPath.Color.Equals(Color.Empty) == false)
 				{
-					if (currentPath.Color.IsNamedColor && Constants.IsExpectedNamedColor(currentPath.Color.Name))
-						sb.AppendFormat("color:{0}", currentPath.Color.Name.ToLowerInvariant());
-					else
-						sb.AppendFormat("color:0x{0:X8}", currentPath.Color.ToArgb());
+					sb.Append("color:").Append(GetColorEncoded(currentPath.Color, true));
 				}
 
 				if (currentPath.FillColor.Equals(Color.Empty) == false)
 				{
 					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
-					sb.AppendFormat("fillcolor:{0:X8}", currentPath.Color.ToArgb());
+					sb.Append("fillcolor:").Append(GetColorEncoded(currentPath.FillColor, false));
 				}
 
 				if (currentPath.Encode.GetValueOrDefault() == true)
@@ -335,6 +332,22 @@ namespace Google.Maps.StaticMaps
 			}
 
 			return string.Join("&", pathParam);
+		}
+
+		/// <summary>
+		/// The color encoding for google static maps API puts the alpha last (0xrrggbbaa)
+		/// whereas .NET encodes it alpha first by default (0xaarrggbb).
+		/// </summary>
+		private static string GetColorEncoded(Color color, bool useNamedColorIfPossible)
+		{
+			if (useNamedColorIfPossible && color.IsNamedColor && Constants.IsExpectedNamedColor(color.Name))
+			{
+				return color.Name.ToLowerInvariant();
+			}
+			else
+			{
+				return string.Format("0x{0:X2}{1:X2}{2:X2}{3:X2}", color.R, color.G, color.B, color.A);
+			}
 		}
 
 		private static string GetPathEncoded(Path currentPath)

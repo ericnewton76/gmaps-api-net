@@ -7,6 +7,7 @@ using Google.Maps.StaticMaps;
 
 using System.Reflection;
 using Google.Maps;
+using System.Text.RegularExpressions;
 
 namespace Google.Maps.Test.StaticMaps
 {
@@ -175,6 +176,21 @@ namespace Google.Maps.Test.StaticMaps
 			Assert.AreEqual(expected, actual);
 		}
 
+		// The color encoding for google static maps API puts the alpha last (0xrrggbbaa)
+		// whereas .NET encodes it alpha first (0xaarrggbb).
+		[Test]
+		public void Path_NonstandardColor_EncodedProperly()
+		{
+			var map = new StaticMapRequest {
+				Sensor = false
+			};
+			map.Paths.Add(new Path(new LatLng(30.0, -60.0)) {
+				Color = System.Drawing.Color.FromArgb(0x80, 0xA0, 0xC0)
+			});
+			string color = ExtractColorFromUri(map.ToUri());
+			Assert.AreEqual("0X80A0C0FF", color.ToUpper());
+		}
+
 		[Test]
 		public void Encoded_SinglePoint()
 		{
@@ -227,6 +243,13 @@ namespace Google.Maps.Test.StaticMaps
 			) {
 				Color = System.Drawing.Color.Red
 			};;
+		}
+
+		private static string ExtractColorFromUri(Uri uri)
+		{
+			var colorMatch = Regex.Match(uri.Query, @"color:([a-z0-9]+)((%7c)|\|)", RegexOptions.IgnoreCase);
+			Assert.True(colorMatch.Success, "Could not find color component of path.");
+			return colorMatch.Groups[1].Value;
 		}
 
 		[Test]
