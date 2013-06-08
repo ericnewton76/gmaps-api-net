@@ -441,7 +441,7 @@ namespace Google.Maps.StaticMaps
 				foreach (Location loc in current.Locations)
 				{
 					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
-					sb.Append(loc.ToString());
+					sb.Append(loc.GetAsUrlParameter());
 				}
 
 				markerStrings[markerStringsIndex++] = "markers=" + sb.ToString();

@@ -120,6 +120,31 @@ namespace Google.Maps.Test.StaticMaps
 			Assert.AreEqual(4, sm.Scale);
 		}
 
+		[Test]
+		public void Markers_ShouldNotUseExtraZeros_BecauseUrlLengthIsLimited()
+		{
+			StaticMapRequest map = new StaticMapRequest { Sensor = false };
+			map.Markers.Add(new LatLng(40.0, -60.0));
+			map.Markers.Add(new LatLng(41.1, -61.1));
+			map.Markers.Add(new LatLng(42.22, -62.22));
+			map.Markers.Add(new LatLng(44.444, -64.444));
+			map.Markers.Add(new LatLng(45.5555, -65.5555));
+			map.Markers.Add(new LatLng(46.66666, -66.66666));
+			map.Markers.Add(new LatLng(47.777777, -67.777777));
+			map.Markers.Add(new LatLng(48.8888888, -68.8888888));
+			// based on this http://gis.stackexchange.com/a/8674/15274,
+			// I'm not too concerned about more than 7 decimals of precision.
+
+			string actual = map.ToUri().Query;
+			StringAssert.Contains("markers=40,-60&", actual);
+			StringAssert.Contains("markers=41.1,-61.1&", actual);
+			StringAssert.Contains("markers=42.22,-62.22&", actual);
+			StringAssert.Contains("markers=44.444,-64.444&", actual);
+			StringAssert.Contains("markers=45.5555,-65.5555&", actual);
+			StringAssert.Contains("markers=46.66666,-66.66666&", actual);
+			StringAssert.Contains("markers=47.777777,-67.777777&", actual);
+			StringAssert.Contains("markers=48.8888888,-68.8888888&", actual);
+		}
 
 	}
 
