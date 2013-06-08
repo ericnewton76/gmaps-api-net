@@ -190,6 +190,46 @@ namespace Google.Maps.Test.StaticMaps
 		}
 
 		[Test]
+		public void TwoPaths()
+		{
+			var map = new StaticMapRequest {
+				Sensor = false
+			};
+			map.Paths.Add(GreenTriangleInAdaMN());
+			map.Paths.Add(RedTriangleNearAdaMN());
+
+			string expectedPath1 = "&path=color:green|47.3017,-96.5299|47.2949,-96.4999|47.2868,-96.5003|47.3017,-96.5299".Replace("|", "%7C");
+			string expectedPath2 = "&path=color:red|47.3105,-96.5326|47.3103,-96.5219|47.3045,-96.5219|47.3105,-96.5326".Replace("|", "%7C");
+			string actual = map.ToUri().Query;
+			StringAssert.Contains(expectedPath1, actual);
+			StringAssert.Contains(expectedPath2, actual);
+		}
+
+		private static Path GreenTriangleInAdaMN()
+		{
+			return new Path(
+				new LatLng(47.3017, -96.5299),
+				new LatLng(47.2949, -96.4999),
+				new LatLng(47.2868, -96.5003),
+				new LatLng(47.3017, -96.5299)
+			) {
+				Color = System.Drawing.Color.Green
+			};
+		}
+
+		private static Path RedTriangleNearAdaMN()
+		{
+			return new Path(
+				new LatLng(47.3105, -96.5326),
+				new LatLng(47.3103, -96.5219),
+				new LatLng(47.3045, -96.5219),
+				new LatLng(47.3105, -96.5326)
+			) {
+				Color = System.Drawing.Color.Red
+			};;
+		}
+
+		[Test]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void Encode_set_but_not_all_LatLng_positions()
 		{
