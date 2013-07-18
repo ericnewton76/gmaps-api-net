@@ -281,10 +281,11 @@ namespace Google.Maps.StaticMaps
 
 			string[] pathParam = new string[this.Paths.Count];
 			int pathParamIndex = 0;
+			System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
 			foreach (Path currentPath in this.Paths)
 			{
-				System.Text.StringBuilder sb = new System.Text.StringBuilder();
+				sb.Length = 0;
 
 				if (currentPath.Color.Equals(Color.Empty) == false)
 				{
