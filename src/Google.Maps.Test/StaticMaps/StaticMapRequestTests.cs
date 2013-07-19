@@ -7,6 +7,7 @@ using Google.Maps.StaticMaps;
 
 using System.Reflection;
 using Google.Maps;
+using System.Text.RegularExpressions;
 
 namespace Google.Maps.Test.StaticMaps
 {
@@ -119,6 +120,31 @@ namespace Google.Maps.Test.StaticMaps
 			Assert.AreEqual(4, sm.Scale);
 		}
 
+		[Test]
+		public void Markers_ShouldNotUseExtraZeros_BecauseUrlLengthIsLimited()
+		{
+			StaticMapRequest map = new StaticMapRequest { Sensor = false };
+			map.Markers.Add(new LatLng(40.0, -60.0));
+			map.Markers.Add(new LatLng(41.1, -61.1));
+			map.Markers.Add(new LatLng(42.22, -62.22));
+			map.Markers.Add(new LatLng(44.444, -64.444));
+			map.Markers.Add(new LatLng(45.5555, -65.5555));
+			map.Markers.Add(new LatLng(46.66666, -66.66666));
+			map.Markers.Add(new LatLng(47.777777, -67.777777));
+			map.Markers.Add(new LatLng(48.8888888, -68.8888888));
+			// based on this http://gis.stackexchange.com/a/8674/15274,
+			// I'm not too concerned about more than 7 decimals of precision.
+
+			string actual = map.ToUri().Query;
+			StringAssert.Contains("markers=40,-60&", actual);
+			StringAssert.Contains("markers=41.1,-61.1&", actual);
+			StringAssert.Contains("markers=42.22,-62.22&", actual);
+			StringAssert.Contains("markers=44.444,-64.444&", actual);
+			StringAssert.Contains("markers=45.5555,-65.5555&", actual);
+			StringAssert.Contains("markers=46.66666,-66.66666&", actual);
+			StringAssert.Contains("markers=47.777777,-67.777777&", actual);
+			StringAssert.Contains("markers=48.8888888,-68.8888888&", actual);
+		}
 
 	}
 
@@ -175,6 +201,21 @@ namespace Google.Maps.Test.StaticMaps
 			Assert.AreEqual(expected, actual);
 		}
 
+		// The color encoding for google static maps API puts the alpha last (0xrrggbbaa)
+		// whereas .NET encodes it alpha first (0xaarrggbb).
+		[Test]
+		public void Path_NonstandardColor_EncodedProperly()
+		{
+			var map = new StaticMapRequest {
+				Sensor = false
+			};
+			map.Paths.Add(new Path(new LatLng(30.0, -60.0)) {
+				Color = System.Drawing.Color.FromArgb(0x80, 0xA0, 0xC0)
+			});
+			string color = ExtractColorFromUri(map.ToUri());
+			Assert.AreEqual("0X80A0C0FF", color.ToUpper());
+		}
+
 		[Test]
 		public void Encoded_SinglePoint()
 		{
@@ -187,6 +228,53 @@ namespace Google.Maps.Test.StaticMaps
 			string actual = accessor.GetPathsStr();
 
 			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		public void TwoPaths()
+		{
+			var map = new StaticMapRequest {
+				Sensor = false
+			};
+			map.Paths.Add(GreenTriangleInAdaMN());
+			map.Paths.Add(RedTriangleNearAdaMN());
+
+			string expectedPath1 = "&path=color:green|47.3017,-96.5299|47.2949,-96.4999|47.2868,-96.5003|47.3017,-96.5299".Replace("|", "%7C");
+			string expectedPath2 = "&path=color:red|47.3105,-96.5326|47.3103,-96.5219|47.3045,-96.5219|47.3105,-96.5326".Replace("|", "%7C");
+			string actual = map.ToUri().Query;
+			StringAssert.Contains(expectedPath1, actual);
+			StringAssert.Contains(expectedPath2, actual);
+		}
+
+		private static Path GreenTriangleInAdaMN()
+		{
+			return new Path(
+				new LatLng(47.3017, -96.5299),
+				new LatLng(47.2949, -96.4999),
+				new LatLng(47.2868, -96.5003),
+				new LatLng(47.3017, -96.5299)
+			) {
+				Color = System.Drawing.Color.Green
+			};
+		}
+
+		private static Path RedTriangleNearAdaMN()
+		{
+			return new Path(
+				new LatLng(47.3105, -96.5326),
+				new LatLng(47.3103, -96.5219),
+				new LatLng(47.3045, -96.5219),
+				new LatLng(47.3105, -96.5326)
+			) {
+				Color = System.Drawing.Color.Red
+			};;
+		}
+
+		private static string ExtractColorFromUri(Uri uri)
+		{
+			var colorMatch = Regex.Match(uri.Query, @"color:([a-z0-9]+)((%7c)|\|)", RegexOptions.IgnoreCase);
+			Assert.True(colorMatch.Success, "Could not find color component of path.");
+			return colorMatch.Groups[1].Value;
 		}
 
 		[Test]

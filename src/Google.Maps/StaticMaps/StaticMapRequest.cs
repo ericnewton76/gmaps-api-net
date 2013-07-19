@@ -41,6 +41,7 @@ namespace Google.Maps.StaticMaps
 			this.Size = new Size(512, 512); //default size is 512x512
 			this.Visible = new List<Location>(1);
 			this.Markers = new MapMarkersCollection();
+			this.Paths = new List<Path>();
 		}
 
 		public static readonly Uri BaseUri =
@@ -168,6 +169,21 @@ namespace Google.Maps.StaticMaps
 		public MapMarkersCollection Markers { get; set; }
 
 		/// <summary>
+		/// For backwards-compatibility; shortcut for Paths when not using
+		/// multiple paths.
+		/// </summary>
+		public Path Path {
+			get
+			{
+				return Paths.SingleOrDefault();
+			}
+			set
+			{
+				Paths = new List<Path> { value };
+			}
+		}
+
+		/// <summary>
 		/// Defines a single path of two or more connected points to overlay on
 		/// the image at specified locations. This parameter takes a string of
 		/// point definitions separated by the pipe character (|). You may
@@ -176,8 +192,7 @@ namespace Google.Maps.StaticMaps
 		/// (normally required) center and zoom parameters. (optional)
 		/// </summary>
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Paths</remarks>
-		//public PathCollection Path { get; set; }
-		public Path Path { get; set; }
+		public ICollection<Path> Paths { get; set; }
 
 		/// <summary>
 		/// Specifies one or more locations that should remain visible on the
@@ -262,30 +277,25 @@ namespace Google.Maps.StaticMaps
 		/// <returns></returns>
 		private string GetPathsStr()
 		{
-			if (this.Path == null) return null;
+			if (this.Paths == null || this.Paths.Count == 0) return null;
 
-			string[] pathParam = new string[1];
+			string[] pathParam = new string[this.Paths.Count];
 			int pathParamIndex = 0;
-
 			System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-			Path currentPath = this.Path;
-			//foreach (Path path in this.Path)
+			foreach (Path currentPath in this.Paths)
 			{
-				sb.Remove(0, sb.Length);
+				sb.Length = 0;
 
 				if (currentPath.Color.Equals(Color.Empty) == false)
 				{
-					if (currentPath.Color.IsNamedColor && Constants.IsExpectedNamedColor(currentPath.Color.Name))
-						sb.AppendFormat("color:{0}", currentPath.Color.Name.ToLowerInvariant());
-					else
-						sb.AppendFormat("color:0x{0:X8}", currentPath.Color.ToArgb());
+					sb.Append("color:").Append(GetColorEncoded(currentPath.Color, true));
 				}
 
 				if (currentPath.FillColor.Equals(Color.Empty) == false)
 				{
 					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
-					sb.AppendFormat("fillcolor:{0:X8}", currentPath.Color.ToArgb());
+					sb.Append("fillcolor:").Append(GetColorEncoded(currentPath.FillColor, false));
 				}
 
 				if (currentPath.Encode.GetValueOrDefault() == true)
@@ -323,6 +333,22 @@ namespace Google.Maps.StaticMaps
 			}
 
 			return string.Join("&", pathParam);
+		}
+
+		/// <summary>
+		/// The color encoding for google static maps API puts the alpha last (0xrrggbbaa)
+		/// whereas .NET encodes it alpha first by default (0xaarrggbb).
+		/// </summary>
+		private static string GetColorEncoded(Color color, bool useNamedColorIfPossible)
+		{
+			if (useNamedColorIfPossible && color.IsNamedColor && Constants.IsExpectedNamedColor(color.Name))
+			{
+				return color.Name.ToLowerInvariant();
+			}
+			else
+			{
+				return string.Format("0x{0:X2}{1:X2}{2:X2}{3:X2}", color.R, color.G, color.B, color.A);
+			}
 		}
 
 		private static string GetPathEncoded(Path currentPath)
@@ -416,7 +442,7 @@ namespace Google.Maps.StaticMaps
 				foreach (Location loc in current.Locations)
 				{
 					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
-					sb.Append(loc.ToString());
+					sb.Append(loc.GetAsUrlParameter());
 				}
 
 				markerStrings[markerStringsIndex++] = "markers=" + sb.ToString();
