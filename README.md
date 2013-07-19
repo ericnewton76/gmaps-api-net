@@ -30,7 +30,7 @@ Currently the service library supports full coverage of the following Google Map
   * *Direction* (thanks to malke.eklam)
   * *Direction Matrix* (thanks to mocciavinc...@gmail.com)
   * *Polyline encoding* (code based on source from [http://bit.ly/5XuDqb  briancaos.wordpress.com])
-  * coming soon, Google Business API support, using Google-supplied Client ID and private key for generating signed urls
+  * *Google Maps for Business support*, using Google-supplied Client ID and private key for generating signed urls
 
 Quick Examples
 --------------
@@ -70,6 +70,15 @@ map.Sensor = false;
 
 var imgTagSrc = map.ToUri();
 ```
+
+Using a Google Maps for Business key
+```c#
+GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
+// Then do as many requests as you like...
+var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
+var response = GeocodingService.GetResponse(request);
+```
+
 
 Project Roadmap
 ---------------
