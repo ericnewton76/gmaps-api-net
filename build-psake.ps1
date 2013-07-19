@@ -102,9 +102,8 @@ task Build -depends Clean,UpdateAssemblyInfoVersions {
 }
 
 task UpdateAssemblyInfoVersions {
-	#sanity check
-	$versionInfo
-	$assemblyVer = new-object Version($versionInfo.MajorMinorRevision + '.0')
+	
+	$assemblyVer = new-object Version($versionInfo.FullString)
 	$fileVer = new-object Version($versionInfo.FullString)
 
 	Write-Host -ForegroundColor DarkCyan "-Updating assembly versions:"
@@ -211,7 +210,8 @@ task PrepareNuspecFiles {
 				$name = (Join-Path $projname $nameInfo.Name)            # gives [name]\[name.csproj]
 			}
 			
-			Get-ChildItem -Path (Join-Path $sourceDir $projname) -filter "*.nuspec" | Foreach-Object {
+			#-Path (Join-Path $sourceDir $projname)
+			Get-ChildItem  -filter "*.nuspec" | Foreach-Object {
 		
 				$nugetPackDir = Join-Path $nugetBaseDir $projname
 			
@@ -224,19 +224,25 @@ task PrepareNuspecFiles {
 		
 				$filename = "$nugetPackDir\$nuspecFile"
 
-				$versionStr = ($versionInfo.MajorMinorRevision + ".0")
+				#Write-Verbose ($versionInfo|Out-String)
+				#Write-Verbose $versionInfo.MajorMinorRevision
+				
+				$versionStr = [String]::Concat($versionInfo.MajorMinorRevision,".0")
 				#$versionNodePattern1 = "<version>[0-9]+(\.([0-9]+|\*)){1,3}</version>"
 				$versionNodePattern1 = '<version>$version$</version>'
 				$versionNodeOut = "<version>" + $versionStr + "</version>"
+				Write-Verbose ("-PrepareNugetSpec: Replacing ["+$versionNodePattern1+"] with ["+$versionNodeOut+"]")
 				$versionAttrPattern1 = 'version="$version$"'
 				$versionAttrOut = 'version="' + $versionStr + '"'
+				Write-Verbose ("-PrepareNugetSpec: Replacing ["+$versionAttrPattern1+"] with ["+$versionAttrOut+"]")
 				
 					(Get-Content $filename) | Foreach-Object {
 						% { $_.Replace($versionNodePattern1, $versionNodeOut) } |
 						% { $_.Replace($versionAttrPattern1, $versionAttrOut) }
 					} | Set-Content $filename
 
-				Write-Host -ForegroundColorGreen "-Updated version(s) in $filename"
+				Write-Host -ForegroundColor Green "-Updated version(s) in $filename"
+				
 			}
 		}
 	}
@@ -249,10 +255,10 @@ task NugetPackage -depends Test,PrepareNuspecFiles {
 
 	foreach ($build in $builds)
 	{
-		Write-Verbose "build.NuGetDir=" $build.NuGetDir
+		Write-Verbose ("build.NuGetDir="+$build.NuGetDir)
 		if ($build.NuGetDir -ne $null)
 		{
-			$nameInfo = new-object System.IO.FileInfo([string]$build.Tests)
+			$nameInfo = new-object System.IO.FileInfo([string]$build.Project)
 			$projname = $nameInfo.Name.Replace($nameInfo.Extension,"")  # chop off the extension
 			if ($nameInfo.Extension -eq ".sln") { 
 				$name = $nameInfo.Name
@@ -313,28 +319,28 @@ function Get-BuildTiming()
 	$now = [DateTime]::Now
 	[TimeSpan]$span = $now - (new-object DateTime($now.Year,1,1))
 
-	Return [int]$span.TotalMinutes
+	Return [int]($span.TotalMinutes/10)
 }
 
 function Load-VersionInfo([string] $path)
 {
 	[hashtable]$ver = @{}
 
-	if( (Test-Path AssemblyVersion_Master.cs) -eq $true) {
-		$matches = (Get-Content AssemblyVersion_Master.cs) -match 'AssemblyFileVersion\("?<V1>(([0-9]+)\.?){1,4}"\)'
-		$matches
-		$ver.MajorMinor = [String]::Concat($matches.V1.Captures[0].Value,".",$matches.V1.Captures[1].Value)
-		$ver.MajorMinorRevision = [String]::Concat($ver.MajorMinor, ".", $matches.V3)
-	} else {
-		$ver.MajorMinor = "0.10"
-		$ver.MajorMinorRevision = "0.10.2"
-	}
-	
+	if( (Test-Path $path) -eq $true) {
+		Write-Verbose "Reading from file $path"
+
+		$matches = (Get-Content $path) | Select-String 'AssemblyFileVersion\("(?<V1>([0-9]+)\.?){1,4}"\)' -AllMatches
+		$caps = $matches.Matches[0].Groups[1].Captures
+
+		$ver.MajorMinor = [String]::Concat($caps[0].Value,".",$caps[1].Value)
+		$ver.MajorMinorRevision = [String]::Concat($ver.MajorMinor, ".", $caps[2].Value)
+		
+	} 
+
 	$ver.Build = Get-BuildTiming
 	$ver.FullString = [String]::Concat($ver.MajorMinorRevision,".",[string]$ver.Build)
-	
-	Write-Host "ver:"
-	$ver
+
+	Write-verbose ("Version (full string)=" + $ver.FullString)
 
 	Return $ver
 }
@@ -359,10 +365,10 @@ function Update-AssemblyInfoFiles ([string] $sourceDir, [string] $assemblyVersio
 	}
 }
 
-[CmdletBinding()]  
+#[CmdletBinding()]  
 function Set-AssemblyInfoBuildNumbers(
 	[Parameter(Position=1,Mandatory=$true)] [Version] $version,
-	[Parameter(Position=2,Mandatory=$false)] [string] $fileSpec = ".\*AssemblyInfo.cs"
+	[Parameter(Position=2,Mandatory=$false)] [string] $fileSpec = ".\*AssemblyInfo.cs",
 	[Parameter(Position=3,Mandatory=$false)] [Version] $fileVersion
 )
 {  
