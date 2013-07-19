@@ -51,6 +51,10 @@ namespace Google.Maps
 
 		public string GetSignedUri(Uri uri)
 		{
+			var builder = new UriBuilder(uri);
+			builder.Query = builder.Query.Substring(1) + "&client=" + _clientId;
+			uri = builder.Uri;
+
 			string signature = GetSignature(uri);
 			signature = signature.Replace("+", "-").Replace("/", "_");
 
