@@ -1,5 +1,5 @@
-Google Maps API for .NET
-========================
+# Google Maps API for .NET
+
 
 C# google maps api interface for interacting with the backend web services for Google Maps
 
@@ -10,8 +10,7 @@ Nuget package: http://nuget.org/gmaps-api-net
 PS> Install-Package gmaps-api-net
 ```
 
-Overview
---------
+## Overview
 This project intends to provide all the features available in the Google Maps API up to v3.7. It is being developed in C# for .NET Framework 3.5.
 
 * Please note that this project is still in design and development phase; the libraries may suffer major changes even at the interface level, so don't rely (yet) in this software for production uses. *
@@ -20,8 +19,7 @@ Designed with simplicity and extensibility in mind, there are different librarie
 
 *Google.Maps* is a full featured API client library, providing strongly typed access to the API.  
 
-API Support
------------
+## API Support
 
 Currently the service library supports full coverage of the following Google Maps APIs:
   * *Geocoding*
@@ -32,11 +30,10 @@ Currently the service library supports full coverage of the following Google Map
   * *Polyline encoding* (code based on source from [http://bit.ly/5XuDqb  briancaos.wordpress.com])
   * coming soon, Google Business API support, using Google-supplied Client ID and private key for generating signed urls
 
-Quick Examples
---------------
+## Quick Examples
 Using Google Maps API for .NET is designed to be really easy.
 
-Getting an address from the Geocoding service
+### Getting an address from the Geocoding service
 Let's suppose we want to search an address and get more information about it. We can write:
 
 ```c#
@@ -58,7 +55,7 @@ Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 37.423
 Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -122.0818530
 ```
 
-Getting a static map url
+### Getting a static map url
 Static Maps support allows you to get a valid url which you can use, for example, with an `<img src="">` tag.
 
 ```c#
@@ -71,8 +68,18 @@ map.Sensor = false;
 var imgTagSrc = map.ToUri();
 ```
 
-Project Roadmap
----------------
+### Signing with a Google Business API key
+This library supports signing with a Google Business API key.  Use the GoogleSigned class to set your key, 
+usually on Application startup.  *TODO: appSetting key support, or alternate method*
+
+Once you invoke GoogleSigned.AssignAllServices with the instance of the GoogleSigned with your clientId/private key, then that's 
+all thats needed.  The service calls will all internally sign all requests with your Google Business API key.
+
+```c#
+GoogleSigned.AssignAllServices(new GoogleSigned("[your client id]","[your private key]"));
+```
+
+## Project Roadmap
 The roadmap has changed a little with changing of hands, but the basic premise is the same.  
   * ~~*Geocoding API*~~
   * ~~*Elevation API*~~
@@ -85,8 +92,7 @@ The roadmap has changed a little with changing of hands, but the basic premise i
   * *Cache implementation*
   * *Smart address search*
 
-Contact
--------
+## Contact
 Questions, comments and/or suggestions are welcome! You can send an email to 
 - Luis at [mailto:luisfarzati@katulu.net luisfarzati@katulu.net], or Twitter: [http://twitter.com/luisfarzati]
 - Eric Newton [mailto:ericnewton76@gmail.com ericnewton76@gmail.com]
