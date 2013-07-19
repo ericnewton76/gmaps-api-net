@@ -28,7 +28,7 @@ Currently the service library supports full coverage of the following Google Map
   * *Direction* (thanks to malke.eklam)
   * *Direction Matrix* (thanks to mocciavinc...@gmail.com)
   * *Polyline encoding* (code based on source from [http://bit.ly/5XuDqb  briancaos.wordpress.com])
-  * coming soon, Google Business API support, using Google-supplied Client ID and private key for generating signed urls
+  * *Google Maps for Business support*, using Google-supplied Client ID and private key for generating signed urls
 
 ## Quick Examples
 Using Google Maps API for .NET is designed to be really easy.
@@ -68,16 +68,14 @@ map.Sensor = false;
 var imgTagSrc = map.ToUri();
 ```
 
-### Signing with a Google Business API key
-This library supports signing with a Google Business API key.  Use the GoogleSigned class to set your key, 
-usually on Application startup.  *TODO: appSetting key support, or alternate method*
-
-Once you invoke GoogleSigned.AssignAllServices with the instance of the GoogleSigned with your clientId/private key, then that's 
-all thats needed.  The service calls will all internally sign all requests with your Google Business API key.
-
+## Using a Google Maps for Business key
 ```c#
-GoogleSigned.AssignAllServices(new GoogleSigned("[your client id]","[your private key]"));
+GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
+// Then do as many requests as you like...
+var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
+var response = GeocodingService.GetResponse(request);
 ```
+
 
 ## Project Roadmap
 The roadmap has changed a little with changing of hands, but the basic premise is the same.  

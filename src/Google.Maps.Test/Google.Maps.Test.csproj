@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Geocoding\LiveGeocodingTests.cs" />
+    <Compile Include="GoogleMapsForBusinessTests.cs" />
     <Compile Include="GoogleSignedTests.cs" />
     <Compile Include="Elevation\ElevationRequestTests.cs" />
     <Compile Include="LatLngComparerTests.cs" />
@@ -120,7 +121,9 @@
     <EmbeddedResource Include="Elevation\json_queries\locations=39.739153,-104.984703.json" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="PrivateSigningKeys.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
