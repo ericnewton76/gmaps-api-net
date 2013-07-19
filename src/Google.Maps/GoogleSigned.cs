@@ -6,6 +6,12 @@ using System.Security.Cryptography;
 
 namespace Google.Maps
 {
+	/// <summary>
+	/// Stores a Google Business API customer's signing information to be passed with service requests to Google's APIs.
+	/// </summary>
+	/// <remarks>
+	/// Use GoogleSigned.AssignAllServices() method to attach the signing information to all outgoing requests, usually during App Startup.
+	/// </remarks>
 	public class GoogleSigned
 	{
 		/// <summary>
