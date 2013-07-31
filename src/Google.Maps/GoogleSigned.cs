@@ -75,7 +75,8 @@ namespace Google.Maps
 		{
 			byte[] encodedPathQuery = Encoding.ASCII.GetBytes(uri.LocalPath + uri.Query);
 
-			byte[] hashed = _hashAlgorithm.ComputeHash(encodedPathQuery);
+            var hashAlgorithm = new HMACSHA1(_privateKeyBytes);
+            byte[] hashed = hashAlgorithm.ComputeHash(encodedPathQuery);
 
 			string signature = Convert.ToBase64String(hashed);
 			return signature;
