@@ -45,13 +45,11 @@ namespace Google.Maps
 			usablePrivateKey = usablePrivateKey.Replace("-", "+").Replace("_","/");
 
 			_privateKeyBytes = Convert.FromBase64String(usablePrivateKey);
-			_hashAlgorithm = new HMACSHA1(_privateKeyBytes);
 
 			_clientId = clientId;
 		}
 
 		private byte[] _privateKeyBytes;
-		private HMACSHA1 _hashAlgorithm;
 		private string _clientId;
 		public string ClientId { get { return _clientId; } }
 
@@ -75,7 +73,8 @@ namespace Google.Maps
 		{
 			byte[] encodedPathQuery = Encoding.ASCII.GetBytes(uri.LocalPath + uri.Query);
 
-			byte[] hashed = _hashAlgorithm.ComputeHash(encodedPathQuery);
+            var hashAlgorithm = new HMACSHA1(_privateKeyBytes);
+            byte[] hashed = hashAlgorithm.ComputeHash(encodedPathQuery);
 
 			string signature = Convert.ToBase64String(hashed);
 			return signature;
