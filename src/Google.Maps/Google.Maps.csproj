@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseSigningService.cs" />
+    <Compile Include="Cache\IUriResponseCache.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
     <Compile Include="Direction\DirectionRequest.cs" />
