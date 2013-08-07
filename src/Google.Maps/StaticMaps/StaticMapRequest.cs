@@ -34,10 +34,12 @@ namespace Google.Maps.StaticMaps
 	/// the type of map, and the placement of optional markers at locations on
 	/// the map.
 	/// </summary>
-	public class StaticMapRequest
+	public class StaticMapRequest : ApiRequest
 	{
 		public StaticMapRequest()
 		{
+
+
 			this.Size = new Size(512, 512); //default size is 512x512
 			this.Visible = new List<Location>(1);
 			this.Markers = new MapMarkersCollection();
@@ -204,28 +206,9 @@ namespace Google.Maps.StaticMaps
 		public ICollection<Location> Visible { get; set; }
 
 
-		/// <summary>
-		/// Specifies whether the application requesting the static map is
-		/// using a sensor to determine the user's location. This parameter
-		/// is required for all static map requests. (required)
-		/// </summary>
-		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Sensor</remarks>
-		public bool? Sensor { get; set; }
-
-
-
-		private void EnsureSensor(bool throwIfNotSet)
+        internal override Uri ToUri()
 		{
-			if (Sensor == null)
-			{
-				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
-		}
-
-		public Uri ToUri()
-		{
-			EnsureSensor(true);
+			EnsureSensor();
 
 			string formatStr = null;
 			switch (this.Format)

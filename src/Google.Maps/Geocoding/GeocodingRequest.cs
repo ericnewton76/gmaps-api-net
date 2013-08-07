@@ -23,7 +23,7 @@ namespace Google.Maps.Geocoding
 	/// <summary>
 	/// Provides a request for the Google Maps Geocoding web service.
 	/// </summary>
-	public class GeocodingRequest
+    public class GeocodingRequest : ApiRequest
 	{
 		/// <summary>
 		/// The address that you want to geocode.  Use LatLng to perform a reverse geocoding request.
@@ -70,14 +70,8 @@ namespace Google.Maps.Geocoding
 		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport"/>
 		public string Language { get; set; }
 
-		/// <summary>
-		/// Indicates whether or not the geocoding request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		public bool? Sensor { get; set; }
 
-		internal Uri ToUri()
+        internal override Uri ToUri()
 		{
 			EnsureSensor();
 			if (Address == null) throw new InvalidOperationException("Address property is not set.");
@@ -112,11 +106,6 @@ namespace Google.Maps.Geocoding
 			string neStr = this.Bounds.Northeast.GetAsUrlParameter();
 
 			return string.Concat(swStr + Constants.PIPE_URL_ENCODED + neStr);
-		}
-
-		private void EnsureSensor()
-		{
-			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
 	}
 }

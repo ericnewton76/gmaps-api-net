@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Google.Maps.Direction
 {
-	public class DirectionRequest
+    public class DirectionRequest : ApiRequest
 	{
 		/// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
@@ -34,11 +34,6 @@ namespace Google.Maps.Direction
 		/// If language is not supplied, the service will attempt to use the native language of the domain from which the request is sent.</summary>
 		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
 		public string Language { get; set; }
-
-		/// <summary>
-		///  Indicates whether or not the directions request comes from a device with a location sensor. This value must be either true or false.
-		/// </summary>
-		public bool? Sensor { get; set; }
 
 		private List<Location> _waypoints;
 		public IEnumerable<Location> Waypoints
@@ -94,7 +89,7 @@ namespace Google.Maps.Direction
 			return sb.ToString();
 		}
 
-		internal Uri ToUri()
+		internal override Uri ToUri()
 		{
 			EnsureSensor();
 
@@ -112,10 +107,7 @@ namespace Google.Maps.Direction
 			return new Uri(url, UriKind.Relative);
 		}
 
-		private void EnsureSensor()
-		{
-			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-		}
+
 
 	}
 }

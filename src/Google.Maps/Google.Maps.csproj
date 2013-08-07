@@ -75,6 +75,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiRequest.cs" />
+    <Compile Include="ApiService.cs" />
     <Compile Include="BaseSigningService.cs" />
     <Compile Include="Cache\IUriResponseCache.cs" />
     <Compile Include="Constants.cs" />

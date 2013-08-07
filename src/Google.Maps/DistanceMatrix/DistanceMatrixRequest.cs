@@ -25,7 +25,7 @@ namespace Google.Maps.DistanceMatrix
 	/// <summary>
 	/// Provides a request for the Google Distance Matrix web service.
 	/// </summary>
-	public class DistanceMatrixRequest
+    public class DistanceMatrixRequest : ApiRequest
 	{
 		/// <summary>
 		/// (optional) Specifies what mode of transport to use when calculating directions.
@@ -48,12 +48,6 @@ namespace Google.Maps.DistanceMatrix
 		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport" />
 		/// </summary>
 		public string Language { get; set; }
-
-		/// <summary>
-		///  
-		///  
-		/// </summary>
-		public bool? Sensor { get; set; }
 
 		/// <summary>
 		///  List of origin waypoints
@@ -143,9 +137,9 @@ namespace Google.Maps.DistanceMatrix
 		/// Create URI for quering
 		/// </summary>
 		/// <returns></returns>
-		internal Uri ToUri()
+        internal override Uri ToUri()
 		{
-			this.EnsureSensor(true);
+			this.EnsureSensor();
 
 			var qsb = new Internal.QueryStringBuilder()
 				.Append("origins", WaypointsToUri(waypointsOrigin))
@@ -159,15 +153,6 @@ namespace Google.Maps.DistanceMatrix
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
-		}
-
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if (Sensor == null)
-			{
-				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
 		}
 	}
 

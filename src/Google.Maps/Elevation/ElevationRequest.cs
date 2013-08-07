@@ -23,7 +23,7 @@ namespace Google.Maps.Elevation
 	/// <summary>
 	/// Provides a request for the Google Maps Elevation web service.
 	/// </summary>
-	public class ElevationRequest
+    public class ElevationRequest : ApiRequest
 	{
 		/// <summary>
 		/// Defines the location(s) on the earth from which to return elevation
@@ -86,18 +86,11 @@ namespace Google.Maps.Elevation
 		/// <remarks>Required if a path is specified.</remarks>
 		public int? Samples { get; set; }
 
-		/// <summary>
-		/// Specifies whether the application requesting elevation data is
-		/// using a sensor to determine the user's location. This parameter
-		/// is required for all elevation requests.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
-		public bool? Sensor { get; set; }
 
-		internal Uri ToUri()
+
+        internal override Uri ToUri()
 		{
-			this.EnsureSensor(true);
+			this.EnsureSensor();
 
 			var qsb = new Internal.QueryStringBuilder()
 
@@ -109,15 +102,6 @@ namespace Google.Maps.Elevation
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
-		}
-
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if (Sensor == null)
-			{
-				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
 		}
 
 		private string GetLocationsStr()
