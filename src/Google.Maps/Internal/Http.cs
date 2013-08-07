@@ -49,11 +49,20 @@ namespace Google.Maps.Internal
 			protected Uri RequestUri { get; set; }
 
             /// <summary>
-            /// Shall this request use the uri cache?
+            /// Is a cache provider avaiable?
             /// </summary>
-            public bool UseCache
+            public bool IsCacheAvaiable
             {
                 get { return _uriResponseCache != null; }
+            }
+
+            /// <summary>
+            /// Determines if the local uri response cache shall be used
+            /// </summary>
+            public bool DontUseCache
+            {
+                get;
+                private set;
             }
 
             /// <summary>
@@ -67,7 +76,7 @@ namespace Google.Maps.Internal
             /// </summary>
             /// <param name="uri"></param>
             public HttpGetResponse(Uri uri)
-                :this(uri, null)
+                :this(uri, null, false)
             {
             }
 
@@ -76,9 +85,10 @@ namespace Google.Maps.Internal
             /// </summary>
             /// <param name="uri"></param>
             /// <param name="uriResponseCache"></param>
-            public HttpGetResponse(Uri uri, IUriResponseCache uriResponseCache)
+            public HttpGetResponse(Uri uri, IUriResponseCache uriResponseCache, bool forceNoCache)
 			{
 				RequestUri = uri;
+                DontUseCache = forceNoCache;
                 _uriResponseCache = uriResponseCache;
 			}
 
@@ -141,10 +151,12 @@ namespace Google.Maps.Internal
 			{
 				var output = String.Empty;
 
-                if (UseCache)
+                if (!DontUseCache && IsCacheAvaiable)
                     output = GetCachedResponse(RequestUri, DefaultCacheLifeTime);
 
-                if (String.IsNullOrEmpty(output))
+                FromCache = !String.IsNullOrEmpty(output);
+
+                if (!FromCache)
                 {
                     using (var reader = GetStreamReader(this.RequestUri))
                     {
@@ -186,9 +198,9 @@ namespace Google.Maps.Internal
 		/// </summary>
 		/// <param name="uri"></param>
 		/// <returns></returns>
-		public static HttpGetResponse Get(Uri uri)
+		public static HttpGetResponse Get(Uri uri, bool forceNoCache = false)
 		{
-			return Factory.CreateResponse(uri);
+            return Factory.CreateResponse(uri, forceNoCache);
 		}
 
 		/// <summary>
@@ -213,9 +225,9 @@ namespace Google.Maps.Internal
 			/// </summary>
 			/// <param name="uri"></param>
 			/// <returns></returns>
-			public virtual HttpGetResponse CreateResponse(Uri uri)
+            public virtual HttpGetResponse CreateResponse(Uri uri, bool forceNoCache = false)
 			{
-                return new HttpGetResponse(uri, UriResponseCache);
+                return new HttpGetResponse(uri, UriResponseCache, forceNoCache);
 			}
 		}
 
