@@ -28,14 +28,14 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService
+	public class GeocodingService : ApiService
 	{
 		#region Http/Https Uris and Constructors
 
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
 
-		public Uri BaseUri { get; set; }
+		
 
 		public GeocodingService() : this(HttpsUri)
 		{
@@ -54,6 +54,7 @@ namespace Google.Maps.Geocoding
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
+        /// 
 		public GeocodeResponse GetResponse(GeocodingRequest request)
 		{
             var httpResponse = GetHttpResponse(request);
@@ -66,14 +67,6 @@ namespace Google.Maps.Geocoding
             }
             return geoCoderResponse;
 		}
-
-        private Google.Maps.Internal.Http.HttpGetResponse GetHttpResponse(GeocodingRequest request, bool forceNoCache = false)
-        {
-            var url = new Uri(this.BaseUri, request.ToUri());
-            return Internal.Http.Get(url, forceNoCache);
-        }
-
-
 
 	}
 }

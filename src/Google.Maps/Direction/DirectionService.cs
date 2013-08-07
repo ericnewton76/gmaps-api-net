@@ -27,14 +27,12 @@ namespace Google.Maps.Direction
 	/// 
 	/// </summary>
 	/// <see cref=""/>
-	public class DirectionService
+    public class DirectionService : ApiService
 	{
 		#region Http/Https Uris and Constructors
 
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/directions/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/directions/");
-
-		public Uri BaseUri { get; set; }
 
 		public DirectionService() : this(HttpUri)
 		{
@@ -45,10 +43,25 @@ namespace Google.Maps.Direction
 		}
 		#endregion
 
-		public DirectionResponse GetResponse(DirectionRequest request)
-		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<DirectionResponse>();
-		}
+        /// <summary>
+        /// Sends the specified request to the Google Maps Direction web
+        /// service and parses the response as an DirectionResponse
+        /// object.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// 
+        public DirectionResponse GetResponse(DirectionRequest request)
+        {
+            var httpResponse = GetHttpResponse(request);
+            var geoCoderResponse = httpResponse.As<DirectionResponse>();
+
+            if (httpResponse.FromCache && geoCoderResponse.Status != ServiceResponseStatus.Ok)
+            {
+                httpResponse = GetHttpResponse(request, true);
+                geoCoderResponse = httpResponse.As<DirectionResponse>();
+            }
+            return geoCoderResponse;
+        }
 	}
 }
