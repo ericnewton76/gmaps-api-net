@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 
+
 namespace Google.Maps.Geocoding
 {
 	/// <summary>
@@ -55,8 +56,24 @@ namespace Google.Maps.Geocoding
 		/// <returns></returns>
 		public GeocodeResponse GetResponse(GeocodingRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<GeocodeResponse>();
+            var httpResponse = GetHttpResponse(request);
+            var geoCoderResponse = httpResponse.As<GeocodeResponse>();
+
+            if (httpResponse.FromCache && geoCoderResponse.Status != ServiceResponseStatus.Ok)
+            {
+                httpResponse = GetHttpResponse(request, true);
+                geoCoderResponse = httpResponse.As<GeocodeResponse>();
+            }
+            return geoCoderResponse;
 		}
+
+        private Google.Maps.Internal.Http.HttpGetResponse GetHttpResponse(GeocodingRequest request, bool forceNoCache = false)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return Internal.Http.Get(url, forceNoCache);
+        }
+
+
+
 	}
 }
