@@ -71,7 +71,7 @@ namespace Google.Maps.Geocoding
 		public string Language { get; set; }
 
 
-        internal override Uri ToUri()
+        public override Uri ToUri()
 		{
 			EnsureSensor();
 			if (Address == null) throw new InvalidOperationException("Address property is not set.");

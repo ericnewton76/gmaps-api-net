@@ -10,7 +10,11 @@ namespace Google.Maps
     /// </summary>
     public abstract class ApiRequest
     {
-        internal abstract Uri ToUri();
+        /// <summary>
+        /// Gets the generated http-get uri for this request
+        /// </summary>
+        /// <returns></returns>
+        public abstract Uri ToUri();
 
         /// <summary>
         /// Specifies whether the application requesting elevation data is

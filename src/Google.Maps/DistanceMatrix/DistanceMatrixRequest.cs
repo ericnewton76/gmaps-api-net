@@ -137,7 +137,7 @@ namespace Google.Maps.DistanceMatrix
 		/// Create URI for quering
 		/// </summary>
 		/// <returns></returns>
-        internal override Uri ToUri()
+        public override Uri ToUri()
 		{
 			this.EnsureSensor();
 

@@ -206,7 +206,7 @@ namespace Google.Maps.StaticMaps
 		public ICollection<Location> Visible { get; set; }
 
 
-        internal override Uri ToUri()
+        public override Uri ToUri()
 		{
 			EnsureSensor();
 

@@ -88,7 +88,7 @@ namespace Google.Maps.Elevation
 
 
 
-        internal override Uri ToUri()
+        public override Uri ToUri()
 		{
 			this.EnsureSensor();
 

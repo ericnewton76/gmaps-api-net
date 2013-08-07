@@ -89,7 +89,7 @@ namespace Google.Maps.Direction
 			return sb.ToString();
 		}
 
-		internal override Uri ToUri()
+		public override Uri ToUri()
 		{
 			EnsureSensor();
 
