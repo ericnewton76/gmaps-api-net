@@ -17,9 +17,9 @@ namespace Google.Maps
         public abstract Uri ToUri();
 
         /// <summary>
-        /// Specifies whether the application requesting elevation data is
+        /// Specifies whether the application requesting data is
         /// using a sensor to determine the user's location. This parameter
-        /// is required for all elevation requests.
+        /// is required for all requests.
         /// </summary>
         /// <remarks>Required.</remarks>
         /// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
