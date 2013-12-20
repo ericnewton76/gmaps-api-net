@@ -40,7 +40,7 @@ Let's suppose we want to search an address and get more information about it. We
 var request = new GeocodingRequest();
 request.Address = "1600 Amphitheatre Parkway";
 request.Sensor = false;
-var response = GeocodingService.GetResponse(request);
+var response = new GeocodingService().GetResponse(request);
 ```
 
 The 'GeocodingService' class submits the request to the API web service, and returns 
