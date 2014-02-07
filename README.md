@@ -5,7 +5,7 @@ C# google maps api interface for interacting with the backend web services for G
 
 This is the main repository for the Google Maps API for .Net
 
-Nuget package: http://nuget.org/gmaps-api-net
+Nuget package: https://www.nuget.org/packages/gmaps-api-net/
 ```
 PS> Install-Package gmaps-api-net
 ```
