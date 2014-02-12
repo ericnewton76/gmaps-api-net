@@ -146,16 +146,17 @@ namespace Google.Maps.DistanceMatrix
 		internal Uri ToUri()
 		{
 			this.EnsureSensor(true);
+            
+            var qsb = new Internal.QueryStringBuilder()
+                .Append("origins", WaypointsToUri(waypointsOrigin))
+                .Append("destinations", WaypointsToUri(WaypointsDestination))
+                .Append("mode", Mode.ToString())
+                .Append("language", Language)
+                .Append("units", Units.ToString())
+                .Append("sensor", (Sensor.Value ? "true" : "false"));
 
-			var qsb = new Internal.QueryStringBuilder()
-				.Append("origins", WaypointsToUri(waypointsOrigin))
-				.Append("destinations", WaypointsToUri(WaypointsDestination))
-				.Append("mode", Mode.ToString())
-				.Append("language", Language)
-				.Append("units", Units.ToString())
-				.Append("sensor", (Sensor.Value ? "true" : "false"))
-				.Append("avoid", Avoid.ToString());
-
+            if (Avoid != DistanceMatrix.Avoid.none) qsb.Append("avoid", Avoid.ToString());        
+                
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);

@@ -11,6 +11,8 @@ namespace Google.Maps.DistanceMatrix
 	/// </summary>
 	public enum Avoid
 	{
+
+        none,
 		/// <summary>
 		/// 
 		/// </summary>
