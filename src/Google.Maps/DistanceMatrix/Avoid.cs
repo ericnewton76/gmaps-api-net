@@ -14,6 +14,11 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// 
 		/// </summary>
+		none,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		highways,
 
 		/// <summary>
