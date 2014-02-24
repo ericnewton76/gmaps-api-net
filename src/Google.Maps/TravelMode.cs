@@ -24,6 +24,12 @@ namespace Google.Maps
 		/// <summary>
 		/// requests bicycling directions via bicycle paths & preferred streets (currently only available in the US).
 		/// </summary>
-		bicycling
+		bicycling,
+
+        /// <summary>
+        ///  requests directions via public transit routes (where available).
+        ///  If you set the mode to "transit" you must also specify either a departure_time or an arrival_time.
+        /// </summary>
+        transit
 	}
 }
