@@ -113,6 +113,9 @@
     <Compile Include="GoogleSigned.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IGoogleService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Internal\ConvertUtil.cs" />
     <Compile Include="Internal\Http.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />

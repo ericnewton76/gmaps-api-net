@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace Google.Maps.Geocoding
 {
@@ -27,7 +28,7 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService
+    public class GeocodingService : IGoogleService<GeocodingRequest, GeocodeResponse>
 	{
 		#region Http/Https Uris and Constructors
 
@@ -47,16 +48,16 @@ namespace Google.Maps.Geocoding
 		#endregion
 
 		/// <summary>
-		/// Sends the specified request to the Google Maps Geocoding web
-		/// service and parses the response as an GeocodingResponse
-		/// object.
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		public GeocodeResponse GetResponse(GeocodingRequest request)
-		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<GeocodeResponse>();
-		}
-	}
+        /// Sends the specified request to the Google Maps Geocoding web
+        /// service and parses the response as an GeocodingResponse
+        /// object in an asynchronous operation.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<GeocodeResponse> GetResponseAsync(GeocodingRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return await Internal.Http.Get(url).AsAsync<GeocodeResponse>();
+        }
+    }
 }

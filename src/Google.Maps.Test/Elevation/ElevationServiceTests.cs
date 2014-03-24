@@ -40,7 +40,7 @@ namespace Google.Maps.Test.Elevation
 
 		[Test]
 		[Ignore("Tolerances problem")]
-		public void GetElevationForOneLocation()
+		public async void GetElevationForOneLocation()
 		{
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
@@ -53,7 +53,7 @@ namespace Google.Maps.Test.Elevation
 
 			request.AddLocations(expectedLocation);
 			request.Sensor = false;
-			var response = new ElevationService().GetResponse(request);
+            var response = await new ElevationService().GetResponseAsync(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
@@ -66,7 +66,7 @@ namespace Google.Maps.Test.Elevation
 
 		[Test]
 		[Ignore("Tolerances problem")]
-		public void GetElevationForTwoLocations()
+        public async void GetElevationForTwoLocations()
 		{
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
@@ -82,7 +82,7 @@ namespace Google.Maps.Test.Elevation
 
 			request.AddLocations(expectedLocation1, expectedLocation2);
 			request.Sensor = false;
-			var response = new ElevationService().GetResponse(request);
+            var response = await new ElevationService().GetResponseAsync(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);

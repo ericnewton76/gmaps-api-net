@@ -19,12 +19,12 @@ namespace Google.Maps.Test
 	{
 
 		[Test]
-		public void GeocodingRequest_Example()
+		public async void GeocodingRequest_Example()
 		{
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway";
 			request.Sensor = false;
-			var response = new GeocodingService().GetResponse(request);
+			var response = await new GeocodingService().GetResponseAsync(request);
 
 			// --break in the online version here-- //
 

@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace Google.Maps.Elevation
 {
@@ -27,7 +28,7 @@ namespace Google.Maps.Elevation
 	/// using the four nearest locations.
 	/// </summary>
 	/// <see cref="http://code.google.com/apis/maps/documentation/elevation/"/>
-	public class ElevationService
+	public class ElevationService : IGoogleService<ElevationRequest, ElevationResponse>
 	{
 		#region Http/Https Uris and Constructors
 
@@ -46,16 +47,16 @@ namespace Google.Maps.Elevation
 		#endregion
 
 		/// <summary>
-		/// Sends the specified request to the Google Maps Elevation web
-		/// service and parses the response as an ElevationResponse
-		/// object.
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		public ElevationResponse GetResponse(ElevationRequest request)
-		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<ElevationResponse>();
-		}
-	}
+        /// Sends the specified request to the Google Maps Elevation web
+        /// service and parses the response as an ElevationResponse
+        /// object.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<ElevationResponse> GetResponseAsync(ElevationRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return await Internal.Http.Get(url).AsAsync<ElevationResponse>();
+        }
+    }
 }

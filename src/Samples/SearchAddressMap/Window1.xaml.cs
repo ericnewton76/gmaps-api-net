@@ -46,12 +46,12 @@ namespace SearchAddressMap
 			MessageBox.Show(e.ErrorException.Message, "Couldn't retrieve map");
 		}
 
-		private void searchButton_Click(object sender, RoutedEventArgs e)
+		private async void searchButton_Click(object sender, RoutedEventArgs e)
 		{
 			var request = new GeocodingRequest();
 			request.Address = searchTextBox.Text;
 			request.Sensor = false;
-			var response = new GeocodingService().GetResponse(request);
+			var response = await new GeocodingService().GetResponseAsync(request);
 
 			if (response.Status == ServiceResponseStatus.Ok)
 			{

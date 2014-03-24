@@ -41,7 +41,7 @@ namespace Google.Maps.Test
 		}
 
 		[Test]
-		public void Signed_GeocodingRequest_Works()
+		public async void Signed_GeocodingRequest_Works()
 		{
 			var request = new GeocodingRequest
 			{
@@ -50,7 +50,7 @@ namespace Google.Maps.Test
 			};
 
 			GoogleSigned.AssignAllServices(GetRealSigningInstance());
-			var response = new GeocodingService().GetResponse(request);
+            var response = await new GeocodingService().GetResponseAsync(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}

@@ -15,41 +15,31 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Threading.Tasks;
 
-namespace Google.Maps.Direction
+namespace Google.Maps
 {
-	/// <summary>
-	/// 
-	/// 
-	/// 
-	/// </summary>
-	/// <see cref=""/>
-    public class DirectionService : IGoogleService<DirectionRequest, DirectionResponse>
-	{
-		#region Http/Https Uris and Constructors
+    interface IGoogleService<TRequest, TResponse>
+    {
+        Uri BaseUri { get; set; }
+        //TResponse GetResponse(TRequest request);
+        Task<TResponse> GetResponseAsync(TRequest request);
+    }
 
-		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/directions/");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/directions/");
+    /*public abstract class MapsService<TRequest, TResponse> where TResponse : class
+    {
+        public Uri BaseUri { get; set; }
 
-		public Uri BaseUri { get; set; }
-
-		public DirectionService() : this(HttpUri)
-		{
-		}
-		public DirectionService(Uri baseUri)
-		{
-			this.BaseUri = HttpsUri;
-		}
-		#endregion
-
-		public async Task<DirectionResponse> GetResponseAsync(DirectionRequest request)
+        public virtual TResponse GetResponse(TRequest request)
         {
             var url = new Uri(this.BaseUri, request.ToUri());
-            return await Internal.Http.Get(url).AsAsync<DirectionResponse>();
+            return Internal.Http.Get(url).As<TResponse>();
         }
-    }
+
+        public virtual async Task<TResponse> GetResponseAsync(TRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return await Internal.Http.Get(url).AsAsync<TResponse>();
+        }
+    }*/
 }

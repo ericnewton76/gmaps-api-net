@@ -1,18 +1,22 @@
-﻿using System;
+﻿using Google.Maps;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Google.Maps;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 
 namespace Google.Maps.Direction
 {
 	public class DirectionRequest
-	{
+    {
+        private List<Location> _waypoints;
+
 		/// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
 		/// </summary>
 		public Location Origin { get; set; }
-		/// <summary>
+		
+        /// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
 		/// </summary>
 		public Location Destination { get; set; }
@@ -40,13 +44,11 @@ namespace Google.Maps.Direction
 		/// </summary>
 		public bool? Sensor { get; set; }
 
-		private List<Location> _waypoints;
 		public IEnumerable<Location> Waypoints
 		{
 			get
 			{
-				if (_waypoints == null) return new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
-				return (IEnumerable<Location>)_waypoints;
+				return (_waypoints ?? new List<Location>()); //may use a static readonly empty list instead of creating one everytime.
 			}
 			set
 			{
@@ -81,7 +83,7 @@ namespace Google.Maps.Direction
 
 		internal string WaypointsToUri()
 		{
-			if (this._waypoints == null || this._waypoints.Count == 0) return null;
+			if (this._waypoints == null || this._waypoints.Any()) return null;
 
 			StringBuilder sb = new StringBuilder();
 
@@ -116,6 +118,5 @@ namespace Google.Maps.Direction
 		{
 			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
-
 	}
 }
