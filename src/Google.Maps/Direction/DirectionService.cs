@@ -46,6 +46,12 @@ namespace Google.Maps.Direction
 		}
 		#endregion
 
+        public DirectionResponse GetResponse(DirectionRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return Internal.Http.Get(url).As<DirectionResponse>();
+        }
+
 		public async Task<DirectionResponse> GetResponseAsync(DirectionRequest request)
         {
             var url = new Uri(this.BaseUri, request.ToUri());

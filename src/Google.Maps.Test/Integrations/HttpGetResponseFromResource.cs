@@ -51,7 +51,7 @@ Ensure a file exists at that resource path and the file has its Build Action set
 		}
 	}
 
-	public class HttpGetResponseFromResourceFactory : Google.Maps.Internal.Http.HttpGetResponseFactory
+    public class HttpGetResponseFromResourceFactory : Google.Maps.Internal.Http.HttpGetResponseFactory
 	{
 		public HttpGetResponseFromResourceFactory(string baseResourcePath)
 		{
@@ -62,7 +62,7 @@ Ensure a file exists at that resource path and the file has its Build Action set
 
 		public override Internal.Http.HttpGetResponse CreateResponse(Uri uri)
 		{
-			return new HttpGetResponseFromResource(uri) { BaseResourcePath = this.BaseResourcePath };
+            return new HttpGetResponseFromResource(uri) { BaseResourcePath = this.BaseResourcePath };
 		}
 	}
 }

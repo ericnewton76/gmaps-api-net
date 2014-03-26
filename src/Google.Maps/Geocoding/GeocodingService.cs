@@ -45,9 +45,22 @@ namespace Google.Maps.Geocoding
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
+        #endregion
 
-		/// <summary>
+        /// <summary>
+        /// Sends the specified request to the Google Maps Geocoding web
+        /// service and parses the response as an GeocodingResponse
+        /// object in an asynchronous operation.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public GeocodeResponse GetResponse(GeocodingRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return Internal.Http.Get(url).As<GeocodeResponse>();
+        }
+
+        /// <summary>
         /// Sends the specified request to the Google Maps Geocoding web
         /// service and parses the response as an GeocodingResponse
         /// object in an asynchronous operation.

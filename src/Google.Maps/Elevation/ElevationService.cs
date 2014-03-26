@@ -46,7 +46,20 @@ namespace Google.Maps.Elevation
 		}
 		#endregion
 
-		/// <summary>
+        /// <summary>
+        /// Sends the specified request to the Google Maps Elevation web
+        /// service and parses the response as an ElevationResponse
+        /// object.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ElevationResponse GetResponse(ElevationRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return Internal.Http.Get(url).As<ElevationResponse>();
+        }
+
+        /// <summary>
         /// Sends the specified request to the Google Maps Elevation web
         /// service and parses the response as an ElevationResponse
         /// object.

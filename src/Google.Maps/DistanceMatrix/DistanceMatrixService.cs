@@ -44,7 +44,13 @@ namespace Google.Maps.DistanceMatrix
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
+        #endregion
+
+        public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return Internal.Http.Get(url).As<DistanceMatrixResponse>();
+        }
 
 		public async Task<DistanceMatrixResponse> GetResponseAsync(DistanceMatrixRequest request)
         {

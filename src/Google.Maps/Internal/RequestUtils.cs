@@ -7,7 +7,6 @@ namespace Google.Maps.Internal
 {
 	internal static class RequestUtils
 	{
-
 		public static string GetLatLngCollectionStr(IEnumerable<LatLng> locationsCollection, int encodedPolylineThreshold = 3)
 		{
 			if (locationsCollection == null) return null;
@@ -29,6 +28,5 @@ namespace Google.Maps.Internal
 				return sb.ToString();
 			}
 		}
-
 	}
 }
