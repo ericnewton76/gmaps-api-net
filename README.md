@@ -11,7 +11,7 @@ PS> Install-Package gmaps-api-net
 ```
 
 ## Overview
-This project intends to provide all the features available in the Google Maps API up to v3.7. It is being developed in C# for .NET Framework 3.5.
+This project intends to provide all the features available in the Google Maps API up to v3.7. It is being developed in C# for .NET Framework 4.5.
 
 * Please note that this project is still in design and development phase; the libraries may suffer major changes even at the interface level, so don't rely (yet) in this software for production uses. *
 
