@@ -32,7 +32,7 @@ namespace Google.Maps.Test.Geocoding
 	public class LiveGeocodingTests
 	{
 		[Test]
-		public void Geocode_With_AddressComponent_Locking()
+		public async void Geocode_With_AddressComponent_Locking()
 		{
 			var requestGB = new GeocodingRequest
 			{
@@ -48,8 +48,8 @@ namespace Google.Maps.Test.Geocoding
 				Components = "country:US"
 			};
 
-			var responseGB = new GeocodingService().GetResponse(requestGB);
-			var responseUS = new GeocodingService().GetResponse(requestUS);
+			var responseGB = await new GeocodingService().GetResponseAsync(requestGB);
+            var responseUS = await new GeocodingService().GetResponseAsync(requestUS);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, responseGB.Status);
 			Assert.AreEqual(ServiceResponseStatus.Ok, responseUS.Status);
@@ -66,7 +66,7 @@ namespace Google.Maps.Test.Geocoding
 		}
 
 		[Test]
-		public void Geocode_Without_AddressComponent_Locking()
+        public async void Geocode_Without_AddressComponent_Locking()
 		{
 			var request = new GeocodingRequest
 			{
@@ -74,7 +74,7 @@ namespace Google.Maps.Test.Geocoding
 				Sensor = false
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+            var response = await new GeocodingService().GetResponseAsync(request);
 
 			foreach (var r in response.Results)
 			{
@@ -83,7 +83,7 @@ namespace Google.Maps.Test.Geocoding
 		}
 
 		[Test]
-		public void GeocodeResult_Has_BoundsProperty()
+        public async void GeocodeResult_Has_BoundsProperty()
 		{
 			var request = new GeocodingRequest
 			{
@@ -91,7 +91,7 @@ namespace Google.Maps.Test.Geocoding
 				Sensor = false
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+            var response = await new GeocodingService().GetResponseAsync(request);
 
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds);
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds.Southwest);
@@ -99,7 +99,7 @@ namespace Google.Maps.Test.Geocoding
 		}
 
 		[Test]
-		public void GeocodeResult_Supports_PostalTownAndPostalCodePrefix()
+        public async void GeocodeResult_Supports_PostalTownAndPostalCodePrefix()
 		{
 			var request = new GeocodingRequest
 			{
@@ -107,7 +107,7 @@ namespace Google.Maps.Test.Geocoding
 				Sensor = false
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+            var response = await new GeocodingService().GetResponseAsync(request);
 
 			var postalTown = response.Results[0].AddressComponents.First(x => x.ShortName == "Melton Mowbray");
 			Assert.IsFalse(postalTown.Types.Contains(AddressType.Unknown), postalTown.ShortName + " should be AddressType PostalTown");

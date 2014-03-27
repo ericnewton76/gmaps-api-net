@@ -75,7 +75,7 @@ namespace Google.Maps.Test.Integrations
 		#endregion
 
 		[Test]
-		public void Empty_address()
+        public async void Empty_address()
 		{
 			// expectations
 			var expectedStatus = ServiceResponseStatus.ZeroResults;
@@ -84,14 +84,14 @@ namespace Google.Maps.Test.Integrations
 			var request = new DirectionRequest();
 			request.Sensor = false;
 			request.Origin = "";
-			var response = new DirectionService().GetResponse(request);
+            var response = await new DirectionService().GetResponseAsync(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
 		}
 
 		[Test]
-		public void GetResultForDirections_ex1()
+        public async void GetResultForDirections_ex1()
 		{
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
@@ -120,8 +120,8 @@ namespace Google.Maps.Test.Integrations
 			request.Origin = "Toronto";
 			request.Destination = "Montreal";
 			request.Sensor = false;
-			
-			var response = new DirectionService().GetResponse(request);
+
+            var response = await new DirectionService().GetResponseAsync(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status, "Status");

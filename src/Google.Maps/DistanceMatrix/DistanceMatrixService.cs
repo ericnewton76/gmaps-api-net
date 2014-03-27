@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace Google.Maps.DistanceMatrix
 {
@@ -27,7 +28,7 @@ namespace Google.Maps.DistanceMatrix
 	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
 	/// <see cref="http://developers.google.com/maps/documentation/distancematrix/"/>
-	public class DistanceMatrixService
+	public class DistanceMatrixService : IGoogleService<DistanceMatrixRequest, DistanceMatrixResponse>
 	{
 		#region Http/Https Uris and Constructors
 
@@ -43,12 +44,18 @@ namespace Google.Maps.DistanceMatrix
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
+        #endregion
 
-		public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
-		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<DistanceMatrixResponse>();
-		}
-	}
+        public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return Internal.Http.Get(url).As<DistanceMatrixResponse>();
+        }
+
+		public async Task<DistanceMatrixResponse> GetResponseAsync(DistanceMatrixRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return await Internal.Http.Get(url).AsAsync<DistanceMatrixResponse>();
+        }
+    }
 }

@@ -74,7 +74,7 @@ namespace Google.Maps.Test.Integrations
 		#endregion
 
 		[Test]
-		public void Empty_address()
+		public async void Empty_address()
 		{
 			// expectations
 			var expectedStatus = ServiceResponseStatus.ZeroResults;
@@ -84,7 +84,7 @@ namespace Google.Maps.Test.Integrations
 			var request = new GeocodingRequest();
 			request.Sensor = false;
 			request.Address = "";
-			var response = new GeocodingService().GetResponse(request);
+            var response = await new GeocodingService().GetResponseAsync(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
@@ -92,7 +92,7 @@ namespace Google.Maps.Test.Integrations
 		}
 
 		[Test]
-		public void GetGeocodingForAddress1()
+		public async void GetGeocodingForAddress1()
 		{
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
@@ -121,7 +121,7 @@ namespace Google.Maps.Test.Integrations
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway Mountain View CA";
 			request.Sensor = false;
-			var response = new GeocodingService().GetResponse(request);
+            var response = await new GeocodingService().GetResponseAsync(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status, "Status");
@@ -142,7 +142,7 @@ namespace Google.Maps.Test.Integrations
 
 
 		[Test]
-		public void GetGeocodingForAddress2()
+		public async void GetGeocodingForAddress2()
 		{
 			// expectations
 			GeocodeResponse expected = new GeocodeResponse()
@@ -176,7 +176,7 @@ namespace Google.Maps.Test.Integrations
 			var request = new GeocodingRequest();
 			request.Address = "11 Wall Street New York NY 10005";
 			request.Sensor = false;
-			var actual = new GeocodingService().GetResponse(request);
+            var actual = await new GeocodingService().GetResponseAsync(request);
 
 			// asserts
 			Assert.AreEqual(expected.Status, actual.Status, "Status");

@@ -11,7 +11,7 @@ PS> Install-Package gmaps-api-net
 ```
 
 ## Overview
-This project intends to provide all the features available in the Google Maps API up to v3.7. It is being developed in C# for .NET Framework 3.5.
+This project intends to provide all the features available in the Google Maps API up to v3.7. It is being developed in C# for .NET Framework 4.5.
 
 * Please note that this project is still in design and development phase; the libraries may suffer major changes even at the interface level, so don't rely (yet) in this software for production uses. *
 
@@ -40,7 +40,7 @@ Let's suppose we want to search an address and get more information about it. We
 var request = new GeocodingRequest();
 request.Address = "1600 Amphitheatre Parkway";
 request.Sensor = false;
-var response = new GeocodingService().GetResponse(request);
+var response = await new GeocodingService().GetResponseAsync(request);
 ```
 
 The 'GeocodingService' class submits the request to the API web service, and returns 
@@ -73,7 +73,7 @@ var imgTagSrc = map.ToUri();
 GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
 // Then do as many requests as you like...
 var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
-var response = GeocodingService.GetResponse(request);
+var response = await GeocodingService.GetResponseAsync(request);
 ```
 
 

@@ -8,8 +8,6 @@ namespace Google.Maps.Internal
 {
 	internal static class ConvertUtil
 	{
-
-
 		public static bool TryCast<Tfrom, Tto>(IEnumerable<Tfrom> collection, out IEnumerable<Tto> convertedCollection) where Tto : class
 		{
 			IEnumerator collectionEnumerator = collection.GetEnumerator();
