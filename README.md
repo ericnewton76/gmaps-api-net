@@ -69,6 +69,9 @@ var imgTagSrc = map.ToUri();
 ```
 
 ### Using a Google Maps for Business key
+Both Business Key and also standard api key's are supported and sample illustrate it's use below:
+
+Business Key:
 ```c#
 GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
 // Then do as many requests as you like...
@@ -76,6 +79,13 @@ var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor
 var response = GeocodingService.GetResponse(request);
 ```
 
+API Key:
+```c#
+GoogleSigned.AssignAllServices(new GoogleSigned("your-api-key"));
+// Then do as many requests as you like...
+var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
+var response = GeocodingService.GetResponse(request);
+```
 
 ## Project Roadmap
 The roadmap has changed a little with changing of hands, but the basic premise is the same.  
