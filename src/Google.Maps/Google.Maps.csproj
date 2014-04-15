@@ -63,9 +63,9 @@
     <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net35\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -117,7 +117,16 @@
     <Compile Include="MapTypes.cs" />
     <Compile Include="MarkerSizes.cs" />
     <Compile Include="Path.cs" />
+    <Compile Include="Places\NearbySearchRequest.cs" />
+    <Compile Include="Places\PlacesRequest.cs" />
+    <Compile Include="Places\PlacesResponse.cs" />
+    <Compile Include="Places\PlacesResult.cs" />
+    <Compile Include="Places\PlacesService.cs" />
+    <Compile Include="Places\PlaceType.cs" />
+    <Compile Include="Places\RadarSearchRequest.cs" />
+    <Compile Include="Places\TextSearchRequest.cs" />
     <Compile Include="PolylineEncoder.cs" />
+    <Compile Include="RankBy.cs" />
     <Compile Include="ServiceResponseStatus.cs" />
     <Compile Include="Geocoding\GeocodingService.cs" />
     <Compile Include="JsonEnumTypeConverter.cs" />
