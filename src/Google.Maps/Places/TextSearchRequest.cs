@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Linq;
 
 namespace Google.Maps.Places
 {
@@ -42,6 +43,11 @@ namespace Google.Maps.Places
             qsb.Append("query", Query.ToLowerInvariant())
                .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
 
+            if (Location != null)
+            {
+                qsb.Append("location", Location.GetAsUrlParameter());
+            }
+
             if (Radius.HasValue)
             {
                 qsb.Append("radius", Radius.Value.ToString());
@@ -65,6 +71,11 @@ namespace Google.Maps.Places
             if (OpenNow.HasValue)
             {
                 qsb.Append("opennow", OpenNow.Value.ToString().ToLowerInvariant());
+            }
+
+            if ((Types != null && Types.Any()))
+            {
+                qsb.Append("types", TypesToUri());
             }
 
             if (ZagatSelected)
