@@ -65,16 +65,6 @@ namespace Google.Maps.Places
                 qsb.Append("keyword", Keyword.ToString().ToLowerInvariant());
             }
 
-            if (!string.IsNullOrEmpty(Name))
-            {
-                qsb.Append("name", Name.ToString().ToLowerInvariant());
-            }
-
-            if ((Types != null && Types.Any()))
-            {
-                qsb.Append("types", TypesToUri());
-            }
-
             if (Minprice.HasValue)
             {
                 qsb.Append("minprice", Minprice.Value.ToString());
@@ -85,9 +75,19 @@ namespace Google.Maps.Places
                 qsb.Append("maxprice", Maxprice.Value.ToString());
             }
 
+            if (!string.IsNullOrEmpty(Name))
+            {
+                qsb.Append("name", Name.ToString().ToLowerInvariant());
+            }
+
             if (OpenNow.HasValue)
             {
                 qsb.Append("opennow", OpenNow.Value.ToString().ToLowerInvariant());
+            }
+
+            if ((Types != null && Types.Any()))
+            {
+                qsb.Append("types", TypesToUri());
             }
 
             if (ZagatSelected)
