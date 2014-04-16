@@ -16,12 +16,15 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Google.Maps.Places
 {
+    /// <summary>
+    /// A Nearby Search lets you search for Places within a specified area.
+    /// You can refine your search request by supplying keywords or 
+    /// specifying the type of Place you are searching for
+    /// </summary>
     public class NearbySearchRequest : PlacesRequest
     {
         /// <summary>

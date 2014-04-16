@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Google.Maps.Places
 {
     /// <summary>
-    /// Provides a direct way to query for place information using the Google Places API.
+    /// The Google Places API allows you to query for place information 
+    /// on a variety of categories, such as: establishments, prominent 
+    /// points of interest, geographic locations, and more. You can search 
+    /// for places either by proximity or a text string.
     /// </summary>
     public class PlacesService
     {
@@ -53,7 +53,6 @@ namespace Google.Maps.Places
         public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
         {
             var url = new Uri(this.BaseUri, request.ToUri());
-            //var stringResp = Internal.Http.Get(url).AsString();
             return Internal.Http.Get(url).As<PlacesResponse>();
         }
     }
