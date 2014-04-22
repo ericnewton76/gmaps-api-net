@@ -20,7 +20,7 @@ using System.Linq;
 
 namespace Google.Maps.Places
 {
-    public abstract class PlacesRequest
+    public abstract class PlacesRequest : BaseRequest
     {
         /// <summary>
         /// Indicates whether or not the place request comes from a device
@@ -85,8 +85,6 @@ namespace Google.Maps.Places
         /// </summary>
         public int? Radius { get; set; }
         
-        internal abstract Uri ToUri();
-
         protected virtual void ValidateRequest()
         {
             if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");

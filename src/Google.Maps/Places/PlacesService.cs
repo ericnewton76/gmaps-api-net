@@ -55,5 +55,18 @@ namespace Google.Maps.Places
             var url = new Uri(this.BaseUri, request.ToUri());
             return Internal.Http.Get(url).As<PlacesResponse>();
         }
+
+        /// <summary>
+        /// Sends the specified request to the Google Maps Places Autocomplate web
+        /// service and parses the response as an AutocompleteResponse
+        /// object.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public AutocompleteResponse GetAutocompleteResponse(AutocompleteRequest request)
+        {
+            var url = new Uri(this.BaseUri, request.ToUri());
+            return Internal.Http.Get(url).As<AutocompleteResponse>();
+        }
     }
 }

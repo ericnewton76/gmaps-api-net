@@ -75,6 +75,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRequest.cs" />
     <Compile Include="BaseSigningService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
@@ -117,6 +118,9 @@
     <Compile Include="MapTypes.cs" />
     <Compile Include="MarkerSizes.cs" />
     <Compile Include="Path.cs" />
+    <Compile Include="Places\AutocompleteRequest.cs" />
+    <Compile Include="Places\AutocompleteResponse.cs" />
+    <Compile Include="Places\AutocompleteResult.cs" />
     <Compile Include="Places\NearbySearchRequest.cs" />
     <Compile Include="Places\PlacesRequest.cs" />
     <Compile Include="Places\PlacesResponse.cs" />
