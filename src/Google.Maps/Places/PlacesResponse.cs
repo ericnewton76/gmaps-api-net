@@ -21,9 +21,21 @@ namespace Google.Maps.Places
 {
     public class PlacesResponse
     {
+        /// <summary>
+        /// Contains the ServiceResponseStatus.
+        /// </summary>
         [JsonProperty("status")]
         public ServiceResponseStatus Status { get; set; }
 
+        /// <summary>
+        /// Contains the error returned from the API, if any.
+        /// </summary>
+        [JsonProperty("error_message")]
+        public string ErrorMessage { get; set; }
+
+        /// <summary>
+        /// The results returned from the API, if any.
+        /// </summary>
         [JsonProperty("results")]
         public PlacesResult[] Results { get; set; }
     }
