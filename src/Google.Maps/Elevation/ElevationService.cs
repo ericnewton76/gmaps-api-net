@@ -27,7 +27,7 @@ namespace Google.Maps.Elevation
 	/// using the four nearest locations.
 	/// </summary>
 	/// <see cref="http://code.google.com/apis/maps/documentation/elevation/"/>
-	public class ElevationService
+	public class ElevationService : ApiService
 	{
 		#region Http/Https Uris and Constructors
 
@@ -52,10 +52,17 @@ namespace Google.Maps.Elevation
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
-		public ElevationResponse GetResponse(ElevationRequest request)
-		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<ElevationResponse>();
-		}
+        public ElevationResponse GetResponse(ElevationRequest request)
+        {
+            var httpResponse = GetHttpResponse(request);
+            var geoCoderResponse = httpResponse.As<ElevationResponse>();
+
+            if (httpResponse.FromCache && geoCoderResponse.Status != ServiceResponseStatus.Ok)
+            {
+                httpResponse = GetHttpResponse(request, true);
+                geoCoderResponse = httpResponse.As<ElevationResponse>();
+            }
+            return geoCoderResponse;
+        }
 	}
 }

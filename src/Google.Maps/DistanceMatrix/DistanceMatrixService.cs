@@ -27,7 +27,7 @@ namespace Google.Maps.DistanceMatrix
 	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
 	/// <see cref="http://developers.google.com/maps/documentation/distancematrix/"/>
-	public class DistanceMatrixService
+	public class DistanceMatrixService : ApiService
 	{
 		#region Http/Https Uris and Constructors
 
@@ -45,10 +45,25 @@ namespace Google.Maps.DistanceMatrix
 		}
 		#endregion
 
-		public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
-		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<DistanceMatrixResponse>();
-		}
+        /// <summary>
+        /// Sends the specified request to the Google Maps DistanceMatrix web
+        /// service and parses the response as an DistanceMatrixResponse
+        /// object.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// 
+        public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
+        {
+            var httpResponse = GetHttpResponse(request);
+            var geoCoderResponse = httpResponse.As<DistanceMatrixResponse>();
+
+            if (httpResponse.FromCache && geoCoderResponse.Status != ServiceResponseStatus.Ok)
+            {
+                httpResponse = GetHttpResponse(request, true);
+                geoCoderResponse = httpResponse.As<DistanceMatrixResponse>();
+            }
+            return geoCoderResponse;
+        }
 	}
 }

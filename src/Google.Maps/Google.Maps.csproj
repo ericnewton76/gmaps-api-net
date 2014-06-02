@@ -75,6 +75,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiRequest.cs" />
+    <Compile Include="ApiService.cs" />
     <Compile Include="BaseSigningService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
@@ -103,7 +105,9 @@
     <Compile Include="GoogleSigned.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Internal\CachedHttpGetResponse.cs" />
     <Compile Include="Internal\ConvertUtil.cs" />
+    <Compile Include="Internal\HttpGetResponse.cs" />
     <Compile Include="Internal\Http.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />
     <Compile Include="Internal\RequestUtils.cs" />

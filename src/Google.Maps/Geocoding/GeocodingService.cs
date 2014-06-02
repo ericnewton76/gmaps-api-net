@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 
+
 namespace Google.Maps.Geocoding
 {
 	/// <summary>
@@ -27,14 +28,14 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService
+	public class GeocodingService : ApiService
 	{
 		#region Http/Https Uris and Constructors
 
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
 
-		public Uri BaseUri { get; set; }
+		
 
 		public GeocodingService() : this(HttpsUri)
 		{
@@ -53,10 +54,19 @@ namespace Google.Maps.Geocoding
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
+        /// 
 		public GeocodeResponse GetResponse(GeocodingRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<GeocodeResponse>();
+            var httpResponse = GetHttpResponse(request);
+            var geoCoderResponse = httpResponse.As<GeocodeResponse>();
+
+            if (httpResponse.FromCache && geoCoderResponse.Status != ServiceResponseStatus.Ok)
+            {
+                httpResponse = GetHttpResponse(request, true);
+                geoCoderResponse = httpResponse.As<GeocodeResponse>();
+            }
+            return geoCoderResponse;
 		}
+
 	}
 }

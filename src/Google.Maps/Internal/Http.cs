@@ -18,6 +18,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Google.Maps.Internal
@@ -27,64 +28,21 @@ namespace Google.Maps.Internal
 	/// </summary>
 	public static class Http
 	{
-		public class HttpGetResponse
+	    /// <summary>
+	    /// How old can a cached response be at max?
+	    /// </summary>
+	    public static TimeSpan DefaultCacheLifeTime = TimeSpan.FromDays(1);
+
+
+	    /// <summary>
+	    /// Get the 
+	    /// </summary>
+	    /// <param name="uri"></param>
+	    /// <param name="forceNoCache"></param>
+	    /// <returns></returns>
+	    public static HttpGetResponse Get(Uri uri, bool forceNoCache = false)
 		{
-			protected Uri RequestUri { get; set; }
-
-			public HttpGetResponse(Uri uri)
-			{
-				RequestUri = uri;
-			}
-
-			protected virtual StreamReader GetStreamReader(Uri uri)
-			{
-				return GetStreamReader(uri, GoogleSigned.SigningInstance);
-			}
-			protected virtual StreamReader GetStreamReader(Uri uri, GoogleSigned signingInstance)
-			{
-				if (signingInstance != null)
-				{
-					uri = new Uri(signingInstance.GetSignedUri(uri));
-				}
-
-				WebResponse response = WebRequest.Create(uri).GetResponse();
-
-				StreamReader sr = new StreamReader(response.GetResponseStream());
-				return sr;
-			}
-
-			public virtual string AsString()
-			{
-				var output = String.Empty;
-
-				using (var reader = GetStreamReader(this.RequestUri))
-				{
-					output = reader.ReadToEnd();
-				}
-
-				return output;
-			}
-
-			public virtual T As<T>() where T : class
-			{
-				T output = null;
-
-				using (var reader = GetStreamReader(this.RequestUri))
-				{
-					JsonTextReader jsonReader = new JsonTextReader(reader);
-					JsonSerializer serializer = new JsonSerializer();
-					serializer.Converters.Add(new JsonEnumTypeConverter());
-					serializer.Converters.Add(new JsonLocationConverter());
-					output = serializer.Deserialize<T>(jsonReader);
-				}
-
-				return output;
-			}
-		}
-
-		public static HttpGetResponse Get(Uri uri)
-		{
-			return Factory.CreateResponse(uri);
+            return Factory.CreateResponse(uri, forceNoCache);
 		}
 
 		/// <summary>
@@ -92,19 +50,22 @@ namespace Google.Maps.Internal
 		/// </summary>
 		public static HttpGetResponseFactory Factory = new HttpGetResponseFactory();
 
+
 		/// <summary>
 		/// A factory class for building HttpGetResponse instances.
 		/// </summary>
 		public class HttpGetResponseFactory
 		{
-			/// <summary>
-			/// Builds a standard HttpGetResponse instance.
-			/// </summary>
-			/// <param name="uri"></param>
-			/// <returns></returns>
-			public virtual HttpGetResponse CreateResponse(Uri uri)
+
+		    /// <summary>
+		    /// Builds a standard HttpGetResponse instance.
+		    /// </summary>
+		    /// <param name="uri"></param>
+		    /// <param name="forceNoCache"></param>
+		    /// <returns></returns>
+		    public virtual HttpGetResponse CreateResponse(Uri uri, bool forceNoCache = false)
 			{
-				return new HttpGetResponse(uri);
+                return new CachedHttpGetResponse(uri, forceNoCache);
 			}
 		}
 
