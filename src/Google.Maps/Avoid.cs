@@ -7,28 +7,28 @@ namespace Google.Maps
 	/// Restrictions are indicated by use of the avoid parameter, and an 
 	/// argument to that parameter indicating the restriction to avoid.
 	/// </summary>
-    [Flags]
-    public enum Avoid
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        none = 0,
+		[Flags]
+		public enum Avoid
+		{
+				/// <summary>
+				/// 
+				/// </summary>
+				none = 0,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        highways = 1,
+				/// <summary>
+				/// 
+				/// </summary>
+				highways = 1,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        tolls = 2,
+				/// <summary>
+				/// 
+				/// </summary>
+				tolls = 2,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        ferries = 4
+				/// <summary>
+				/// 
+				/// </summary>
+				ferries = 4
 
-    }
+		}
 }

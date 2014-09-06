@@ -41,7 +41,7 @@ namespace Google.Maps.Direction
 		}
 		public DirectionService(Uri baseUri)
 		{
-      this.BaseUri = baseUri;
+		  this.BaseUri = baseUri;
 		}
 		#endregion
 
