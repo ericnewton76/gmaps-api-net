@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Google.Maps;
 using System.Text;
 
@@ -35,7 +36,8 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// (optional) Directions may be calculated that adhere to certain restrictions.
 		/// </summary>
-		public Avoid Avoid { get; set; }
+        [DefaultValue(Avoid.none)]
+        public Avoid Avoid { get; set; }
 
 		/// <summary>
 		///  (optional) Specifies the unit system to use when expressing distance as text.
@@ -154,7 +156,7 @@ namespace Google.Maps.DistanceMatrix
 				.Append("language", Language)
 				.Append("units", Units.ToString())
 				.Append("sensor", (Sensor.Value ? "true" : "false"))
-				.Append("avoid", Avoid.ToString());
+		        .Append("avoid", AvoidHelper.MakeAvoidString(Avoid));
 
 			var url = "json?" + qsb.ToString();
 
