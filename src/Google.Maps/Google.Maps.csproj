@@ -75,6 +75,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Avoid.cs" />
+    <Compile Include="AvoidHelper.cs" />
     <Compile Include="BaseSigningService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
@@ -84,7 +86,6 @@
     <Compile Include="Direction\DirectionService.cs" />
     <Compile Include="Direction\DirectionStep.cs" />
     <Compile Include="Direction\Polyline.cs" />
-    <Compile Include="DistanceMatrix\Avoid.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixRequest.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixResponse.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixResponseStatus.cs" />

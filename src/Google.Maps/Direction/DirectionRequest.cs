@@ -24,6 +24,18 @@ namespace Google.Maps.Direction
 		[DefaultValue(TravelMode.driving)]
 		public TravelMode Mode { get; set; }
 
+		/// <summary>
+		/// (optional) Directions may be calculated that adhere to certain restrictions.
+		/// </summary>
+		[DefaultValue(Avoid.none)]
+		public Avoid Avoid { get; set; }
+
+		/// <summary>
+		/// (optional) If set to true, specifies that the Directions service may provide more than one route alternative in the response. 
+		/// Note that providing route alternatives may increase the response time from the server.
+		/// </summary>
+		public bool? Alternatives { get; set; }
+
 		/// <summary>The region code, specified as a ccTLD ("top-level domain") two-character value. See also Region biasing.</summary>
 		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
 		/// <seealso cref="https://developers.google.com/maps/documentation/directions/#RegionBiasing"/>
@@ -105,7 +117,9 @@ namespace Google.Maps.Direction
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
-				.Append("sensor", Sensor.Value ? "true" : "false");
+				.Append("sensor", Sensor.Value ? "true" : "false")
+				.Append(AvoidHelper.MakeAvoidString(Avoid))
+				.Append("alternatives", Alternatives.HasValue ? (Alternatives.Value ? "true" : "false") : (string)null);
 
 			var url = "json?" + qsb.ToString();
 
