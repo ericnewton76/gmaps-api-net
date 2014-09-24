@@ -1,4 +1,4 @@
-build:
+build_script:
   - build NugetPackage
 
 artifacts:
