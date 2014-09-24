@@ -391,8 +391,6 @@ function Set-AssemblyInfoBuildNumbers(
                   
     foreach( $file in $foundFiles )  
     {     
-        (Get-Content $file) | ForEach-Object {  
-                % {$_ -replace $assemblyPattern, $updatedAssemblyVersion } |                  
-            } | Set-Content $file                                 
+        (Get-Content $file) | % {$_ -replace $assemblyPattern, $updatedAssemblyVersion } | Set-Content $file                                 
     }
 }
