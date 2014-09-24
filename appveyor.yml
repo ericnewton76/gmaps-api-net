@@ -1,0 +1,6 @@
+build:
+  - build NugetPackage
+
+artifacts:
+  - path: Build\NuGet\*.nupkg
+    name: NugetPackages
