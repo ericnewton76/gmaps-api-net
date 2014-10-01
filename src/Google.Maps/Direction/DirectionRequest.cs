@@ -118,7 +118,7 @@ namespace Google.Maps.Direction
 				.Append("region", Region)
 				.Append("language", Language)
 				.Append("sensor", Sensor.Value ? "true" : "false")
-				.Append(AvoidHelper.MakeAvoidString(Avoid))
+				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid))
 				.Append("alternatives", Alternatives.HasValue ? (Alternatives.Value ? "true" : "false") : (string)null);
 
 			var url = "json?" + qsb.ToString();
