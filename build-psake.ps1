@@ -15,7 +15,7 @@ properties {
 	$workingDir = "$baseDir\Build\Working"
 	$nugetBaseDir = "$baseDir\Build\NuGet"
 
-	$buildNumber = $env:APPVEYOR_BUILD_NUMBER #Load-VersionInfo -path "$sourceDir\AssemblyVersion_Master.cs"
+	$buildNumber = $env:APPVEYOR_BUILD_VERSION #Load-VersionInfo -path "$sourceDir\AssemblyVersion_Master.cs"
 	$versionInfo = Get-VersionNumber $buildNumber
 
 	$nuget_executible = "$sourceDir\.nuget\NuGet.exe"
