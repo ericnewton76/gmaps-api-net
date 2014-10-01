@@ -1,6 +1,8 @@
 build_script:
   - build NugetPackage
 
+test: off
+
 artifacts:
   - path: Build\NuGet\*.nupkg
     name: NugetPackages
