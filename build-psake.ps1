@@ -285,7 +285,7 @@ task NugetPackage -depends Test,PrepareNuspecFiles {
 				$nuspecFile = (Join-Path $nugetPackDir $_.Name)
 
 				Write-Host -ForegroundColor DarkCyan "-NuGet pack $_"
-				exec { & $nuget_executible pack $nuspecFile -Symbols -OutputDirectory $nugetPackDir } "Failed during NuGet Pack phase."
+				exec { & $nuget_executible pack $nuspecFile -OutputDirectory $nugetPackDir } "Failed during NuGet Pack phase."
 				Write-Host -ForegroundColor Green "-NuGet pack succeeded. $nuspecFile"
 			}
 			
