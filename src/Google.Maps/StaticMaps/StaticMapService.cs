@@ -68,10 +68,16 @@ namespace Google.Maps.StaticMaps
 		public int GetMapToStream(StaticMapRequest mapOptions, System.IO.Stream outputStream)
 		{
 			Uri requestUri = new Uri(BaseUri, mapOptions.ToUri());
+			GoogleSigned signingInstance = GoogleSigned.SigningInstance;
+			if (signingInstance != null)
+			{
+				requestUri = new Uri(signingInstance.GetSignedUri(requestUri));
+			}
 
 			int totalBytes = 0;
 
 			WebRequest request = WebRequest.Create(requestUri);
+
 			using (WebResponse response = request.GetResponse())
 			{
 				Stream inputStream = response.GetResponseStream();
