@@ -76,7 +76,7 @@ namespace Google.Maps.StaticMaps
 			{
 				Stream inputStream = response.GetResponseStream();
 
-				int bytesRead = 0;
+				int bytesRead = 0; 
 				const int BYTE_BUFFER_LENGTH = 4096;
 				byte[] buffer = new byte[BYTE_BUFFER_LENGTH];
 
@@ -86,7 +86,7 @@ namespace Google.Maps.StaticMaps
 					outputStream.Write(buffer, 0, bytesRead);
 					totalBytes += bytesRead;
 				}
-				while (bytesRead > BYTE_BUFFER_LENGTH);
+				while (bytesRead > 0);
 			}
 
 			return totalBytes;
