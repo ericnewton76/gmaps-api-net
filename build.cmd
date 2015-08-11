@@ -13,4 +13,3 @@ cd ..
 ECHO.
 ECHO.
 powershell -Command "& { Start-Transcript -path "./Build/lastbuild.log"; Import-Module ".\Tools\psake\tools\psake.psm1"; Invoke-psake .\build-psake.ps1 %*; Stop-Transcript; }"
-pause

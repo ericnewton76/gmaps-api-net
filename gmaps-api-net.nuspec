@@ -10,7 +10,7 @@
         <projectUrl>http://github.com/ericnewton76/gmaps-api-net</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A library for interacting with Google Maps API web services using C# or VB.Net</description>
-        <tags>google-maps,maps,c#,google</tags>
+        <tags>google-maps maps c# google</tags>
         <dependencies>
             <dependency id="Newtonsoft.Json" version="4.5" />
         </dependencies>

@@ -75,7 +75,12 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="BaseRequest.cs" />
+=======
+    <Compile Include="Avoid.cs" />
+    <Compile Include="AvoidHelper.cs" />
+>>>>>>> upstream/master
     <Compile Include="BaseSigningService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
@@ -85,7 +90,6 @@
     <Compile Include="Direction\DirectionService.cs" />
     <Compile Include="Direction\DirectionStep.cs" />
     <Compile Include="Direction\Polyline.cs" />
-    <Compile Include="DistanceMatrix\Avoid.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixRequest.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixResponse.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixResponseStatus.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="StaticMaps\StaticMapService.cs" />
     <Compile Include="TravelMode.cs" />
     <Compile Include="Units.cs" />
+    <Compile Include="ViaLatLng.cs" />
     <Compile Include="ViewportComparer.cs">
       <SubType>Code</SubType>
     </Compile>

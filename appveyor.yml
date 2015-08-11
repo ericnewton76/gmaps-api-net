@@ -1,0 +1,13 @@
+build_script:
+  - build NugetPackage
+
+test: off
+
+artifacts:
+  - path: Build\NuGet\*.nupkg
+    name: NugetPackages
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: 2SwDMmXZZtgoLWsldKZ8GCu9rZXpO5quTYtSNJQSeeiqDjnmo0OfutNVcH3jsfpj

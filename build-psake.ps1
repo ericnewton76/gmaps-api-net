@@ -15,13 +15,15 @@ properties {
 	$workingDir = "$baseDir\Build\Working"
 	$nugetBaseDir = "$baseDir\Build\NuGet"
 
-	$versionInfo = Load-VersionInfo -path "$sourceDir\AssemblyVersion_Master.cs"
+	$buildNumber = $env:APPVEYOR_BUILD_VERSION #Load-VersionInfo -path "$sourceDir\AssemblyVersion_Master.cs"
+	$versionInfo = Get-VersionNumber $buildNumber
 
 	$nuget_executible = "$sourceDir\.nuget\NuGet.exe"
 
    $builds = @(
 
 	@{Project="GoogleMapsForNET.sln";	Tests="Google.Maps.Test.csproj"; 	Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
+# @{Project="GoogleMapsForNET.sln";	Tests="Google.Maps.Test.csproj"; 	Constants=""; FinalDir="Net45"; NuGetDir = "net45"; Framework="net-4.5"; Sign=$false}
 #	@{Project="TestingHelpers.csproj";	Tests="TestHelpers.Tests.csproj";	Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
 
 	#when some 4.0 specific things come about:
@@ -103,13 +105,13 @@ task Build -depends Clean,UpdateAssemblyInfoVersions {
 
 task UpdateAssemblyInfoVersions {
 	
-	$assemblyVer = new-object Version($versionInfo.FullString)
-	$fileVer = new-object Version($versionInfo.FullString)
-
-	Write-Host -ForegroundColor DarkCyan "-Updating assembly versions:"
+	Write-Host -ForegroundColor DarkCyan "-Using build version: $buildNumber"
+	
+	
 	Write-Host -ForegroundColor DarkCyan "-AssemblyVersion:     $assemblyVer"
 	Write-Host -ForegroundColor DarkCyan "-AssemblyFileVersion: $fileVer"
-	Update-AssemblyInfoFiles $sourceDir $assemblyVer $fileVer
+	
+	Update-AllAssemblyInfoFiles $versionInfo
 }
 
 # Run tests on deployed files
@@ -227,13 +229,12 @@ task PrepareNuspecFiles {
 				#Write-Verbose ($versionInfo|Out-String)
 				#Write-Verbose $versionInfo.MajorMinorRevision
 				
-				$versionStr = [String]::Concat($versionInfo.MajorMinorRevision,".0")
 				#$versionNodePattern1 = "<version>[0-9]+(\.([0-9]+|\*)){1,3}</version>"
 				$versionNodePattern1 = '<version>$version$</version>'
-				$versionNodeOut = "<version>" + $versionStr + "</version>"
+				$versionNodeOut = "<version>" + $buildNumber + "</version>"
 				Write-Verbose ("-PrepareNugetSpec: Replacing ["+$versionNodePattern1+"] with ["+$versionNodeOut+"]")
 				$versionAttrPattern1 = 'version="$version$"'
-				$versionAttrOut = 'version="' + $versionStr + '"'
+				$versionAttrOut = 'version="' + $buildNumber + '"'
 				Write-Verbose ("-PrepareNugetSpec: Replacing ["+$versionAttrPattern1+"] with ["+$versionAttrOut+"]")
 				
 					(Get-Content $filename) | Foreach-Object {
@@ -243,6 +244,9 @@ task PrepareNuspecFiles {
 
 				Write-Host -ForegroundColor Green "-Updated version(s) in $filename"
 				
+				Write-Host "---------------"
+				cat $filename
+				Write-Host "---------------"
 			}
 		}
 	}
@@ -281,7 +285,7 @@ task NugetPackage -depends Test,PrepareNuspecFiles {
 				$nuspecFile = (Join-Path $nugetPackDir $_.Name)
 
 				Write-Host -ForegroundColor DarkCyan "-NuGet pack $_"
-				exec { & $nuget_executible pack $nuspecFile -Symbols -OutputDirectory $nugetPackDir } "Failed during NuGet Pack phase."
+				exec { & $nuget_executible pack $nuspecFile -OutputDirectory $nugetPackDir } "Failed during NuGet Pack phase."
 				Write-Host -ForegroundColor Green "-NuGet pack succeeded. $nuspecFile"
 			}
 			
@@ -345,54 +349,39 @@ function Load-VersionInfo([string] $path)
 	Return $ver
 }
 
-# Update any (recursively found under $sourceDir) AssemblyInfo.cs files
-function Update-AssemblyInfoFiles ([string] $sourceDir, [string] $assemblyVersionNumber, [string] $fileVersionNumber)
+# a version number is usually missing final revision number
+function Get-VersionNumber ( [string] $version )
 {
-	$assemblyVersionPattern = 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
-	$fileVersionPattern = 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
-	$assemblyVersion = 'AssemblyVersion("' + $assemblyVersionNumber + '")';
-	$fileVersion = 'AssemblyFileVersion("' + $fileVersionNumber + '")';
-
-	Get-ChildItem -Path $sourceDir -r -filter AssemblyInfo.cs | ForEach-Object {
-		$filename = $_.Directory.ToString() + '\' + $_.Name
-
-		(Get-Content $filename) | ForEach-Object {
-			% {$_ -replace $assemblyVersionPattern, $assemblyVersion } |
-			% {$_ -replace $fileVersionPattern, $fileVersion }
-		} | Set-Content $filename
-
-		Write-Host -ForegroundColor Green "-Updated versions in:" $filename
-	}
+   $timespan = ([System.DateTime]::Now - [System.DateTime]::Today)
+   $seconds = [Math]::Truncate($timespan.TotalSeconds / 2)
+   
+   return "$version.$seconds"
 }
 
-#[CmdletBinding()]  
-function Set-AssemblyInfoBuildNumbers(
-	[Parameter(Position=1,Mandatory=$true)] [Version] $version,
-	[Parameter(Position=2,Mandatory=$false)] [string] $fileSpec = ".\*AssemblyInfo.cs",
-	[Parameter(Position=3,Mandatory=$false)] [Version] $fileVersion
-)
-{  
-    $assemblyPattern = "[0-9]+(\.([0-9]+|\*)){1,3}"  
-    $assemblyVersionPattern = 'Assembly(File)?Version\("([0-9]+(\.([0-9]+|\*)){1,3})"\)'  
-      
-    $foundFiles = get-childitem $fileSpec -recurse  
-                         
-    #$rawVersionNumberGroup = get-content $foundFiles | select-string -pattern $assemblyVersionPattern | select -first 1 | % { $_.Matches }              
-    #$rawVersionNumber = $rawVersionNumberGroup.Groups[1].Value  
-                    
-    #$versionParts = $rawVersionNumber.Split('.')  
-    #$versionParts[3] = ([int]$versionParts[3]) + 1  
-    #$updatedAssemblyVersion = "{0}.{1}.{2}.{3}" -f $versionParts[0], $versionParts[1], $versionParts[2], $versionParts[3]  
-	#$updatedAssemblyVersion = "{0}.{1}.{2}.{3}" -f $version.Major, $version.Minor, $version.Revision, $version.Build
-	$updatedAssemblyVersion = $version.ToString()
-      
-    #$assemblyVersion  
-	$regex = new RegEx($assemblyVersionPattern,[RegexOptions]::SingleLine+[RegexOptions]::IgnoreCase)
-                  
-    foreach( $file in $foundFiles )  
-    {     
-        (Get-Content $file) | ForEach-Object {  
-                % {$_ -replace $assemblyPattern, $updatedAssemblyVersion } |                  
-            } | Set-Content $file                                 
-    }
+function Update-SourceVersion
+{
+  Param ([string]$Version)
+  $NewVersion = 'AssemblyVersion("' + $Version + '")';
+  $NewFileVersion = 'AssemblyFileVersion("' + $Version + '")';
+
+  foreach ($o in $input) 
+  {
+    Write-output $o.FullName
+    $TmpFile = $o.FullName + ".tmp"
+
+     get-content $o.FullName | 
+        %{$_ -replace 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)', $NewVersion } |
+        %{$_ -replace 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)', $NewFileVersion }  > $TmpFile
+
+     move-item $TmpFile $o.FullName -force
+  }
+}
+
+
+function Update-AllAssemblyInfoFiles ( $version )
+{
+  foreach ($file in "AssemblyInfo.cs", "AssemblyInfo.vb" ) 
+  {
+    get-childitem -recurse |? {$_.Name -eq $file} | Update-SourceVersion $version ;
+  }
 }

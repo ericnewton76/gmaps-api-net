@@ -68,15 +68,21 @@ namespace Google.Maps.StaticMaps
 		public int GetMapToStream(StaticMapRequest mapOptions, System.IO.Stream outputStream)
 		{
 			Uri requestUri = new Uri(BaseUri, mapOptions.ToUri());
+			GoogleSigned signingInstance = GoogleSigned.SigningInstance;
+			if (signingInstance != null)
+			{
+				requestUri = new Uri(signingInstance.GetSignedUri(requestUri));
+			}
 
 			int totalBytes = 0;
 
 			WebRequest request = WebRequest.Create(requestUri);
+
 			using (WebResponse response = request.GetResponse())
 			{
 				Stream inputStream = response.GetResponseStream();
 
-				int bytesRead = 0;
+				int bytesRead = 0; 
 				const int BYTE_BUFFER_LENGTH = 4096;
 				byte[] buffer = new byte[BYTE_BUFFER_LENGTH];
 
@@ -86,7 +92,7 @@ namespace Google.Maps.StaticMaps
 					outputStream.Write(buffer, 0, bytesRead);
 					totalBytes += bytesRead;
 				}
-				while (bytesRead > BYTE_BUFFER_LENGTH);
+				while (bytesRead > 0);
 			}
 
 			return totalBytes;
