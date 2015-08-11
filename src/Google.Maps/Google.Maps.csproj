@@ -75,12 +75,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="BaseRequest.cs" />
-=======
     <Compile Include="Avoid.cs" />
     <Compile Include="AvoidHelper.cs" />
->>>>>>> upstream/master
     <Compile Include="BaseSigningService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
