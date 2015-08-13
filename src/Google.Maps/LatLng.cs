@@ -25,10 +25,10 @@ namespace Google.Maps
 	[Serializable]
 	public class LatLng : Location, IEquatable<LatLng>
 	{
-        private double _latitude;
-        private double _longitude;
+		private double _latitude;
+		private double _longitude;
 
-        public LatLng()
+		public LatLng()
 		{
 		}
 
@@ -54,7 +54,7 @@ namespace Google.Maps
 			this._longitude = longitude;
 		}
 		
-        /// <summary>
+		/// <summary>
 		/// Create a new latlng instance with the given latitude and longitude coordinates.
 		/// </summary>
 		/// <param name="latitude"></param>
@@ -127,7 +127,7 @@ namespace Google.Maps
 		public static LatLng Parse(string value)
 		{
 			if (value == null) throw new ArgumentNullException("value");
-            
+			
 			try
 			{
 				string[] parts = value.Split(',');
@@ -147,30 +147,30 @@ namespace Google.Maps
 			}
 		}
 
-        /// <summary>
-        /// Converts the specified string representation of a latlong to its <see cref="LatLong"/> equivalent and returns a value that indicates whether the convertion succeeded.
-        /// </summary>
-        /// <param name="value">A string containing the latlong to convert.</param>
-        /// <param name="result">When this method returns, it contains the <see cref="LatLong"/> value equivalent to the value contained in value, if the convertion succeeded; otherwize null if the convertion failed. The convertion fails if the value is null or does not conform to a comma-seperated string containing two decimal points. This parameter is passed uninitialized.</param>
-        /// <returns>true if the convertion succeeded; otherwise false.</returns>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="FormatException"/>
-        public static bool TryParse(string value, out LatLng result)
-        {
-            result = null;
-            if (value == null) return false;
-            
-            try
-            {
-                result = Parse(value);
-            }
-            catch
-            {
-                return false;
-            }
+		/// <summary>
+		/// Converts the specified string representation of a latlong to its <see cref="LatLong"/> equivalent and returns a value that indicates whether the convertion succeeded.
+		/// </summary>
+		/// <param name="value">A string containing the latlong to convert.</param>
+		/// <param name="result">When this method returns, it contains the <see cref="LatLong"/> value equivalent to the value contained in value, if the convertion succeeded; otherwize null if the convertion failed. The convertion fails if the value is null or does not conform to a comma-seperated string containing two decimal points. This parameter is passed uninitialized.</param>
+		/// <returns>true if the convertion succeeded; otherwise false.</returns>
+		/// <exception cref="ArgumentNullException"/>
+		/// <exception cref="FormatException"/>
+		public static bool TryParse(string value, out LatLng result)
+		{
+			result = null;
+			if (value == null) return false;
+			
+			try
+			{
+				result = Parse(value);
+			}
+			catch
+			{
+				return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 		#endregion
 
 		public override bool Equals(object obj)
@@ -178,7 +178,7 @@ namespace Google.Maps
 			return Equals(obj as LatLng);
 		}
 		
-        public bool Equals(LatLng other)
+		public bool Equals(LatLng other)
 		{
 			if (other == null) return false;
 
