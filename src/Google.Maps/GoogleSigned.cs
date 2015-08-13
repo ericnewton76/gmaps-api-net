@@ -18,7 +18,7 @@ namespace Google.Maps
 		private string _clientId;
 		private string _apiKey;
 		private GoogleSignedType _signType = GoogleSignedType.ApiKey;
-		
+
 		/// <summary>
 		/// Used by all the services except Geolocation API and Places API
 		/// </summary>
@@ -32,12 +32,12 @@ namespace Google.Maps
 
 		public GoogleSigned(string clientId, string usablePrivateKey)
 		{
-			usablePrivateKey = usablePrivateKey.Replace("-", "+").Replace("_","/");
+			usablePrivateKey = usablePrivateKey.Replace("-", "+").Replace("_", "/");
 			_privateKeyBytes = Convert.FromBase64String(usablePrivateKey);
 			_clientId = clientId;
 			_signType = GoogleSignedType.Business;
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the GoogleSigned instance to use for all of the various service calls.
 		/// </summary>
@@ -81,7 +81,7 @@ namespace Google.Maps
 				return uri.Scheme + "://" + uri.Host + uri.LocalPath + uri.Query;
 			}
 		}
-		
+
 		public string GetSignedUri(string url)
 		{
 			return GetSignedUri(new Uri(url));
@@ -97,7 +97,7 @@ namespace Google.Maps
 			string signature = Convert.ToBase64String(hashed);
 			return signature;
 		}
-		
+
 		public string GetSignature(string url)
 		{
 			return GetSignature(new Uri(url));

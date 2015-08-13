@@ -55,7 +55,7 @@ namespace Google.Maps
 			//note the Code Project Open License at http://www.codeproject.com/info/cpol10.aspx
 
 			if (value == null || value == "") return new List<LatLng>(0);
-			
+
 			char[] polylinechars = value.ToCharArray();
 			int index = 0;
 

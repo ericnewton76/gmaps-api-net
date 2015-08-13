@@ -20,79 +20,79 @@ using System.Linq;
 
 namespace Google.Maps.Places
 {
-    /// <summary>
-    /// The Google Places API Text Search Service is a web service that 
-    /// returns information about a set of Places based on a string 
-    /// </summary>
-    public class TextSearchRequest : PlacesRequest
-    {
-        public string Query { get; set; }
+	/// <summary>
+	/// The Google Places API Text Search Service is a web service that 
+	/// returns information about a set of Places based on a string 
+	/// </summary>
+	public class TextSearchRequest : PlacesRequest
+	{
+		public string Query { get; set; }
 
-        /// <summary>
-        /// The language in which to return results. See the list of supported domain languages. 
-        /// Note that we often update supported languages so this list may not be exhaustive.
-        /// </summary>
-        /// <see cref="https://developers.google.com/places/documentation/search#PlaceSearchRequests"/>
-        public string Language { get; set; }
+		/// <summary>
+		/// The language in which to return results. See the list of supported domain languages. 
+		/// Note that we often update supported languages so this list may not be exhaustive.
+		/// </summary>
+		/// <see cref="https://developers.google.com/places/documentation/search#PlaceSearchRequests"/>
+		public string Language { get; set; }
 
-        internal override Uri ToUri()
-        {
-            ValidateRequest();
-            var qsb = new Internal.QueryStringBuilder();
+		internal override Uri ToUri()
+		{
+			ValidateRequest();
+			var qsb = new Internal.QueryStringBuilder();
 
-            qsb.Append("query", Query.ToLowerInvariant())
-               .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+			qsb.Append("query", Query.ToLowerInvariant())
+			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
 
-            if (Location != null)
-            {
-                qsb.Append("location", Location.GetAsUrlParameter());
-            }
+			if (Location != null)
+			{
+				qsb.Append("location", Location.GetAsUrlParameter());
+			}
 
-            if (Radius.HasValue)
-            {
-                qsb.Append("radius", Radius.Value.ToString());
-            }
+			if (Radius.HasValue)
+			{
+				qsb.Append("radius", Radius.Value.ToString());
+			}
 
-            if (!string.IsNullOrEmpty(Language))
-            {
-                qsb.Append("language", Language.ToLowerInvariant());
-            }
+			if (!string.IsNullOrEmpty(Language))
+			{
+				qsb.Append("language", Language.ToLowerInvariant());
+			}
 
-            if (Minprice.HasValue)
-            {
-                qsb.Append("minprice", Minprice.Value.ToString());
-            }
+			if (Minprice.HasValue)
+			{
+				qsb.Append("minprice", Minprice.Value.ToString());
+			}
 
-            if (Maxprice.HasValue)
-            {
-                qsb.Append("maxprice", Maxprice.Value.ToString());
-            }
+			if (Maxprice.HasValue)
+			{
+				qsb.Append("maxprice", Maxprice.Value.ToString());
+			}
 
-            if (OpenNow.HasValue)
-            {
-                qsb.Append("opennow", OpenNow.Value.ToString().ToLowerInvariant());
-            }
+			if (OpenNow.HasValue)
+			{
+				qsb.Append("opennow", OpenNow.Value.ToString().ToLowerInvariant());
+			}
 
-            if ((Types != null && Types.Any()))
-            {
-                qsb.Append("types", TypesToUri());
-            }
+			if ((Types != null && Types.Any()))
+			{
+				qsb.Append("types", TypesToUri());
+			}
 
-            if (ZagatSelected)
-            {
-                qsb.Append("zagatselected");
-            }
+			if (ZagatSelected)
+			{
+				qsb.Append("zagatselected");
+			}
 
-            var url = "textsearch/json?" + qsb.ToString();
+			var url = "textsearch/json?" + qsb.ToString();
 
-            return new Uri(url, UriKind.Relative);
-        }
+			return new Uri(url, UriKind.Relative);
+		}
 
-        protected override void ValidateRequest()
-        {
-            base.ValidateRequest();
+		protected override void ValidateRequest()
+		{
+			base.ValidateRequest();
 
-            if (string.IsNullOrEmpty(Query)) throw new InvalidOperationException("Query property is not set");
-        }
-    }
+			if (string.IsNullOrEmpty(Query)) throw new InvalidOperationException("Query property is not set");
+		}
+	}
 }

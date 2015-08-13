@@ -18,56 +18,57 @@ using System;
 
 namespace Google.Maps.Places
 {
-    /// <summary>
-    /// The Google Places API allows you to query for place information 
-    /// on a variety of categories, such as: establishments, prominent 
-    /// points of interest, geographic locations, and more. You can search 
-    /// for places either by proximity or a text string.
-    /// </summary>
-    public class PlacesService
-    {
-        #region Http/Https Uris and Constructors
+	/// <summary>
+	/// The Google Places API allows you to query for place information 
+	/// on a variety of categories, such as: establishments, prominent 
+	/// points of interest, geographic locations, and more. You can search 
+	/// for places either by proximity or a text string.
+	/// </summary>
+	public class PlacesService
+	{
+		#region Http/Https Uris and Constructors
 
-        public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/");
-        public static readonly Uri HttpUri = new Uri("http://maps.googleapis.com/maps/api/place/");
+		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/");
+		public static readonly Uri HttpUri = new Uri("http://maps.googleapis.com/maps/api/place/");
 
 		public Uri BaseUri { get; set; }
 
-		public PlacesService() : this(HttpsUri)
+		public PlacesService()
+			: this(HttpsUri)
 		{
 		}
 
-        public PlacesService(Uri baseUri)
+		public PlacesService(Uri baseUri)
 		{
 			this.BaseUri = baseUri;
 		}
 		#endregion
 
-        /// <summary>
-        /// Sends the specified request to the Google Maps Geocoding web
-        /// service and parses the response as an GeocodingResponse
-        /// object.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
-        {
-            var url = new Uri(this.BaseUri, request.ToUri());
-            var t = Internal.Http.Get(url).AsString();
-            return Internal.Http.Get(url).As<PlacesResponse>();
-        }
+		/// <summary>
+		/// Sends the specified request to the Google Maps Geocoding web
+		/// service and parses the response as an GeocodingResponse
+		/// object.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
+		{
+			var url = new Uri(this.BaseUri, request.ToUri());
+			var t = Internal.Http.Get(url).AsString();
+			return Internal.Http.Get(url).As<PlacesResponse>();
+		}
 
-        /// <summary>
-        /// Sends the specified request to the Google Maps Places Autocomplate web
-        /// service and parses the response as an AutocompleteResponse
-        /// object.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public AutocompleteResponse GetAutocompleteResponse(AutocompleteRequest request)
-        {
-            var url = new Uri(this.BaseUri, request.ToUri());
-            return Internal.Http.Get(url).As<AutocompleteResponse>();
-        }
-    }
+		/// <summary>
+		/// Sends the specified request to the Google Maps Places Autocomplate web
+		/// service and parses the response as an AutocompleteResponse
+		/// object.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		public AutocompleteResponse GetAutocompleteResponse(AutocompleteRequest request)
+		{
+			var url = new Uri(this.BaseUri, request.ToUri());
+			return Internal.Http.Get(url).As<AutocompleteResponse>();
+		}
+	}
 }

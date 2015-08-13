@@ -17,7 +17,7 @@ namespace Google.Maps
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType,
-		  object existingValue, JsonSerializer serializer)
+			object existingValue, JsonSerializer serializer)
 		{
 			var jsonObject = JObject.Load(reader);
 			var target = Create(objectType, jsonObject);
@@ -26,7 +26,7 @@ namespace Google.Maps
 		}
 
 		public override void WriteJson(JsonWriter writer, object value,
-	   JsonSerializer serializer)
+			JsonSerializer serializer)
 		{
 			throw new NotImplementedException();
 		}
