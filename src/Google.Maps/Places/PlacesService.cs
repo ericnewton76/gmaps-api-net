@@ -54,7 +54,6 @@ namespace Google.Maps.Places
 		public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			var t = Internal.Http.Get(url).AsString();
 			return Internal.Http.Get(url).As<PlacesResponse>();
 		}
 
