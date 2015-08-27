@@ -53,7 +53,7 @@ namespace Google.Maps
 			this._latitude = latitude;
 			this._longitude = longitude;
 		}
-		
+
 		/// <summary>
 		/// Create a new latlng instance with the given latitude and longitude coordinates.
 		/// </summary>
@@ -127,7 +127,7 @@ namespace Google.Maps
 		public static LatLng Parse(string value)
 		{
 			if (value == null) throw new ArgumentNullException("value");
-			
+
 			try
 			{
 				string[] parts = value.Split(',');
@@ -159,7 +159,7 @@ namespace Google.Maps
 		{
 			result = null;
 			if (value == null) return false;
-			
+
 			try
 			{
 				result = Parse(value);
@@ -177,7 +177,7 @@ namespace Google.Maps
 		{
 			return Equals(obj as LatLng);
 		}
-		
+
 		public bool Equals(LatLng other)
 		{
 			if (other == null) return false;

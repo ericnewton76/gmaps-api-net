@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Google.Maps
 {
-    public abstract class BaseRequest
-    {
-        internal abstract Uri ToUri();
-    }
+	public abstract class BaseRequest
+	{
+		internal abstract Uri ToUri();
+	}
 }

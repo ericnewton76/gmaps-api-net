@@ -545,7 +545,7 @@ namespace Google.Maps
 
 			return result;
 		}
-	
+
 		public override bool CanConvert(Type objectType)
 		{
 			return
@@ -559,7 +559,7 @@ namespace Google.Maps
 		{
 			object result = null;
 
-			if(objectType == typeof(ServiceResponseStatus))
+			if (objectType == typeof(ServiceResponseStatus))
 				result = AsResponseStatus(reader.Value.ToString());
 
 			if (objectType == typeof(AddressType))

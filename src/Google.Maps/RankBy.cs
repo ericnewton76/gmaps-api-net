@@ -23,9 +23,9 @@ using System.Text;
 
 namespace Google.Maps
 {
-    public enum RankBy
-    {
-        Prominence,
-        Distance
-    }
+	public enum RankBy
+	{
+		Prominence,
+		Distance
+	}
 }

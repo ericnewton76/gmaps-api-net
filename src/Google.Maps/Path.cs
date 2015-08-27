@@ -17,7 +17,8 @@ namespace Google.Maps
 		{
 			Points = new List<Location>(locations);
 		}
-		public Path(params Location[] locations) : this((IEnumerable<Location>)locations)
+		public Path(params Location[] locations)
+			: this((IEnumerable<Location>)locations)
 		{
 		}
 
