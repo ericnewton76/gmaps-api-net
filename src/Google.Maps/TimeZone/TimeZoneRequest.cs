@@ -59,7 +59,6 @@ namespace Google.Maps.TimeZone
 		{
 			EnsureSensor();
 			if (Location == null) throw new InvalidOperationException("Location property is not set.");
-			if (Location == null) throw new InvalidOperationException("Location property is not set.");
 
 			var qsb = new Internal.QueryStringBuilder();
 			DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
