@@ -45,7 +45,7 @@ namespace Google.Maps.TimeZone
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Time Zone web
-		/// service and parses the response as an TimeZoneRequest
+		/// service and parses the response as an TimeZoneResponse
 		/// object.
 		/// </summary>
 		/// <param name="request"></param>
