@@ -28,7 +28,7 @@ Currently the service library supports full coverage of the following Google Map
   * *Static Maps*
   * *Direction* (thanks to malke.eklam)
   * *Direction Matrix* (thanks to mocciavinc...@gmail.com)
-  * *Places*
+  * *Places* (thanks to [Mieliespoor](https://github.com/mieliespoor) and [Sheepzez](https://github.com/Sheepzez))
   * *Time Zones* (thanks to [Sheepzez](http://github.com/Sheepzez))
   * *Polyline encoding* (code based on source from [http://bit.ly/5XuDqb  briancaos.wordpress.com])
   * *Google Maps for Business support*, using Google-supplied Client ID and private key for generating signed urls. (thanks for test generation and other help from richardthombs)
