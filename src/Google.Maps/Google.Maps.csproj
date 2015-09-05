@@ -140,6 +140,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticMaps\StaticMapRequest.cs" />
     <Compile Include="StaticMaps\StaticMapService.cs" />
+    <Compile Include="TimeZone\TimeZoneRequest.cs" />
+    <Compile Include="TimeZone\TimeZoneResponse.cs" />
+    <Compile Include="TimeZone\TimeZoneService.cs" />
     <Compile Include="TravelMode.cs" />
     <Compile Include="Units.cs" />
     <Compile Include="ViaLatLng.cs" />
