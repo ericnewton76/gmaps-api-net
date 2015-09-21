@@ -19,7 +19,7 @@ using System.Linq;
 using NUnit.Framework;
 using Google.Maps.Direction;
 using System;
-using Google.Maps.Geocoding;
+using Google.Maps.Shared;
 
 namespace Google.Maps.Test.Integrations
 {

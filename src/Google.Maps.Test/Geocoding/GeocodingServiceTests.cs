@@ -18,6 +18,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Google.Maps.Geocoding;
+using Google.Maps.Shared;
 using System;
 
 namespace Google.Maps.Test.Integrations
