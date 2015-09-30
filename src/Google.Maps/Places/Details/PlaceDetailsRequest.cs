@@ -49,8 +49,11 @@ namespace Google.Maps.Places.Details
         /// <summary>
         /// Indicates whether or not the geocoding request comes from a device
         /// with a location sensor. This value must be either true or false.
+        /// 
+        /// The Google Places API Web Service previously required that you include the sensor 
+        /// parameter to indicate whether your application used a sensor to determine the user's 
+        /// location. This parameter is no longer required.
         /// </summary>
-        /// <remarks>Required.</remarks>
         public bool? Sensor { get; set; }
 
         
