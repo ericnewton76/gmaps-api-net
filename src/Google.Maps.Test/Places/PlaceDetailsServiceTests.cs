@@ -6,16 +6,20 @@ namespace Google.Maps.Test.Places
     [TestFixture]
     class PlaceDetailsServiceTests
     {
+        [TestCase("ChIJN1t_tDeuEmsRUsoyG83frY4", "Google")]
         [Test]
-        public void PlacesDetailsTest()
+        public void PlacesDetailsTest(string placeID, string placeName)
         {
             PlaceDetailsRequest request = new PlaceDetailsRequest()
             {
-                PlaceID = "ChIJN1t_tDeuEmsRUsoyG83frY4"
+                PlaceID = placeID
             };
             var response = new PlaceDetailsService().GetResponse(request);
 
             Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+            Assert.IsNotNull(response.Result.URL);
+            Assert.AreEqual(placeID, response.Result.PlaceID);
+            Assert.AreEqual(placeName, response.Result.Name);
         }
 
         [SetUp]
