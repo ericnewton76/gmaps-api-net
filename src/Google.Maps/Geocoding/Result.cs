@@ -17,6 +17,7 @@
 
 using Newtonsoft.Json;
 using System;
+using Google.Maps.Shared;
 
 namespace Google.Maps.Geocoding
 {

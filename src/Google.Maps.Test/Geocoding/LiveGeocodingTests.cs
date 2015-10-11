@@ -15,12 +15,10 @@
  * limitations under the License.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Google.Maps.Geocoding;
+using Google.Maps.Shared;
 
 using NUnit.Framework;
 
