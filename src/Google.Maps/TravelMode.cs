@@ -26,9 +26,9 @@ namespace Google.Maps
 		/// </summary>
 		bicycling,
 
-        /// <summary>
-        /// requests public transportation directions (where available).
-        /// </summary>
-        transit
-    }
+		/// <summary>
+		/// requests public transportation directions (where available).
+		/// </summary>
+		transit
+	}
 }
