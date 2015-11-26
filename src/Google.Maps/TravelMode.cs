@@ -24,6 +24,11 @@ namespace Google.Maps
 		/// <summary>
 		/// requests bicycling directions via bicycle paths & preferred streets (currently only available in the US).
 		/// </summary>
-		bicycling
-	}
+		bicycling,
+
+        /// <summary>
+        /// requests public transportation directions (where available).
+        /// </summary>
+        transit
+    }
 }
