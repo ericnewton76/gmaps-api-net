@@ -63,5 +63,8 @@ namespace Google.Maps.Places
 
 		[JsonProperty("reference")]
 		public string Reference { get; set; }
-	}
+
+        [JsonProperty("place_id")]
+        public string PlaceId { get; set; }
+    }
 }
