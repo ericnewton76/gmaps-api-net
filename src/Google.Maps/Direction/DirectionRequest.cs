@@ -52,6 +52,18 @@ namespace Google.Maps.Direction
 		/// </summary>
 		public bool? Sensor { get; set; }
 
+		/// <summary>
+		/// departure_time specifies the desired time of departure as seconds since midnight, January 1, 1970 UTC. The departure time may be specified in two cases:
+		///     For Transit Directions: One of departure_time or arrival_time must be specified when requesting directions.
+		///     For Driving Directions: Maps for Business customers can specify the departure_time to receive trip duration considering current traffic conditions. The departure_time must be set to within a few minutes of the current time.
+		/// </summary>
+		public long? DepartureTime { get; set; }
+
+		/// <summary>
+		/// arrival_time specifies the desired time of arrival for transit directions as seconds since midnight, January 1, 1970 UTC. One of departure_time or arrival_time must be specified when requesting transit directions.
+		/// </summary>
+		public long? ArrivalTime { get; set; }
+
 		private List<Location> _waypoints;
 		public IEnumerable<Location> Waypoints
 		{
@@ -114,6 +126,8 @@ namespace Google.Maps.Direction
 				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
 				.Append("destination", (Destination == null ? (string)null : Destination.GetAsUrlParameter()))
 				.Append("mode", (Mode != TravelMode.driving ? Mode.ToString() : (string)null))
+				.Append("departure_time", (DepartureTime == null ? null : DepartureTime.Value.ToString()))
+				.Append("arrival_time", (ArrivalTime == null ? null : ArrivalTime.Value.ToString()))
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
