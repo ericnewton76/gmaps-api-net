@@ -29,6 +29,14 @@ namespace Google.Maps.Places
 		public string description { get; set; }
 
 		/// <summary>
+		/// Is a textual identifier that uniquely identifies a place.
+		/// To retrieve information about the place, pass this identifier 
+		/// in the placeId field of a Google Places API Web Service request.
+		/// </summary>
+		[JsonProperty("place_id")]
+		public string PlaceId { get; set; }
+
+		/// <summary>
 		/// Contains a unique token that you can use to retrieve additional
 		/// information about this place in a Place Details request. You
 		/// can store this token and use it at any time in future to refresh
