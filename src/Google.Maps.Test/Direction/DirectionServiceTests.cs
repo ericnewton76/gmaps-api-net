@@ -98,20 +98,20 @@ namespace Google.Maps.Test.Integrations
 			var expectedRoutesCount = 1;
 			
 			var expectedEndAddress = "Montreal, QC, Canada";
-			var expectedEndLocation = new LatLng(45.508570, -73.553770);
+            var expectedEndLocation = new LatLng(45.5017123, -73.5672184);
 			
 			var expectedStartAddress = "Toronto, ON, Canada";
-			var expectedStartLocation = new LatLng(43.653310, -79.382770);
+            var expectedStartLocation = new LatLng(43.6533103, -79.3827675);
 
 			var expectedBounds = new Viewport(
 				northEast: new LatLng(45.51048, -73.55332),
 				southWest: new LatLng(43.65331, -79.38373)
 			);
 
-			var expectedDistance = new ValueText() { Text = "542 km", Value = "542382" };
-			var expectedDuration = new ValueText() { Text = "5 hours 27 mins", Value = "19608" };
+            var expectedDistance = new ValueText() { Text = "541 km", Value = "540965" };
+            var expectedDuration = new ValueText() { Text = "5 hours 17 mins", Value = "18996" };
 
-			var expectedSteps = 13;
+			var expectedSteps = 16;
 
 			var expectedSummary = "ON-401 E";
 
@@ -129,18 +129,18 @@ namespace Google.Maps.Test.Integrations
 
 			var currentLeg = response.Routes[0].Legs[0];
 
-			Assert.That(expectedStartAddress, Is.EqualTo(currentLeg.StartAddress), "Leg.StartAddress");
-			Assert.That(expectedStartLocation, Is.EqualTo(currentLeg.StartLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.StartLocation");
-			
-			Assert.That(expectedEndAddress, Is.EqualTo(currentLeg.EndAddress), "Leg.EndAddress");
-			Assert.That(expectedEndLocation, Is.EqualTo(currentLeg.EndLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.EndLocation");
+            Assert.That(currentLeg.StartAddress, Is.EqualTo(expectedStartAddress), "Leg.StartAddress");
+            Assert.That(currentLeg.StartLocation, Is.EqualTo(expectedStartLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.StartLocation");
 
-			Assert.That(expectedDistance, Is.EqualTo(currentLeg.Distance).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
-			Assert.That(expectedDuration, Is.EqualTo(currentLeg.Duration).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
+            Assert.That(currentLeg.EndAddress, Is.EqualTo(expectedEndAddress), "Leg.EndAddress");
+            Assert.That(currentLeg.EndLocation, Is.EqualTo(expectedEndLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.EndLocation");
 
-			Assert.That(expectedSteps, Is.EqualTo(currentLeg.Steps.Count()), "Leg.Steps");
+            Assert.That(currentLeg.Distance, Is.EqualTo(expectedDistance).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)), "Leg.Distance");
+            Assert.That(currentLeg.Duration, Is.EqualTo(expectedDuration).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)), "Leg.Duration");
 
-			Assert.That(expectedSummary, Is.EqualTo(response.Routes[0].Summary), "Route.Summary");
+            Assert.That(currentLeg.Steps.Count(), Is.EqualTo(expectedSteps), "Leg.Steps");
+
+            Assert.That(response.Routes[0].Summary, Is.EqualTo(expectedSummary), "Route.Summary");
 		}
 
 
