@@ -103,7 +103,6 @@
     <EmbeddedResource Include="Geocoding\json_queries\address=1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
     <EmbeddedResource Include="Geocoding\json_queries\latlngQuery.json" />
     <EmbeddedResource Include="Geocoding\json_queries\sensor=false.json" />
-    <EmbeddedResource Include="Direction\json_queries\origin=Toronto%24destination=Montreal.json" />
     <EmbeddedResource Include="Direction\json_queries\sensor=false.json" />
     <Compile Include="Geocoding\GeocodingRequestTests.cs" />
     <Compile Include="Geocoding\GeocodingServiceTests.cs" />
@@ -139,6 +138,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Elevation\json_queries\query1.json" />
     <EmbeddedResource Include="Elevation\json_queries\query2.json" />
+    <EmbeddedResource Include="Direction\json_queries\origin=Toront%24destination=Montreal.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

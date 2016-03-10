@@ -2,6 +2,7 @@
    "geocoded_waypoints" : [
       {
          "geocoder_status" : "OK",
+         "partial_match" : true,
          "place_id" : "ChIJpTvG15DL1IkRd8S0KlBVNTI",
          "types" : [ "locality", "political" ]
       },

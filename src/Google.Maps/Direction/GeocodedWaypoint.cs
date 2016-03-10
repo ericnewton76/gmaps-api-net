@@ -17,5 +17,8 @@ namespace Google.Maps.Direction
 
         [JsonProperty("types")]
         public AddressType[] Types { get; set; }
+
+        [JsonProperty("partial_match")]
+        public bool PartialMatch { get; set; }
     }
 }

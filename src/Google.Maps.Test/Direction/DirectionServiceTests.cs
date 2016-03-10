@@ -115,9 +115,15 @@ namespace Google.Maps.Test.Integrations
 
 			var expectedSummary = "ON-401 E";
 
+            var expectedWaypointStatus = ServiceResponseStatus.Ok;
+            var expectedWaypointPartialMatch = true;
+            var expectedWaypointAddressType1 = AddressType.Locality;
+            var expectedWaypointAddressType2 = AddressType.Political;
+
+
 			// test
 			var request = new DirectionRequest();
-			request.Origin = "Toronto";
+			request.Origin = "Toront"; // Typo intended
 			request.Destination = "Montreal";
 			request.Sensor = false;
 			
@@ -141,6 +147,11 @@ namespace Google.Maps.Test.Integrations
             Assert.That(currentLeg.Steps.Count(), Is.EqualTo(expectedSteps), "Leg.Steps");
 
             Assert.That(response.Routes[0].Summary, Is.EqualTo(expectedSummary), "Route.Summary");
+
+            Assert.AreEqual(expectedWaypointStatus, response.Waypoints[0].Status, "Waypoint.Status");
+            Assert.AreEqual(expectedWaypointAddressType1, response.Waypoints[1].Types[0], "Waypoint.PlaceType1");
+            Assert.AreEqual(expectedWaypointAddressType2, response.Waypoints[1].Types[1], "Waypoint.PlaceType2");
+            Assert.AreEqual(expectedWaypointPartialMatch, response.Waypoints[0].PartialMatch, "Waypoint.PartialMatch");
 		}
 
 
