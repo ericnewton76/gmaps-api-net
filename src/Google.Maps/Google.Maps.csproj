@@ -102,6 +102,7 @@
     <Compile Include="Direction\DirectionRoute.cs" />
     <Compile Include="Direction\DirectionService.cs" />
     <Compile Include="Direction\DirectionStep.cs" />
+    <Compile Include="Direction\GeocodedWaypoint.cs" />
     <Compile Include="Direction\Polyline.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixRequest.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixResponse.cs" />

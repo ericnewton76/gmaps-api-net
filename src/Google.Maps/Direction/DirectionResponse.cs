@@ -14,5 +14,8 @@ namespace Google.Maps.Direction
 
 		[JsonProperty("routes")]
 		public DirectionRoute[] Routes { get; set; }
+
+        [JsonProperty("geocoded_waypoints")]
+        public GeocodedWaypoint[] Waypoints { get; set; }
 	}
 }
