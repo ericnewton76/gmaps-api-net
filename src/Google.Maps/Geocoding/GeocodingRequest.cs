@@ -81,20 +81,22 @@ namespace Google.Maps.Geocoding
 		internal Uri ToUri()
 		{
 			EnsureSensor();
-			if (Address == null) throw new InvalidOperationException("Address property is not set.");
 
 			var qsb = new Internal.QueryStringBuilder();
 
-			if(this.Address.GetType() == typeof(LatLng))
-			{
-				qsb.Append("latlng", Address.GetAsUrlParameter());
-			}
-			else
-			{
-				qsb.Append("address", Address.GetAsUrlParameter());
-			}
-				
-			qsb.Append("bounds", GetBoundsStr())
+            if (Address != null)
+            {
+                if (this.Address.GetType() == typeof(LatLng))
+                {
+                    qsb.Append("latlng", Address.GetAsUrlParameter());
+                }
+                else
+                {
+                    qsb.Append("address", Address.GetAsUrlParameter());
+                }
+            }
+
+            qsb.Append("bounds", GetBoundsStr())
 				.Append("components", HttpUtility.UrlEncode(Components))
 				.Append("region", Region)
 				.Append("language", Language)
