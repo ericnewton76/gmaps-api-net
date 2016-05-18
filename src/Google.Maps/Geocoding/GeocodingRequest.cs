@@ -33,23 +33,23 @@ namespace Google.Maps.Geocoding
 		/// <remarks>Required if latlng not present.</remarks>
 		public Location Address { get; set; }
 
-		/// <summary>
-		/// Undocumented address component filters.
-		/// Only geocoding results matching the component filters will be returned.
-		/// </summary>
-		/// <remarks>IE: country:uk|locality:stathern</remarks>
-		public string Components { get; set; }
+        /// <summary>
+        /// Undocumented address component filters.
+        /// Only geocoding results matching the component filters will be returned.
+        /// </summary>
+        /// <remarks>IE: country:uk|locality:stathern</remarks>
+        public ComponentFilter Components { get; set; }
 
-		/// <summary>
-		/// The bounding box of the viewport within which to bias geocode
-		/// results more prominently.
-		/// </summary>
-		/// <remarks>
-		/// Optional. This parameter will only influence, not fully restrict, results
-		/// from the geocoder.
-		/// </remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
-		public Viewport Bounds { get; set; }
+        /// <summary>
+        /// The bounding box of the viewport within which to bias geocode
+        /// results more prominently.
+        /// </summary>
+        /// <remarks>
+        /// Optional. This parameter will only influence, not fully restrict, results
+        /// from the geocoder.
+        /// </remarks>
+        /// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
+        public Viewport Bounds { get; set; }
 
 		/// <summary>
 		/// The region code, specified as a ccTLD ("top-level domain")
@@ -97,7 +97,7 @@ namespace Google.Maps.Geocoding
             }
 
             qsb.Append("bounds", GetBoundsStr())
-				.Append("components", HttpUtility.UrlEncode(Components))
+				.Append("components", Components != null ? Components.ToUrlParameters() : "")
 				.Append("region", Region)
 				.Append("language", Language)
 				.Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
