@@ -31,8 +31,6 @@ namespace Google.Maps.Direction
         public string NumberOfStops { get; set; }
 
 
-
-
         public DirectionTransitDetails()
         {
 
