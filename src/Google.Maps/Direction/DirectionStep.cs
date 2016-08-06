@@ -23,8 +23,8 @@ namespace Google.Maps.Direction
 		[JsonProperty("duration")]
 		public ValueText Duration { get; set; }
 
-		[JsonProperty("maneuver")]
-		public string Maneuver { get; set; }
+		[JsonProperty("transit_details")]
+		public DirectionTransitDetails TransitDetails  { get; set; }
 
 		[JsonProperty("html_instructions")]
 		public string HtmlInstructions { get; set; }
