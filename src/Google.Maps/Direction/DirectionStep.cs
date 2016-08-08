@@ -22,6 +22,9 @@ namespace Google.Maps.Direction
 
 		[JsonProperty("duration")]
 		public ValueText Duration { get; set; }
+		
+		[Obsolete("maneuver is obsolete", false)]
+		public string Maneuver { get; set; } 
 
 		[JsonProperty("transit_details")]
 		public DirectionTransitDetails TransitDetails  { get; set; }
