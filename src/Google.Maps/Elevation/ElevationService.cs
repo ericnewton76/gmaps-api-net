@@ -36,7 +36,7 @@ namespace Google.Maps.Elevation
 
 		public Uri BaseUri { get; set; }
 
-		public ElevationService() : this(HttpUri)
+		public ElevationService() : this(HttpsUri)
 		{
 		}
 		public ElevationService(Uri baseUri)

@@ -142,8 +142,10 @@ namespace Google.Maps.Direction
 
 		private void EnsureSensor()
 		{
-			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
+            if (this.Sensor == null)
+            {
+                this.Sensor = false;
+            }
 		}
-
 	}
 }

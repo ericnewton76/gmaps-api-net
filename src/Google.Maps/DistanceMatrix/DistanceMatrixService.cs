@@ -36,7 +36,7 @@ namespace Google.Maps.DistanceMatrix
 
 		public Uri BaseUri { get; set; }
 
-		public DistanceMatrixService() : this(HttpUri)
+		public DistanceMatrixService() : this(HttpsUri)
 		{
 		}
 		public DistanceMatrixService(Uri baseUri)
