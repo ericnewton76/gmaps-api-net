@@ -41,6 +41,9 @@ namespace Google.Maps.DistanceMatrix
 
 			[JsonProperty("duration")]
 			public ValueText duration { get; set; }
+
+            [JsonProperty("duration_in_traffic")]
+            public ValueText durationInTraffic { get; set; }
 		}//end class
 	}//end class
 }//end namespace

@@ -25,13 +25,8 @@ namespace Google.Maps.Test
 		{
 			try
 			{
-				using (var keys = new StreamReader(@"..\..\PrivateSigningKeys.txt"))
-				{
-					var clientid = keys.ReadLine().Trim();
-					var privateKey = keys.ReadLine().Trim();
 
-					return new GoogleSigned(clientid, privateKey);
-				}
+                    return new GoogleSigned("AIzaSyBzi5eUuDeUQz4oqmnxeOMtKA-i5xYjG8Q");
 			}
 			catch (FileNotFoundException)
 			{
