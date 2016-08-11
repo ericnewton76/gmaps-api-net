@@ -173,6 +173,7 @@
     <Compile Include="TimeZone\TimeZoneRequest.cs" />
     <Compile Include="TimeZone\TimeZoneResponse.cs" />
     <Compile Include="TimeZone\TimeZoneService.cs" />
+    <Compile Include="TrafficModel.cs" />
     <Compile Include="TravelMode.cs" />
     <Compile Include="Units.cs" />
     <Compile Include="ViaLatLng.cs" />

@@ -57,6 +57,10 @@ namespace Google.Maps.DistanceMatrix
 		/// </summary>
 		public bool? Sensor { get; set; }
 
+        public int DepartureTime { get; set; }
+
+        public TrafficModel TrafficModel { get; set; }
+
 		/// <summary>
 		///  List of origin waypoints
 		/// </summary>
@@ -149,14 +153,16 @@ namespace Google.Maps.DistanceMatrix
 		{
 			this.EnsureSensor(true);
 
-			var qsb = new Internal.QueryStringBuilder()
-				.Append("origins", WaypointsToUri(waypointsOrigin))
-				.Append("destinations", WaypointsToUri(WaypointsDestination))
-				.Append("mode", Mode.ToString())
-				.Append("language", Language)
-				.Append("units", Units.ToString())
-				.Append("sensor", (Sensor.Value ? "true" : "false"))
-				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid));
+            var qsb = new Internal.QueryStringBuilder()
+                .Append("origins", WaypointsToUri(waypointsOrigin))
+                .Append("destinations", WaypointsToUri(WaypointsDestination))
+                .Append("mode", Mode.ToString())
+                .Append("language", Language)
+                .Append("units", Units.ToString())
+                .Append("sensor", (Sensor.Value ? "true" : "false"))
+                .Append("avoid", AvoidHelper.MakeAvoidString(Avoid))
+                .Append("departure_time", DepartureTime.ToString())
+                .Append("traffic_model", TrafficModel.ToString());
 
 			var url = "json?" + qsb.ToString();
 
