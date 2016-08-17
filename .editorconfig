@@ -1,0 +1,8 @@
+root=true
+
+[*]
+trim_trailing_whitespace = true
+indent_style = tab
+
+[*.cs]
+indent_size = 4
