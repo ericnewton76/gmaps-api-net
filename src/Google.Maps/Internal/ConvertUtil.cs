@@ -16,16 +16,16 @@ namespace Google.Maps.Internal
 
 			List<Tto> target = new List<Tto>(collection.Count());
 
-			while (collectionEnumerator.MoveNext())
+			while(collectionEnumerator.MoveNext())
 			{
-				if (collectionEnumerator.Current == null)
+				if(collectionEnumerator.Current == null)
 				{
 					target.Add(null);
 				}
 				else
 				{
 					Tto convert = collectionEnumerator.Current as Tto;
-					if (convert == null) { convertedCollection = null; return false; }
+					if(convert == null) { convertedCollection = null; return false; }
 					target.Add(convert);
 				}
 			}

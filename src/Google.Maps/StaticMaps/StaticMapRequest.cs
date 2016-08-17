@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -50,8 +50,8 @@ namespace Google.Maps.StaticMaps
 		/// <summary>
 		/// Defines the center of the map, equidistant from all edges of the
 		/// map. This parameter takes an <see cref="Location" />-derived instance identifying a
-		/// unique location on the face of the earth. Use <see cref="LatLng" /> for a 
-		/// {latitude,longitude} pair (e.g. 40.714728,-73.998672) or use <see cref="Location" /> for a 
+		/// unique location on the face of the earth. Use <see cref="LatLng" /> for a
+		/// {latitude,longitude} pair (e.g. 40.714728,-73.998672) or use <see cref="Location" /> for a
 		/// string address (e.g. "city hall, new york, ny"). (Required if markers not present.)
 		/// </summary>
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Locations</remarks>
@@ -68,9 +68,9 @@ namespace Google.Maps.StaticMaps
 			get { return _zoom; }
 			set
 			{
-				if (value != null)
+				if(value != null)
 				{
-					if (value < Constants.ZOOM_LEVEL_MIN) throw new ArgumentOutOfRangeException(string.Format("value cannot be less than 0.", Constants.ZOOM_LEVEL_MIN));
+					if(value < Constants.ZOOM_LEVEL_MIN) throw new ArgumentOutOfRangeException(string.Format("value cannot be less than 0.", Constants.ZOOM_LEVEL_MIN));
 				}
 				_zoom = value;
 			}
@@ -91,19 +91,19 @@ namespace Google.Maps.StaticMaps
 			get { return _size; }
 			set
 			{
-				if (value.Width < Constants.SIZE_WIDTH_MIN) throw new ArgumentOutOfRangeException(string.Format("value.Width cannot be less than {0}.", Constants.SIZE_WIDTH_MIN));
-				if (value.Height < Constants.SIZE_HEIGHT_MIN) throw new ArgumentOutOfRangeException(string.Format("value.Height cannot be less than {0}.", Constants.SIZE_HEIGHT_MIN));
-				if (value.Width > Constants.SIZE_WIDTH_MAX) throw new ArgumentOutOfRangeException(string.Format("value.Width cannot be greater than {0}.", Constants.SIZE_WIDTH_MAX));
-				if (value.Height > Constants.SIZE_HEIGHT_MAX) throw new ArgumentOutOfRangeException(string.Format("value.Height cannot be greater than {0}.", Constants.SIZE_HEIGHT_MAX));
+				if(value.Width < Constants.SIZE_WIDTH_MIN) throw new ArgumentOutOfRangeException(string.Format("value.Width cannot be less than {0}.", Constants.SIZE_WIDTH_MIN));
+				if(value.Height < Constants.SIZE_HEIGHT_MIN) throw new ArgumentOutOfRangeException(string.Format("value.Height cannot be less than {0}.", Constants.SIZE_HEIGHT_MIN));
+				if(value.Width > Constants.SIZE_WIDTH_MAX) throw new ArgumentOutOfRangeException(string.Format("value.Width cannot be greater than {0}.", Constants.SIZE_WIDTH_MAX));
+				if(value.Height > Constants.SIZE_HEIGHT_MAX) throw new ArgumentOutOfRangeException(string.Format("value.Height cannot be greater than {0}.", Constants.SIZE_HEIGHT_MAX));
 				this._size = value;
 			}
 		}
 		private Size _size;
 
 		/// <summary>
-		/// affects the number of pixels that are returned. scale=2 returns twice as many pixels as scale=1 
-		/// while retaining the same coverage area and level of detail (i.e. the contents of the map don't change). 
-		/// This is useful when developing for high-resolution displays, or when generating a map for printing. 
+		/// affects the number of pixels that are returned. scale=2 returns twice as many pixels as scale=1
+		/// while retaining the same coverage area and level of detail (i.e. the contents of the map don't change).
+		/// This is useful when developing for high-resolution displays, or when generating a map for printing.
 		/// The default value is 1. Accepted values are 2 and 4 (4 is only available to Maps API for Business customers.)
 		/// </summary>
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#scale_values</remarks>
@@ -112,7 +112,7 @@ namespace Google.Maps.StaticMaps
 			get { return _scale; }
 			set
 			{
-				if (value != null)
+				if(value != null)
 				{
 					Constants.IsExpectedScaleValue(value.Value, true);
 				}
@@ -149,7 +149,7 @@ namespace Google.Maps.StaticMaps
 		public string Language { get; set; }
 
 		/// <summary>
-		/// defines the appropriate borders to display, based on geo-political sensitivities. 
+		/// defines the appropriate borders to display, based on geo-political sensitivities.
 		/// Accepts a region code specified as a two-character ccTLD ('top-level domain') value. (optional)
 		/// </summary>
 		public string Region { get; set; }
@@ -172,7 +172,8 @@ namespace Google.Maps.StaticMaps
 		/// For backwards-compatibility; shortcut for Paths when not using
 		/// multiple paths.
 		/// </summary>
-		public Path Path {
+		public Path Path
+		{
 			get
 			{
 				return Paths.SingleOrDefault();
@@ -216,9 +217,9 @@ namespace Google.Maps.StaticMaps
 
 		private void EnsureSensor(bool throwIfNotSet)
 		{
-			if (Sensor == null)
+			if(Sensor == null)
 			{
-				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
+				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
 				else return;
 			}
 		}
@@ -228,7 +229,7 @@ namespace Google.Maps.StaticMaps
 			EnsureSensor(true);
 
 			string formatStr = null;
-			switch (this.Format)
+			switch(this.Format)
 			{
 				case GMapsImageFormats.Unspecified: break;
 				case GMapsImageFormats.JPGbaseline: formatStr = "jpg-baseline"; break;
@@ -236,7 +237,7 @@ namespace Google.Maps.StaticMaps
 			}
 
 			string maptypeStr = null;
-			switch (this.MapType)
+			switch(this.MapType)
 			{
 				case MapTypes.Unspecified: break;
 				default:
@@ -245,11 +246,11 @@ namespace Google.Maps.StaticMaps
 			}
 
 			string zoomStr = null;
-			if (this.Zoom != null)
+			if(this.Zoom != null)
 				zoomStr = this.Zoom.ToString();
 
 			string centerStr = null;
-			if (this.Center != null)
+			if(this.Center != null)
 				centerStr = this.Center.GetAsUrlParameter();
 
 			QueryStringBuilder qs = new QueryStringBuilder()
@@ -277,51 +278,51 @@ namespace Google.Maps.StaticMaps
 		/// <returns></returns>
 		private string GetPathsStr()
 		{
-			if (this.Paths == null || this.Paths.Count == 0) return null;
+			if(this.Paths == null || this.Paths.Count == 0) return null;
 
 			string[] pathParam = new string[this.Paths.Count];
 			int pathParamIndex = 0;
 			System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-			foreach (Path currentPath in this.Paths)
+			foreach(Path currentPath in this.Paths)
 			{
 				sb.Length = 0;
 
-				if (currentPath.Color.Equals(Color.Empty) == false)
+				if(currentPath.Color.Equals(Color.Empty) == false)
 				{
 					sb.Append("color:").Append(GetColorEncoded(currentPath.Color, true));
 				}
 
-				if (currentPath.FillColor.Equals(Color.Empty) == false)
+				if(currentPath.FillColor.Equals(Color.Empty) == false)
 				{
-					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.Append("fillcolor:").Append(GetColorEncoded(currentPath.FillColor, false));
 				}
 
-				if (currentPath.Encode.GetValueOrDefault() == true)
+				if(currentPath.Encode.GetValueOrDefault() == true)
 				{
 					string encodedValue = GetPathEncoded(currentPath);
 
-					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.Append(Constants.PATH_ENCODED_PREFIX).Append(encodedValue);
 				}
 				else
 				{
-					if (currentPath.Encode == null && currentPath.Points.Count > 10)
+					if(currentPath.Encode == null && currentPath.Points.Count > 10)
 					{
 						IEnumerable<LatLng> positionCollection;
-						if (ConvertUtil.TryCast<Location, LatLng>(currentPath.Points, out positionCollection) == true)
+						if(ConvertUtil.TryCast<Location, LatLng>(currentPath.Points, out positionCollection) == true)
 						{
 							string encodedValue = PolylineEncoder.EncodeCoordinates(positionCollection);
-							if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+							if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 							sb.Append(Constants.PATH_ENCODED_PREFIX).Append(encodedValue);
 						}
 
 					}
 
-					foreach (Location loc in currentPath.Points)
+					foreach(Location loc in currentPath.Points)
 					{
-						if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+						if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 						sb.Append(loc.GetAsUrlParameter());
 					}
 
@@ -341,7 +342,7 @@ namespace Google.Maps.StaticMaps
 		/// </summary>
 		private static string GetColorEncoded(Color color, bool useNamedColorIfPossible)
 		{
-			if (useNamedColorIfPossible && color.IsNamedColor && Constants.IsExpectedNamedColor(color.Name))
+			if(useNamedColorIfPossible && color.IsNamedColor && Constants.IsExpectedNamedColor(color.Name))
 			{
 				return color.Name.ToLowerInvariant();
 			}
@@ -355,7 +356,7 @@ namespace Google.Maps.StaticMaps
 		{
 			IEnumerable<LatLng> latlngPoints;
 			try { latlngPoints = currentPath.Points.Cast<LatLng>().ToList(); }
-			catch (InvalidCastException ex) { throw new InvalidOperationException("Encountered a point specified as a location.  Encoding only supports all points in LatLng types.", ex); }
+			catch(InvalidCastException ex) { throw new InvalidOperationException("Encountered a point specified as a location.  Encoding only supports all points in LatLng types.", ex); }
 
 			string encodedValue = PolylineEncoder.EncodeCoordinates(latlngPoints);
 			return encodedValue;
@@ -367,12 +368,12 @@ namespace Google.Maps.StaticMaps
 		/// <returns></returns>
 		private string GetVisibleStr()
 		{
-			if (this.Visible.Count == 0) return null;
+			if(this.Visible.Count == 0) return null;
 
 			System.Text.StringBuilder sb = new System.Text.StringBuilder();
-			foreach (Location loc in this.Visible)
+			foreach(Location loc in this.Visible)
 			{
-				if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+				if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 				sb.Append(loc.ToString());
 			}
 			return sb.ToString();
@@ -384,31 +385,31 @@ namespace Google.Maps.StaticMaps
 		/// <returns></returns>
 		private string GetMarkersStr()
 		{
-			if (this.Markers.Count == 0) return null;
+			if(this.Markers.Count == 0) return null;
 
 			System.Text.StringBuilder sb = new System.Text.StringBuilder(200);
 
 			string[] markerStrings = new string[this.Markers.Count];
 			int markerStringsIndex = 0;
 
-			foreach (MapMarkers current in this.Markers)
+			foreach(MapMarkers current in this.Markers)
 			{
 				//start with an empty stringbuilder.
 				sb.Remove(0, sb.Length);
 
 				//output the size parameter, if it was specified.
-				if (current.MarkerSize != MarkerSizes.Unspecified)
+				if(current.MarkerSize != MarkerSizes.Unspecified)
 				{
-					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.AppendFormat("size:{0}", current.MarkerSize.ToString().ToLowerInvariant());
 				}
 
 				//check for a color specified for the markers and add that style attribute if so
-				if (current.Color.Equals(Color.Empty) == false)
+				if(current.Color.Equals(Color.Empty) == false)
 				{
-					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 
-					if (current.Color.IsNamedColor && Constants.IsExpectedNamedColor(current.Color.Name))
+					if(current.Color.IsNamedColor && Constants.IsExpectedNamedColor(current.Color.Name))
 					{
 						sb.AppendFormat("color:{0}", current.Color.Name.ToLowerInvariant());
 					}
@@ -419,35 +420,36 @@ namespace Google.Maps.StaticMaps
 				}
 
 				//add a label, but if the MarkerSize is MarkerSizes.Tiny then you can't have a label.
-				if (string.IsNullOrEmpty(current.Label) == false && current.MarkerSize != MarkerSizes.Tiny)
+				if(string.IsNullOrEmpty(current.Label) == false && current.MarkerSize != MarkerSizes.Tiny)
 				{
-					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.AppendFormat("label:{0}", current.Label);
 				}
 
 				//add a custom icon param
-				if (string.IsNullOrEmpty(current.IconUrl) == false)
+				if(string.IsNullOrEmpty(current.IconUrl) == false)
 				{
-					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.AppendFormat("icon:{0}", HttpUtility.UrlEncode(current.IconUrl));
 
-					if (current.Shadow != null)
+					if(current.Shadow != null)
 					{
-						if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+						if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 						sb.AppendFormat("shadow:{0}", (current.Shadow == true ? "true" : "false"));
 					}
 				}
 
-        //add a custom scale param
-        if (current.Scale != null) {
-          if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
-          sb.AppendFormat("scale:{0}", current.Scale.Value);
-        }
-
-        //iterate the locations
-        foreach (Location loc in current.Locations)
+				//add a custom scale param
+				if(current.Scale != null)
 				{
-					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+					sb.AppendFormat("scale:{0}", current.Scale.Value);
+				}
+
+				//iterate the locations
+				foreach(Location loc in current.Locations)
+				{
+					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.Append(loc.GetAsUrlParameter());
 				}
 

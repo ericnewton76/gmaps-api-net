@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -52,8 +52,8 @@ namespace Google.Maps.DistanceMatrix
 		public string Language { get; set; }
 
 		/// <summary>
-		///  
-		///  
+		///
+		///
 		/// </summary>
 		public bool? Sensor { get; set; }
 
@@ -74,7 +74,7 @@ namespace Google.Maps.DistanceMatrix
 		{
 			get
 			{
-				if (waypointsOrigin == null)
+				if(waypointsOrigin == null)
 				{
 					waypointsOrigin = new SortedList<int, Waypoint>();
 				}
@@ -93,7 +93,7 @@ namespace Google.Maps.DistanceMatrix
 		{
 			get
 			{
-				if (waypointsDestination == null)
+				if(waypointsDestination == null)
 				{
 					waypointsDestination = new SortedList<int, Waypoint>();
 				}
@@ -106,7 +106,7 @@ namespace Google.Maps.DistanceMatrix
 		}//end method
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="destination"></param>
 		public void AddOrigin(Waypoint destination)
@@ -115,7 +115,7 @@ namespace Google.Maps.DistanceMatrix
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="destination"></param>
 		public void AddDestination(Waypoint destination)
@@ -124,16 +124,16 @@ namespace Google.Maps.DistanceMatrix
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <returns></returns>
 		internal string WaypointsToUri(SortedList<int, Waypoint> Waypoints)
 		{
-			if (Waypoints.Count == 0) return string.Empty;
+			if(Waypoints.Count == 0) return string.Empty;
 
 			StringBuilder sb = new StringBuilder();
 
-			foreach (Waypoint waypoint in Waypoints.Values)
+			foreach(Waypoint waypoint in Waypoints.Values)
 			{
 				sb.AppendFormat("{0}|", waypoint.ToString());
 			}
@@ -165,9 +165,9 @@ namespace Google.Maps.DistanceMatrix
 
 		private void EnsureSensor(bool throwIfNotSet)
 		{
-			if (Sensor == null)
+			if(Sensor == null)
 			{
-				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
+				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
 				else return;
 			}
 		}

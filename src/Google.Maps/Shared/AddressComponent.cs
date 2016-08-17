@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,23 +51,25 @@ namespace Google.Maps.Shared
 		}
 		public bool Equals(AddressComponent obj)
 		{
-			if(obj==null) return false;
+			if(obj == null) return false;
 
 			if(string.Compare(this.ShortName, obj.ShortName) != 0 || string.Compare(this.LongName, obj.LongName) != 0)
 				return false;
 
-			int thisTypesLength=-1, objTypesLength = -1;
+			int thisTypesLength = -1, objTypesLength = -1;
 			if(this.Types != null) thisTypesLength = this.Types.Length;
 			if(obj.Types != null) objTypesLength = obj.Types.Length;
-			
-			try {
-				for(int i=0; i < objTypesLength; i++)
+
+			try
+			{
+				for(int i = 0; i < objTypesLength; i++)
 				{
 					AddressType thisType = this.Types[i];
 					AddressType objType = obj.Types[i];
 					if(thisType != objType) return false;
 				}
-			} catch { return false; }
+			}
+			catch { return false; }
 
 			//they seem to be equal
 			return true;

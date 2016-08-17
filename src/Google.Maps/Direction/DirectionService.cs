@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,9 +22,9 @@ using System.Globalization;
 namespace Google.Maps.Direction
 {
 	/// <summary>
-	/// 
-	/// 
-	/// 
+	///
+	///
+	///
 	/// </summary>
 	/// <see cref=""/>
 	public class DirectionService
@@ -36,12 +36,13 @@ namespace Google.Maps.Direction
 
 		public Uri BaseUri { get; set; }
 
-		public DirectionService() : this(HttpUri)
+		public DirectionService()
+			: this(HttpUri)
 		{
 		}
 		public DirectionService(Uri baseUri)
 		{
-		  this.BaseUri = baseUri;
+			this.BaseUri = baseUri;
 		}
 		#endregion
 

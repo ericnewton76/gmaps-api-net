@@ -28,9 +28,9 @@ namespace Google.Maps.Test.Elevation
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
 			{
-				if (methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
+				if(methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
 			}
-#endregion
+			#endregion
 
 			public Uri ToUri()
 			{
@@ -38,7 +38,7 @@ namespace Google.Maps.Test.Elevation
 				{
 					return (Uri)S_ToUriMethod.Invoke(this, new object[] { });
 				}
-				catch (TargetInvocationException ex)
+				catch(TargetInvocationException ex)
 				{
 					throw ex.InnerException;
 				}

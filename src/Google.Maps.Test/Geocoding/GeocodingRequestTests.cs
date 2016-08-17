@@ -31,7 +31,7 @@ namespace Google.Maps.Test
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
 			{
-				if (methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
+				if(methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
 			}
 
 			#region Protected/Private interface
@@ -41,7 +41,7 @@ namespace Google.Maps.Test
 				{
 					return (Uri)_ToUri.Invoke(_instance, new object[] { });
 				}
-				catch (TargetInvocationException ex)
+				catch(TargetInvocationException ex)
 				{
 					throw ex.InnerException;
 				}
@@ -49,8 +49,8 @@ namespace Google.Maps.Test
 			#endregion
 
 			#region Public interface copy
-			public Location Address 
-			{ 
+			public Location Address
+			{
 				get { return _instance.Address; }
 				set { this._instance.Address = value; }
 			}
@@ -121,7 +121,7 @@ namespace Google.Maps.Test
 		public void LatLng_for_address_will_invoke_reverse_geocoding()
 		{
 			var req = new GeocodingRequestAccessor();
-			
+
 			req.Sensor = false;
 			req.Address = new LatLng(-30.1d, 40.2d); //using -30.1f,40.2f gives precision error beyond 6 digits when using format "R". strange.
 

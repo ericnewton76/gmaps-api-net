@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -58,20 +58,20 @@ namespace Google.Maps.Geocoding
 		[JsonProperty("geometry")]
 		public Geometry Geometry { get; set; }
 
-        /// <summary>
-        /// Indicates that the geocoder did not return an exact match for the
-        /// original request, though it was able to match part of the requested address.
-        /// </summary>
-        [JsonProperty("partial_match")]
-        public bool PartialMatch { get; set; }
+		/// <summary>
+		/// Indicates that the geocoder did not return an exact match for the
+		/// original request, though it was able to match part of the requested address.
+		/// </summary>
+		[JsonProperty("partial_match")]
+		public bool PartialMatch { get; set; }
 
-        /// <summary>
-        /// Is a unique identifier that can be used with other Google APIs.For example, you can use
-        /// the place_id in a <see href="https://developers.google.com/places/web-service/details">Google Places API</see>
-        /// request to get details of a local business, such as phone number, opening hours, user reviews, and more. See
-        /// the <see href="https://developers.google.com/places/place-id">place ID overview</see>.
-        /// </summary>
-        [JsonProperty("place_id")]
-        public string PlaceId { get; set; }
-    }
+		/// <summary>
+		/// Is a unique identifier that can be used with other Google APIs.For example, you can use
+		/// the place_id in a <see href="https://developers.google.com/places/web-service/details">Google Places API</see>
+		/// request to get details of a local business, such as phone number, opening hours, user reviews, and more. See
+		/// the <see href="https://developers.google.com/places/place-id">place ID overview</see>.
+		/// </summary>
+		[JsonProperty("place_id")]
+		public string PlaceId { get; set; }
+	}
 }

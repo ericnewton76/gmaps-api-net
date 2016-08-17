@@ -30,7 +30,7 @@ namespace Google.Maps.Test
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
 			{
-				if (methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
+				if(methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
 			}
 
 			#region Protected/Private interface
@@ -40,14 +40,14 @@ namespace Google.Maps.Test
 				{
 					return (Uri)_ToUri.Invoke(this, new object[] { });
 				}
-				catch (TargetInvocationException ex)
+				catch(TargetInvocationException ex)
 				{
 					throw ex.InnerException;
 				}
 			}
 			#endregion
 
-		
+
 		}
 
 		//[Test]
@@ -149,7 +149,7 @@ namespace Google.Maps.Test
 			var req = new DirectionRequestAccessor();
 			req.Sensor = false;
 			req.Origin = new LatLng(30.2, 40.3);
-			req.Destination = new LatLng(50.5,60.6);
+			req.Destination = new LatLng(50.5, 60.6);
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
 
 			Uri expected = new Uri("json?origin=30.2,40.3&destination=50.5,60.6&sensor=false", UriKind.Relative);

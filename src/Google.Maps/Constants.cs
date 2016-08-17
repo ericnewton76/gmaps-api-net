@@ -21,16 +21,16 @@ namespace Google.Maps
 		private static string[] S_ExpectedNamedColors;
 		public static bool IsExpectedNamedColor(string value)
 		{
-			if (value == null) return false;
+			if(value == null) return false;
 			return (Contains(S_ExpectedNamedColors, value, true));
 		}
 
 		private static int[] S_ExpectedScaleValues;
 		public static bool IsExpectedScaleValue(int value, bool throwIfOutOfRange)
 		{
-			if (Contains(S_ExpectedScaleValues, value) == true) return true;
+			if(Contains(S_ExpectedScaleValues, value) == true) return true;
 
-			if (throwIfOutOfRange)
+			if(throwIfOutOfRange)
 				throw new ArgumentOutOfRangeException("Scale value can only be " + ListValues(S_ExpectedScaleValues));
 			else
 				return false;
@@ -46,9 +46,9 @@ namespace Google.Maps
 		private static bool Contains(string[] array, string value, bool ignoreCase)
 		{
 			//TODO: rewrite for speed somehow
-			for (int i = 0; i < array.Length; i++)
+			for(int i = 0; i < array.Length; i++)
 			{
-				if (string.Compare(array[i], value, ignoreCase) == 0) return true;
+				if(string.Compare(array[i], value, ignoreCase) == 0) return true;
 			}
 
 			return false;
@@ -56,9 +56,9 @@ namespace Google.Maps
 		private static bool Contains(int[] array, int value)
 		{
 			//TODO: rewrite for speed somehow
-			for (int i = 0; i < array.Length; i++)
+			for(int i = 0; i < array.Length; i++)
 			{
-				if (array[i] == value) return true;
+				if(array[i] == value) return true;
 			}
 
 			return false;
@@ -67,9 +67,9 @@ namespace Google.Maps
 		{
 			//TODO: rewrite for speed somehow
 			System.Text.StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < array.Length; i++)
+			for(int i = 0; i < array.Length; i++)
 			{
-				if (sb.Length > 0) sb.Append(",");
+				if(sb.Length > 0) sb.Append(",");
 				sb.Append(array[i]);
 			}
 			return sb.ToString();

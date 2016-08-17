@@ -20,7 +20,7 @@ namespace Google.Maps
 		/// <param name="value"></param>
 		public Location(string value)
 		{
-			if (value != null) this._value = value.Trim();
+			if(value != null) this._value = value.Trim();
 		}
 
 		private string _value;

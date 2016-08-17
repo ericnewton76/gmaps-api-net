@@ -18,15 +18,15 @@ namespace Google.Maps.Test
 
 		public int Compare(ValueText x, ValueText y)
 		{
-			if (x == null && y == null) return 0;
+			if(x == null && y == null) return 0;
 
 			int test;
 
 			test = this._stringComparer.Compare(x.Text, y.Text);
-			if (test != 0) return test;
+			if(test != 0) return test;
 
 			test = this._stringComparer.Compare(x.Value, y.Value);
-			if (test != 0) return test;
+			if(test != 0) return test;
 
 			//i guess they're the same.
 			return 0;

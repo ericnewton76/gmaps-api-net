@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,10 +29,10 @@ namespace Google.Maps.Test.Integrations
 
 		private static double GetTolerance(double expected, int decimalPrecision)
 		{
-			int magnitude = 1 +(expected==0.0 ? -1 : Convert.ToInt32(Math.Floor(Math.Log10(expected))));
+			int magnitude = 1 + (expected == 0.0 ? -1 : Convert.ToInt32(Math.Floor(Math.Log10(expected))));
 			int precision = 15 - magnitude;
 
-			double tolerance = 1.0 / Math.Pow(10,precision);
+			double tolerance = 1.0 / Math.Pow(10, precision);
 
 			return tolerance;
 		}
@@ -96,10 +96,10 @@ namespace Google.Maps.Test.Integrations
 			// expectations
 			var expectedStatus = ServiceResponseStatus.Ok;
 			var expectedRoutesCount = 1;
-			
+
 			var expectedEndAddress = "Montreal, QC, Canada";
 			var expectedEndLocation = new LatLng(45.508570, -73.553770);
-			
+
 			var expectedStartAddress = "Toronto, ON, Canada";
 			var expectedStartLocation = new LatLng(43.653310, -79.382770);
 
@@ -120,7 +120,7 @@ namespace Google.Maps.Test.Integrations
 			request.Origin = "Toronto";
 			request.Destination = "Montreal";
 			request.Sensor = false;
-			
+
 			var response = new DirectionService().GetResponse(request);
 
 			// asserts
@@ -131,7 +131,7 @@ namespace Google.Maps.Test.Integrations
 
 			Assert.That(expectedStartAddress, Is.EqualTo(currentLeg.StartAddress), "Leg.StartAddress");
 			Assert.That(expectedStartLocation, Is.EqualTo(currentLeg.StartLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.StartLocation");
-			
+
 			Assert.That(expectedEndAddress, Is.EqualTo(currentLeg.EndAddress), "Leg.EndAddress");
 			Assert.That(expectedEndLocation, Is.EqualTo(currentLeg.EndLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.EndLocation");
 

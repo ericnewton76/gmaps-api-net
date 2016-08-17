@@ -23,16 +23,16 @@ namespace Google.Maps
 
 		public bool Equals(Viewport x, Viewport y)
 		{
-			if (x == null || y == null) return false;
+			if(x == null || y == null) return false;
 
-			if (x.Northeast == null || y.Northeast == null) return false;
-			if (x.Southwest == null || y.Southwest == null) return false;
+			if(x.Northeast == null || y.Northeast == null) return false;
+			if(x.Southwest == null || y.Southwest == null) return false;
 
 			LatLngComparer c = LatLngComparer.Within(this.Epsilon);
-			if (c.Equals(x.Northeast, y.Northeast) == false)
+			if(c.Equals(x.Northeast, y.Northeast) == false)
 				return false;
 
-			if (c.Equals(x.Southwest, y.Southwest) == false)
+			if(c.Equals(x.Southwest, y.Southwest) == false)
 				return false;
 
 			return true;

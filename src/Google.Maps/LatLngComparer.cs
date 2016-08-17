@@ -23,12 +23,12 @@ namespace Google.Maps
 
 		public bool Equals(LatLng x, LatLng y)
 		{
-			if (x == null || y == null) return false;
+			if(x == null || y == null) return false;
 
-			if(this.Equals(x.Latitude,y.Latitude, this._epsilon)==false)
+			if(this.Equals(x.Latitude, y.Latitude, this._epsilon) == false)
 				return false;
 
-			if (this.Equals(x.Longitude, y.Longitude, this._epsilon) == false)
+			if(this.Equals(x.Longitude, y.Longitude, this._epsilon) == false)
 				return false;
 
 			return true;
@@ -46,7 +46,7 @@ namespace Google.Maps
 			double absB = Math.Abs(b);
 			double diff = Math.Abs(a - b);
 
-			if (a * b == 0)
+			if(a * b == 0)
 			{ // a or b or both are zero
 				// relative error is not meaningful here
 				return diff < (epsilon * epsilon);

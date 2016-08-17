@@ -10,19 +10,19 @@ namespace Google.Maps.Internal
 
 		public static string GetLatLngCollectionStr(IEnumerable<LatLng> locationsCollection, int encodedPolylineThreshold = 3)
 		{
-			if (locationsCollection == null) return null;
+			if(locationsCollection == null) return null;
 
 			int countOfItems = locationsCollection.Count();
-			if (countOfItems >= encodedPolylineThreshold)
+			if(countOfItems >= encodedPolylineThreshold)
 			{
 				return Constants.PATH_ENCODED_PREFIX + PolylineEncoder.EncodeCoordinates(locationsCollection);
 			}
 			else
 			{
 				System.Text.StringBuilder sb = new StringBuilder(countOfItems * 22); // normally latlng's are -40.454545,-90.454545 so I picked a "larger than average" of 22 digits.
-				foreach (LatLng position in locationsCollection)
+				foreach(LatLng position in locationsCollection)
 				{
-					if (sb.Length > 0) sb.Append("|");
+					if(sb.Length > 0) sb.Append("|");
 					sb.Append(position.GetAsUrlParameter());
 				}
 

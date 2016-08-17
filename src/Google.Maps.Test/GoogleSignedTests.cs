@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Google.Maps.Test
 {
-	[TestFixture] 
+	[TestFixture]
 	class GoogleSignedTests
 	{
 

@@ -10,9 +10,9 @@ namespace Google.Maps.Test
 	 * These tests require a real Google Maps for Business Client ID and Signing key.
 	 * This information should be stored in the PrivateSigningKeys.txt file, with the
 	 * Client ID on line 1, and the Signing Key on line 2.
-	 * 
+	 *
 	 * The .gitignore prevents this file from being checked into GitHub :)
-	 * 
+	 *
 	 * If this file does not exist then the tests will do an Assert.Ignore
 	 */
 
@@ -25,7 +25,7 @@ namespace Google.Maps.Test
 		{
 			try
 			{
-				using (var keys = new StreamReader(@"..\..\PrivateSigningKeys.txt"))
+				using(var keys = new StreamReader(@"..\..\PrivateSigningKeys.txt"))
 				{
 					var clientid = keys.ReadLine().Trim();
 					var privateKey = keys.ReadLine().Trim();
@@ -33,7 +33,7 @@ namespace Google.Maps.Test
 					return new GoogleSigned(clientid, privateKey);
 				}
 			}
-			catch (FileNotFoundException)
+			catch(FileNotFoundException)
 			{
 				Assert.Ignore("PrivateSigningKeys.txt could not be found - ignoring test");
 				return null;

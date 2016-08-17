@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,11 +34,11 @@ namespace Google.Maps.Elevation
 		/// </summary>
 		/// <remarks>Required if path not present.</remarks>
 		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Locations"/>
-		public IList<LatLng> Locations 
+		public IList<LatLng> Locations
 		{
-			get 
+			get
 			{
-				if (_locations == null) _locations = new List<LatLng>();
+				if(_locations == null) _locations = new List<LatLng>();
 				return _locations;
 			}
 		}
@@ -50,10 +50,10 @@ namespace Google.Maps.Elevation
 		/// <param name="locationCollection"></param>
 		public void AddLocations(params LatLng[] locationCollection)
 		{
-			if (locationCollection == null) return;
+			if(locationCollection == null) return;
 
 			IList<LatLng> myLocations = this.Locations;
-			foreach (LatLng item in locationCollection)
+			foreach(LatLng item in locationCollection)
 			{
 				this.Locations.Add(item);
 			}
@@ -72,7 +72,7 @@ namespace Google.Maps.Elevation
 		{
 			get
 			{
-				if (this._path == null) this._path = new List<LatLng>();
+				if(this._path == null) this._path = new List<LatLng>();
 				return this._path;
 			}
 		}
@@ -113,9 +113,9 @@ namespace Google.Maps.Elevation
 
 		private void EnsureSensor(bool throwIfNotSet)
 		{
-			if (Sensor == null)
+			if(Sensor == null)
 			{
-				if (throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
+				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
 				else return;
 			}
 		}

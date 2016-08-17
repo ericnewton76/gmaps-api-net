@@ -13,7 +13,7 @@ namespace Google.Maps.Test
 		[Test]
 		public void encode_coords_1()
 		{
-			LatLng[] points = new LatLng[] { 
+			LatLng[] points = new LatLng[] {
 				new LatLng(38.5,-120.2),
 				new LatLng(40.7,-120.95),
 				new LatLng(43.252,-126.453)
@@ -30,7 +30,7 @@ namespace Google.Maps.Test
 		{
 			string value = "_p~iF~ps|U_ulLnnqC_mqNvxq`@";
 
-			LatLng[] expected = new LatLng[] { 
+			LatLng[] expected = new LatLng[] {
 				new LatLng(38.5,-120.2),
 				new LatLng(40.7,-120.95),
 				new LatLng(43.252,-126.453)
@@ -42,7 +42,7 @@ namespace Google.Maps.Test
 
 			Assert.AreEqual(expected.Length, actual.Length, "Length");
 
-			for(int i=0; i<actual.Length;i++)
+			for(int i = 0; i < actual.Length; i++)
 			{
 				Assert.AreEqual(expected[i].Latitude, actual[i].Latitude);
 				Assert.AreEqual(expected[i].Longitude, actual[i].Longitude);

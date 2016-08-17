@@ -164,7 +164,7 @@ namespace Google.Maps.Test.StaticMaps
 				{
 					return (string)method.Invoke(_instance, new object[] { });
 				}
-				catch (TargetInvocationException ex)
+				catch(TargetInvocationException ex)
 				{
 					throw ex.InnerException;
 				}
@@ -206,10 +206,12 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Path_NonstandardColor_EncodedProperly()
 		{
-			var map = new StaticMapRequest {
+			var map = new StaticMapRequest
+			{
 				Sensor = false
 			};
-			map.Paths.Add(new Path(new LatLng(30.0, -60.0)) {
+			map.Paths.Add(new Path(new LatLng(30.0, -60.0))
+			{
 				Color = System.Drawing.Color.FromArgb(0x80, 0xA0, 0xC0)
 			});
 			string color = ExtractColorFromUri(map.ToUri());
@@ -233,7 +235,8 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void TwoPaths()
 		{
-			var map = new StaticMapRequest {
+			var map = new StaticMapRequest
+			{
 				Sensor = false
 			};
 			map.Paths.Add(GreenTriangleInAdaMN());
@@ -253,7 +256,8 @@ namespace Google.Maps.Test.StaticMaps
 				new LatLng(47.2949, -96.4999),
 				new LatLng(47.2868, -96.5003),
 				new LatLng(47.3017, -96.5299)
-			) {
+			)
+			{
 				Color = System.Drawing.Color.Green
 			};
 		}
@@ -265,9 +269,10 @@ namespace Google.Maps.Test.StaticMaps
 				new LatLng(47.3103, -96.5219),
 				new LatLng(47.3045, -96.5219),
 				new LatLng(47.3105, -96.5326)
-			) {
+			)
+			{
 				Color = System.Drawing.Color.Red
-			};;
+			}; ;
 		}
 
 		private static string ExtractColorFromUri(Uri uri)

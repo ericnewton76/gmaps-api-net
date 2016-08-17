@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,23 +33,23 @@ namespace Google.Maps.Geocoding
 		/// <remarks>Required if latlng not present.</remarks>
 		public Location Address { get; set; }
 
-        /// <summary>
-        /// Undocumented address component filters.
-        /// Only geocoding results matching the component filters will be returned.
-        /// </summary>
-        /// <remarks>IE: country:uk|locality:stathern</remarks>
-        public ComponentFilter Components { get; set; }
+		/// <summary>
+		/// Undocumented address component filters.
+		/// Only geocoding results matching the component filters will be returned.
+		/// </summary>
+		/// <remarks>IE: country:uk|locality:stathern</remarks>
+		public ComponentFilter Components { get; set; }
 
-        /// <summary>
-        /// The bounding box of the viewport within which to bias geocode
-        /// results more prominently.
-        /// </summary>
-        /// <remarks>
-        /// Optional. This parameter will only influence, not fully restrict, results
-        /// from the geocoder.
-        /// </remarks>
-        /// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
-        public Viewport Bounds { get; set; }
+		/// <summary>
+		/// The bounding box of the viewport within which to bias geocode
+		/// results more prominently.
+		/// </summary>
+		/// <remarks>
+		/// Optional. This parameter will only influence, not fully restrict, results
+		/// from the geocoder.
+		/// </remarks>
+		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
+		public Viewport Bounds { get; set; }
 
 		/// <summary>
 		/// The region code, specified as a ccTLD ("top-level domain")
@@ -84,19 +84,19 @@ namespace Google.Maps.Geocoding
 
 			var qsb = new Internal.QueryStringBuilder();
 
-            if (Address != null)
-            {
-                if (this.Address.GetType() == typeof(LatLng))
-                {
-                    qsb.Append("latlng", Address.GetAsUrlParameter());
-                }
-                else
-                {
-                    qsb.Append("address", Address.GetAsUrlParameter());
-                }
-            }
+			if(Address != null)
+			{
+				if(this.Address.GetType() == typeof(LatLng))
+				{
+					qsb.Append("latlng", Address.GetAsUrlParameter());
+				}
+				else
+				{
+					qsb.Append("address", Address.GetAsUrlParameter());
+				}
+			}
 
-            qsb.Append("bounds", GetBoundsStr())
+			qsb.Append("bounds", GetBoundsStr())
 				.Append("components", Components != null ? Components.ToUrlParameters() : "")
 				.Append("region", Region)
 				.Append("language", Language)
@@ -109,7 +109,7 @@ namespace Google.Maps.Geocoding
 
 		private string GetBoundsStr()
 		{
-			if (this.Bounds == null) return null;
+			if(this.Bounds == null) return null;
 
 			string swStr = this.Bounds.Southwest.GetAsUrlParameter();
 			string neStr = this.Bounds.Northeast.GetAsUrlParameter();
@@ -119,7 +119,7 @@ namespace Google.Maps.Geocoding
 
 		private void EnsureSensor()
 		{
-			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
+			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
 	}
 }

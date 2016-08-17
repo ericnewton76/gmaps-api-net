@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Google.Maps.Test.Places
 {
-    [TestFixture]
-    public class PlacesServiceTests
-    {
-    }
+	[TestFixture]
+	public class PlacesServiceTests
+	{
+	}
 }

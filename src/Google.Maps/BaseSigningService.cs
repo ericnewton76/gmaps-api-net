@@ -9,7 +9,7 @@ namespace Google.Maps
 	public abstract class BaseSigningService
 	{
 		private static Dictionary<Type, GoogleSigned> S_SigningInstances = new Dictionary<Type, GoogleSigned>();
-		
+
 		internal static void AssignSigningInstance(BaseSigningService serviceInstance, GoogleSigned signingInstance)
 		{
 			S_SigningInstances[serviceInstance.GetType()] = signingInstance;
@@ -19,7 +19,7 @@ namespace Google.Maps
 		{
 			GoogleSigned instance;
 
-			if (S_SigningInstances.TryGetValue(this.GetType(), out instance) == false)
+			if(S_SigningInstances.TryGetValue(this.GetType(), out instance) == false)
 				return null;
 			else
 				return instance;

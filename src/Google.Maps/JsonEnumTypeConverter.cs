@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ namespace Google.Maps
 		{
 			var result = ServiceResponseStatus.Unknown;
 
-			switch (s)
+			switch(s)
 			{
 				case "OK":
 					result = ServiceResponseStatus.Ok;
@@ -55,7 +55,7 @@ namespace Google.Maps
 		{
 			var result = AddressType.Unknown;
 
-			switch (s)
+			switch(s)
 			{
 				case "street_address":
 					result = AddressType.StreetAddress;
@@ -140,7 +140,7 @@ namespace Google.Maps
 		private static Places.PlaceType AsPlaceType(string s)
 		{
 			var result = Places.PlaceType.Unknown;
-			switch (s)
+			switch(s)
 			{
 				case "accounting":
 					result = Places.PlaceType.Accounting;
@@ -528,7 +528,7 @@ namespace Google.Maps
 		{
 			var result = LocationType.Unknown;
 
-			switch (s)
+			switch(s)
 			{
 				case "ROOFTOP":
 					result = LocationType.Rooftop;
@@ -560,16 +560,16 @@ namespace Google.Maps
 		{
 			object result = null;
 
-			if (objectType == typeof(ServiceResponseStatus))
+			if(objectType == typeof(ServiceResponseStatus))
 				result = AsResponseStatus(reader.Value.ToString());
 
-			if (objectType == typeof(AddressType))
+			if(objectType == typeof(AddressType))
 				result = AsAddressType(reader.Value.ToString());
 
-			if (objectType == typeof(LocationType))
+			if(objectType == typeof(LocationType))
 				result = AsLocationType(reader.Value.ToString());
 
-			if (objectType == typeof(Places.PlaceType))
+			if(objectType == typeof(Places.PlaceType))
 				result = AsPlaceType(reader.Value.ToString());
 
 			return result;

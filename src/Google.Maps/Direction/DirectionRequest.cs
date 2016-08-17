@@ -18,7 +18,7 @@ namespace Google.Maps.Direction
 		public Location Destination { get; set; }
 
 		/// <summary>
-		/// Specifies the mode of transport to use when calculating directions. Valid values are specified in <see cref="TravelMode"/>s. 
+		/// Specifies the mode of transport to use when calculating directions. Valid values are specified in <see cref="TravelMode"/>s.
 		/// </summary>
 		//TODO: add transit TravelMode and add to summary: If you set the mode to "transit" you must also specify either a departure_time or an arrival_time.
 		[DefaultValue(TravelMode.driving)]
@@ -31,7 +31,7 @@ namespace Google.Maps.Direction
 		public Avoid Avoid { get; set; }
 
 		/// <summary>
-		/// (optional) If set to true, specifies that the Directions service may provide more than one route alternative in the response. 
+		/// (optional) If set to true, specifies that the Directions service may provide more than one route alternative in the response.
 		/// Note that providing route alternatives may increase the response time from the server.
 		/// </summary>
 		public bool? Alternatives { get; set; }
@@ -41,8 +41,8 @@ namespace Google.Maps.Direction
 		/// <seealso cref="https://developers.google.com/maps/documentation/directions/#RegionBiasing"/>
 		public string Region { get; set; }
 
-		/// <summary>The language in which to return results. See the list of supported domain languages. 
-		/// Note that we often update supported languages so this list may not be exhaustive. 
+		/// <summary>The language in which to return results. See the list of supported domain languages.
+		/// Note that we often update supported languages so this list may not be exhaustive.
 		/// If language is not supplied, the service will attempt to use the native language of the domain from which the request is sent.</summary>
 		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
 		public string Language { get; set; }
@@ -69,21 +69,21 @@ namespace Google.Maps.Direction
 		{
 			get
 			{
-				if (_waypoints == null) return new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
+				if(_waypoints == null) return new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
 				return (IEnumerable<Location>)_waypoints;
 			}
 			set
 			{
-				if (value == null)
+				if(value == null)
 				{
 					//clear our reference.
 					_waypoints = null; return;
 				}
-				
+
 				//see if reference passed is a List<Location> instance.
 				List<Location> list = value as List<Location>;
-				
-				if(list == null) 
+
+				if(list == null)
 					//build a list from the ienumerable passed in.
 					list = new List<Location>(value);
 
@@ -98,20 +98,20 @@ namespace Google.Maps.Direction
 		/// <param name="waypoint"></param>
 		public void AddWaypoint(Location waypoint)
 		{
-			if (waypoint == null) return;
-			if (_waypoints == null) _waypoints = new List<Location>();
+			if(waypoint == null) return;
+			if(_waypoints == null) _waypoints = new List<Location>();
 			_waypoints.Add(waypoint);
 		}
 
 		internal string WaypointsToUri()
 		{
-			if (this._waypoints == null || this._waypoints.Count == 0) return null;
+			if(this._waypoints == null || this._waypoints.Count == 0) return null;
 
 			StringBuilder sb = new StringBuilder();
 
-			foreach (Location waypoint in this._waypoints)
+			foreach(Location waypoint in this._waypoints)
 			{
-				if (sb.Length > 0) sb.Append("|");
+				if(sb.Length > 0) sb.Append("|");
 				sb.Append(waypoint.ToString());
 			}
 
@@ -142,7 +142,7 @@ namespace Google.Maps.Direction
 
 		private void EnsureSensor()
 		{
-			if (this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
+			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
 
 	}

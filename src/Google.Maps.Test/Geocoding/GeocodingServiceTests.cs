@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,10 +29,10 @@ namespace Google.Maps.Test.Integrations
 
 		private static double GetTolerance(double expected, int decimalPrecision)
 		{
-			int magnitude = 1 +(expected==0.0 ? -1 : Convert.ToInt32(Math.Floor(Math.Log10(expected))));
+			int magnitude = 1 + (expected == 0.0 ? -1 : Convert.ToInt32(Math.Floor(Math.Log10(expected))));
 			int precision = 15 - magnitude;
 
-			double tolerance = 1.0 / Math.Pow(10,precision);
+			double tolerance = 1.0 / Math.Pow(10, precision);
 
 			return tolerance;
 		}
@@ -100,8 +100,8 @@ namespace Google.Maps.Test.Integrations
 			var expectedResultCount = 1;
 			var expectedType = AddressType.StreetAddress;
 			var expectedFormattedAddress = "1600 Amphitheatre Parkway, Mountain View, CA 94043, USA";
-			var expectedComponentTypes = new AddressType[] { 
-				AddressType.StreetNumber, 
+			var expectedComponentTypes = new AddressType[] {
+				AddressType.StreetNumber,
 				AddressType.Route,
 				AddressType.Locality,
 				AddressType.AdministrativeAreaLevel1,
@@ -149,9 +149,9 @@ namespace Google.Maps.Test.Integrations
 			GeocodeResponse expected = new GeocodeResponse()
 			{
 				Status = ServiceResponseStatus.Ok,
-				Results = new Result[] { 
+				Results = new Result[] {
 					new Result() {
-						
+
 						AddressComponents = new AddressComponent[] {
 							MakeAddressComponent("11","11",	AddressType.StreetNumber)
 							, MakeAddressComponent("Wall St","Wall Street", AddressType.Route)
@@ -163,7 +163,7 @@ namespace Google.Maps.Test.Integrations
 							, MakeAddressComponent("US", "United States", AddressType.Country, AddressType.Political)
 						}
 						, FormattedAddress = "11 Wall Street, New York, NY 10005, USA"
-						, Geometry = MakeGeometry(LocationType.Rooftop, 
+						, Geometry = MakeGeometry(LocationType.Rooftop,
 								40.7068599,-74.0111281 //location
 								, 40.7055109,-74.0124771 //swBound
 								, 40.7082089,-74.0097791) //neBound
@@ -182,13 +182,13 @@ namespace Google.Maps.Test.Integrations
 			// asserts
 			Assert.AreEqual(expected.Status, actual.Status, "Status");
 			Assert.AreEqual(expected.Results.Length, actual.Results.Length, "ResultCount");
-			
+
 			var expectedResult = expected.Results.First(); var actualResult = actual.Results.First();
 			Assert.AreEqual(expectedResult.Types, actualResult.Types, "Result.First().Types");
 			Assert.AreEqual(expectedResult.FormattedAddress, actualResult.FormattedAddress, "Resut.First().FormattedAddress");
 
 			//Assert.That(expectedResult.AddressComponents, Is.EquivalentTo(actualResult.AddressComponents));
-			
+
 			//Assert.IsTrue(
 			//    expectedComponentTypes.OrderBy(x => x).SequenceEqual(
 			//        response.Results.Single().AddressComponents.SelectMany(y => y.Types).Distinct().OrderBy(z => z)), "Types");
@@ -198,7 +198,7 @@ namespace Google.Maps.Test.Integrations
 			//double tolerance = GetTolerance(expectedResult.Geometry.Viewport.Southwest.Latitude, 7);
 			//Assert.That(expectedResult.Geometry.Viewport.Southwest, Is.EqualTo(actualResult.Geometry.Viewport.Southwest).Within(latlngTolerance));
 			//Assert.That(expectedResult.Geometry.Viewport.Southwest, Is.EqualTo(actualResult.Geometry.Viewport.Southwest).Within(0.0000001d));
-			
+
 			//Assert.AreEqual(expectedLatitude, response.Results.Single().Geometry.Location.Latitude, "Latitude");
 			//Assert.AreEqual(expectedLongitude, response.Results.Single().Geometry.Location.Longitude, "Longitude");
 			//Assert.AreEqual(expectedLocationType, response.Results.Single().Geometry.LocationType, "LocationType");
@@ -225,8 +225,8 @@ namespace Google.Maps.Test.Integrations
 		//        AddressType.Political
 		//    };
 		//    var expectedFormattedAddress = "277 Bedford Ave, Brooklyn, NY 11211, USA";
-		//    var expectedComponentTypes = new AddressType[] { 
-		//        AddressType.StreetNumber, 
+		//    var expectedComponentTypes = new AddressType[] {
+		//        AddressType.StreetNumber,
 		//        AddressType.Route,
 		//        AddressType.Locality,
 		//        AddressType.AdministrativeAreaLevel1,

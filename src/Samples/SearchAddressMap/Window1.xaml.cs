@@ -21,7 +21,7 @@ namespace SearchAddressMap
 
 		private void refreshMap()
 		{
-			if (resultsTreeView.SelectedItem == null) return;
+			if(resultsTreeView.SelectedItem == null) return;
 
 			var location = ((LatLng)((TreeViewItem)resultsTreeView.SelectedItem).Tag);
 			var map = new StaticMapRequest();
@@ -29,7 +29,7 @@ namespace SearchAddressMap
 			map.Zoom = Convert.ToInt32(zoomSlider.Value);
 			map.Size = new System.Drawing.Size(332, 332);
 			map.Markers.Add(map.Center);
-			map.MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(),true);
+			map.MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true);
 			map.Sensor = false;
 
 			var image = new BitmapImage();
@@ -53,7 +53,7 @@ namespace SearchAddressMap
 			request.Sensor = false;
 			var response = new GeocodingService().GetResponse(request);
 
-			if (response.Status == ServiceResponseStatus.Ok)
+			if(response.Status == ServiceResponseStatus.Ok)
 			{
 				resultsTreeView.ItemsSource = response.Results.ToTree();
 			}
@@ -66,7 +66,7 @@ namespace SearchAddressMap
 
 		private void zoomSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
-			if (zoomLabel != null)
+			if(zoomLabel != null)
 			{
 				zoomLabel.Content = zoomSlider.Value.ToString("0x");
 				refreshMap();

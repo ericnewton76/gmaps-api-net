@@ -26,7 +26,7 @@ namespace Google.Maps.Test
 		[TestCase(40.7142330d, -73.9612910d, "40.714233,-73.961291")]
 		public void GetAsUrlEncoded(double lat, double lng, string expected)
 		{
-			LatLng latlng = new LatLng(lat,lng);
+			LatLng latlng = new LatLng(lat, lng);
 
 			//string expected = "-35.335300,95.445400";
 			string actual = latlng.GetAsUrlParameter();
@@ -71,7 +71,7 @@ namespace Google.Maps.Test
 		}
 
 		[Test]
-		[TestCase(30.1d,60.2d)]
+		[TestCase(30.1d, 60.2d)]
 		public void Equals(double lat, double lng)
 		{
 			LatLng latLng1 = new LatLng(lat, lng);
@@ -81,7 +81,7 @@ namespace Google.Maps.Test
 		}
 
 		[Test]
-		[TestCase(40.2d,70.3d)]
+		[TestCase(40.2d, 70.3d)]
 		public void NotEquals(double lat, double lng)
 		{
 			LatLng latLng1 = new LatLng(lat, lng);
@@ -91,7 +91,7 @@ namespace Google.Maps.Test
 
 			LatLng latLng3 = new LatLng(lat, 0d);
 			Assert.IsFalse(latLng1.Equals(latLng3));
-			
+
 			LatLng latLng4 = new LatLng(0d, 0d);
 			Assert.IsFalse(latLng1.Equals(latLng4));
 		}

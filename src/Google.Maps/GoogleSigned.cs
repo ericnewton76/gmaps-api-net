@@ -64,7 +64,7 @@ namespace Google.Maps
 
 		public string GetSignedUri(Uri uri)
 		{
-			var builder = new UriBuilder(uri); if (_signType == GoogleSignedType.Business)
+			var builder = new UriBuilder(uri); if(_signType == GoogleSignedType.Business)
 			{
 				builder.Query = builder.Query.Substring(1) + "&client=" + _clientId;
 				uri = builder.Uri;

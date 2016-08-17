@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -113,7 +113,7 @@ namespace Google.Maps
 		/// <returns></returns>
 		public override string GetAsUrlParameter()
 		{
-			//we're not returning crazy characters so just return the string.  
+			//we're not returning crazy characters so just return the string.
 			//prevents the comma from being converted to %2c, expanding the single character to three characters.
 			return this.ToString("R");
 		}
@@ -126,13 +126,13 @@ namespace Google.Maps
 		/// <returns></returns>
 		public static LatLng Parse(string value)
 		{
-			if (value == null) throw new ArgumentNullException("value");
+			if(value == null) throw new ArgumentNullException("value");
 
 			try
 			{
 				string[] parts = value.Split(',');
 
-				if (parts.Length != 2) throw new FormatException("Missing data for points.");
+				if(parts.Length != 2) throw new FormatException("Missing data for points.");
 
 				double latitude = double.Parse(parts[0].Trim(), CultureInfo.InvariantCulture);
 				double longitude = double.Parse(parts[1].Trim(), CultureInfo.InvariantCulture);
@@ -141,7 +141,7 @@ namespace Google.Maps
 
 				return latlng;
 			}
-			catch (Exception ex)
+			catch(Exception ex)
 			{
 				throw new FormatException("Failed to parse LatLng.", ex);
 			}
@@ -158,7 +158,7 @@ namespace Google.Maps
 		public static bool TryParse(string value, out LatLng result)
 		{
 			result = null;
-			if (value == null) return false;
+			if(value == null) return false;
 
 			try
 			{
@@ -180,9 +180,9 @@ namespace Google.Maps
 
 		public bool Equals(LatLng other)
 		{
-			if (other == null) return false;
+			if(other == null) return false;
 
-			if (other.Latitude == this.Latitude && other.Longitude == this.Longitude)
+			if(other.Latitude == this.Latitude && other.Longitude == this.Longitude)
 			{
 				return true;
 			}

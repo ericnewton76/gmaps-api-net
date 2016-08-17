@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,8 +22,8 @@ using System.Net;
 namespace Google.Maps.StaticMaps
 {
 	/// <summary>
-	/// The Google Static Maps API lets you embed a Google Maps image on your web page without requiring JavaScript or any dynamic page 
-	/// loading. The Google Static Map service creates your map based on URL parameters sent through a standard HTTP request and returns the 
+	/// The Google Static Maps API lets you embed a Google Maps image on your web page without requiring JavaScript or any dynamic page
+	/// loading. The Google Static Map service creates your map based on URL parameters sent through a standard HTTP request and returns the
 	/// map as an image you can display on your web page.
 	/// </summary>
 	/// <see cref="https://developers.google.com/maps/documentation/staticmaps/"/>
@@ -36,7 +36,8 @@ namespace Google.Maps.StaticMaps
 
 		public Uri BaseUri { get; set; }
 
-		public StaticMapService() : this(HttpUri)
+		public StaticMapService()
+			: this(HttpUri)
 		{
 		}
 		public StaticMapService(Uri baseUri)
@@ -69,7 +70,7 @@ namespace Google.Maps.StaticMaps
 		{
 			Uri requestUri = new Uri(BaseUri, mapOptions.ToUri());
 			GoogleSigned signingInstance = GoogleSigned.SigningInstance;
-			if (signingInstance != null)
+			if(signingInstance != null)
 			{
 				requestUri = new Uri(signingInstance.GetSignedUri(requestUri));
 			}
@@ -78,11 +79,11 @@ namespace Google.Maps.StaticMaps
 
 			WebRequest request = WebRequest.Create(requestUri);
 
-			using (WebResponse response = request.GetResponse())
+			using(WebResponse response = request.GetResponse())
 			{
 				Stream inputStream = response.GetResponseStream();
 
-				int bytesRead = 0; 
+				int bytesRead = 0;
 				const int BYTE_BUFFER_LENGTH = 4096;
 				byte[] buffer = new byte[BYTE_BUFFER_LENGTH];
 
@@ -92,7 +93,7 @@ namespace Google.Maps.StaticMaps
 					outputStream.Write(buffer, 0, bytesRead);
 					totalBytes += bytesRead;
 				}
-				while (bytesRead > 0);
+				while(bytesRead > 0);
 			}
 
 			return totalBytes;
