@@ -108,4 +108,11 @@ Questions, comments and/or suggestions are welcome! You can send an email to
 - Luis at [mailto:luisfarzati@katulu.net luisfarzati@katulu.net], or Twitter: [http://twitter.com/luisfarzati]
 - Eric Newton [mailto:ericnewton76@gmail.com ericnewton76@gmail.com]
 
-*Thank you!*
+## A note to Contributors
+Hello all, in order to maintain the project files' formatting, please get the EditorConfig plugin that works with your favorite IDE.  Many options available.  
+
+This will go a long ways towards helping to maintain formatting so that actual changes arent lost in formatting changes... And that's a good thing, yes?  :wink:
+
+The .editorconfig file specifies the desired formatting.  It basically uses an out-of-the-box Visual Studio 2013 C# editor configuration.
+
+And to all who contribute... *Thank you!*
