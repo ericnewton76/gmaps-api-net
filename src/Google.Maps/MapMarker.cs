@@ -80,8 +80,25 @@ namespace Google.Maps
 		[DefaultValue(true)]
 		public bool? Shadow { get; set; }
 
+    /// <summary>
+		/// Affects the number of pixels marker can use. Markers are limited to sizes of 4096 pixels (64x64 for square images) by default. 
+		/// This is useful when developing for high-resolution displays, or when generating a map for printing. 
+		/// The default value is 1. Accepted values are 2 and 4 (4 is only available to Maps API for Business customers.)
+		/// See http://stackoverflow.com/questions/10336646/how-can-i-use-high-resolution-custom-markers-with-the-scale-parameter-in-google
+		/// </summary>
+		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#scale_values</remarks>
+		public int? Scale {
+      get { return _scale; }
+      set {
+        if (value != null) {
+          Constants.IsExpectedScaleValue(value.Value, true);
+        }
+        _scale = value;
+      }
+    }
+    private int? _scale;
 
-		public static implicit operator MapMarkers(Location location)
+    public static implicit operator MapMarkers(Location location)
 		{
 			return new MapMarkers(location);
 		}

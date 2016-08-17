@@ -438,8 +438,14 @@ namespace Google.Maps.StaticMaps
 					}
 				}
 
-				//iterate the locations
-				foreach (Location loc in current.Locations)
+        //add a custom scale param
+        if (current.Scale != null) {
+          if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
+          sb.AppendFormat("scale:{0}", current.Scale.Value);
+        }
+
+        //iterate the locations
+        foreach (Location loc in current.Locations)
 				{
 					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.Append(loc.GetAsUrlParameter());
