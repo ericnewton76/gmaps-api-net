@@ -102,7 +102,13 @@
     <Compile Include="Direction\DirectionRoute.cs" />
     <Compile Include="Direction\DirectionService.cs" />
     <Compile Include="Direction\DirectionStep.cs" />
+    <Compile Include="Direction\DirectionTransitDetails.cs" />
+    <Compile Include="Direction\LineInfo.cs" />
     <Compile Include="Direction\Polyline.cs" />
+    <Compile Include="Direction\Stop.cs" />
+    <Compile Include="Direction\Time.cs" />
+    <Compile Include="Direction\TransitAgency .cs" />
+    <Compile Include="Direction\VehicleInfo.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixRequest.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixResponse.cs" />
     <Compile Include="DistanceMatrix\DistanceMatrixResponseStatus.cs" />
