@@ -51,20 +51,20 @@ namespace Google.Maps.Test
 			Assert.Pass();
 		}
 
-	    [Test]
-	    public void PartialMatchTest()
-	    {
-            // invalid address results in partial match
-	        var request = new DirectionRequest
-	        {
-                Sensor = false,
-	            Origin = new Location("410 Beeeeeechwood Rd, NJ 07450"),
-	            Destination = new Location("204 Powell Ave, CA 94523")
-	        };
-	        var response = new DirectionService().GetResponse(request);
+		[Test]
+		public void PartialMatchTest()
+		{
+			// invalid address results in partial match
+			var request = new DirectionRequest
+			{
+				Sensor = false,
+				Origin = new Location("410 Beeeeeechwood Rd, NJ 07450"),
+				Destination = new Location("204 Powell Ave, CA 94523")
+			};
+			var response = new DirectionService().GetResponse(request);
 
-            Assert.True(response.GeocodedWaypoints.Any(wp => wp.PartialMatch));
-	    }
+			Assert.True(response.GeocodedWaypoints.Any(wp => wp.PartialMatch));
+		}
 
 	}
 }
