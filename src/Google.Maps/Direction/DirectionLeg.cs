@@ -28,5 +28,11 @@ namespace Google.Maps.Direction
 
 		[JsonProperty("end_address")]
 		public string EndAddress { get; set; }
+		
+		[JsonProperty("arrival_time")]
+        	public Time ArrivalTime { get; set; }
+
+	        [JsonProperty("departure_time")]
+	        public Time DepartureTime { get; set; }
 	}
 }
