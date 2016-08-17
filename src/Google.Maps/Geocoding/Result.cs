@@ -57,5 +57,21 @@ namespace Google.Maps.Geocoding
 
 		[JsonProperty("geometry")]
 		public Geometry Geometry { get; set; }
-	}
+
+        /// <summary>
+        /// Indicates that the geocoder did not return an exact match for the
+        /// original request, though it was able to match part of the requested address.
+        /// </summary>
+        [JsonProperty("partial_match")]
+        public bool PartialMatch { get; set; }
+
+        /// <summary>
+        /// Is a unique identifier that can be used with other Google APIs.For example, you can use
+        /// the place_id in a <see href="https://developers.google.com/places/web-service/details">Google Places API</see>
+        /// request to get details of a local business, such as phone number, opening hours, user reviews, and more. See
+        /// the <see href="https://developers.google.com/places/place-id">place ID overview</see>.
+        /// </summary>
+        [JsonProperty("place_id")]
+        public string PlaceId { get; set; }
+    }
 }
