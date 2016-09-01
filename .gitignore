@@ -150,4 +150,4 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
-/src/Google.Maps/project.lock.json
+project.lock.json

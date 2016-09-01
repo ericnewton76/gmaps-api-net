@@ -23,9 +23,9 @@ namespace Google.Maps.Test
 			{
 				S_instanceType = typeof(DirectionRequest);
 
-				try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { }); }
-				catch { }
-				finally { Ensure(_ToUri, "ToUri"); }
+                try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance); }
+                catch { }
+                finally { Ensure(_ToUri, "ToUri"); }
 			}
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
@@ -94,18 +94,18 @@ namespace Google.Maps.Test
 
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_sensor_not_set_should_throw_error()
 		{
 			var req = new DirectionRequestAccessor();
 
 			var actual = req.ToUri();
 
+            Assert.Throws<InvalidOperationException>(() => req.ToUri());
 			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
 		}
 
 		//TODO: enable this [Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		//[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Origin_set()
 		{
 			var req = new DirectionRequestAccessor();
@@ -117,7 +117,7 @@ namespace Google.Maps.Test
 		}
 
 		//TODO: enable this [Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		//[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Destination_set()
 		{
 			var req = new DirectionRequestAccessor();

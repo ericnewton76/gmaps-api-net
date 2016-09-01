@@ -9,7 +9,7 @@ namespace Google.Maps.Test.Places
 		{
 			try
 			{
-				using(var keys = new StreamReader(@"..\..\..\ServerSigningKeys.txt"))
+				using(var keys = new StreamReader(new FileStream(@"..\..\..\ServerSigningKeys.txt", FileMode.Open)))
 				{
 					var key = keys.ReadLine().Trim();
 

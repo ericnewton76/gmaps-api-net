@@ -135,8 +135,8 @@ namespace Google.Maps.Test.Integrations
 			Assert.That(expectedEndAddress, Is.EqualTo(currentLeg.EndAddress), "Leg.EndAddress");
 			Assert.That(expectedEndLocation, Is.EqualTo(currentLeg.EndLocation).Using(LatLngComparer.Within(0.000001f)), "Leg.EndLocation");
 
-			Assert.That(expectedDistance, Is.EqualTo(currentLeg.Distance).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
-			Assert.That(expectedDuration, Is.EqualTo(currentLeg.Duration).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
+			Assert.That(expectedDistance, Is.EqualTo(currentLeg.Distance).Using(new ValueTextComparer(StringComparer.OrdinalIgnoreCase)));
+			Assert.That(expectedDuration, Is.EqualTo(currentLeg.Duration).Using(new ValueTextComparer(StringComparer.OrdinalIgnoreCase)));
 
 			Assert.That(expectedSteps, Is.EqualTo(currentLeg.Steps.Count()), "Leg.Steps");
 

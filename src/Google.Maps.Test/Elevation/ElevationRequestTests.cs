@@ -21,7 +21,7 @@ namespace Google.Maps.Test.Elevation
 
 			static ElevationRequestAccessor()
 			{
-				try { S_ToUriMethod = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { }); }
+				try { S_ToUriMethod = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance); }
 				catch { }
 				finally { Ensure(S_ToUriMethod, "ToUri"); }
 			}
@@ -47,13 +47,13 @@ namespace Google.Maps.Test.Elevation
 		}
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		//[ExpectedException(typeof(InvalidOperationException))]
 		public void Sensor_not_set_throws()
 		{
 			var req = new ElevationRequestAccessor();
 
 			Uri url = req.ToUri();
-
+            Assert.Throws<InvalidOperationException>(() => req.ToUri());
 			Assert.Fail("Expected exception");
 		}
 

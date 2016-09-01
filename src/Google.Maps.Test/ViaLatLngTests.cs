@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Google.Maps;
+using System.Globalization;
 
 namespace Google.Maps.Test
 {
@@ -52,12 +53,12 @@ namespace Google.Maps.Test
 		{
 			ViaLatLng test = new ViaLatLng(40.714224m, -73.961452m);
 
-			System.Globalization.CultureInfo savedCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            CultureInfo savedCulture = CultureInfo.CurrentCulture;
 
 			try
 			{
-				//change the thread culture
-				System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("nl-BE");//belgium uses different numbering
+                //change the thread culture
+                CultureInfo.CurrentCulture = new CultureInfo("nl-BE");
 
 				string expected = "via:40.714224,-73.961452";
 				string actual = test.ToString();
@@ -66,7 +67,7 @@ namespace Google.Maps.Test
 			}
 			finally
 			{
-				System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;
+                CultureInfo.CurrentCulture = savedCulture;
 			}
 		}
 

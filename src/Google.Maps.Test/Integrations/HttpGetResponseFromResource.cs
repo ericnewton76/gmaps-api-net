@@ -9,7 +9,7 @@ namespace Google.Maps.Test.Integrations
 {
 	public class HttpGetResponseFromResource : Google.Maps.Internal.Http.HttpGetResponse
 	{
-		System.Reflection.Assembly S_testAssembly = Assembly.GetAssembly(typeof(HttpGetResponseFromResource));
+        Assembly S_testAssembly = typeof(HttpGetResponseFromResource).GetTypeInfo().Assembly;
 
 		public HttpGetResponseFromResource(Uri uri)
 			: base(uri)

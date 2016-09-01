@@ -25,7 +25,7 @@ namespace Google.Maps.Test
 		{
 			try
 			{
-				using(var keys = new StreamReader(@"..\..\PrivateSigningKeys.txt"))
+				using(var keys = new StreamReader(new FileStream(@"..\..\PrivateSigningKeys.txt", FileMode.Open)))
 				{
 					var clientid = keys.ReadLine().Trim();
 					var privateKey = keys.ReadLine().Trim();
