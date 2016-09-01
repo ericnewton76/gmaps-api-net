@@ -19,10 +19,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using HttpUtility = System.Web.HttpUtility;
 using Google.Maps.Internal;
+using System.Drawing;
 
-using Size = System.Drawing.Size;
 using Color = System.Drawing.Color;
 
 namespace Google.Maps.StaticMaps
@@ -430,7 +429,7 @@ namespace Google.Maps.StaticMaps
 				if(string.IsNullOrEmpty(current.IconUrl) == false)
 				{
 					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
-					sb.AppendFormat("icon:{0}", HttpUtility.UrlEncode(current.IconUrl));
+					sb.AppendFormat("icon:{0}", System.Net.WebUtility.UrlEncode(current.IconUrl));
 
 					if(current.Shadow != null)
 					{

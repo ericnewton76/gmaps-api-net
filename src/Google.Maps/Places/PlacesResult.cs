@@ -21,7 +21,6 @@ using System;
 
 namespace Google.Maps.Places
 {
-	[Serializable]
 	[JsonObject(MemberSerialization.OptIn)]
 	public class PlacesResult
 	{

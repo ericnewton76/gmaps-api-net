@@ -20,7 +20,6 @@ using System;
 
 namespace Google.Maps.TimeZone
 {
-	[Serializable]
 	[JsonObject(MemberSerialization.OptIn)]
 	public class TimeZoneResponse
 	{
