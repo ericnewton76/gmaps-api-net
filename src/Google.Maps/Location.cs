@@ -41,8 +41,7 @@ namespace Google.Maps
 		public virtual string GetAsUrlParameter()
 		{
 			return WebUtility.UrlEncode(this.ToString())
-				.Replace("%2c", ",")
-				;
+				.Replace("%2c", ",").Replace("%2C", ",");
 		}
 
 		/// <summary>
