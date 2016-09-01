@@ -16,21 +16,16 @@ namespace Google.Maps.Test.StaticMaps
     {
 
         [Test]
-        //[ExpectedException(typeof(InvalidOperationException))]
         public void Sensor_not_set_throws_invalidoperationexception_when_touri_called()
         {
             StaticMapRequest sm = new StaticMapRequest();
-            sm.ToUri();
 
             Assert.Throws<InvalidOperationException>(() => sm.ToUri());
-            //Assert.Fail("InvalidOPerationException was expected");
         }
 
         [Test]
-        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Invalid_size_propert_set()
         {
-            //Assert.Fail("Invalid size was set to property but no exception happened.");
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new StaticMapRequest()
                 {
@@ -41,7 +36,6 @@ namespace Google.Maps.Test.StaticMaps
         }
 
         [Test]
-        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Invalid_size_max()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -55,7 +49,6 @@ namespace Google.Maps.Test.StaticMaps
 
 
         [Test]
-        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Zoom_argumentoutofrange_bottom()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -79,7 +72,6 @@ namespace Google.Maps.Test.StaticMaps
         }
 
         [Test]
-        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Scale_argumentoutofrange()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -163,7 +155,7 @@ namespace Google.Maps.Test.StaticMaps
 
                 try
                 {
-                    return (string)method.Invoke(_instance, new object[] { });
+                    return (string)method.Invoke(_instance, null);
                 }
                 catch (TargetInvocationException ex)
                 {
@@ -293,7 +285,6 @@ namespace Google.Maps.Test.StaticMaps
             Location second = new Location("New York");
             accessor.Path = new Path(first, second) { Encode = true };
 
-            string actual = accessor.GetPathsStr();
             Assert.Throws<InvalidOperationException>(() => accessor.GetPathsStr());
         }
 

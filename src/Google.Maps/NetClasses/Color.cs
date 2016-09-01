@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.Drawing
 {
-    public class Color
+    public struct Color
     {
         public byte A { get; }
         public byte R { get; }
@@ -13,7 +13,7 @@ namespace System.Drawing
         public byte B { get; }
         public bool IsNamedColor { get { return false; } }
         public string Name { get; }
-        public static Color Empty = null;
+        public static readonly Color Empty = new Color();
 
         public static Color Green
         {

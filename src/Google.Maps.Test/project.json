@@ -7,12 +7,21 @@
     "Google.Maps": {
       "target": "project"
     },
-    "System.Threading.Thread": "4.0.0"
+    "System.Threading.Thread": "4.0.0",
+    "dotnet-test-nunit": "3.4.0-beta-2"
   },
+  "testRunner": "nunit",
+  "resource": [ "Geocoding/json_queries/*.json", "Direction/json_queries/*.json" ],
 
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "netcoreapp1.0": {
+      "imports": "dotnet",
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0-*",
+          "type": "platform"
+        }
+      }
     }
   }
 }

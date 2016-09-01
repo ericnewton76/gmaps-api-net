@@ -98,14 +98,10 @@ namespace Google.Maps.Test
 		{
 			var req = new DirectionRequestAccessor();
 
-			var actual = req.ToUri();
-
             Assert.Throws<InvalidOperationException>(() => req.ToUri());
-			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
 		}
 
 		//TODO: enable this [Test]
-		//[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Origin_set()
 		{
 			var req = new DirectionRequestAccessor();
