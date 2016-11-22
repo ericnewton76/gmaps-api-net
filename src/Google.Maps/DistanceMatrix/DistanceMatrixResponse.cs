@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Google.Maps.DistanceMatrix
 {
 	/// <summary>
-	/// 
+	///
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	public class DistanceMatrixResponse
@@ -13,11 +13,17 @@ namespace Google.Maps.DistanceMatrix
 		[JsonProperty("status")]
 		public ServiceResponseStatus Status { get; set; }
 
+		[JsonProperty("destination_addresses")]
+		public string[] DestinationAddresses { get; set; }
+
+		[JsonProperty("origin_addresses")]
+		public string[] OriginAddresses { get; set; }
+
 		[JsonProperty("rows")]
 		public DistanceMatrixRows[] Rows { get; set; }
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		[JsonObject(MemberSerialization.OptIn)]
 		public class DistanceMatrixRows
@@ -27,7 +33,7 @@ namespace Google.Maps.DistanceMatrix
 		}//end class
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		[JsonObject(MemberSerialization.OptIn)]
 		public class DistanceMatrixElement
