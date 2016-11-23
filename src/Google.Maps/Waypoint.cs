@@ -13,12 +13,12 @@ namespace Google.Maps
 		/// <summary>
 		/// latitude/longitude coordinates
 		/// </summary>
-		private LatLng Position { get; set; }
+		public LatLng Position { get; set; }
 
 		/// <summary>
 		/// Origins, destinations, place IDs and waypoints as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia")
 		/// </summary>
-		private string Address { get; set; }
+		public string Address { get; set; }
 
 		public Waypoint() { }
 
