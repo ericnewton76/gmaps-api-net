@@ -31,13 +31,14 @@ namespace Google.Maps.DistanceMatrix
 	{
 		#region Http/Https Uris and Constructors
 
+		//if you plan to use apiKey Google forces you to use https. Also it is ok to use https without apiKey.
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/distancematrix/");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/distancematrix/");
+		//public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/distancematrix/");
 
 		public Uri BaseUri { get; set; }
 
 		public DistanceMatrixService()
-			: this(HttpUri)
+			: this(HttpsUri)
 		{
 		}
 		public DistanceMatrixService(Uri baseUri)

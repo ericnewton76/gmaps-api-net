@@ -16,6 +16,11 @@ namespace Google.Maps.Test.DistanceMatrix
 
 		}
 
+		public LiveDistanceMatrixTest()
+		{
+			//GoogleSigned.AssignAllServices(new GoogleSigned(apiKey: "your-api-key"));
+		}
+
 		[Test]
 		public void DrivingDistancebyLngLat()
 		{
