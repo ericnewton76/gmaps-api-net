@@ -35,6 +35,42 @@ namespace Google.Maps.Test.DistanceMatrix
 		}
 
 		[Test]
+		public void DrivingDistancebyAddressAndLngLat()
+		{
+			DistanceMatrixRequest request = new DistanceMatrixRequest();
+			//sheffield
+			request.AddDestination(new Waypoint("Sheffield"));
+			//rotherham
+			request.AddOrigin(new Waypoint(lat: 53.434297m, lng: -1.364678m));
+
+			request.Sensor = true;
+			request.Mode = TravelMode.driving;
+
+			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+
+			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
+
+		}
+
+		[Test]
+		public void DrivingDistancebyAddress()
+		{
+			DistanceMatrixRequest request = new DistanceMatrixRequest();
+			//sheffield
+			request.AddDestination(new Waypoint("Sheffield"));
+			//rotherham
+			request.AddOrigin(new Waypoint("Rotherham"));
+
+			request.Sensor = true;
+			request.Mode = TravelMode.driving;
+
+			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+
+			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
+
+		}
+
+		[Test]
 		public void DrivingDistancebyLngLatHasOneOriginAndDestinationAdresses()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -56,6 +92,29 @@ namespace Google.Maps.Test.DistanceMatrix
 		}
 
 		[Test]
+		public void DrivingDistancebyAddressHasOneOriginAndDestinationAdresses()
+		{
+			DistanceMatrixRequest request = new DistanceMatrixRequest();
+
+			//rotherham
+			request.AddOrigin(new Waypoint("Rotherham"));
+			//sheffield
+			request.AddDestination(new Waypoint("Sheffield"));
+
+			request.Sensor = true;
+			request.Mode = TravelMode.driving;
+
+			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+
+			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
+			Assert.IsTrue(response.DestinationAddresses.Length == 1);
+			Assert.IsTrue(response.OriginAddresses.Length == 1);
+
+		}
+
+
+
+		[Test]
 		public void DrivingDistancebyLngLatHasOneOriginAndMultipleDestinationAdresses()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -75,6 +134,27 @@ namespace Google.Maps.Test.DistanceMatrix
 			Assert.IsTrue(response.DestinationAddresses.Length > 1);
 			Assert.IsTrue(response.OriginAddresses.Length == 1);
 
+		}
+
+		[Test]
+		public void DrivingDistancebyAddressHasOneOriginAndMultipleDestinationAdresses()
+		{
+			DistanceMatrixRequest request = new DistanceMatrixRequest();
+
+			//rotherham
+			request.AddOrigin(new Waypoint("Rotherham"));
+			//sheffield
+			request.AddDestination(new Waypoint("Sheffield"));
+			request.AddDestination(new Waypoint("London"));
+
+			request.Sensor = true;
+			request.Mode = TravelMode.driving;
+
+			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+
+			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
+			Assert.IsTrue(response.DestinationAddresses.Length > 1);
+			Assert.IsTrue(response.OriginAddresses.Length == 1);
 		}
 	}
 }

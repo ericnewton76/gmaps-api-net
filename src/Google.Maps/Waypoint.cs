@@ -2,11 +2,23 @@
 
 namespace Google.Maps
 {
-	[Obsolete("Functionality was absorbed by Location being polymorphic")]
+	//It is not obsolete, still works the same I just had to add support to string inputs -- bbotond90
+	//[Obsolete("Functionality was absorbed by Location being polymorphic")]
+	/// <summary>
+	/// Google documentation: https://developers.google.com/maps/documentation/directions/intro
+	/// Specify origins, destinations, and waypoints as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia"), or as latitude/longitude coordinates, or as place IDs.
+	/// </summary>
 	public class Waypoint
 	{
-		public LatLng Position { get; set; }
-		public string Address { get; set; }
+		/// <summary>
+		/// latitude/longitude coordinates
+		/// </summary>
+		private LatLng Position { get; set; }
+
+		/// <summary>
+		/// Origins, destinations, place IDs and waypoints as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia")
+		/// </summary>
+		private string Address { get; set; }
 
 		public Waypoint() { }
 
@@ -15,6 +27,15 @@ namespace Google.Maps
 			Position = new LatLng(lat, lng);
 		}
 
+		public Waypoint(string address)
+		{
+			Address = address;
+		}
+
+		/// <summary>
+		/// Get the Waypoint value through only the ToString method to keep its result consistent regardless of input type
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return Position != null ? Position.ToString() : Address;
