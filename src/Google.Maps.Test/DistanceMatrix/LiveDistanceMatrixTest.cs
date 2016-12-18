@@ -26,9 +26,9 @@ namespace Google.Maps.Test.DistanceMatrix
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
 			//sheffield
-			request.AddDestination(new Waypoint(lat: 53.378243m, lng: -1.462131m));
+			request.AddDestination(new LatLng(latitude: 53.378243m, longitude: -1.462131m));
 			//rotherham
-			request.AddOrigin(new Waypoint(lat: 53.434297m,lng: -1.364678m));
+			request.AddOrigin(new LatLng(latitude: 53.434297m,longitude: -1.364678m));
 
 			request.Sensor = true;
 			request.Mode = TravelMode.driving;
@@ -44,9 +44,9 @@ namespace Google.Maps.Test.DistanceMatrix
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
 			//sheffield
-			request.AddDestination(new Waypoint("Sheffield"));
+			request.AddDestination(new Location("Sheffield"));
 			//rotherham
-			request.AddOrigin(new Waypoint(lat: 53.434297m, lng: -1.364678m));
+			request.AddOrigin(new LatLng(latitude: 53.434297m, longitude: -1.364678m));
 
 			request.Sensor = true;
 			request.Mode = TravelMode.driving;
@@ -62,9 +62,9 @@ namespace Google.Maps.Test.DistanceMatrix
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
 			//sheffield
-			request.AddDestination(new Waypoint("Sheffield"));
+			request.AddDestination(new Location("Sheffield"));
 			//rotherham
-			request.AddOrigin(new Waypoint("Rotherham"));
+			request.AddOrigin(new Location("Rotherham"));
 
 			request.Sensor = true;
 			request.Mode = TravelMode.driving;
@@ -81,9 +81,9 @@ namespace Google.Maps.Test.DistanceMatrix
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
 
 			//rotherham
-			request.AddOrigin(new Waypoint(lat: 53.434297m, lng: -1.364678m));
+			request.AddOrigin(new LatLng(latitude: 53.434297m, longitude: -1.364678m));
 			//sheffield
-			request.AddDestination(new Waypoint(lat: 53.378243m, lng: -1.462131m));
+			request.AddDestination(new LatLng(latitude: 53.378243m, longitude: -1.462131m));
 
 			request.Sensor = true;
 			request.Mode = TravelMode.driving;
@@ -102,9 +102,9 @@ namespace Google.Maps.Test.DistanceMatrix
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
 
 			//rotherham
-			request.AddOrigin(new Waypoint("Rotherham"));
+			request.AddOrigin(new Location("Rotherham"));
 			//sheffield
-			request.AddDestination(new Waypoint("Sheffield"));
+			request.AddDestination(new Location("Sheffield"));
 
 			request.Sensor = true;
 			request.Mode = TravelMode.driving;
@@ -125,10 +125,10 @@ namespace Google.Maps.Test.DistanceMatrix
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
 
 			//rotherham
-			request.AddOrigin(new Waypoint(lat: 53.434297m, lng: -1.364678m));
+			request.AddOrigin(new LatLng(latitude: 53.434297m, longitude: -1.364678m));
 			//sheffield
-			request.AddDestination(new Waypoint(lat: 53.378243m, lng: -1.462131m));
-			request.AddDestination(new Waypoint(lat: 51.378243m, lng: -1.162131m));
+			request.AddDestination(new LatLng(latitude: 53.378243m, longitude: -1.462131m));
+			request.AddDestination(new LatLng(latitude: 51.378243m, longitude: -1.162131m));
 
 			request.Sensor = true;
 			request.Mode = TravelMode.driving;
@@ -147,10 +147,10 @@ namespace Google.Maps.Test.DistanceMatrix
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
 
 			//rotherham
-			request.AddOrigin(new Waypoint("Rotherham"));
+			request.AddOrigin(new Location("Rotherham"));
 			//sheffield
-			request.AddDestination(new Waypoint("Sheffield"));
-			request.AddDestination(new Waypoint("London"));
+			request.AddDestination(new Location("Sheffield"));
+			request.AddDestination(new Location("London"));
 
 			request.Sensor = true;
 			request.Mode = TravelMode.driving;

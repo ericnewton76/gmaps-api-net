@@ -2,8 +2,8 @@
 
 namespace Google.Maps
 {
-	//It is not obsolete, still works the same I just had to add support to string inputs -- bbotond90
-	//[Obsolete("Functionality was absorbed by Location being polymorphic")]
+	
+	[Obsolete("Functionality was absorbed by Location being polymorphic", true)]
 	/// <summary>
 	/// Google documentation: https://developers.google.com/maps/documentation/directions/intro
 	/// Specify origins, destinations, and waypoints as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia"), or as latitude/longitude coordinates, or as place IDs.

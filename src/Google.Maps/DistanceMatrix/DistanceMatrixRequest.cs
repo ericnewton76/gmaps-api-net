@@ -60,23 +60,23 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		///  List of origin waypoints
 		/// </summary>
-		private SortedList<int, Waypoint> waypointsOrigin;
+		private SortedList<int, Location> waypointsOrigin;
 
 		/// <summary>
 		/// List of destination waypoints
 		/// </summary>
-		private SortedList<int, Waypoint> waypointsDestination;
+		private SortedList<int, Location> waypointsDestination;
 
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Waypoint> WaypointsOrigin
+		public SortedList<int, Location> WaypointsOrigin
 		{
 			get
 			{
 				if(waypointsOrigin == null)
 				{
-					waypointsOrigin = new SortedList<int, Waypoint>();
+					waypointsOrigin = new SortedList<int, Location>();
 				}
 				return waypointsOrigin;
 			}
@@ -89,13 +89,13 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Waypoint> WaypointsDestination
+		public SortedList<int, Location> WaypointsDestination
 		{
 			get
 			{
 				if(waypointsDestination == null)
 				{
-					waypointsDestination = new SortedList<int, Waypoint>();
+					waypointsDestination = new SortedList<int, Location>();
 				}
 				return waypointsDestination;
 			}
@@ -109,7 +109,7 @@ namespace Google.Maps.DistanceMatrix
 		///
 		/// </summary>
 		/// <param name="destination"></param>
-		public void AddOrigin(Waypoint destination)
+		public void AddOrigin(Location destination)
 		{
 			WaypointsOrigin.Add(WaypointsOrigin.Count, destination);
 		}
@@ -118,7 +118,7 @@ namespace Google.Maps.DistanceMatrix
 		///
 		/// </summary>
 		/// <param name="destination"></param>
-		public void AddDestination(Waypoint destination)
+		public void AddDestination(Location destination)
 		{
 			WaypointsDestination.Add(WaypointsDestination.Count, destination);
 		}
@@ -127,13 +127,13 @@ namespace Google.Maps.DistanceMatrix
 		///
 		/// </summary>
 		/// <returns></returns>
-		internal string WaypointsToUri(SortedList<int, Waypoint> Waypoints)
+		internal string WaypointsToUri(SortedList<int, Location> Waypoints)
 		{
 			if(Waypoints.Count == 0) return string.Empty;
 
 			StringBuilder sb = new StringBuilder();
 
-			foreach(Waypoint waypoint in Waypoints.Values)
+			foreach(Location waypoint in Waypoints.Values)
 			{
 				sb.AppendFormat("{0}|", waypoint.ToString());
 			}
