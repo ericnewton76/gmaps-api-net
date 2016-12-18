@@ -27,8 +27,12 @@ namespace Google.Maps.Test.Integrations
 			queryString.Replace("&sensor=false", ""); //clear off sensor=false
 			queryString.Replace("&sensor=true", ""); // clear off sensor=true
 
-			//have to replace any remaining ampersands with $ due to filename limitations.
-			queryString.Replace("&", "$").Replace("|", "!").Replace("%", "~");
+			//have to replace certain characters that wont work for a path
+			queryString.Replace("&", "$")
+				.Replace("%20", "+")
+				.Replace("%2C", ",")
+				.Replace("|", "!")
+				.Replace("%", "~");
 
 			string resourcePath = this.BaseResourcePath + string.Format(".{0}_queries.{1}.{0}", outputType, queryString.ToString());
 
