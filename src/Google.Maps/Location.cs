@@ -40,7 +40,7 @@ namespace Google.Maps
 		/// <returns></returns>
 		public virtual string GetAsUrlParameter()
 		{
-			return Uri.EscapeDataString(this.ToString());
+			return System.Uri.EscapeDataString(this.ToString());
 		}
 
 		/// <summary>
