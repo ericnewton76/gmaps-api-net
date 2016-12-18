@@ -60,48 +60,56 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		///  List of origin waypoints
 		/// </summary>
-		private SortedList<int, Waypoint> waypointsOrigin;
+		private SortedList<int, Location> _waypointsOrigin;
+		private SortedList<int, Location> EnsureWaypointsOrigin()
+		{
+			if(_waypointsOrigin == null)
+			{
+				_waypointsOrigin = new SortedList<int, Location>();
+			}
+			return _waypointsOrigin;
+		}
 
 		/// <summary>
 		/// List of destination waypoints
 		/// </summary>
-		private SortedList<int, Waypoint> waypointsDestination;
+		private SortedList<int, Location> _waypointsDestination;
+		private SortedList<int, Location> EnsureWaypointsDestination()
+		{
+			if(_waypointsDestination == null)
+			{
+				_waypointsDestination = new SortedList<int, Maps.Location>();
+			}
+			return _waypointsDestination;
+		}
 
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Waypoint> WaypointsOrigin
+		public SortedList<int, Location> WaypointsOrigin
 		{
 			get
 			{
-				if(waypointsOrigin == null)
-				{
-					waypointsOrigin = new SortedList<int, Waypoint>();
-				}
-				return waypointsOrigin;
+				return EnsureWaypointsOrigin();
 			}
 			set
 			{
-				waypointsOrigin = value;
+				_waypointsOrigin = value;
 			}
 		}//end method
 
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Waypoint> WaypointsDestination
+		public SortedList<int, Location> WaypointsDestination
 		{
 			get
 			{
-				if(waypointsDestination == null)
-				{
-					waypointsDestination = new SortedList<int, Waypoint>();
-				}
-				return waypointsDestination;
+				return EnsureWaypointsDestination();
 			}
 			set
 			{
-				waypointsDestination = value;
+				_waypointsDestination = value;
 			}
 		}//end method
 
@@ -109,7 +117,7 @@ namespace Google.Maps.DistanceMatrix
 		///
 		/// </summary>
 		/// <param name="destination"></param>
-		public void AddOrigin(Waypoint destination)
+		public void AddOrigin(Location destination)
 		{
 			WaypointsOrigin.Add(WaypointsOrigin.Count, destination);
 		}
@@ -118,7 +126,7 @@ namespace Google.Maps.DistanceMatrix
 		///
 		/// </summary>
 		/// <param name="destination"></param>
-		public void AddDestination(Waypoint destination)
+		public void AddDestination(Location destination)
 		{
 			WaypointsDestination.Add(WaypointsDestination.Count, destination);
 		}
@@ -127,19 +135,21 @@ namespace Google.Maps.DistanceMatrix
 		///
 		/// </summary>
 		/// <returns></returns>
-		internal string WaypointsToUri(SortedList<int, Waypoint> Waypoints)
+		internal string WaypointsToUri(SortedList<int, Location> waypointsList)
 		{
-			if(Waypoints.Count == 0) return string.Empty;
+			if(waypointsList == null) return string.Empty;
+			if(waypointsList.Count == 0) return string.Empty;
 
 			StringBuilder sb = new StringBuilder();
 
-			foreach(Waypoint waypoint in Waypoints.Values)
+			foreach(Location waypoint in waypointsList.Values)
 			{
-				sb.AppendFormat("{0}|", waypoint.ToString());
+				if(sb.Length > 0) sb.Append("|");
+				sb.Append(waypoint.ToString());
 			}
-			sb = sb.Remove(sb.Length - 1, 1);
+			
 			return sb.ToString();
-		}//end method
+		}
 
 		/// <summary>
 		/// Create URI for quering
@@ -150,8 +160,8 @@ namespace Google.Maps.DistanceMatrix
 			this.EnsureSensor(true);
 
 			var qsb = new Internal.QueryStringBuilder()
-				.Append("origins", WaypointsToUri(waypointsOrigin))
-				.Append("destinations", WaypointsToUri(WaypointsDestination))
+				.Append("origins", WaypointsToUri(_waypointsOrigin))
+				.Append("destinations", WaypointsToUri(_waypointsDestination))
 				.Append("mode", Mode.ToString())
 				.Append("language", Language)
 				.Append("units", Units.ToString())
