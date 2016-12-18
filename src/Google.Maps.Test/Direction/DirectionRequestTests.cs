@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Google.Maps.Geocoding;
 using System.Reflection;
 using Google.Maps.Direction;
+using System.Collections.Specialized;
 
 namespace Google.Maps.Test
 {
@@ -13,7 +14,7 @@ namespace Google.Maps.Test
 	public class DirectionRequestTests
 	{
 
-
+		#region DirectionRequestAccessor
 		public class DirectionRequestAccessor : DirectionRequest
 		{
 			private static Type S_instanceType;
@@ -49,6 +50,27 @@ namespace Google.Maps.Test
 
 
 		}
+		#endregion
+
+		#region helpers
+
+		NameValueCollection ParseQueryString(Uri uri)
+		{
+			//cant use uri.query for relativeuris for some stupid stupid STUPID reason
+			string query = uri.ToString();
+			return ParseQueryString(uri.ToString());
+		}
+		NameValueCollection ParseQueryString(string uri)
+		{
+			int queryIndex = uri.LastIndexOf("?");
+			if(queryIndex == -1) return new NameValueCollection();
+
+			string query = uri.Substring(queryIndex);
+
+			var nvcol = System.Web.HttpUtility.ParseQueryString(query);
+			return nvcol;
+		}
+		#endregion
 
 		//[Test]
 		//[ExpectedException(typeof(InvalidOperationException))]
@@ -94,26 +116,31 @@ namespace Google.Maps.Test
 
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		
 		public void GetUrl_sensor_not_set_should_throw_error()
 		{
 			var req = new DirectionRequestAccessor();
 
-			var actual = req.ToUri();
-
-			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
+			//act
+			//assert
+			Assert.Throws<InvalidOperationException>(() =>
+			{
+				var actual = req.ToUri();
+			});
 		}
 
-		//TODO: enable this [Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		[Test]
 		public void GetUrl_no_Origin_set()
 		{
 			var req = new DirectionRequestAccessor();
 			//req.Origin = nothing basically;
 
-			var actual = req.ToUri();
-
-			Assert.Fail("Should've encountered an InvalidOperationException due to Origin property not being set.");
+			//act
+			//assert
+			Assert.Throws<InvalidOperationException>(() =>
+			{
+				var actual = req.ToUri();
+			});
 		}
 
 		//TODO: enable this [Test]
@@ -123,44 +150,62 @@ namespace Google.Maps.Test
 			var req = new DirectionRequestAccessor();
 			//req.Origin = nothing basically;
 
-			var actual = req.ToUri();
-
-			Assert.Fail("Should've encountered an InvalidOperationException due to Destination property not being set.");
+			//act
+			//assert
+			Assert.Throws<InvalidOperationException>(() =>
+			{
+				var actual = req.ToUri();
+			});
 		}
 
 		[Test]
 		public void GetUrl_simplest_using_address_ex1()
 		{
+			//arrange
+			var expected = ParseQueryString("json?origin=New York, NY&destination=Albany, NY&sensor=false");
+
 			var req = new DirectionRequestAccessor();
 			req.Sensor = false;
 			req.Origin = "New York, NY";
 			req.Destination = "Albany, NY";
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
 
-			Uri expected = new Uri("json?origin=New+York,+NY&destination=Albany,+NY&sensor=false", UriKind.Relative);
-			Uri actual = req.ToUri();
+			//act
+			var actual = ParseQueryString(req.ToUri());
 
-			Assert.AreEqual(expected, actual);
+			//assert
+			Assert.That(actual, Is.EquivalentTo(expected));
 		}
 
 		[Test]
 		public void GetUrl_simplest_using_latlng()
 		{
+			//arrange
+			var expected = new NameValueCollection {
+				{ "origin", "30.2,40.3" },
+				{ "destination", "50.5,60.6" },
+				{ "sensor", "false" }
+			};
+
 			var req = new DirectionRequestAccessor();
 			req.Sensor = false;
 			req.Origin = new LatLng(30.2, 40.3);
 			req.Destination = new LatLng(50.5, 60.6);
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
 
-			Uri expected = new Uri("json?origin=30.2,40.3&destination=50.5,60.6&sensor=false", UriKind.Relative);
-			Uri actual = req.ToUri();
+			//act
+			var actual = ParseQueryString(req.ToUri());
 
-			Assert.AreEqual(expected, actual);
+			//assert
+			Assert.That(actual, Is.EquivalentTo(expected));
 		}
 
 		[Test]
 		public void GetUrl_waypoints_simple_ex1()
 		{
+			//arrange
+			var expected = ParseQueryString("json?origin=NY&destination=FL&waypoints=NC&sensor=false");
+
 			var req = new DirectionRequestAccessor();
 			req.Sensor = false;
 			req.Origin = "NY";
@@ -169,16 +214,20 @@ namespace Google.Maps.Test
 
 			req.AddWaypoint("NC");
 
-			Uri expected = new Uri("json?origin=NY&destination=FL&waypoints=NC&sensor=false", UriKind.Relative);
-			Uri actual = req.ToUri();
+			//act
+			var actual = ParseQueryString(req.ToUri());
 
-			Assert.AreEqual(expected, actual);
+			//assert
+			Assert.That(actual, Is.EquivalentTo(expected));
 
 		}
 
 		[Test]
 		public void GetUrl_waypoints_latlng_ex1()
 		{
+			//arrange
+			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=28.452694,-80.979195&sensor=false");
+
 			var req = new DirectionRequestAccessor();
 			req.Sensor = false;
 			req.Origin = "NY";
@@ -187,15 +236,19 @@ namespace Google.Maps.Test
 
 			req.AddWaypoint(new LatLng(28.452694, -80.979195));
 
-			Uri expected = new Uri("json?origin=NY&destination=Orlando,FL&waypoints=28.452694,-80.979195&sensor=false", UriKind.Relative);
-			Uri actual = req.ToUri();
+			//act
+			var actual = ParseQueryString(req.ToUri());
 
-			Assert.AreEqual(expected, actual);
+			//assert
+			Assert.That(actual, Is.EquivalentTo(expected));
 		}
 
 		[Test]
 		public void GetUrl_waypoints_latlng_ex2()
 		{
+			//arrange
+			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=NJ|28.452694,-80.979195|Sarasota,FL&sensor=false");
+
 			var req = new DirectionRequestAccessor();
 			req.Sensor = false;
 			req.Origin = "NY";
@@ -206,13 +259,12 @@ namespace Google.Maps.Test
 			req.AddWaypoint(new LatLng(28.452694, -80.979195));
 			req.AddWaypoint("Sarasota,FL");
 
-			Uri expected = new Uri("json?origin=NY&destination=Orlando,FL&waypoints=NJ|28.452694,-80.979195|Sarasota,FL&sensor=false", UriKind.Relative);
-			Uri actual = req.ToUri();
+			//act
+			var actual = ParseQueryString(req.ToUri());
 
-			Assert.AreEqual(expected, actual);
+			//assert
+			Assert.That(actual, Is.EquivalentTo(expected));
 		}
-
-
 
 	}
 }
