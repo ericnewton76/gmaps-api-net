@@ -16,6 +16,8 @@ properties {
 	$nugetBaseDir = "$baseDir\Build\NuGet"
 
 	$buildNumber = $env:APPVEYOR_BUILD_VERSION #Load-VersionInfo -path "$sourceDir\AssemblyVersion_Master.cs"
+	$buildNumber = (Get-Content 'build-version.txt') + ".${buildNumber}"
+		
 	$versionInfo = Get-VersionNumber $buildNumber
 
 	$nuget_executible = "$sourceDir\.nuget\NuGet.exe"
@@ -370,8 +372,8 @@ function Update-SourceVersion
     $TmpFile = $o.FullName + ".tmp"
 
      get-content $o.FullName | 
-        %{$_ -replace 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)', $NewVersion } |
-        %{$_ -replace 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)', $NewFileVersion }  > $TmpFile
+        %{$_ -replace 'AssemblyVersion\(".*"\)', $NewVersion } |
+        %{$_ -replace 'AssemblyFileVersion\(".*"\)', $NewFileVersion }  > $TmpFile
 
      move-item $TmpFile $o.FullName -force
   }
