@@ -24,7 +24,7 @@ properties {
 
    $builds = @(
 
-	@{Project="GoogleMapsForNET.sln";	Tests="Google.Maps.Test.csproj"; 	Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
+	@{Project="GoogleMapsForNET.sln";Tests="Google.Maps.Test.csproj"; Constants="";FinalDir="Net"; NuGetDir="net";Framework="net-4.0";Sign=$false}
 # @{Project="GoogleMapsForNET.sln";	Tests="Google.Maps.Test.csproj"; 	Constants=""; FinalDir="Net45"; NuGetDir = "net45"; Framework="net-4.5"; Sign=$false}
 #	@{Project="TestingHelpers.csproj";	Tests="TestHelpers.Tests.csproj";	Constants=""; FinalDir="Net"; NuGetDir = ""; Framework="net-4.0"; Sign=$false}
 
