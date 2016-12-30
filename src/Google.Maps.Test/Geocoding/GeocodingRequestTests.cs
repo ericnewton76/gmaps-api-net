@@ -24,7 +24,7 @@ namespace Google.Maps.Test
 			{
 				S_instanceType = typeof(GeocodingRequest);
 
-				try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { }); }
+				try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance); }
 				catch { }
 				finally { Ensure(_ToUri, "ToUri"); }
 			}
@@ -132,27 +132,20 @@ namespace Google.Maps.Test
 		}
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_sensor_not_set_should_throw_error()
 		{
 			var req = new GeocodingRequestAccessor();
 			req.Address = "New York, NY";
 
-			var actual = req.ToUri();
-
-			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
+            Assert.Throws<InvalidOperationException>(() => req.ToUri());
 		}
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Address_set()
 		{
 			var req = new GeocodingRequestAccessor();
-			//req.Address = something;
 
-			var actual = req.ToUri();
-
-			Assert.Fail("Should've encountered an InvalidOperationException due to Address property not being set.");
+            Assert.Throws<InvalidOperationException>(() => req.ToUri());
 		}
 	}
 }

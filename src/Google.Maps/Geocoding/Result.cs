@@ -21,7 +21,6 @@ using Google.Maps.Shared;
 
 namespace Google.Maps.Geocoding
 {
-	[Serializable]
 	[JsonObject(MemberSerialization.OptIn)]
 	public class Result
 	{

@@ -20,8 +20,8 @@ using System.Linq;
 using System.Collections.Generic;
 
 using Google.Maps.Internal;
+using System.Drawing;
 
-using Size = System.Drawing.Size;
 using Color = System.Drawing.Color;
 
 namespace Google.Maps.StaticMaps

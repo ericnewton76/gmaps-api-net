@@ -24,9 +24,9 @@ namespace Google.Maps.Test
 			{
 				S_instanceType = typeof(DirectionRequest);
 
-				try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { }); }
-				catch { }
-				finally { Ensure(_ToUri, "ToUri"); }
+                try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance); }
+                catch { }
+                finally { Ensure(_ToUri, "ToUri"); }
 			}
 
 			private static void Ensure(MethodInfo methodInfo, string methodName)
@@ -123,9 +123,8 @@ namespace Google.Maps.Test
 
 			//act
 			//assert
-			Assert.Throws<InvalidOperationException>(() =>
-			{
-				var actual = req.ToUri();
+			Assert.Throws<InvalidOperationException>(() => {
+            	Assert.Throws<InvalidOperationException>(() => req.ToUri());
 			});
 		}
 
@@ -144,7 +143,7 @@ namespace Google.Maps.Test
 		}
 
 		//TODO: enable this [Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		//[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Destination_set()
 		{
 			var req = new DirectionRequestAccessor();
