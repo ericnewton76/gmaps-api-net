@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Google.Maps;
 using System.Text;
+using System.Linq;
 
 namespace Google.Maps.DistanceMatrix
 {
@@ -60,12 +61,12 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		///  List of origin waypoints
 		/// </summary>
-		private SortedList<int, Location> _waypointsOrigin;
-		private SortedList<int, Location> EnsureWaypointsOrigin()
+		private List<Location> _waypointsOrigin;
+		private List<Location> EnsureWaypointsOrigin()
 		{
 			if(_waypointsOrigin == null)
 			{
-				_waypointsOrigin = new SortedList<int, Location>();
+				_waypointsOrigin = new List<Location>();
 			}
 			return _waypointsOrigin;
 		}
@@ -73,12 +74,12 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// List of destination waypoints
 		/// </summary>
-		private SortedList<int, Location> _waypointsDestination;
-		private SortedList<int, Location> EnsureWaypointsDestination()
+		private List<Location> _waypointsDestination;
+		private List<Location> EnsureWaypointsDestination()
 		{
 			if(_waypointsDestination == null)
 			{
-				_waypointsDestination = new SortedList<int, Maps.Location>();
+				_waypointsDestination = new List<Location>();
 			}
 			return _waypointsDestination;
 		}
@@ -86,7 +87,7 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Location> WaypointsOrigin
+		public List<Location> WaypointsOrigin
 		{
 			get
 			{
@@ -101,7 +102,7 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Location> WaypointsDestination
+		public List<Location> WaypointsDestination
 		{
 			get
 			{
@@ -119,7 +120,7 @@ namespace Google.Maps.DistanceMatrix
 		/// <param name="destination"></param>
 		public void AddOrigin(Location destination)
 		{
-			WaypointsOrigin.Add(WaypointsOrigin.Count, destination);
+			WaypointsOrigin.Add(destination);
 		}
 
 		/// <summary>
@@ -128,26 +129,26 @@ namespace Google.Maps.DistanceMatrix
 		/// <param name="destination"></param>
 		public void AddDestination(Location destination)
 		{
-			WaypointsDestination.Add(WaypointsDestination.Count, destination);
+			WaypointsDestination.Add(destination);
 		}
 
 		/// <summary>
 		///
 		/// </summary>
 		/// <returns></returns>
-		internal string WaypointsToUri(SortedList<int, Location> waypointsList)
+		internal string WaypointsToUri(IEnumerable<Location> waypointsList)
 		{
 			if(waypointsList == null) return string.Empty;
-			if(waypointsList.Count == 0) return string.Empty;
+			if(waypointsList.Count() == 0) return string.Empty;
 
 			StringBuilder sb = new StringBuilder();
 
-			foreach(Location waypoint in waypointsList.Values)
+			foreach(Location waypoint in waypointsList)
 			{
 				if(sb.Length > 0) sb.Append("|");
 				sb.Append(waypoint.ToString());
 			}
-			
+
 			return sb.ToString();
 		}
 
