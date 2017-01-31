@@ -65,29 +65,22 @@ namespace Google.Maps.Direction
 		public long? ArrivalTime { get; set; }
 
 		private List<Location> _waypoints;
-		public IEnumerable<Location> Waypoints
+
+		private List<Location> EnsureWaypoints()
+		{
+			if(_waypoints == null) _waypoints = new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
+			return _waypoints;
+		}
+
+		public List<Location> Waypoints
 		{
 			get
 			{
-				if(_waypoints == null) return new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
-				return (IEnumerable<Location>)_waypoints;
+				return EnsureWaypoints();
 			}
 			set
 			{
-				if(value == null)
-				{
-					//clear our reference.
-					_waypoints = null; return;
-				}
-
-				//see if reference passed is a List<Location> instance.
-				List<Location> list = value as List<Location>;
-
-				if(list == null)
-					//build a list from the ienumerable passed in.
-					list = new List<Location>(value);
-
-				_waypoints = list;
+				_waypoints = value;
 			}
 		}
 
@@ -99,8 +92,7 @@ namespace Google.Maps.Direction
 		public void AddWaypoint(Location waypoint)
 		{
 			if(waypoint == null) return;
-			if(_waypoints == null) _waypoints = new List<Location>();
-			_waypoints.Add(waypoint);
+			EnsureWaypoints().Add(waypoint);
 		}
 
 		internal string WaypointsToUri()
