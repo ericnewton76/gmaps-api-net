@@ -15,10 +15,17 @@ properties {
 	$workingDir = "$baseDir\Build\Working"
 	$nugetBaseDir = "$baseDir\Build\NuGet"
 
-	$buildNumber = $env:APPVEYOR_BUILD_VERSION #Load-VersionInfo -path "$sourceDir\AssemblyVersion_Master.cs"
-	$buildNumber = (Get-Content 'build-version.txt') + ".${buildNumber}"
+	if(-Not (Test-Path Env:\APPVEYOR_BUILD_NUMBER)) {
+		$buildNumber = [Math]::Floor((new-timespan -start ([System.DateTime]::Today) -end ([System.DateTime]::Now)).TotalSeconds)
+	}
+	else
+	{
+		$buildNumber = Env:\APPVEYOR_BUILD_NUMBER
+	}
+	
+	$buildVersion = (Get-Content 'build-version.txt') + ".${buildNumber}"
 		
-	$versionInfo = Get-VersionNumber $buildNumber
+	$versionInfo = Get-VersionNumber $buildVersion
 
 	$nuget_executible = "$sourceDir\.nuget\NuGet.exe"
 
