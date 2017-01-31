@@ -115,7 +115,7 @@ namespace Google.Maps.DistanceMatrix
 		}//end method
 
 		/// <summary>
-		///
+		/// Adds a waypoint location to the origin set
 		/// </summary>
 		/// <param name="destination"></param>
 		public void AddOrigin(Location destination)
@@ -124,7 +124,7 @@ namespace Google.Maps.DistanceMatrix
 		}
 
 		/// <summary>
-		///
+		/// Adds a waypoint location to the destination set
 		/// </summary>
 		/// <param name="destination"></param>
 		public void AddDestination(Location destination)
@@ -133,7 +133,7 @@ namespace Google.Maps.DistanceMatrix
 		}
 
 		/// <summary>
-		///
+		/// Convert waypoint locations collection to a uri string
 		/// </summary>
 		/// <returns></returns>
 		internal string WaypointsToUri(IEnumerable<Location> waypointsList)
