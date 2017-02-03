@@ -87,6 +87,7 @@
     <Compile Include="Direction\DirectionService.cs" />
     <Compile Include="Direction\DirectionStep.cs" />
     <Compile Include="Direction\DirectionTransitDetails.cs" />
+    <Compile Include="Direction\GeocodedWaypoint.cs" />
     <Compile Include="Direction\LineInfo.cs" />
     <Compile Include="Direction\Polyline.cs" />
     <Compile Include="Direction\Stop.cs" />

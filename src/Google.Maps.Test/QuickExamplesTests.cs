@@ -63,7 +63,7 @@ namespace Google.Maps.Test
 			};
 			var response = new DirectionService().GetResponse(request);
 
-			Assert.True(response.GeocodedWaypoints.Any(wp => wp.PartialMatch));
+			Assert.True(response.Waypoints.Any(wp => wp.PartialMatch));
 		}
 
 	}
