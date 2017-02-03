@@ -20,7 +20,7 @@ properties {
 	}
 	else
 	{
-		$buildNumber = Env:\APPVEYOR_BUILD_NUMBER
+		$buildNumber = $env:APPVEYOR_BUILD_NUMBER
 	}
 	
 	$buildVersion = (Get-Content 'build-version.txt') + ".${buildNumber}"
@@ -48,8 +48,6 @@ properties {
 	#@{Project = "Newtonsoft.Json.Net20"; TestsName = "Newtonsoft.Json.Tests.Net20"; Constants="NET20"; FinalDir="Net20"; NuGetDir = "net20"; Framework="net-2.0"; Sign=$true}
    )
 }
-
-$framework = '4.0x86'
 
 # Set up the default task, when calling build-psake with no -task parameter
 # 
