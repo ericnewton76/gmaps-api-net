@@ -37,7 +37,7 @@ namespace Google.Maps.Direction
 		public Uri BaseUri { get; set; }
 
 		public DirectionService()
-			: this(HttpUri)
+			: this(HttpsUri)
 		{
 		}
 		public DirectionService(Uri baseUri)

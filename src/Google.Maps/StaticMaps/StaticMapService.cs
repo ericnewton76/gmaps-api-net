@@ -37,7 +37,7 @@ namespace Google.Maps.StaticMaps
 		public Uri BaseUri { get; set; }
 
 		public StaticMapService()
-			: this(HttpUri)
+			: this(HttpsUri)
 		{
 		}
 		public StaticMapService(Uri baseUri)
