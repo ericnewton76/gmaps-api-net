@@ -18,6 +18,8 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 
 namespace Google.Maps.Internal
@@ -38,18 +40,30 @@ namespace Google.Maps.Internal
 
 			protected virtual StreamReader GetStreamReader(Uri uri)
 			{
-				return GetStreamReader(uri, GoogleSigned.SigningInstance);
+				return GetStreamReader(uri, GoogleSigned.SigningInstance, Proxy.ProxyInstance);
 			}
-			protected virtual StreamReader GetStreamReader(Uri uri, GoogleSigned signingInstance)
+			protected virtual StreamReader GetStreamReader(Uri uri, GoogleSigned signingInstance, IWebProxy proxyInstance)
 			{
 				if(signingInstance != null)
 				{
 					uri = new Uri(signingInstance.GetSignedUri(uri));
 				}
 
-				WebResponse response = WebRequest.Create(uri).GetResponse();
+				var _orgCallback = ServicePointManager.ServerCertificateValidationCallback;
+				ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => { return true; };
+				
+				WebRequest request = WebRequest.Create(uri);
+				
+				if (proxyInstance != null)
+				{
+					request.Proxy = proxyInstance;
+				}
 
+				WebResponse response = request.GetResponse();
 				StreamReader sr = new StreamReader(response.GetResponseStream());
+
+				ServicePointManager.ServerCertificateValidationCallback = _orgCallback;
+
 				return sr;
 			}
 

@@ -80,6 +80,7 @@
     <Compile Include="BaseSigningService.cs" />
     <Compile Include="ComponentFilter.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Proxy.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
     <Compile Include="Direction\DirectionRequest.cs" />
     <Compile Include="Direction\DirectionResponse.cs" />
