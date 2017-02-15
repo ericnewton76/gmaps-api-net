@@ -418,8 +418,8 @@ namespace Google.Maps.StaticMaps
 					}
 				}
 
-				//add a label, but if the MarkerSize is MarkerSizes.Tiny then you can't have a label.
-				if(string.IsNullOrEmpty(current.Label) == false && current.MarkerSize != MarkerSizes.Tiny)
+				// add a label, but if the MarkerSize is MarkerSizes.Tiny or Small then you can't have a label.
+				if (string.IsNullOrEmpty(current.Label) == false && !(current.MarkerSize == MarkerSizes.Tiny || current.MarkerSize == MarkerSizes.Small))
 				{
 					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.AppendFormat("label:{0}", current.Label);
