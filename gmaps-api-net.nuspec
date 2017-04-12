@@ -12,7 +12,7 @@
         <description>A library for interacting with Google Maps API web services using C# or VB.Net</description>
         <tags>google-maps maps c# google</tags>
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="4.5" />
+            <dependency id="Newtonsoft.Json" version="8.0.1" />
         </dependencies>
     </metadata>
 </package>
