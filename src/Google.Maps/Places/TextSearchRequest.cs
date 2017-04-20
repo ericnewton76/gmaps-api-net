@@ -35,6 +35,14 @@ namespace Google.Maps.Places
 		/// <see cref="https://developers.google.com/places/documentation/search#PlaceSearchRequests"/>
 		public string Language { get; set; }
 
+		/// <summary>
+		/// Returns the next 20 results from a previously run
+		/// search. Setting a pagetoken parameter will execute
+		/// a search with the same parameters used previously
+		/// — all parameters other than pagetoken will be ignored.
+		/// </summary>
+		public string PageToken { get; set; }
+
 		internal override Uri ToUri()
 		{
 			ValidateRequest();
@@ -71,6 +79,11 @@ namespace Google.Maps.Places
 			if(OpenNow.HasValue)
 			{
 				qsb.Append("opennow", OpenNow.Value.ToString().ToLowerInvariant());
+			}
+
+			if(!string.IsNullOrEmpty(PageToken))
+			{
+				qsb.Append("pagetoken", PageToken);
 			}
 
 			if((Types != null && Types.Any()))
