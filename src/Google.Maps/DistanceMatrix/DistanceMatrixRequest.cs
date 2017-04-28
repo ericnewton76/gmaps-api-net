@@ -146,7 +146,7 @@ namespace Google.Maps.DistanceMatrix
 			foreach(Location waypoint in waypointsList)
 			{
 				if(sb.Length > 0) sb.Append("|");
-				sb.Append(waypoint.ToString());
+				sb.Append(Uri.EscapeDataString(waypoint.ToString()));
 			}
 
 			return sb.ToString();
