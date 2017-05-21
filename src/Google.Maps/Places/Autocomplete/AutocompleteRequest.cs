@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
+
 
 namespace Google.Maps.Places
 {
@@ -61,6 +63,11 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Components { get; set; }
 
+		/// <summary>
+		/// A Google Maps Api Key is now required, It is Validated as part of the request
+		/// </summary>
+		public string Licencekey { get; set; }
+
 		internal override Uri ToUri()
 		{
 			ValidateRequest();
@@ -68,7 +75,8 @@ namespace Google.Maps.Places
 			var qsb = new Internal.QueryStringBuilder();
 
 			qsb.Append("input", Input.ToLowerInvariant())
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()))
+			   .Append("key", Licencekey.ToString().ToLowerInvariant());
 
 			if(Offset > 0)
 			{
@@ -100,6 +108,7 @@ namespace Google.Maps.Places
 				qsb.Append(string.Format("components=country:{0}", Components.ToLowerInvariant()));
 			}
 
+
 			var url = "autocomplete/json?" + qsb.ToString();
 			return new Uri(url, UriKind.Relative);
 		}
@@ -109,6 +118,14 @@ namespace Google.Maps.Places
 			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 
 			if(string.IsNullOrEmpty(this.Input)) throw new InvalidOperationException("Input property hasn't been set.");
+
+			
+			if(ConfigurationManager.AppSettings["Google.Maps.Licence.key"] != null)
+			{
+				Licencekey = ConfigurationManager.AppSettings["Google.Maps.Licence.key"].ToString();
+			}
+
+			if (string.IsNullOrEmpty(Licencekey)) throw new InvalidOperationException("Licence key hasn't been set");
 		}
 
 		protected string TypesToUri()
