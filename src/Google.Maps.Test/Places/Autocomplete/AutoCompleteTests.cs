@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Google.Maps.Places;
+
 namespace Google.Maps.Test.Places.Autocomplete
 {
 	[TestFixture]
@@ -26,8 +27,7 @@ namespace Google.Maps.Test.Places.Autocomplete
 			var request = new AutocompleteRequest()
 			{
 				Sensor = false,
-				Input = "London",
-				Licencekey = "AIzaSyA5e-MpZ89-Sy-P8ZAG1-BS6kc--88IghI"
+				Input = "London"
 			};
 
 			var service = new PlacesService();
@@ -36,6 +36,27 @@ namespace Google.Maps.Test.Places.Autocomplete
 			response = service.GetAutocompleteResponse(request);
 
 			Assert.IsNotNull(response);
+		}
+
+		[Test]
+		public void ResponseWith_Types_And_Places()
+		{
+			var request = new AutocompleteRequest()
+			{
+				Sensor = false,
+				Input = "SK4 5DA",
+				Regions = true,
+				Components = "UK"
+			};
+
+			var service = new PlacesService();
+			AutocompleteResponse response = null;
+
+			response = service.GetAutocompleteResponse(request);
+
+			Assert.IsNotNull(response);
+			Assert.IsTrue(response.Predictions.Length > 0);
+			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
 		}
 
 	}

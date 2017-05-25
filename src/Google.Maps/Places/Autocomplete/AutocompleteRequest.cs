@@ -68,6 +68,20 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Licencekey { get; set; }
 
+		/// <summary>
+		/// City only search
+		/// </summary>
+		/// <see cref="https://developers.google.com/places/web-service/supported_types"/>
+		/// <returns></returns>
+		public bool CitysOnly { get; set; }
+
+		/// <summary>
+		/// A type collection instructs the Places service to return the following types: 
+		/// locality, sublocality,postal_code,country,administrative_area_level_1,administrative_area_level_2
+		/// </summary>
+		/// <see cref="https://developers.google.com/places/web-service/supported_types"/>
+		public bool Regions { get; set; }
+
 		internal override Uri ToUri()
 		{
 			ValidateRequest();
@@ -76,7 +90,7 @@ namespace Google.Maps.Places
 
 			qsb.Append("input", Input.ToLowerInvariant())
 			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()))
-			   .Append("key", Licencekey.ToString().ToLowerInvariant());
+			   .Append("key", Licencekey.ToString());
 
 			if(Offset > 0)
 			{
@@ -108,8 +122,19 @@ namespace Google.Maps.Places
 				qsb.Append(string.Format("components=country:{0}", Components.ToLowerInvariant()));
 			}
 
+			if (CitysOnly & !Regions)
+			{
+				qsb.Append("types", "(cities)");
+			}
+
+			if (Regions & !CitysOnly)
+			{
+				qsb.Append("types", "(regions)");
+			}
 
 			var url = "autocomplete/json?" + qsb.ToString();
+
+			var returnUrl = new Uri(url, UriKind.Relative).ToString();
 			return new Uri(url, UriKind.Relative);
 		}
 
@@ -126,6 +151,11 @@ namespace Google.Maps.Places
 			}
 
 			if (string.IsNullOrEmpty(Licencekey)) throw new InvalidOperationException("Licence key hasn't been set");
+
+			if(CitysOnly && Regions)
+			{
+				throw new InvalidOperationException("Invalid Request, you can only have either CitysOnly or Regions and not both");
+			}
 		}
 
 		protected string TypesToUri()
