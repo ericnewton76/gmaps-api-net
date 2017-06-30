@@ -113,9 +113,10 @@ namespace Google.Maps
 		/// <returns></returns>
 		public override string GetAsUrlParameter()
 		{
-			//we're not returning crazy characters so just return the string.
-			//prevents the comma from being converted to %2c, expanding the single character to three characters.
-			return this.ToString("R");
+			// This style of formatting will give us 7 decimal places of precision,
+			// but if anything can be expressed with less, then it will be.
+			// IE: 0.5 rather than 0.5000000
+			return this.ToString("0.#######");
 		}
 
 		#region Parse
