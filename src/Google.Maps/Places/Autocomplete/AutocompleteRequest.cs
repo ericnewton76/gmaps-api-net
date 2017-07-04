@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
+
 
 namespace Google.Maps.Places
 {
@@ -61,6 +63,25 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Components { get; set; }
 
+		/// <summary>
+		/// A Google Maps Api Key is now required, It is Validated as part of the request
+		/// </summary>
+		public string Licencekey { get; set; }
+
+		/// <summary>
+		/// City only search
+		/// </summary>
+		/// <see cref="https://developers.google.com/places/web-service/supported_types"/>
+		/// <returns></returns>
+		public bool CitysOnly { get; set; }
+
+		/// <summary>
+		/// A type collection instructs the Places service to return the following types: 
+		/// locality, sublocality,postal_code,country,administrative_area_level_1,administrative_area_level_2
+		/// </summary>
+		/// <see cref="https://developers.google.com/places/web-service/supported_types"/>
+		public bool Regions { get; set; }
+
 		internal override Uri ToUri()
 		{
 			ValidateRequest();
@@ -68,7 +89,8 @@ namespace Google.Maps.Places
 			var qsb = new Internal.QueryStringBuilder();
 
 			qsb.Append("input", Input.ToLowerInvariant())
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()))
+			   .Append("key", Licencekey.ToString());
 
 			if(Offset > 0)
 			{
@@ -100,7 +122,19 @@ namespace Google.Maps.Places
 				qsb.Append(string.Format("components=country:{0}", Components.ToLowerInvariant()));
 			}
 
+			if (CitysOnly & !Regions)
+			{
+				qsb.Append("types", "(cities)");
+			}
+
+			if (Regions & !CitysOnly)
+			{
+				qsb.Append("types", "(regions)");
+			}
+
 			var url = "autocomplete/json?" + qsb.ToString();
+
+			var returnUrl = new Uri(url, UriKind.Relative).ToString();
 			return new Uri(url, UriKind.Relative);
 		}
 
@@ -109,6 +143,19 @@ namespace Google.Maps.Places
 			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 
 			if(string.IsNullOrEmpty(this.Input)) throw new InvalidOperationException("Input property hasn't been set.");
+
+			
+			if(ConfigurationManager.AppSettings["Google.Maps.Licence.key"] != null)
+			{
+				Licencekey = ConfigurationManager.AppSettings["Google.Maps.Licence.key"].ToString();
+			}
+
+			if (string.IsNullOrEmpty(Licencekey)) throw new InvalidOperationException("Licence key hasn't been set");
+
+			if(CitysOnly && Regions)
+			{
+				throw new InvalidOperationException("Invalid Request, you can only have either CitysOnly or Regions and not both");
+			}
 		}
 
 		protected string TypesToUri()
