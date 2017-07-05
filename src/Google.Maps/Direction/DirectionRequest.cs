@@ -107,6 +107,8 @@ namespace Google.Maps.Direction
 
 		internal Uri ToUri()
 		{
+			if (Origin == null) throw new InvalidOperationException("Origin is required");
+
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
 				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
 				.Append("destination", (Destination == null ? (string)null : Destination.GetAsUrlParameter()))
