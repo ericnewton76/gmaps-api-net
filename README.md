@@ -94,6 +94,10 @@ A big thank you to all of our [contributors](https://github.com/ericnewton76/gma
 - [Sheepzez](https://github.com/Sheepzez)
 - [Mieliespoor](https://github.com/mieliespoor)
 - [Richard Thombs](https://github.com/richardthombs)
+- [Frank Hommers](https://github.com/frankhommers)
+- [Maetiz](https://github.com/Maetiz)
+- [obito1406](https://github.com/obito1406)
+- [pettys](https://github.com/pettys)
 
 Forked from a work originally created by [Luis Farzati](https://github.com/luisfarzati) and incorporating ideas from [Brian Pedersen](https://briancaos.wordpress.com/2009/10/16/google-maps-polyline-encoding-in-c)
 
