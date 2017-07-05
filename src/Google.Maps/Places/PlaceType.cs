@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
 
 namespace Google.Maps.Places
 {
@@ -53,15 +54,20 @@ namespace Google.Maps.Places
 		Electrician,
 		ElectronicsStore,
 		Embassy,
+		[Obsolete("Not supported after February 16, 2017")]
 		Establishment,
+		[Obsolete("Not supported after February 16, 2017")]
 		Finance,
 		FireStation,
 		Florist,
+		[Obsolete("Not supported after February 16, 2017")]
 		Food,
 		FuneralHome,
 		FurnitureStore,
 		GasStation,
+		[Obsolete("Not supported after February 16, 2017")]
 		GeneralContractor,
+		[Obsolete("Not supported after February 16, 2017")]
 		GroceryOrSupermarket,
 		Gym,
 		HairCare,
@@ -94,6 +100,7 @@ namespace Google.Maps.Places
 		PetStore,
 		Pharmacy,
 		Physiotherapist,
+		[Obsolete("Not supported after February 16, 2017")]
 		PlaceOfWorship,
 		Plumber,
 		Police,
