@@ -52,7 +52,6 @@ namespace Google.Maps.Test.Elevation
 			var request = new ElevationRequest();
 
 			request.AddLocations(expectedLocation);
-			request.Sensor = false;
 			var response = new ElevationService().GetResponse(request);
 
 			// asserts
@@ -81,7 +80,6 @@ namespace Google.Maps.Test.Elevation
 			var request = new ElevationRequest();
 
 			request.AddLocations(expectedLocation1, expectedLocation2);
-			request.Sensor = false;
 			var response = new ElevationService().GetResponse(request);
 
 			// asserts

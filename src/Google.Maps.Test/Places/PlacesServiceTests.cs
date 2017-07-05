@@ -17,8 +17,7 @@ namespace Google.Maps.Test.Places
 			PlacesRequest request = new NearbySearchRequest()
 			{
 				Location = new LatLng(40.741895, -73.989308),
-				Radius = 10000,
-				Sensor = false
+				Radius = 10000
 			};
 			PlacesResponse response = new PlacesService().GetResponse(request);
 
@@ -32,7 +31,6 @@ namespace Google.Maps.Test.Places
 			{
 				Location = new LatLng(40.741895, -73.989308),
 				Radius = 10000,
-				Sensor = false,
 				PageToken = response.NextPageToken
 			};
 			response = new PlacesService().GetResponse(request);
@@ -47,7 +45,6 @@ namespace Google.Maps.Test.Places
 			{
 				Location = new LatLng(40.741895, -73.989308),
 				Radius = 10000,
-				Sensor = false,
 				PageToken = response.NextPageToken + "A" // invalid token
 			};
 			response = new PlacesService().GetResponse(request);
@@ -61,8 +58,7 @@ namespace Google.Maps.Test.Places
 			PlacesRequest request = new TextSearchRequest()
 			{
 				Query = "New York, NY",
-				Radius = 10000,
-				Sensor = false
+				Radius = 10000
 			};
 			PlacesResponse response = new PlacesService().GetResponse(request);
 
@@ -76,7 +72,6 @@ namespace Google.Maps.Test.Places
 			{
 				Query = "New York, NY",
 				Radius = 10000,
-				Sensor = false,
 				PageToken = response.NextPageToken
 			};
 			response = new PlacesService().GetResponse(request);
@@ -91,7 +86,6 @@ namespace Google.Maps.Test.Places
 			{
 				Query = "New York, NY",
 				Radius = 10000,
-				Sensor = false,
 				PageToken = response.NextPageToken + "A" // invalid token
 			};
 			response = new PlacesService().GetResponse(request);

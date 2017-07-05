@@ -16,22 +16,11 @@ namespace Google.Maps.Test.StaticMaps
 	{
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public void Sensor_not_set_throws_invalidoperationexception_when_touri_called()
-		{
-			StaticMapRequest sm = new StaticMapRequest();
-			sm.ToUri();
-
-			Assert.Fail("InvalidOPerationException was expected");
-		}
-
-		[Test]
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void Invalid_size_propert_set()
 		{
 			StaticMapRequest sm = new StaticMapRequest()
 			{
-				Sensor = false,
 				Size = new System.Drawing.Size(-1, -1)
 			};
 
@@ -44,7 +33,6 @@ namespace Google.Maps.Test.StaticMaps
 		{
 			StaticMapRequest sm = new StaticMapRequest()
 			{
-				Sensor = false,
 				Size = new System.Drawing.Size(4097, 4097)
 			};
 
@@ -58,7 +46,6 @@ namespace Google.Maps.Test.StaticMaps
 		{
 			StaticMapRequest sm = new StaticMapRequest()
 			{
-				Sensor = false,
 				Zoom = -1
 			};
 
@@ -123,7 +110,7 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Markers_ShouldNotUseExtraZeros_BecauseUrlLengthIsLimited()
 		{
-			StaticMapRequest map = new StaticMapRequest { Sensor = false };
+			StaticMapRequest map = new StaticMapRequest();
 			map.Markers.Add(new LatLng(40.0, -60.0));
 			map.Markers.Add(new LatLng(41.1, -61.1));
 			map.Markers.Add(new LatLng(42.22, -62.22));
@@ -143,7 +130,7 @@ namespace Google.Maps.Test.StaticMaps
 			StringAssert.Contains("markers=45.5555,-65.5555&", actual);
 			StringAssert.Contains("markers=46.66666,-66.66666&", actual);
 			StringAssert.Contains("markers=47.777777,-67.777777&", actual);
-			StringAssert.Contains("markers=48.8888888,-68.8888888&", actual);
+			StringAssert.Contains("markers=48.8888888,-68.8888888", actual);
 		}
 
 	}
@@ -154,7 +141,7 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Points_One()
 		{
-			var request = new StaticMapRequest { Sensor = true };
+			var request = new StaticMapRequest();
 
 			LatLng first = new LatLng(30.1, -60.2);
 			request.Path = new Path(first);
@@ -168,7 +155,7 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Points_Two()
 		{
-			var request = new StaticMapRequest { Sensor = true };
+			var request = new StaticMapRequest();
 
 			LatLng first = new LatLng(30.1, -60.2);
 			LatLng second = new LatLng(40.3, -70.4);
@@ -186,10 +173,7 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Path_NonstandardColor_EncodedProperly()
 		{
-			var map = new StaticMapRequest
-			{
-				Sensor = false
-			};
+			var map = new StaticMapRequest();
 			map.Paths.Add(new Path(new LatLng(30.0, -60.0))
 			{
 				Color = System.Drawing.Color.FromArgb(0x80, 0xA0, 0xC0)
@@ -201,7 +185,7 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Encoded_SinglePoint()
 		{
-			var request = new StaticMapRequest { Sensor = true };
+			var request = new StaticMapRequest();
 
 			LatLng zero = new LatLng(30.0, -60.0);
 			request.Path = new Path(zero) { Encode = true };
@@ -215,10 +199,7 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void TwoPaths()
 		{
-			var map = new StaticMapRequest
-			{
-				Sensor = false
-			};
+			var map = new StaticMapRequest();
 			map.Paths.Add(GreenTriangleInAdaMN());
 			map.Paths.Add(RedTriangleNearAdaMN());
 

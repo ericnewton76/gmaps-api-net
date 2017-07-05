@@ -35,14 +35,12 @@ namespace Google.Maps.Test.Geocoding
 			var requestGB = new GeocodingRequest
 			{
 				Address = "Boston",
-				Sensor = false,
 				Components = "country:GB"
 			};
 
 			var requestUS = new GeocodingRequest
 			{
 				Address = "Boston",
-				Sensor = false,
 				Components = "country:US"
 			};
 
@@ -68,8 +66,7 @@ namespace Google.Maps.Test.Geocoding
 		{
 			var request = new GeocodingRequest
 			{
-				Address = "Boston",
-				Sensor = false
+				Address = "Boston"
 			};
 
 			var response = new GeocodingService().GetResponse(request);
@@ -85,8 +82,7 @@ namespace Google.Maps.Test.Geocoding
 		{
 			var request = new GeocodingRequest
 			{
-				Address = "Boston",
-				Sensor = false
+				Address = "Boston"
 			};
 
 			var response = new GeocodingService().GetResponse(request);
@@ -101,8 +97,7 @@ namespace Google.Maps.Test.Geocoding
 		{
 			var request = new GeocodingRequest
 			{
-				Address = "Stathern, UK",
-				Sensor = false
+				Address = "Stathern, UK"
 			};
 
 			var response = new GeocodingService().GetResponse(request);
