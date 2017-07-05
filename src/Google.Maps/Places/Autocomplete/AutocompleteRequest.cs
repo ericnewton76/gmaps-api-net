@@ -61,7 +61,7 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Components { get; set; }
 
-		internal override Uri ToUri()
+		public override Uri ToUri()
 		{
 			ValidateRequest();
 

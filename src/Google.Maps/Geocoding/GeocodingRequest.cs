@@ -24,7 +24,7 @@ namespace Google.Maps.Geocoding
 	/// <summary>
 	/// Provides a request for the Google Maps Geocoding web service.
 	/// </summary>
-	public class GeocodingRequest
+	public class GeocodingRequest : BaseRequest
 	{
 		/// <summary>
 		/// The address that you want to geocode.  Use LatLng to perform a reverse geocoding request.
@@ -78,7 +78,7 @@ namespace Google.Maps.Geocoding
 		/// <remarks>Required.</remarks>
 		public bool? Sensor { get; set; }
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			EnsureSensor();
 

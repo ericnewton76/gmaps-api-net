@@ -7,6 +7,6 @@ namespace Google.Maps
 {
 	public abstract class BaseRequest
 	{
-		internal abstract Uri ToUri();
+		public abstract Uri ToUri();
 	}
 }

@@ -27,7 +27,7 @@ namespace Google.Maps.DistanceMatrix
 	/// <summary>
 	/// Provides a request for the Google Distance Matrix web service.
 	/// </summary>
-	public class DistanceMatrixRequest
+	public class DistanceMatrixRequest : BaseRequest
 	{
 		/// <summary>
 		/// (optional) Specifies what mode of transport to use when calculating directions.
@@ -156,7 +156,7 @@ namespace Google.Maps.DistanceMatrix
 		/// Create URI for quering
 		/// </summary>
 		/// <returns></returns>
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			this.EnsureSensor(true);
 

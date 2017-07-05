@@ -23,7 +23,7 @@ namespace Google.Maps.Elevation
 	/// <summary>
 	/// Provides a request for the Google Maps Elevation web service.
 	/// </summary>
-	public class ElevationRequest
+	public class ElevationRequest : BaseRequest
 	{
 		/// <summary>
 		/// Defines the location(s) on the earth from which to return elevation
@@ -95,7 +95,7 @@ namespace Google.Maps.Elevation
 		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
 		public bool? Sensor { get; set; }
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			this.EnsureSensor(true);
 
