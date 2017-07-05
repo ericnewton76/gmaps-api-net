@@ -44,7 +44,7 @@ namespace Google.Maps.Places
 		Cemetery,
 		Church,
 		CityHall,
-		ClotingStore,
+		ClothingStore,
 		ConvenienceStore,
 		CourtHouse,
 		Dentist,
@@ -66,6 +66,7 @@ namespace Google.Maps.Places
 		Gym,
 		HairCare,
 		HardwareStore,
+		[Obsolete("Not supported after February 16, 2017")]
 		Health,
 		HinduTemple,
 		HomeGoodsStore,
@@ -93,7 +94,7 @@ namespace Google.Maps.Places
 		PetStore,
 		Pharmacy,
 		Physiotherapist,
-		PlaceOfWorkship,
+		PlaceOfWorship,
 		Plumber,
 		Police,
 		PostOffice,
@@ -110,8 +111,9 @@ namespace Google.Maps.Places
 		Store,
 		SubwayStation,
 		Synagogue,
-		TaxiStation,
+		TaxiStand,
 		TrainStation,
+		TransitStation,
 		TravelAgency,
 		University,
 		VeterinaryCare,
@@ -262,11 +264,6 @@ namespace Google.Maps.Places
 		/// <summary>
 		/// Indicates an second-order civil entity below a locality.
 		/// </summary>
-		SublocalityLevel1,
-
-		/// <summary>
-		/// Indicates an first-order civil entity below a locality.
-		/// </summary>
-		TransitStation
+		SublocalityLevel1
 	}
 }
