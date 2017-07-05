@@ -33,7 +33,7 @@ namespace Google.Maps.StaticMaps
 	/// the type of map, and the placement of optional markers at locations on
 	/// the map.
 	/// </summary>
-	public class StaticMapRequest
+	public class StaticMapRequest : BaseRequest
 	{
 		public StaticMapRequest()
 		{
@@ -223,7 +223,7 @@ namespace Google.Maps.StaticMaps
 			}
 		}
 
-		public Uri ToUri()
+		public override Uri ToUri()
 		{
 			EnsureSensor(true);
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Google.Maps.Places.Details
 {
-	public class PlaceDetailsRequest
+	public class PlaceDetailsRequest : BaseRequest
 	{
 		/// <summary>
 		/// Undocumented address component filters.
@@ -57,7 +57,7 @@ namespace Google.Maps.Places.Details
 		public bool? Sensor { get; set; }
 
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			var qsb = new Internal.QueryStringBuilder();
 

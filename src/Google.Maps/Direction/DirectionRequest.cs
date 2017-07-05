@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Google.Maps.Direction
 {
-	public class DirectionRequest
+	public class DirectionRequest : BaseRequest
 	{
 		/// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
@@ -110,7 +110,7 @@ namespace Google.Maps.Direction
 			return sb.ToString();
 		}
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			EnsureSensor();
 

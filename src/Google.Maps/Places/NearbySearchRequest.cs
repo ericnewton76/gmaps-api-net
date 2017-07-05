@@ -69,7 +69,7 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string PageToken { get; set; }
 
-		internal override Uri ToUri()
+		public override Uri ToUri()
 		{
 			ValidateRequest();
 
