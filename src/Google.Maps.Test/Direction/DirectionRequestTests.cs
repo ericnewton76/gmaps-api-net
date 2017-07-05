@@ -116,20 +116,6 @@ namespace Google.Maps.Test
 
 
 		[Test]
-		
-		public void GetUrl_sensor_not_set_should_throw_error()
-		{
-			var req = new DirectionRequestAccessor();
-
-			//act
-			//assert
-			Assert.Throws<InvalidOperationException>(() =>
-			{
-				var actual = req.ToUri();
-			});
-		}
-
-		[Test]
 		public void GetUrl_no_Origin_set()
 		{
 			var req = new DirectionRequestAccessor();
@@ -162,10 +148,9 @@ namespace Google.Maps.Test
 		public void GetUrl_simplest_using_address_ex1()
 		{
 			//arrange
-			var expected = ParseQueryString("json?origin=New York, NY&destination=Albany, NY&sensor=false");
+			var expected = ParseQueryString("json?origin=New York, NY&destination=Albany, NY");
 
 			var req = new DirectionRequestAccessor();
-			req.Sensor = false;
 			req.Origin = "New York, NY";
 			req.Destination = "Albany, NY";
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
@@ -183,12 +168,10 @@ namespace Google.Maps.Test
 			//arrange
 			var expected = new NameValueCollection {
 				{ "origin", "30.2,40.3" },
-				{ "destination", "50.5,60.6" },
-				{ "sensor", "false" }
+				{ "destination", "50.5,60.6" }
 			};
 
 			var req = new DirectionRequestAccessor();
-			req.Sensor = false;
 			req.Origin = new LatLng(30.2, 40.3);
 			req.Destination = new LatLng(50.5, 60.6);
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
@@ -204,10 +187,9 @@ namespace Google.Maps.Test
 		public void GetUrl_waypoints_simple_ex1()
 		{
 			//arrange
-			var expected = ParseQueryString("json?origin=NY&destination=FL&waypoints=NC&sensor=false");
+			var expected = ParseQueryString("json?origin=NY&destination=FL&waypoints=NC");
 
 			var req = new DirectionRequestAccessor();
-			req.Sensor = false;
 			req.Origin = "NY";
 			req.Destination = "FL";
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
@@ -226,10 +208,9 @@ namespace Google.Maps.Test
 		public void GetUrl_waypoints_latlng_ex1()
 		{
 			//arrange
-			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=28.452694,-80.979195&sensor=false");
+			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=28.452694,-80.979195");
 
 			var req = new DirectionRequestAccessor();
-			req.Sensor = false;
 			req.Origin = "NY";
 			req.Destination = "Orlando,FL";
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.
@@ -247,10 +228,9 @@ namespace Google.Maps.Test
 		public void GetUrl_waypoints_latlng_ex2()
 		{
 			//arrange
-			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=NJ|28.452694,-80.979195|Sarasota,FL&sensor=false");
+			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=NJ|28.452694,-80.979195|Sarasota,FL");
 
 			var req = new DirectionRequestAccessor();
-			req.Sensor = false;
 			req.Origin = "NY";
 			req.Destination = "Orlando,FL";
 			req.Mode = TravelMode.driving; //this is default, so querystring doesn't need to contain it.

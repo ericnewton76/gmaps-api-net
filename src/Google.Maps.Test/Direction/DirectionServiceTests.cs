@@ -82,7 +82,6 @@ namespace Google.Maps.Test.Integrations
 
 			// test
 			var request = new DirectionRequest();
-			request.Sensor = false;
 			request.Origin = "";
 			var response = new DirectionService().GetResponse(request);
 
@@ -125,7 +124,6 @@ namespace Google.Maps.Test.Integrations
 			var request = new DirectionRequest();
 			request.Origin = "Toront"; // Typo intended
 			request.Destination = "Montreal";
-			request.Sensor = false;
 
 			var response = new DirectionService().GetResponse(request);
 

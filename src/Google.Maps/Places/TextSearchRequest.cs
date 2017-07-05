@@ -40,8 +40,7 @@ namespace Google.Maps.Places
 			ValidateRequest();
 			var qsb = new Internal.QueryStringBuilder();
 
-			qsb.Append("query", Uri.EscapeDataString(Query.ToLowerInvariant()))
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+			qsb.Append("query", Uri.EscapeDataString(Query.ToLowerInvariant()));
 
 			if(Location != null)
 			{

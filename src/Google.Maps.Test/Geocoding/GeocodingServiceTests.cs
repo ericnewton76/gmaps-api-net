@@ -83,7 +83,6 @@ namespace Google.Maps.Test.Integrations
 
 			// test
 			var request = new GeocodingRequest();
-			request.Sensor = false;
 			request.Address = "";
 			var response = new GeocodingService().GetResponse(request);
 
@@ -121,7 +120,6 @@ namespace Google.Maps.Test.Integrations
 			// test
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway Mountain View CA";
-			request.Sensor = false;
 			var response = new GeocodingService().GetResponse(request);
 
 			// asserts
@@ -176,7 +174,6 @@ namespace Google.Maps.Test.Integrations
 			// test
 			var request = new GeocodingRequest();
 			request.Address = "11 Wall Street New York NY 10005";
-			request.Sensor = false;
 			var actual = new GeocodingService().GetResponse(request);
 
 			// asserts

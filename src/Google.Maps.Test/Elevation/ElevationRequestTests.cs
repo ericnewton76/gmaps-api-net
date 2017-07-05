@@ -47,24 +47,12 @@ namespace Google.Maps.Test.Elevation
 		}
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public void Sensor_not_set_throws()
-		{
-			var req = new ElevationRequestAccessor();
-
-			Uri url = req.ToUri();
-
-			Assert.Fail("Expected exception");
-		}
-
-		[Test]
 		public void GetUrl_one_location()
 		{
 			var req = new ElevationRequestAccessor();
-			req.Sensor = false;
 			req.Locations.Add(new LatLng(40.714728, -73.998672));
 
-			string expected = "json?locations=40.714728,-73.998672&sensor=false";
+			string expected = "json?locations=40.714728,-73.998672";
 			string actual = req.ToUri().OriginalString;
 
 			Assert.AreEqual(expected, actual);

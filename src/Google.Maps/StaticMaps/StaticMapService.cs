@@ -104,15 +104,13 @@ namespace Google.Maps.StaticMaps
 		/// </summary>
 		/// <param name="center"></param>
 		/// <param name="zoom"></param>
-		/// <param name="sensor"></param>
 		/// <returns></returns>
-		public byte[] GetMap(Location center, int zoom, bool sensor)
+		public byte[] GetMap(Location center, int zoom)
 		{
 			StaticMapRequest request = new StaticMapRequest()
 			{
 				Center = center,
-				Zoom = zoom,
-				Sensor = sensor
+				Zoom = zoom
 			};
 
 			return GetImageBytes(request);
@@ -123,17 +121,15 @@ namespace Google.Maps.StaticMaps
 		/// </summary>
 		/// <param name="center">A location to center the map on</param>
 		/// <param name="zoom">Zoom level to use</param>
-		/// <param name="sensor">Pass true if the location was provided via a sensor</param>
 		/// <param name="imageFormat">The format of the image</param>
 		/// <returns></returns>
-		public byte[] GetMap(Location center, int zoom, GMapsImageFormats imageFormat, bool sensor)
+		public byte[] GetMap(Location center, int zoom, GMapsImageFormats imageFormat)
 		{
 			StaticMapRequest request = new StaticMapRequest()
 			{
 				Format = imageFormat,
 				Center = center,
-				Zoom = zoom,
-				Sensor = sensor
+				Zoom = zoom
 			};
 
 			return GetImageBytes(request);
@@ -144,31 +140,28 @@ namespace Google.Maps.StaticMaps
 		/// </summary>
 		/// <param name="center">A location to center the map on</param>
 		/// <param name="zoom">Zoom level to use</param>
-		/// <param name="sensor">Pass true if the location was provided via a sensor</param>
 		/// <param name="imageFormat">The format of the image</param>
 		/// <returns></returns>
-		public byte[] GetMap(Location center, int zoom, System.Drawing.Size size, GMapsImageFormats imageFormat, bool sensor)
+		public byte[] GetMap(Location center, int zoom, System.Drawing.Size size, GMapsImageFormats imageFormat)
 		{
 			StaticMapRequest request = new StaticMapRequest()
 			{
 				Format = imageFormat,
 				Size = size,
 				Center = center,
-				Zoom = zoom,
-				Sensor = sensor
+				Zoom = zoom
 			};
 
 			return GetImageBytes(request);
 		}
 
 
-		public byte[] GetMapWithCenterMarked(Location center, int zoom, bool sensor)
+		public byte[] GetMapWithCenterMarked(Location center, int zoom)
 		{
 			StaticMapRequest request = new StaticMapRequest()
 			{
 				Center = center,
-				Zoom = zoom,
-				Sensor = sensor
+				Zoom = zoom
 			};
 			request.Markers.Add(request.Center);
 

@@ -47,17 +47,8 @@ namespace Google.Maps.TimeZone
 		/// <see cref="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
 		public string Language { get; set; }
 
-		/// <summary>
-		/// Indicates whether or not the timezone request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		/// <see cref="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Sensor"/>
-		public bool? Sensor { get; set; }
-
 		internal Uri ToUri()
 		{
-			EnsureSensor();
 			if(Location == null) throw new InvalidOperationException("Location property is not set.");
 
 			var qsb = new Internal.QueryStringBuilder();
@@ -65,17 +56,11 @@ namespace Google.Maps.TimeZone
 
 			qsb.Append("location", Location.GetAsUrlParameter())
 				.Append("timestamp", (Timestamp.ToUniversalTime() - epoch).TotalSeconds.ToString())
-				.Append("language", Language)
-				.Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+				.Append("language", Language);
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
-		}
-
-		private void EnsureSensor()
-		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
 	}
 }

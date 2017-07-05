@@ -75,8 +75,7 @@ namespace Google.Maps.Places
 
 			var qsb = new Internal.QueryStringBuilder();
 
-			qsb.Append("location", Location.GetAsUrlParameter())
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+			qsb.Append("location", Location.GetAsUrlParameter());
 
 			if(RankBy.GetValueOrDefault(Maps.RankBy.Prominence) != Maps.RankBy.Distance)
 			{

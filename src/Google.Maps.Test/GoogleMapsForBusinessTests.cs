@@ -45,8 +45,7 @@ namespace Google.Maps.Test
 		{
 			var request = new GeocodingRequest
 			{
-				Address = "Stathern, UK",
-				Sensor = false
+				Address = "Stathern, UK"
 			};
 
 			GoogleSigned.AssignAllServices(GetRealSigningInstance());
