@@ -73,6 +73,8 @@ namespace Google.Maps.Geocoding
 
 		internal Uri ToUri()
 		{
+			if (Address == null) throw new InvalidOperationException("Address is required");
+
 			var qsb = new Internal.QueryStringBuilder();
 
 			if(Address != null)
