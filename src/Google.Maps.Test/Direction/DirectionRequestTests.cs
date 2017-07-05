@@ -13,45 +13,6 @@ namespace Google.Maps.Test
 	[TestFixture]
 	public class DirectionRequestTests
 	{
-
-		#region DirectionRequestAccessor
-		public class DirectionRequestAccessor : DirectionRequest
-		{
-			private static Type S_instanceType;
-			private static MethodInfo _ToUri;
-
-			static DirectionRequestAccessor()
-			{
-				S_instanceType = typeof(DirectionRequest);
-
-				try { _ToUri = S_instanceType.GetMethod("ToUri", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { }); }
-				catch { }
-				finally { Ensure(_ToUri, "ToUri"); }
-			}
-
-			private static void Ensure(MethodInfo methodInfo, string methodName)
-			{
-				if(methodInfo == null) Assert.Fail("Method '{0}' on type '{1}' was not found, and the accessor will fail.", methodName, S_instanceType);
-			}
-
-			#region Protected/Private interface
-			public Uri ToUri()
-			{
-				try
-				{
-					return (Uri)_ToUri.Invoke(this, new object[] { });
-				}
-				catch(TargetInvocationException ex)
-				{
-					throw ex.InnerException;
-				}
-			}
-			#endregion
-
-
-		}
-		#endregion
-
 		#region helpers
 
 		NameValueCollection ParseQueryString(Uri uri)
@@ -119,7 +80,7 @@ namespace Google.Maps.Test
 		
 		public void GetUrl_sensor_not_set_should_throw_error()
 		{
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 
 			//act
 			//assert
@@ -132,7 +93,7 @@ namespace Google.Maps.Test
 		[Test]
 		public void GetUrl_no_Origin_set()
 		{
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 			//req.Origin = nothing basically;
 
 			//act
@@ -147,7 +108,7 @@ namespace Google.Maps.Test
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Destination_set()
 		{
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 			//req.Origin = nothing basically;
 
 			//act
@@ -164,7 +125,7 @@ namespace Google.Maps.Test
 			//arrange
 			var expected = ParseQueryString("json?origin=New York, NY&destination=Albany, NY&sensor=false");
 
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 			req.Sensor = false;
 			req.Origin = "New York, NY";
 			req.Destination = "Albany, NY";
@@ -187,7 +148,7 @@ namespace Google.Maps.Test
 				{ "sensor", "false" }
 			};
 
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 			req.Sensor = false;
 			req.Origin = new LatLng(30.2, 40.3);
 			req.Destination = new LatLng(50.5, 60.6);
@@ -206,7 +167,7 @@ namespace Google.Maps.Test
 			//arrange
 			var expected = ParseQueryString("json?origin=NY&destination=FL&waypoints=NC&sensor=false");
 
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 			req.Sensor = false;
 			req.Origin = "NY";
 			req.Destination = "FL";
@@ -228,7 +189,7 @@ namespace Google.Maps.Test
 			//arrange
 			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=28.452694,-80.979195&sensor=false");
 
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 			req.Sensor = false;
 			req.Origin = "NY";
 			req.Destination = "Orlando,FL";
@@ -249,7 +210,7 @@ namespace Google.Maps.Test
 			//arrange
 			var expected = ParseQueryString("json?origin=NY&destination=Orlando,FL&waypoints=NJ|28.452694,-80.979195|Sarasota,FL&sensor=false");
 
-			var req = new DirectionRequestAccessor();
+			var req = new DirectionRequest();
 			req.Sensor = false;
 			req.Origin = "NY";
 			req.Destination = "Orlando,FL";
