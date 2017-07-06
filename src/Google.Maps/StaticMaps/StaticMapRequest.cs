@@ -210,6 +210,7 @@ namespace Google.Maps.StaticMaps
 		/// is required for all static map requests. (required)
 		/// </summary>
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Sensor</remarks>
+		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 		public bool? Sensor { get; set; }
 
 

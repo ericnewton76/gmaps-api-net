@@ -27,6 +27,7 @@ namespace Google.Maps.Places
 		/// with a location sensor. This value must be either true or false.
 		/// </summary>
 		/// <remarks>Required.</remarks>
+		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 		public bool? Sensor { get; set; }
 
 		/// <summary>

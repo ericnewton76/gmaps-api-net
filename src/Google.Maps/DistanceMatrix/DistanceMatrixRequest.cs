@@ -56,6 +56,7 @@ namespace Google.Maps.DistanceMatrix
 		///
 		///
 		/// </summary>
+		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 		public bool? Sensor { get; set; }
 
 		/// <summary>

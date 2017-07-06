@@ -54,6 +54,7 @@ namespace Google.Maps.Places.Details
 		/// parameter to indicate whether your application used a sensor to determine the user's
 		/// location. This parameter is no longer required.
 		/// </summary>
+		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 		public bool? Sensor { get; set; }
 
 

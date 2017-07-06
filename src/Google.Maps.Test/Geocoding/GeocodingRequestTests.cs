@@ -54,6 +54,8 @@ namespace Google.Maps.Test
 				get { return _instance.Address; }
 				set { this._instance.Address = value; }
 			}
+
+			[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 			public bool? Sensor
 			{
 				get { return this._instance.Sensor; }

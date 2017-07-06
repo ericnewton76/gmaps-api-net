@@ -53,6 +53,7 @@ namespace Google.Maps.TimeZone
 		/// </summary>
 		/// <remarks>Required.</remarks>
 		/// <see cref="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Sensor"/>
+		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 		public bool? Sensor { get; set; }
 
 		internal Uri ToUri()

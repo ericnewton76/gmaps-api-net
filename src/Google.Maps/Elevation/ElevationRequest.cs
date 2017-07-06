@@ -93,6 +93,7 @@ namespace Google.Maps.Elevation
 		/// </summary>
 		/// <remarks>Required.</remarks>
 		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
+		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 		public bool? Sensor { get; set; }
 
 		internal Uri ToUri()
