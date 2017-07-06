@@ -50,6 +50,7 @@ namespace Google.Maps.Direction
 		/// <summary>
 		///  Indicates whether or not the directions request comes from a device with a location sensor. This value must be either true or false.
 		/// </summary>
+		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
 		public bool? Sensor { get; set; }
 
 		/// <summary>
@@ -112,7 +113,8 @@ namespace Google.Maps.Direction
 
 		internal Uri ToUri()
 		{
-			EnsureSensor();
+			//ENewton(2017-Jul-05): ensure sensor call removed because sensor parameter no longer required by the APIs
+			//EnsureSensor();
 
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
 				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
@@ -123,7 +125,7 @@ namespace Google.Maps.Direction
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
-				.Append("sensor", Sensor.Value ? "true" : "false")
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false")
 				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid))
 				.Append("alternatives", Alternatives.HasValue ? (Alternatives.Value ? "true" : "false") : (string)null);
 
@@ -132,6 +134,7 @@ namespace Google.Maps.Direction
 			return new Uri(url, UriKind.Relative);
 		}
 
+		[Obsolete("Google doesnt require sensor parameter anymore", true)]
 		private void EnsureSensor()
 		{
 			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");

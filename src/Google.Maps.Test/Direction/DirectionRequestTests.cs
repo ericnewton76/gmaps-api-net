@@ -115,8 +115,8 @@ namespace Google.Maps.Test
 		//}
 
 
-		[Test]
-		
+		//ENewton(2017-Jul-05): sensor is not required anymore
+		//[Test]
 		public void GetUrl_sensor_not_set_should_throw_error()
 		{
 			var req = new DirectionRequestAccessor();
