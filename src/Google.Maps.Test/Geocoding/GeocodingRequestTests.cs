@@ -133,18 +133,6 @@ namespace Google.Maps.Test
 
 		[Test]
 		[ExpectedException(typeof(InvalidOperationException))]
-		public void GetUrl_sensor_not_set_should_throw_error()
-		{
-			var req = new GeocodingRequestAccessor();
-			req.Address = "New York, NY";
-
-			var actual = req.ToUri();
-
-			Assert.Fail("Should've encountered an InvalidOperationException due to Sensor property not being set.");
-		}
-
-		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Address_set()
 		{
 			var req = new GeocodingRequestAccessor();

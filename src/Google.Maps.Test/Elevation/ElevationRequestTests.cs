@@ -47,17 +47,6 @@ namespace Google.Maps.Test.Elevation
 		}
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public void Sensor_not_set_throws()
-		{
-			var req = new ElevationRequestAccessor();
-
-			Uri url = req.ToUri();
-
-			Assert.Fail("Expected exception");
-		}
-
-		[Test]
 		public void GetUrl_one_location()
 		{
 			var req = new ElevationRequestAccessor();

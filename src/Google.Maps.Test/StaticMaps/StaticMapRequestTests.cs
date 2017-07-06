@@ -16,16 +16,6 @@ namespace Google.Maps.Test.StaticMaps
 	{
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public void Sensor_not_set_throws_invalidoperationexception_when_touri_called()
-		{
-			StaticMapRequest sm = new StaticMapRequest();
-			sm.ToUri();
-
-			Assert.Fail("InvalidOPerationException was expected");
-		}
-
-		[Test]
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void Invalid_size_propert_set()
 		{
