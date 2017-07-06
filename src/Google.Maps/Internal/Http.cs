@@ -19,6 +19,7 @@ using System;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Google.Maps.Internal
 {
@@ -65,6 +66,11 @@ namespace Google.Maps.Internal
 				return output;
 			}
 
+			/// <summary>
+			/// returns result from Url as a specific type <typeparamref name="T" /> deserialized via JsonSerializer
+			/// </summary>
+			/// <typeparam name="T"></typeparam>
+			/// <returns></returns>
 			public virtual T As<T>() where T : class
 			{
 				T output = null;
@@ -73,8 +79,15 @@ namespace Google.Maps.Internal
 				{
 					JsonTextReader jsonReader = new JsonTextReader(reader);
 					JsonSerializer serializer = new JsonSerializer();
+
+					serializer.ContractResolver = new DefaultContractResolver()
+					{
+						NamingStrategy = new SnakeCaseNamingStrategy()
+					};
+
 					serializer.Converters.Add(new JsonEnumTypeConverter());
 					serializer.Converters.Add(new JsonLocationConverter());
+
 					output = serializer.Deserialize<T>(jsonReader);
 				}
 
