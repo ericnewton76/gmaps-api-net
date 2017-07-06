@@ -27,5 +27,8 @@ namespace Google.Maps.Elevation
 
 		[JsonProperty("elevation")]
 		public decimal Elevation { get; set; }
+
+		[JsonProperty("resolution")]
+		public decimal Resolution { get; set; }
 	}
 }
