@@ -57,7 +57,6 @@ namespace Google.Maps.TimeZone
 
 		internal Uri ToUri()
 		{
-			EnsureSensor();
 			if(Location == null) throw new InvalidOperationException("Location property is not set.");
 
 			var qsb = new Internal.QueryStringBuilder();
@@ -73,10 +72,6 @@ namespace Google.Maps.TimeZone
 			return new Uri(url, UriKind.Relative);
 		}
 
-		private void EnsureSensor()
-		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-		}
 	}
 }
 

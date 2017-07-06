@@ -213,20 +213,8 @@ namespace Google.Maps.StaticMaps
 		public bool? Sensor { get; set; }
 
 
-
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if(Sensor == null)
-			{
-				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
-		}
-
 		public Uri ToUri()
 		{
-			EnsureSensor(true);
-
 			string formatStr = null;
 			switch(this.Format)
 			{

@@ -80,8 +80,6 @@ namespace Google.Maps.Geocoding
 
 		internal Uri ToUri()
 		{
-			EnsureSensor();
-
 			var qsb = new Internal.QueryStringBuilder();
 
 			if(Address != null)
@@ -117,9 +115,5 @@ namespace Google.Maps.Geocoding
 			return string.Concat(swStr + Constants.PIPE_URL_ENCODED + neStr);
 		}
 
-		private void EnsureSensor()
-		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-		}
 	}
 }

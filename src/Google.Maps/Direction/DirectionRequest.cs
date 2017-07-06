@@ -134,11 +134,11 @@ namespace Google.Maps.Direction
 			return new Uri(url, UriKind.Relative);
 		}
 
-		[Obsolete("Google doesnt require sensor parameter anymore", true)]
-		private void EnsureSensor()
-		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-		}
+		//[Obsolete("Google doesnt require sensor parameter anymore", true)]
+		//private void EnsureSensor()
+		//{
+		//	if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
+		//}
 
 	}
 }

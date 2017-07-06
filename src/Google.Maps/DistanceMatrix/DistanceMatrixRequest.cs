@@ -158,8 +158,6 @@ namespace Google.Maps.DistanceMatrix
 		/// <returns></returns>
 		internal Uri ToUri()
 		{
-			this.EnsureSensor(true);
-
 			var qsb = new Internal.QueryStringBuilder()
 				.Append("origins", WaypointsToUri(_waypointsOrigin))
 				.Append("destinations", WaypointsToUri(_waypointsDestination))
@@ -174,14 +172,6 @@ namespace Google.Maps.DistanceMatrix
 			return new Uri(url, UriKind.Relative);
 		}
 
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if(Sensor == null)
-			{
-				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
-		}
 	}
 
 }

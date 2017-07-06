@@ -97,8 +97,6 @@ namespace Google.Maps.Elevation
 
 		internal Uri ToUri()
 		{
-			this.EnsureSensor(true);
-
 			var qsb = new Internal.QueryStringBuilder()
 
 				.Append("locations", RequestUtils.GetLatLngCollectionStr(this._locations))
@@ -109,15 +107,6 @@ namespace Google.Maps.Elevation
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
-		}
-
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if(Sensor == null)
-			{
-				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
 		}
 
 		private string GetLocationsStr()
