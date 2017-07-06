@@ -45,8 +45,7 @@ namespace Google.Maps
 		OverQueryLimit = 3,
 
 		/// <summary>
-		/// Indicates that your request was denied, generally because of lack
-		/// of a sensor parameter.
+		/// Indicates that your request was denied.
 		/// </summary>
 		RequestDenied = 4,
 

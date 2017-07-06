@@ -46,18 +46,6 @@ namespace Google.Maps.Places.Details
 		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport"/>
 		public string Language { get; set; }
 
-		/// <summary>
-		/// Indicates whether or not the geocoding request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		///
-		/// The Google Places API Web Service previously required that you include the sensor
-		/// parameter to indicate whether your application used a sensor to determine the user's
-		/// location. This parameter is no longer required.
-		/// </summary>
-		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-		public bool? Sensor { get; set; }
-
-
 		internal Uri ToUri()
 		{
 			var qsb = new Internal.QueryStringBuilder();

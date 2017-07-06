@@ -53,13 +53,6 @@ namespace Google.Maps.DistanceMatrix
 		public string Language { get; set; }
 
 		/// <summary>
-		///
-		///
-		/// </summary>
-		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-		public bool? Sensor { get; set; }
-
-		/// <summary>
 		///  List of origin waypoints
 		/// </summary>
 		private List<Location> _waypointsOrigin;
@@ -165,14 +158,12 @@ namespace Google.Maps.DistanceMatrix
 				.Append("mode", Mode.ToString())
 				.Append("language", Language)
 				.Append("units", Units.ToString())
-				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false")
 				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid));
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
 		}
-
 	}
 
 }

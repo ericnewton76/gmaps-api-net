@@ -203,17 +203,6 @@ namespace Google.Maps.StaticMaps
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Paths</remarks>
 		public ICollection<Location> Visible { get; set; }
 
-
-		/// <summary>
-		/// Specifies whether the application requesting the static map is
-		/// using a sensor to determine the user's location. This parameter
-		/// is required for all static map requests. (required)
-		/// </summary>
-		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Sensor</remarks>
-		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-		public bool? Sensor { get; set; }
-
-
 		public Uri ToUri()
 		{
 			string formatStr = null;
@@ -252,8 +241,7 @@ namespace Google.Maps.StaticMaps
 				.Append("region", this.Region)
 				.Append(GetMarkersStr())
 				.Append(GetPathsStr())
-				.Append("visible", GetVisibleStr())
-				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
+				.Append("visible", GetVisibleStr());
 
 			var url = "staticmap?" + qs.ToString();
 

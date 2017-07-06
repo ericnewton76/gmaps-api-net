@@ -86,24 +86,13 @@ namespace Google.Maps.Elevation
 		/// <remarks>Required if a path is specified.</remarks>
 		public int? Samples { get; set; }
 
-		/// <summary>
-		/// Specifies whether the application requesting elevation data is
-		/// using a sensor to determine the user's location. This parameter
-		/// is required for all elevation requests.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
-		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-		public bool? Sensor { get; set; }
-
 		internal Uri ToUri()
 		{
 			var qsb = new Internal.QueryStringBuilder()
 
 				.Append("locations", RequestUtils.GetLatLngCollectionStr(this._locations))
 				.Append("path", RequestUtils.GetLatLngCollectionStr(this._path))
-				.Append("samples", (Samples.GetValueOrDefault() > 0 ? Samples.ToString() : ""))
-				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
+				.Append("samples", (Samples.GetValueOrDefault() > 0 ? Samples.ToString() : ""));
 
 			var url = "json?" + qsb.ToString();
 

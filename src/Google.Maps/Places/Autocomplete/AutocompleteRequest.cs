@@ -7,13 +7,6 @@ namespace Google.Maps.Places
 {
 	public class AutocompleteRequest : BaseRequest
 	{
-		/// <summary>
-		/// Indicates whether or not the place request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-		public bool? Sensor { get; set; }
 
 		/// <summary>
 		/// The text string on which to search. The Place Autocomplete service
@@ -68,8 +61,7 @@ namespace Google.Maps.Places
 
 			var qsb = new Internal.QueryStringBuilder();
 
-			qsb.Append("input", Input.ToLowerInvariant())
-				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
+			qsb.Append("input", Input.ToLowerInvariant());
 
 			if(Offset > 0)
 			{
@@ -107,8 +99,6 @@ namespace Google.Maps.Places
 
 		protected void ValidateRequest()
 		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-
 			if(string.IsNullOrEmpty(this.Input)) throw new InvalidOperationException("Input property hasn't been set.");
 		}
 

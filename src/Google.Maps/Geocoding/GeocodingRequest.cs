@@ -71,14 +71,6 @@ namespace Google.Maps.Geocoding
 		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport"/>
 		public string Language { get; set; }
 
-		/// <summary>
-		/// Indicates whether or not the geocoding request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-		public bool? Sensor { get; set; }
-
 		internal Uri ToUri()
 		{
 			var qsb = new Internal.QueryStringBuilder();
@@ -98,8 +90,7 @@ namespace Google.Maps.Geocoding
 			qsb.Append("bounds", GetBoundsStr())
 				.Append("components", Components != null ? Components.ToUrlParameters() : "")
 				.Append("region", Region)
-				.Append("language", Language)
-				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
+				.Append("language", Language);
 
 			var url = "json?" + qsb.ToString();
 
@@ -115,6 +106,5 @@ namespace Google.Maps.Geocoding
 
 			return string.Concat(swStr + Constants.PIPE_URL_ENCODED + neStr);
 		}
-
 	}
 }

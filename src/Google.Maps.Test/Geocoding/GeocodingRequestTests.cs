@@ -54,13 +54,6 @@ namespace Google.Maps.Test
 				get { return _instance.Address; }
 				set { this._instance.Address = value; }
 			}
-
-			[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-			public bool? Sensor
-			{
-				get { return this._instance.Sensor; }
-				set { this._instance.Sensor = value; }
-			}
 			#endregion
 
 		}
@@ -124,17 +117,14 @@ namespace Google.Maps.Test
 		{
 			var req = new GeocodingRequestAccessor();
 
-			req.Sensor = false;
 			req.Address = new LatLng(-30.1d, 40.2d); //using -30.1f,40.2f gives precision error beyond 6 digits when using format "R". strange.
 
-			Uri expected = new Uri("json?latlng=-30.1,40.2&sensor=false", UriKind.Relative);
+			Uri expected = new Uri("json?latlng=-30.1,40.2", UriKind.Relative);
 			Uri actual = req.ToUri();
 
 			Assert.AreEqual(expected, actual);
 		}
 
-		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Address_set()
 		{
 			var req = new GeocodingRequestAccessor();

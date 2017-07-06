@@ -23,14 +23,6 @@ namespace Google.Maps.Places
 	public abstract class PlacesRequest : BaseRequest
 	{
 		/// <summary>
-		/// Indicates whether or not the place request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		[Obsolete("Google Maps API doesnt require this parameter anymore.  This property will be removed in a future version.")]
-		public bool? Sensor { get; set; }
-
-		/// <summary>
 		/// The latitude/longitude around which to retrieve Place information.
 		/// </summary>
 		/// <remarks>Required with RequestType=Nearby.</remarks>
@@ -88,8 +80,6 @@ namespace Google.Maps.Places
 
 		protected virtual void ValidateRequest()
 		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-
 			if(this.Minprice.HasValue && (this.Minprice < 0 || this.Minprice > 4)) throw new ArgumentException("Minprice property must have a value between 0 and 4 inclusive.");
 
 			if(this.Maxprice.HasValue && (this.Maxprice < 0 || this.Maxprice > 4)) throw new ArgumentException("Maxprice property must have a value between 0 and 4 inclusive.");
