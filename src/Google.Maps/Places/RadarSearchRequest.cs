@@ -57,8 +57,8 @@ namespace Google.Maps.Places
 			var qsb = new Internal.QueryStringBuilder();
 
 			qsb.Append("location", Location.GetAsUrlParameter())
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()))
-			   .Append("radius", (Radius.Value.ToString().ToLowerInvariant()));
+			   .Append("radius", (Radius.Value.ToString().ToLowerInvariant()))
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
 
 			if(!string.IsNullOrEmpty(Keyword))
 			{

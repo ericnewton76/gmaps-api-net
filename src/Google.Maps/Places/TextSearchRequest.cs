@@ -49,7 +49,8 @@ namespace Google.Maps.Places
 			var qsb = new Internal.QueryStringBuilder();
 
 			qsb.Append("query", Uri.EscapeDataString(Query.ToLowerInvariant()))
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
+
 
 			if(Location != null)
 			{

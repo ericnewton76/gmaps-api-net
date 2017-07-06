@@ -98,7 +98,7 @@ namespace Google.Maps.Geocoding
 				.Append("components", Components != null ? Components.ToUrlParameters() : "")
 				.Append("region", Region)
 				.Append("language", Language)
-				.Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
 
 			var url = "json?" + qsb.ToString();
 

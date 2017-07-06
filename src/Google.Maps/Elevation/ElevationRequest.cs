@@ -102,7 +102,7 @@ namespace Google.Maps.Elevation
 				.Append("locations", RequestUtils.GetLatLngCollectionStr(this._locations))
 				.Append("path", RequestUtils.GetLatLngCollectionStr(this._path))
 				.Append("samples", (Samples.GetValueOrDefault() > 0 ? Samples.ToString() : ""))
-				.Append("sensor", (Sensor.Value ? "true" : "false"));
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
 
 			var url = "json?" + qsb.ToString();
 

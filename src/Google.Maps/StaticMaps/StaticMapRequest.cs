@@ -252,7 +252,7 @@ namespace Google.Maps.StaticMaps
 				.Append(GetMarkersStr())
 				.Append(GetPathsStr())
 				.Append("visible", GetVisibleStr())
-				.Append("sensor", (Sensor == true ? "true" : "false"));
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
 
 			var url = "staticmap?" + qs.ToString();
 

@@ -68,7 +68,7 @@ namespace Google.Maps.Places
 			var qsb = new Internal.QueryStringBuilder();
 
 			qsb.Append("input", Input.ToLowerInvariant())
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false");
 
 			if(Offset > 0)
 			{

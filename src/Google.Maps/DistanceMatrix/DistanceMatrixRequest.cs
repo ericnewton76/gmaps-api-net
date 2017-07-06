@@ -164,7 +164,7 @@ namespace Google.Maps.DistanceMatrix
 				.Append("mode", Mode.ToString())
 				.Append("language", Language)
 				.Append("units", Units.ToString())
-				.Append("sensor", (Sensor.Value ? "true" : "false"))
+				.Append("sensor", Sensor.GetValueOrDefault(false) ? "true" : "false")
 				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid));
 
 			var url = "json?" + qsb.ToString();
