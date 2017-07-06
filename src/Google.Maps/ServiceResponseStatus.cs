@@ -50,16 +50,16 @@ namespace Google.Maps
 		/// </summary>
 		RequestDenied = 4,
 
-        /// <summary>
-        /// At least one of the provided locations in the request could not
-        /// be geocoded.
-        /// </summary>
-        NotFound = 5,
+		/// <summary>
+		/// At least one of the provided locations in the request could not
+		/// be geocoded.
+		/// </summary>
+		NotFound = 5,
 
-        /// <summary>
-        /// Indicates that too many waypoints were provided in the request.
-        /// Without an API key the maximum number is 8.
-        /// </summary>
-        MaxWaypointsExceeded = 6
+		/// <summary>
+		/// Indicates that too many waypoints were provided in the request.
+		/// Without an API key the maximum number is 8.
+		/// </summary>
+		MaxWaypointsExceeded = 6
 	}
 }

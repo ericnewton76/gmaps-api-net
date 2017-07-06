@@ -328,7 +328,7 @@ namespace Google.Maps.StaticMaps
 
 				}
 
-			skipster:
+				skipster:
 				pathParam[pathParamIndex++] = "path=" + sb.ToString();
 			}
 

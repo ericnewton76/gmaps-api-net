@@ -46,12 +46,12 @@ namespace Google.Maps
 				case "INVALID_REQUEST":
 					result = ServiceResponseStatus.InvalidRequest;
 					break;
-                case "MAX_WAYPOINTS_EXCEEDED":
-                    result = ServiceResponseStatus.MaxWaypointsExceeded;
-                    break;
-                case "NOT_FOUND":
-                    result = ServiceResponseStatus.NotFound;
-                    break;
+				case "MAX_WAYPOINTS_EXCEEDED":
+					result = ServiceResponseStatus.MaxWaypointsExceeded;
+					break;
+				case "NOT_FOUND":
+					result = ServiceResponseStatus.NotFound;
+					break;
 			}
 
 			return result;

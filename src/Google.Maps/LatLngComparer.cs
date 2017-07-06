@@ -48,7 +48,7 @@ namespace Google.Maps
 
 			if(a * b == 0)
 			{ // a or b or both are zero
-				// relative error is not meaningful here
+			  // relative error is not meaningful here
 				return diff < (epsilon * epsilon);
 			}
 			else
