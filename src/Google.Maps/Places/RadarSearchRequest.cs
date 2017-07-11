@@ -50,7 +50,7 @@ namespace Google.Maps.Places
 		/// </remarks>
 		public string Name { get; set; }
 
-		internal override Uri ToUri()
+		public override Uri ToUri()
 		{
 			ValidateRequest();
 

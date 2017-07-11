@@ -221,7 +221,7 @@ namespace Google.Maps
 					result = Places.PlaceType.CityHall;
 					break;
 				case "clothing_store":
-					result = Places.PlaceType.ClotingStore;
+					result = Places.PlaceType.ClothingStore;
 					break;
 				case "convenience_store":
 					result = Places.PlaceType.ConvenienceStore;
@@ -368,7 +368,7 @@ namespace Google.Maps
 					result = Places.PlaceType.Physiotherapist;
 					break;
 				case "place_of_worship":
-					result = Places.PlaceType.PlaceOfWorkship;
+					result = Places.PlaceType.PlaceOfWorship;
 					break;
 				case "plumber":
 					result = Places.PlaceType.Plumber;
@@ -419,7 +419,7 @@ namespace Google.Maps
 					result = Places.PlaceType.Synagogue;
 					break;
 				case "taxi_stand":
-					result = Places.PlaceType.TaxiStation;
+					result = Places.PlaceType.TaxiStand;
 					break;
 				case "train_station":
 					result = Places.PlaceType.TrainStation;

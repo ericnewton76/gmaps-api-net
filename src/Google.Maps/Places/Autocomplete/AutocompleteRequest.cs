@@ -7,7 +7,6 @@ namespace Google.Maps.Places
 {
 	public class AutocompleteRequest : BaseRequest
 	{
-
 		/// <summary>
 		/// The text string on which to search. The Place Autocomplete service
 		/// will return candidate matches based on this string and order
@@ -55,7 +54,7 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Components { get; set; }
 
-		internal override Uri ToUri()
+		public override Uri ToUri()
 		{
 			ValidateRequest();
 

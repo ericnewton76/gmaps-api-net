@@ -23,7 +23,7 @@ namespace Google.Maps.Elevation
 	/// <summary>
 	/// Provides a request for the Google Maps Elevation web service.
 	/// </summary>
-	public class ElevationRequest
+	public class ElevationRequest : BaseRequest
 	{
 		/// <summary>
 		/// Defines the location(s) on the earth from which to return elevation
@@ -86,7 +86,7 @@ namespace Google.Maps.Elevation
 		/// <remarks>Required if a path is specified.</remarks>
 		public int? Samples { get; set; }
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			var qsb = new Internal.QueryStringBuilder()
 

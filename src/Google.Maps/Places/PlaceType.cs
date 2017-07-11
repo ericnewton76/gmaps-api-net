@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
 
 namespace Google.Maps.Places
 {
@@ -44,7 +45,7 @@ namespace Google.Maps.Places
 		Cemetery,
 		Church,
 		CityHall,
-		ClotingStore,
+		ClothingStore,
 		ConvenienceStore,
 		CourtHouse,
 		Dentist,
@@ -53,19 +54,25 @@ namespace Google.Maps.Places
 		Electrician,
 		ElectronicsStore,
 		Embassy,
+		[Obsolete("Not supported after February 16, 2017")]
 		Establishment,
+		[Obsolete("Not supported after February 16, 2017")]
 		Finance,
 		FireStation,
 		Florist,
+		[Obsolete("Not supported after February 16, 2017")]
 		Food,
 		FuneralHome,
 		FurnitureStore,
 		GasStation,
+		[Obsolete("Not supported after February 16, 2017")]
 		GeneralContractor,
+		[Obsolete("Not supported after February 16, 2017")]
 		GroceryOrSupermarket,
 		Gym,
 		HairCare,
 		HardwareStore,
+		[Obsolete("Not supported after February 16, 2017")]
 		Health,
 		HinduTemple,
 		HomeGoodsStore,
@@ -93,7 +100,8 @@ namespace Google.Maps.Places
 		PetStore,
 		Pharmacy,
 		Physiotherapist,
-		PlaceOfWorkship,
+		[Obsolete("Not supported after February 16, 2017")]
+		PlaceOfWorship,
 		Plumber,
 		Police,
 		PostOffice,
@@ -110,8 +118,9 @@ namespace Google.Maps.Places
 		Store,
 		SubwayStation,
 		Synagogue,
-		TaxiStation,
+		TaxiStand,
 		TrainStation,
+		TransitStation,
 		TravelAgency,
 		University,
 		VeterinaryCare,
@@ -262,11 +271,6 @@ namespace Google.Maps.Places
 		/// <summary>
 		/// Indicates an second-order civil entity below a locality.
 		/// </summary>
-		SublocalityLevel1,
-
-		/// <summary>
-		/// Indicates an first-order civil entity below a locality.
-		/// </summary>
-		TransitStation
+		SublocalityLevel1
 	}
 }

@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Google.Maps.Direction
 {
-	public class DirectionRequest
+	public class DirectionRequest : BaseRequest
 	{
 		/// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
@@ -46,8 +46,6 @@ namespace Google.Maps.Direction
 		/// If language is not supplied, the service will attempt to use the native language of the domain from which the request is sent.</summary>
 		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
 		public string Language { get; set; }
-
-		/// <summary>
 		/// departure_time specifies the desired time of departure as seconds since midnight, January 1, 1970 UTC. The departure time may be specified in two cases:
 		///     For Transit Directions: One of departure_time or arrival_time must be specified when requesting directions.
 		///     For Driving Directions: Maps for Business customers can specify the departure_time to receive trip duration considering current traffic conditions. The departure_time must be set to within a few minutes of the current time.
@@ -105,8 +103,9 @@ namespace Google.Maps.Direction
 			return sb.ToString();
 		}
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
+			if (Origin == null) throw new InvalidOperationException("Origin is required");
 
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
 				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))

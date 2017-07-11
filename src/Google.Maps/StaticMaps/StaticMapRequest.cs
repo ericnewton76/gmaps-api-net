@@ -33,7 +33,7 @@ namespace Google.Maps.StaticMaps
 	/// the type of map, and the placement of optional markers at locations on
 	/// the map.
 	/// </summary>
-	public class StaticMapRequest
+	public class StaticMapRequest : BaseRequest
 	{
 		public StaticMapRequest()
 		{
@@ -203,7 +203,7 @@ namespace Google.Maps.StaticMaps
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Paths</remarks>
 		public ICollection<Location> Visible { get; set; }
 
-		public Uri ToUri()
+		public override Uri ToUri()
 		{
 			string formatStr = null;
 			switch(this.Format)

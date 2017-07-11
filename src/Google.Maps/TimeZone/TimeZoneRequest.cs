@@ -22,7 +22,7 @@ namespace Google.Maps.TimeZone
 	/// <summary>
 	/// Provides a request for the Google Maps Time Zone web service.
 	/// </summary>
-	public class TimeZoneRequest
+	public class TimeZoneRequest : BaseRequest
 	{
 		/// <summary>
 		/// The latitude and longitude co-ordinates of the location you want the time zone of.
@@ -47,7 +47,7 @@ namespace Google.Maps.TimeZone
 		/// <see cref="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
 		public string Language { get; set; }
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			if(Location == null) throw new InvalidOperationException("Location property is not set.");
 

@@ -138,54 +138,34 @@ namespace Google.Maps.Test.StaticMaps
 	[TestFixture]
 	public class StaticMap_Path_Tests
 	{
-		public class StaticMapRequestAccessor
-		{
-			private StaticMapRequest _instance = new StaticMapRequest();
-			private Type _instanceType = typeof(StaticMapRequest);
-
-			public new string GetPathsStr()
-			{
-				MethodInfo method = _instanceType.GetMethod("GetPathsStr", BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, new ParameterModifier[] { });
-
-				try
-				{
-					return (string)method.Invoke(_instance, new object[] { });
-				}
-				catch(TargetInvocationException ex)
-				{
-					throw ex.InnerException;
-				}
-			}
-			public Path Path { get { return _instance.Path; } set { this._instance.Path = value; } }
-		}
-
 		[Test]
 		public void Points_One()
 		{
-			StaticMapRequestAccessor accessor = new StaticMapRequestAccessor();
+			var request = new StaticMapRequest();
 
 			LatLng first = new LatLng(30.1, -60.2);
-			accessor.Path = new Path(first);
+			request.Path = new Path(first);
 
-			string expected = "path=30.1,-60.2";
-			string actual = accessor.GetPathsStr();
+			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2&sensor=true";
+			var actual = request.ToUri();
 
-			Assert.AreEqual(expected, actual);
+			Assert.AreEqual(expected, actual.ToString());
 		}
+
 		[Test]
 		public void Points_Two()
 		{
-			StaticMapRequestAccessor accessor = new StaticMapRequestAccessor();
+			var request = new StaticMapRequest();
 
 			LatLng first = new LatLng(30.1, -60.2);
 			LatLng second = new LatLng(40.3, -70.4);
 
-			accessor.Path = new Path(first, second);
+			request.Path = new Path(first, second);
 
-			string expected = "path=30.1,-60.2%7C40.3,-70.4";
-			string actual = accessor.GetPathsStr();
+			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2|40.3,-70.4&sensor=true";
+			var actual = request.ToUri();
 
-			Assert.AreEqual(expected, actual);
+			Assert.AreEqual(expected, actual.ToString());
 		}
 
 		// The color encoding for google static maps API puts the alpha last (0xrrggbbaa)
@@ -205,15 +185,15 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Encoded_SinglePoint()
 		{
-			StaticMapRequestAccessor accessor = new StaticMapRequestAccessor();
+			var request = new StaticMapRequest();
 
 			LatLng zero = new LatLng(30.0, -60.0);
-			accessor.Path = new Path(zero) { Encode = true };
+			request.Path = new Path(zero) { Encode = true };
 
-			string expected = "path=enc:" + PolylineEncoder.EncodeCoordinates(new LatLng[] { zero });
-			string actual = accessor.GetPathsStr();
+			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=enc:_kbvD~vemJ&sensor=true";
+			var actual = request.ToUri();
 
-			Assert.AreEqual(expected, actual);
+			Assert.AreEqual(expected, actual.ToString());
 		}
 
 		[Test]
@@ -267,14 +247,13 @@ namespace Google.Maps.Test.StaticMaps
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void Encode_set_but_not_all_LatLng_positions()
 		{
-			StaticMapRequestAccessor accessor = new StaticMapRequestAccessor();
+			var request = new StaticMapRequest();
 
 			LatLng first = new LatLng(30.0, -60.0);
 			Location second = new Location("New York");
-			accessor.Path = new Path(first, second) { Encode = true };
+			request.Path = new Path(first, second) { Encode = true };
 
-			string expected = null;//expecting an Exception
-			string actual = accessor.GetPathsStr();
+			var actual = request.ToUri();
 
 			Assert.Fail("Expected an InvalidOperationException because first point was LatLng but second point was Location.");
 		}
