@@ -141,20 +141,29 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void Points_One()
 		{
+			//arrange
+			string expected = "/maps/api/staticmap?size=512x512&path=30.1,-60.2";
+
+			//act
 			var request = new StaticMapRequest();
 
 			LatLng first = new LatLng(30.1, -60.2);
 			request.Path = new Path(first);
 
-			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2&sensor=true";
-			var actual = request.ToUri();
+			var uri = request.ToUri();
+			var actual = System.Web.HttpUtility.UrlDecode(uri.PathAndQuery); //for netstandard we'll have to change this to WebUtility.UrlDecode i think
 
-			Assert.AreEqual(expected, actual.ToString());
+			//assert
+			Assert.AreEqual(expected, actual);
 		}
 
 		[Test]
 		public void Points_Two()
 		{
+			//arrange
+			var expected = "/maps/api/staticmap?size=512x512&path=30.1,-60.2|40.3,-70.4";
+
+			//act
 			var request = new StaticMapRequest();
 
 			LatLng first = new LatLng(30.1, -60.2);
@@ -162,10 +171,11 @@ namespace Google.Maps.Test.StaticMaps
 
 			request.Path = new Path(first, second);
 
-			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2|40.3,-70.4&sensor=true";
-			var actual = request.ToUri();
+			var uri = request.ToUri();
+			var actual = System.Web.HttpUtility.UrlDecode(uri.PathAndQuery); //for netstandard we'll have to change this to WebUtility.UrlDecode i think
 
-			Assert.AreEqual(expected, actual.ToString());
+			//assert
+			Assert.AreEqual(expected, actual);
 		}
 
 		// The color encoding for google static maps API puts the alpha last (0xrrggbbaa)
@@ -190,10 +200,10 @@ namespace Google.Maps.Test.StaticMaps
 			LatLng zero = new LatLng(30.0, -60.0);
 			request.Path = new Path(zero) { Encode = true };
 
-			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=enc:_kbvD~vemJ&sensor=true";
+			string expected = "/maps/api/staticmap?size=512x512&path=enc:_kbvD~vemJ";
 			var actual = request.ToUri();
 
-			Assert.AreEqual(expected, actual.ToString());
+			Assert.AreEqual(expected, actual.PathAndQuery);
 		}
 
 		[Test]
