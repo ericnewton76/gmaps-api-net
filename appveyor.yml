@@ -4,16 +4,12 @@ pull_requests:
 configuration: Release
 shallow_clone: true
 clone_depth: 10
-init:
-- ps: write-host "init.RDP"; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
   assembly_version: '{version}'
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
-environment:
-  appveyor_rdp_password: Letmein1!
 build:
   publish_nuget: true
   verbosity: quiet
@@ -28,7 +24,7 @@ deploy:
 - provider: NuGet
   api_key:
     secure: 2SwDMmXZZtgoLWsldKZ8GCu9rZXpO5quTYtSNJQSeeiqDjnmo0OfutNVcH3jsfpj
-  artifact: '*.nupkg'
+  artifact: 'NugetPackage'
   on:
     branch: release
 notifications:
@@ -39,7 +35,3 @@ notifications:
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true
-on_success:
-- ps: "write-host \"Collecting RDP Information\"; \n\n$blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))"
-on_finish:
-- ps: 
