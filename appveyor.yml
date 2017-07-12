@@ -21,7 +21,7 @@ after_build:
 test:
   assemblies:
     only:
-    - src\Google.Maps.Test\**\*Tests.dll
+    - src\Google.Maps.Test\bin\Release\*Test.dll
 
 artifacts:
 - path: Build\Nuget\*.nupkg
