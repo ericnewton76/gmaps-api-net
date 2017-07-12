@@ -13,7 +13,7 @@ assembly_info:
   assembly_informational_version: '{version}'
 
 build_script:
-- cmd: msbuild /p:Configuration=Release src\GoogleMapsForNET.sln /verbosity:minimal
+- cmd: msbuild /p:Configuration=Release src\GoogleMapsForNET.sln /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 after_build:
 - cmd: call nuget_pack.cmd
