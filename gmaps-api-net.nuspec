@@ -14,5 +14,8 @@
         <dependencies>
             <dependency id="Newtonsoft.Json" version="8.0.1" />
         </dependencies>
+        <files>
+            <file src="lib\Google.Maps.dll" target="lib" />
+        </files>
     </metadata>
 </package>

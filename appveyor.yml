@@ -13,10 +13,12 @@ assembly_info:
 build:
   publish_nuget: true
   verbosity: quiet
+after_build:
+- cmd: call nuget_pack.cmd
 test:
   assemblies:
     only:
-    - Build\Testing\**\*Tests.dll
+    - src\Google.Maps.Tests\**\*Tests.dll
 artifacts:
 - path: Build\Nuget\*.nupkg
   name: NugetPackage
