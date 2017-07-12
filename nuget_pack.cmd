@@ -13,7 +13,7 @@ if "%CONFIGURATION%" == "" set CONFIGURATION=Release
 
 REM mkdir Build 2>NUL
 REM mkdir Build\NugetPack 2>NUL
-xcopy /I /Y src\%PROJECT%\bin\%CONFIGURATION%\%PROJECT%.* Build\NugetPack\lib
+xcopy /I /Y src\%PROJECT%\bin\%CONFIGURATION%\%PROJECT%.* Build\Nuget\lib
 if errorlevel 1 goto :END
 
 pushd Build\NugetPack
