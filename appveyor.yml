@@ -12,9 +12,6 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 
-before_build:
-- cmd: set
-
 build_script:
 - cmd: msbuild /p:Configuration=Release src\GoogleMapsForNET.sln /verbosity:minimal
 
@@ -24,7 +21,7 @@ after_build:
 test:
   assemblies:
     only:
-    - src\Google.Maps.Tests\**\*Tests.dll
+    - src\Google.Maps.Test\**\*Tests.dll
 
 artifacts:
 - path: Build\Nuget\*.nupkg
