@@ -16,7 +16,7 @@ REM mkdir Build\NugetPack 2>NUL
 xcopy /I /Y src\%PROJECT%\bin\%CONFIGURATION%\%PROJECT%.* Build\Nuget\lib
 if errorlevel 1 goto :END
 
-pushd Build\NugetPack
+pushd Build\Nuget
 
 echo.
 echo copy gmaps-api-net.nuspec .
