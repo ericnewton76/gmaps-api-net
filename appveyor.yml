@@ -15,10 +15,8 @@ assembly_info:
 before_build:
 - cmd: set
 
-build:
-  project: src\GoogleMapsForNet.sln
-  publish_nuget: true
-  verbosity: quiet
+build_script:
+- cmd: msbuild /p:Configuration=Release src\GoogleMapsForNET.sln /verbosity:minimal
 
 after_build:
 - cmd: call nuget_pack.cmd
