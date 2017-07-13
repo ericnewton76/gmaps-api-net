@@ -71,16 +71,9 @@ namespace Google.Maps.Geocoding
 		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport"/>
 		public string Language { get; set; }
 
-		/// <summary>
-		/// Indicates whether or not the geocoding request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		public bool? Sensor { get; set; }
-
 		public override Uri ToUri()
 		{
-			EnsureSensor();
+			if (Address == null) throw new InvalidOperationException("Address is required");
 
 			var qsb = new Internal.QueryStringBuilder();
 
@@ -99,8 +92,7 @@ namespace Google.Maps.Geocoding
 			qsb.Append("bounds", GetBoundsStr())
 				.Append("components", Components != null ? Components.ToUrlParameters() : "")
 				.Append("region", Region)
-				.Append("language", Language)
-				.Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+				.Append("language", Language);
 
 			var url = "json?" + qsb.ToString();
 
@@ -115,11 +107,6 @@ namespace Google.Maps.Geocoding
 			string neStr = this.Bounds.Northeast.GetAsUrlParameter();
 
 			return string.Concat(swStr + Constants.PIPE_URL_ENCODED + neStr);
-		}
-
-		private void EnsureSensor()
-		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
 		}
 	}
 }

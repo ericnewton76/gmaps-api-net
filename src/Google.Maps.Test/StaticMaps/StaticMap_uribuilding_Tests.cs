@@ -16,11 +16,10 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void BasicUri()
 		{
-			string expected = "/maps/api/staticmap?center=30.1,-60.2&size=512x512&sensor=false";
+			string expected = "/maps/api/staticmap?center=30.1,-60.2&size=512x512";
 
 			StaticMapRequest sm = new StaticMapRequest()
 			{
-				Sensor = false,
 				Center = new LatLng(30.1, -60.2)
 			};
 
