@@ -27,6 +27,7 @@ namespace Google.Maps.Places
 	/// Search, you can create applications that help users identify specific
 	/// areas of interest within a geographic area
 	/// </summary>
+	[Obsolete("Radar search is deprecated as of June 30, 2018. After that time, this feature will no longer be available.")]
 	public class RadarSearchRequest : PlacesRequest
 	{
 		/// <summary>
