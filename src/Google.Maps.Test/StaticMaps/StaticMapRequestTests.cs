@@ -146,7 +146,7 @@ namespace Google.Maps.Test.StaticMaps
 			LatLng first = new LatLng(30.1, -60.2);
 			request.Path = new Path(first);
 
-			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2&sensor=true";
+			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2";
 			var actual = request.ToUri();
 
 			Assert.AreEqual(expected, actual.ToString());
@@ -162,7 +162,7 @@ namespace Google.Maps.Test.StaticMaps
 
 			request.Path = new Path(first, second);
 
-			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2|40.3,-70.4&sensor=true";
+			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=30.1,-60.2|40.3,-70.4";
 			var actual = request.ToUri();
 
 			Assert.AreEqual(expected, actual.ToString());
@@ -190,7 +190,7 @@ namespace Google.Maps.Test.StaticMaps
 			LatLng zero = new LatLng(30.0, -60.0);
 			request.Path = new Path(zero) { Encode = true };
 
-			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=enc:_kbvD~vemJ&sensor=true";
+			string expected = "https://maps.google.com/maps/api/staticmap?size=512x512&path=enc:_kbvD~vemJ";
 			var actual = request.ToUri();
 
 			Assert.AreEqual(expected, actual.ToString());
