@@ -1,3 +1,4 @@
+image: Visual Studio 2017
 version: 0.18.{build}
 pull_requests:
   do_not_increment_build_number: true
