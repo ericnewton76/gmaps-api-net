@@ -24,8 +24,6 @@ namespace Google.Maps.Test.Integrations
 			string outputType = uri.Segments[uri.Segments.Length - 1];
 
 			System.Text.StringBuilder queryString = new StringBuilder(uri.OriginalString.Substring(uri.OriginalString.IndexOf("?") + 1));
-			queryString.Replace("&sensor=false", ""); //clear off sensor=false
-			queryString.Replace("&sensor=true", ""); // clear off sensor=true
 
 			//have to replace certain characters that wont work for a path
 			queryString.Replace("&", "$")
@@ -33,6 +31,8 @@ namespace Google.Maps.Test.Integrations
 				.Replace("%2C", ",")
 				.Replace("|", "!")
 				.Replace("%", "~");
+
+			if (queryString.Length == 0) queryString = new StringBuilder("blank");
 
 			string resourcePath = this.BaseResourcePath + string.Format(".{0}_queries.{1}.{0}", outputType, queryString.ToString());
 

@@ -23,7 +23,6 @@ namespace Google.Maps.Test
 		{
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway";
-			request.Sensor = false;
 			var response = new GeocodingService().GetResponse(request);
 
 			// --break in the online version here-- //
@@ -44,7 +43,6 @@ namespace Google.Maps.Test
 			map.Center = new Location("1600 Amphitheatre Parkway Mountain View, CA 94043");
 			map.Size = new System.Drawing.Size(400, 400);
 			map.Zoom = 14;
-			map.Sensor = false;
 
 			var imgTagSrc = map.ToUri();
 
@@ -57,13 +55,12 @@ namespace Google.Maps.Test
 			// invalid address results in partial match
 			var request = new DirectionRequest
 			{
-				Sensor = false,
 				Origin = new Location("410 Beeeeeechwood Rd, NJ 07450"),
 				Destination = new Location("204 Powell Ave, CA 94523")
 			};
 			var response = new DirectionService().GetResponse(request);
 
-			Assert.True(response.GeocodedWaypoints.Any(wp => wp.PartialMatch));
+			Assert.True(response.Waypoints.Any(wp => wp.PartialMatch));
 		}
 
 	}

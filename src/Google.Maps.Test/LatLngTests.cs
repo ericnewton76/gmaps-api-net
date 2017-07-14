@@ -24,6 +24,7 @@ namespace Google.Maps.Test
 		[Test]
 		[TestCase(-35.3353d, 95.4454d, "-35.3353,95.4454")]
 		[TestCase(40.7142330d, -73.9612910d, "40.714233,-73.961291")]
+		[TestCase(0.000001d, -0.000001d, "0.000001,-0.000001")]
 		public void GetAsUrlEncoded(double lat, double lng, string expected)
 		{
 			LatLng latlng = new LatLng(lat, lng);

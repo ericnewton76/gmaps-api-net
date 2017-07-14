@@ -2,36 +2,26 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ni8ha94ofk7acjmf)](https://ci.appveyor.com/project/EricNewton/gmaps-api-net)
 
-C# google maps api interface for interacting with the backend web services for Google Maps
+A .NET library for interacting with the Google Maps API suite.
 
-This is the main repository for the Google Maps API for .Net
-
-Nuget package: https://www.nuget.org/packages/gmaps-api-net/
+NuGet package: https://www.nuget.org/packages/gmaps-api-net/
 ```
 PS> Install-Package gmaps-api-net
 ```
 
 ## Overview
-This project intends to provide all the features available in the Google Maps API up to v3.7. It is being developed in C# for .NET Framework 3.5.
-
-* Please note that this project is still in design and development phase; the libraries may suffer major changes even at the interface level, so don't rely (yet) in this software for production uses. *
-
-Designed with simplicity and extensibility in mind, there are different libraries according to what you need.
-
-*Google.Maps* is a full featured API client library, providing strongly typed access to the API.  
+This project attempts to provide all the features available in the Google Maps API. It is being developed in C# for the Microsoft .NET Framework v3.5 and up. *gmaps-api-net* is a fully featured API client library, providing strongly typed access to the API.
 
 ## API Support
 
-Currently the service library supports full coverage of the following Google Maps APIs:
-  * *Geocoding*
-  * *Elevation*
-  * *Static Maps*
-  * *Direction* (thanks to malke.eklam)
-  * *Direction Matrix* (thanks to mocciavinc...@gmail.com)
-  * *Places* (thanks to [Mieliespoor](https://github.com/mieliespoor) and [Sheepzez](https://github.com/Sheepzez))
-  * *Time Zones* (thanks to [Sheepzez](http://github.com/Sheepzez))
-  * *Polyline encoding* (code based on source from [http://bit.ly/5XuDqb  briancaos.wordpress.com])
-  * *Google Maps for Business support*, using Google-supplied Client ID and private key for generating signed urls. (thanks for test generation and other help from richardthombs)
+Currently the library supports full coverage of the following Google Maps APIs:
+  * Geocoding
+  * Elevation
+  * Static Maps
+  * Directions
+  * Distance Matrix
+  * Places
+  * Time Zones
 
 ## Quick Examples
 Using Google Maps API for .NET is designed to be really easy.
@@ -46,7 +36,7 @@ request.Sensor = false;
 var response = new GeocodingService().GetResponse(request);
 ```
 
-The 'GeocodingService' class submits the request to the API web service, and returns 
+The `GeocodingService` class submits the request to the API web service, and returns 
 the response strongly typed as a `GeocodeResponse` object which may contain zero, one or more results. 
 Assuming we received at least one result, let's get some of its properties:
 
@@ -58,7 +48,7 @@ Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 37.423
 Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -122.0818530
 ```
 
-### Getting a static map url
+### Getting a static map URL
 Static Maps support allows you to get a valid url which you can use, for example, with an `<img src="">` tag.
 
 ```c#
@@ -72,44 +62,47 @@ var imgTagSrc = map.ToUri();
 ```
 
 ### Using a Google Maps for Business key
-Both Business Key and also standard api key's are supported and sample illustrate it's use below:
 
-Business Key:
 ```c#
 GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
+
 // Then do as many requests as you like...
 var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
 var response = GeocodingService.GetResponse(request);
 ```
 
-API Key:
+### Using a Google Maps API key
+
 ```c#
 GoogleSigned.AssignAllServices(new GoogleSigned("your-api-key"));
+
 // Then do as many requests as you like...
 var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
 var response = GeocodingService.GetResponse(request);
 ```
 
-## Project Roadmap
-The roadmap has changed a little with changing of hands, but the basic premise is the same.  
-  * ~~*Geocoding API*~~
-  * ~~*Elevation API*~~
-  * *Static Maps* (WORKING)
-  * *Documentation!* (WORKING)
-  * *Sample code* (WORKING)
-  * *Higher level API classes* (WORKING)
-  * *Cacheability support* (WORKING)
-  * *HTML helpers* -will be implemented in a tandem project for MVC and WebForms
-  * *Cache implementation*
-  * *Smart address search*
-
 ## Contact
-Questions, comments and/or suggestions are welcome! You can send an email to 
-- Luis at [mailto:luisfarzati@katulu.net luisfarzati@katulu.net], or Twitter: [http://twitter.com/luisfarzati]
-- Eric Newton [mailto:ericnewton76@gmail.com ericnewton76@gmail.com]
+Questions, comments and/or suggestions are welcome! Please raise an [issue](https://github.com/ericnewton76/gmaps-api-net/issues) in GitHub or send an email to:
+
+- Eric Newton [ericnewton76@gmail.com](mailto:ericnewton76@gmail.com)
+- Richard Thombs [stonyuk@gmail.com](mailto:stonyuk@gmail.com)
+
+## Contributors
+A big thank you to all of our [contributors](https://github.com/ericnewton76/gmaps-api-net/graphs/contributors) including:
+
+- [Eric Newton](https://github.com/ericnewton76)
+- [Sheepzez](https://github.com/Sheepzez)
+- [Mieliespoor](https://github.com/mieliespoor)
+- [Richard Thombs](https://github.com/richardthombs)
+- [Frank Hommers](https://github.com/frankhommers)
+- [Maetiz](https://github.com/Maetiz)
+- [obito1406](https://github.com/obito1406)
+- [pettys](https://github.com/pettys)
+
+Forked from a work originally created by [Luis Farzati](https://github.com/luisfarzati) and incorporating ideas from [Brian Pedersen](https://briancaos.wordpress.com/2009/10/16/google-maps-polyline-encoding-in-c)
 
 ## A note to Contributors
-Hello all, in order to maintain the project files' formatting, please get the EditorConfig plugin that works with your favorite IDE.  Many options available.  
+In order to maintain the project files' formatting, please get the EditorConfig plugin that works with your favorite IDE. Many options available.  
 
 This will go a long ways towards helping to maintain formatting so that actual changes arent lost in formatting changes... And that's a good thing, yes?  :wink:
 

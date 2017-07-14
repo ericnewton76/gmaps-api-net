@@ -8,13 +8,6 @@ namespace Google.Maps.Places
 	public class AutocompleteRequest : BaseRequest
 	{
 		/// <summary>
-		/// Indicates whether or not the place request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		public bool? Sensor { get; set; }
-
-		/// <summary>
 		/// The text string on which to search. The Place Autocomplete service
 		/// will return candidate matches based on this string and order
 		/// results based on their perceived relevance
@@ -61,14 +54,13 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Components { get; set; }
 
-		internal override Uri ToUri()
+		public override Uri ToUri()
 		{
 			ValidateRequest();
 
 			var qsb = new Internal.QueryStringBuilder();
 
-			qsb.Append("input", Input.ToLowerInvariant())
-			   .Append("sensor", (Sensor.Value.ToString().ToLowerInvariant()));
+			qsb.Append("input", Input.ToLowerInvariant());
 
 			if(Offset > 0)
 			{
@@ -106,8 +98,6 @@ namespace Google.Maps.Places
 
 		protected void ValidateRequest()
 		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-
 			if(string.IsNullOrEmpty(this.Input)) throw new InvalidOperationException("Input property hasn't been set.");
 		}
 

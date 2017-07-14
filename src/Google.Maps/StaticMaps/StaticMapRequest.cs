@@ -33,7 +33,7 @@ namespace Google.Maps.StaticMaps
 	/// the type of map, and the placement of optional markers at locations on
 	/// the map.
 	/// </summary>
-	public class StaticMapRequest
+	public class StaticMapRequest : BaseRequest
 	{
 		public StaticMapRequest()
 		{
@@ -203,30 +203,8 @@ namespace Google.Maps.StaticMaps
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Paths</remarks>
 		public ICollection<Location> Visible { get; set; }
 
-
-		/// <summary>
-		/// Specifies whether the application requesting the static map is
-		/// using a sensor to determine the user's location. This parameter
-		/// is required for all static map requests. (required)
-		/// </summary>
-		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#Sensor</remarks>
-		public bool? Sensor { get; set; }
-
-
-
-		private void EnsureSensor(bool throwIfNotSet)
+		public override Uri ToUri()
 		{
-			if(Sensor == null)
-			{
-				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
-		}
-
-		public Uri ToUri()
-		{
-			EnsureSensor(true);
-
 			string formatStr = null;
 			switch(this.Format)
 			{
@@ -263,8 +241,7 @@ namespace Google.Maps.StaticMaps
 				.Append("region", this.Region)
 				.Append(GetMarkersStr())
 				.Append(GetPathsStr())
-				.Append("visible", GetVisibleStr())
-				.Append("sensor", (Sensor == true ? "true" : "false"));
+				.Append("visible", GetVisibleStr());
 
 			var url = "staticmap?" + qs.ToString();
 
@@ -328,7 +305,7 @@ namespace Google.Maps.StaticMaps
 
 				}
 
-			skipster:
+				skipster:
 				pathParam[pathParamIndex++] = "path=" + sb.ToString();
 			}
 
@@ -418,8 +395,8 @@ namespace Google.Maps.StaticMaps
 					}
 				}
 
-				//add a label, but if the MarkerSize is MarkerSizes.Tiny then you can't have a label.
-				if(string.IsNullOrEmpty(current.Label) == false && current.MarkerSize != MarkerSizes.Tiny)
+				// add a label, but if the MarkerSize is MarkerSizes.Tiny or Small then you can't have a label.
+				if (string.IsNullOrEmpty(current.Label) == false && !(current.MarkerSize == MarkerSizes.Tiny || current.MarkerSize == MarkerSizes.Small))
 				{
 					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.AppendFormat("label:{0}", current.Label);

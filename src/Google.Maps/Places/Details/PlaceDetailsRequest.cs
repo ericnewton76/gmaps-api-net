@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Google.Maps.Places.Details
 {
-	public class PlaceDetailsRequest
+	public class PlaceDetailsRequest : BaseRequest
 	{
 		/// <summary>
 		/// Undocumented address component filters.
@@ -46,18 +46,7 @@ namespace Google.Maps.Places.Details
 		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport"/>
 		public string Language { get; set; }
 
-		/// <summary>
-		/// Indicates whether or not the geocoding request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		///
-		/// The Google Places API Web Service previously required that you include the sensor
-		/// parameter to indicate whether your application used a sensor to determine the user's
-		/// location. This parameter is no longer required.
-		/// </summary>
-		public bool? Sensor { get; set; }
-
-
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
 			var qsb = new Internal.QueryStringBuilder();
 

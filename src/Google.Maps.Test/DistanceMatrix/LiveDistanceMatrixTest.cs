@@ -30,7 +30,6 @@ namespace Google.Maps.Test.DistanceMatrix
 			//rotherham
 			request.AddOrigin(new LatLng(latitude: 53.434297m,longitude: -1.364678m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
@@ -48,7 +47,6 @@ namespace Google.Maps.Test.DistanceMatrix
 			//rotherham
 			request.AddOrigin(new LatLng(latitude: 53.434297m, longitude: -1.364678m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
@@ -66,7 +64,6 @@ namespace Google.Maps.Test.DistanceMatrix
 			//rotherham
 			request.AddOrigin(new Location("Rotherham"));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
@@ -85,7 +82,6 @@ namespace Google.Maps.Test.DistanceMatrix
 			//sheffield
 			request.AddDestination(new LatLng(latitude: 53.378243m, longitude: -1.462131m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
@@ -106,7 +102,6 @@ namespace Google.Maps.Test.DistanceMatrix
 			//sheffield
 			request.AddDestination(new Location("Sheffield"));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
@@ -130,7 +125,6 @@ namespace Google.Maps.Test.DistanceMatrix
 			request.AddDestination(new LatLng(latitude: 53.378243m, longitude: -1.462131m));
 			request.AddDestination(new LatLng(latitude: 51.378243m, longitude: -1.162131m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
@@ -152,7 +146,6 @@ namespace Google.Maps.Test.DistanceMatrix
 			request.AddDestination(new Location("Sheffield"));
 			request.AddDestination(new Location("London"));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);

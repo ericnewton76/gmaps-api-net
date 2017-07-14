@@ -20,13 +20,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Google.Maps;
 using System.Text;
+using System.Linq;
 
 namespace Google.Maps.DistanceMatrix
 {
 	/// <summary>
 	/// Provides a request for the Google Distance Matrix web service.
 	/// </summary>
-	public class DistanceMatrixRequest
+	public class DistanceMatrixRequest : BaseRequest
 	{
 		/// <summary>
 		/// (optional) Specifies what mode of transport to use when calculating directions.
@@ -52,20 +53,14 @@ namespace Google.Maps.DistanceMatrix
 		public string Language { get; set; }
 
 		/// <summary>
-		///
-		///
-		/// </summary>
-		public bool? Sensor { get; set; }
-
-		/// <summary>
 		///  List of origin waypoints
 		/// </summary>
-		private SortedList<int, Location> _waypointsOrigin;
-		private SortedList<int, Location> EnsureWaypointsOrigin()
+		private List<Location> _waypointsOrigin;
+		private List<Location> EnsureWaypointsOrigin()
 		{
 			if(_waypointsOrigin == null)
 			{
-				_waypointsOrigin = new SortedList<int, Location>();
+				_waypointsOrigin = new List<Location>();
 			}
 			return _waypointsOrigin;
 		}
@@ -73,12 +68,12 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// List of destination waypoints
 		/// </summary>
-		private SortedList<int, Location> _waypointsDestination;
-		private SortedList<int, Location> EnsureWaypointsDestination()
+		private List<Location> _waypointsDestination;
+		private List<Location> EnsureWaypointsDestination()
 		{
 			if(_waypointsDestination == null)
 			{
-				_waypointsDestination = new SortedList<int, Maps.Location>();
+				_waypointsDestination = new List<Location>();
 			}
 			return _waypointsDestination;
 		}
@@ -86,7 +81,7 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Location> WaypointsOrigin
+		public List<Location> WaypointsOrigin
 		{
 			get
 			{
@@ -101,7 +96,7 @@ namespace Google.Maps.DistanceMatrix
 		/// <summary>
 		/// Accessor method
 		/// </summary>
-		public SortedList<int, Location> WaypointsDestination
+		public List<Location> WaypointsDestination
 		{
 			get
 			{
@@ -114,40 +109,40 @@ namespace Google.Maps.DistanceMatrix
 		}//end method
 
 		/// <summary>
-		///
+		/// Adds a waypoint location to the origin set
 		/// </summary>
 		/// <param name="destination"></param>
 		public void AddOrigin(Location destination)
 		{
-			WaypointsOrigin.Add(WaypointsOrigin.Count, destination);
+			WaypointsOrigin.Add(destination);
 		}
 
 		/// <summary>
-		///
+		/// Adds a waypoint location to the destination set
 		/// </summary>
 		/// <param name="destination"></param>
 		public void AddDestination(Location destination)
 		{
-			WaypointsDestination.Add(WaypointsDestination.Count, destination);
+			WaypointsDestination.Add(destination);
 		}
 
 		/// <summary>
-		///
+		/// Convert waypoint locations collection to a uri string
 		/// </summary>
 		/// <returns></returns>
-		internal string WaypointsToUri(SortedList<int, Location> waypointsList)
+		internal string WaypointsToUri(IEnumerable<Location> waypointsList)
 		{
 			if(waypointsList == null) return string.Empty;
-			if(waypointsList.Count == 0) return string.Empty;
+			if(waypointsList.Count() == 0) return string.Empty;
 
 			StringBuilder sb = new StringBuilder();
 
-			foreach(Location waypoint in waypointsList.Values)
+			foreach(Location waypoint in waypointsList)
 			{
 				if(sb.Length > 0) sb.Append("|");
-				sb.Append(waypoint.ToString());
+				sb.Append(Uri.EscapeDataString(waypoint.ToString()));
 			}
-			
+
 			return sb.ToString();
 		}
 
@@ -155,31 +150,19 @@ namespace Google.Maps.DistanceMatrix
 		/// Create URI for quering
 		/// </summary>
 		/// <returns></returns>
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
-			this.EnsureSensor(true);
-
 			var qsb = new Internal.QueryStringBuilder()
 				.Append("origins", WaypointsToUri(_waypointsOrigin))
 				.Append("destinations", WaypointsToUri(_waypointsDestination))
 				.Append("mode", Mode.ToString())
 				.Append("language", Language)
 				.Append("units", Units.ToString())
-				.Append("sensor", (Sensor.Value ? "true" : "false"))
 				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid));
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
-		}
-
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if(Sensor == null)
-			{
-				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
 		}
 	}
 

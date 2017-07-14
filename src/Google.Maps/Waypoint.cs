@@ -2,7 +2,7 @@
 
 namespace Google.Maps
 {
-	
+
 	[Obsolete("Functionality was absorbed by Location being polymorphic", true)]
 	/// <summary>
 	/// Google documentation: https://developers.google.com/maps/documentation/directions/intro

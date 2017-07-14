@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Google.Maps.Direction
 {
-	public class DirectionRequest
+	public class DirectionRequest : BaseRequest
 	{
 		/// <summary>
 		/// The <see cref="Location"/> from which you wish to calculate directions.
@@ -48,11 +48,6 @@ namespace Google.Maps.Direction
 		public string Language { get; set; }
 
 		/// <summary>
-		///  Indicates whether or not the directions request comes from a device with a location sensor. This value must be either true or false.
-		/// </summary>
-		public bool? Sensor { get; set; }
-
-		/// <summary>
 		/// departure_time specifies the desired time of departure as seconds since midnight, January 1, 1970 UTC. The departure time may be specified in two cases:
 		///     For Transit Directions: One of departure_time or arrival_time must be specified when requesting directions.
 		///     For Driving Directions: Maps for Business customers can specify the departure_time to receive trip duration considering current traffic conditions. The departure_time must be set to within a few minutes of the current time.
@@ -65,29 +60,22 @@ namespace Google.Maps.Direction
 		public long? ArrivalTime { get; set; }
 
 		private List<Location> _waypoints;
-		public IEnumerable<Location> Waypoints
+
+		private List<Location> EnsureWaypoints()
+		{
+			if(_waypoints == null) _waypoints = new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
+			return _waypoints;
+		}
+
+		public List<Location> Waypoints
 		{
 			get
 			{
-				if(_waypoints == null) return new List<Location>(); //may use a static readonly empty list instead of creating one everytime.
-				return (IEnumerable<Location>)_waypoints;
+				return EnsureWaypoints();
 			}
 			set
 			{
-				if(value == null)
-				{
-					//clear our reference.
-					_waypoints = null; return;
-				}
-
-				//see if reference passed is a List<Location> instance.
-				List<Location> list = value as List<Location>;
-
-				if(list == null)
-					//build a list from the ienumerable passed in.
-					list = new List<Location>(value);
-
-				_waypoints = list;
+				_waypoints = value;
 			}
 		}
 
@@ -99,8 +87,7 @@ namespace Google.Maps.Direction
 		public void AddWaypoint(Location waypoint)
 		{
 			if(waypoint == null) return;
-			if(_waypoints == null) _waypoints = new List<Location>();
-			_waypoints.Add(waypoint);
+			EnsureWaypoints().Add(waypoint);
 		}
 
 		internal string WaypointsToUri()
@@ -118,9 +105,9 @@ namespace Google.Maps.Direction
 			return sb.ToString();
 		}
 
-		internal Uri ToUri()
+		public override Uri ToUri()
 		{
-			EnsureSensor();
+			if (Origin == null) throw new InvalidOperationException("Origin is required");
 
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
 				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
@@ -131,7 +118,6 @@ namespace Google.Maps.Direction
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
-				.Append("sensor", Sensor.Value ? "true" : "false")
 				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid))
 				.Append("alternatives", Alternatives.HasValue ? (Alternatives.Value ? "true" : "false") : (string)null);
 
@@ -139,11 +125,5 @@ namespace Google.Maps.Direction
 
 			return new Uri(url, UriKind.Relative);
 		}
-
-		private void EnsureSensor()
-		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-		}
-
 	}
 }

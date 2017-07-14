@@ -45,9 +45,20 @@ namespace Google.Maps
 		OverQueryLimit = 3,
 
 		/// <summary>
-		/// Indicates that your request was denied, generally because of lack
-		/// of a sensor parameter.
+		/// Indicates that your request was denied.
 		/// </summary>
-		RequestDenied = 4
+		RequestDenied = 4,
+
+		/// <summary>
+		/// At least one of the provided locations in the request could not
+		/// be geocoded.
+		/// </summary>
+		NotFound = 5,
+
+		/// <summary>
+		/// Indicates that too many waypoints were provided in the request.
+		/// Without an API key the maximum number is 8.
+		/// </summary>
+		MaxWaypointsExceeded = 6
 	}
 }
