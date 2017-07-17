@@ -11,101 +11,101 @@ using System.Text.RegularExpressions;
 
 namespace Google.Maps.Test.StaticMaps
 {
-	[TestFixture]
-	public class StaticMapRequestTests
-	{
+    [TestFixture]
+    public class StaticMapRequestTests
+    {
 
-		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
-		public void Invalid_size_propert_set()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Size = new System.Drawing.Size(-1, -1)
-			};
+        
 
-			Assert.Fail("Invalid size was set to property but no exception happened.");
-		}
+        [Test]
+        public void Invalid_size_propert_set()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StaticMapRequest()
+                {
+                    Sensor = false,
+                    Size = new System.Drawing.Size(-1, -1)
+                }
+            );
+        }
 
-		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
-		public void Invalid_size_max()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Size = new System.Drawing.Size(4097, 4097)
-			};
+        [Test]
+        public void Invalid_size_max()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StaticMapRequest()
+                {
+                    Sensor = false,
+                    Size = new System.Drawing.Size(4097, 4097)
+                }
+            );
+        }
 
-			Assert.Fail("Invalid size was set to property but no exception happened.");
-		}
 
+        [Test]
+        public void Zoom_argumentoutofrange_bottom()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StaticMapRequest()
+                {
+                    Sensor = false,
+                    Zoom = -1
+                }
+            );
+        }
+        [Test]
+        public void Zoom_setbacktonull()
+        {
+            StaticMapRequest sm = new StaticMapRequest()
+            {
+                Zoom = 1
+            };
+            sm.Zoom = null;
 
-		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
-		public void Zoom_argumentoutofrange_bottom()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Zoom = -1
-			};
+            Assert.Pass();
+        }
 
-			Assert.Fail("Zoom was set to invalid value.");
-		}
-		[Test]
-		public void Zoom_setbacktonull()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Zoom = 1
-			};
-			sm.Zoom = null;
+        [Test]
+        public void Scale_argumentoutofrange()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new StaticMapRequest()
+            {
+                Scale = 3
+            });
+        }
 
-			Assert.Pass();
-		}
+        //needs RowTest extension here.
+        [Test]
+        public void Scale_validvalue_1()
+        {
+            StaticMapRequest sm = new StaticMapRequest()
+            {
+                Scale = 1
+            };
 
-		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
-		public void Scale_argumentoutofrange()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Scale = 3
-			};
+            Assert.AreEqual(1, sm.Scale);
+        }
+        [Test]
+        public void Scale_validvalue_2()
+        {
+            StaticMapRequest sm = new StaticMapRequest()
+            {
+                Scale = 2
+            };
 
-			Assert.Fail("Expected an ArgumentOutOfRange exception.");
-		}
+            Assert.AreEqual(2, sm.Scale);
+        }
+        [Test]
+        public void Scale_validvalue_4()
+        {
+            StaticMapRequest sm = new StaticMapRequest()
+            {
+                Scale = 4
+            };
 
-		//needs RowTest extension here.
-		[Test]
-		public void Scale_validvalue_1()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Scale = 1
-			};
-
-			Assert.AreEqual(1, sm.Scale);
-		}
-		[Test]
-		public void Scale_validvalue_2()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Scale = 2
-			};
-
-			Assert.AreEqual(2, sm.Scale);
-		}
-		[Test]
-		public void Scale_validvalue_4()
-		{
-			StaticMapRequest sm = new StaticMapRequest()
-			{
-				Scale = 4
-			};
-
-			Assert.AreEqual(4, sm.Scale);
-		}
+            Assert.AreEqual(4, sm.Scale);
+        }
 
 		[Test]
 		public void Markers_ShouldNotUseExtraZeros_BecauseUrlLengthIsLimited()
@@ -133,7 +133,7 @@ namespace Google.Maps.Test.StaticMaps
 			StringAssert.Contains("markers=48.8888888,-68.8888888", actual);
 		}
 
-	}
+    }
 
 	[TestFixture]
 	public class StaticMap_Path_Tests
@@ -157,8 +157,8 @@ namespace Google.Maps.Test.StaticMaps
 		{
 			var request = new StaticMapRequest();
 
-			LatLng first = new LatLng(30.1, -60.2);
-			LatLng second = new LatLng(40.3, -70.4);
+            LatLng first = new LatLng(30.1, -60.2);
+            LatLng second = new LatLng(40.3, -70.4);
 
 			request.Path = new Path(first, second);
 
@@ -203,48 +203,48 @@ namespace Google.Maps.Test.StaticMaps
 			map.Paths.Add(GreenTriangleInAdaMN());
 			map.Paths.Add(RedTriangleNearAdaMN());
 
-			string expectedPath1 = "&path=color:green|47.3017,-96.5299|47.2949,-96.4999|47.2868,-96.5003|47.3017,-96.5299".Replace("|", "%7C");
-			string expectedPath2 = "&path=color:red|47.3105,-96.5326|47.3103,-96.5219|47.3045,-96.5219|47.3105,-96.5326".Replace("|", "%7C");
-			string actual = map.ToUri().Query;
-			StringAssert.Contains(expectedPath1, actual);
-			StringAssert.Contains(expectedPath2, actual);
-		}
+            string expectedPath1 = "&path=color:green|47.3017,-96.5299|47.2949,-96.4999|47.2868,-96.5003|47.3017,-96.5299".Replace("|", "%7C");
+            string expectedPath2 = "&path=color:red|47.3105,-96.5326|47.3103,-96.5219|47.3045,-96.5219|47.3105,-96.5326".Replace("|", "%7C");
+            string actual = map.ToUri().Query;
+            StringAssert.Contains(expectedPath1, actual);
+            StringAssert.Contains(expectedPath2, actual);
+        }
 
-		private static Path GreenTriangleInAdaMN()
-		{
-			return new Path(
-				new LatLng(47.3017, -96.5299),
-				new LatLng(47.2949, -96.4999),
-				new LatLng(47.2868, -96.5003),
-				new LatLng(47.3017, -96.5299)
-			)
-			{
-				Color = System.Drawing.Color.Green
-			};
-		}
+        private static Path GreenTriangleInAdaMN()
+        {
+            return new Path(
+                new LatLng(47.3017, -96.5299),
+                new LatLng(47.2949, -96.4999),
+                new LatLng(47.2868, -96.5003),
+                new LatLng(47.3017, -96.5299)
+            )
+            {
+                Color = System.Drawing.Color.Green
+            };
+        }
 
-		private static Path RedTriangleNearAdaMN()
-		{
-			return new Path(
-				new LatLng(47.3105, -96.5326),
-				new LatLng(47.3103, -96.5219),
-				new LatLng(47.3045, -96.5219),
-				new LatLng(47.3105, -96.5326)
-			)
-			{
-				Color = System.Drawing.Color.Red
-			}; ;
-		}
+        private static Path RedTriangleNearAdaMN()
+        {
+            return new Path(
+                new LatLng(47.3105, -96.5326),
+                new LatLng(47.3103, -96.5219),
+                new LatLng(47.3045, -96.5219),
+                new LatLng(47.3105, -96.5326)
+            )
+            {
+                Color = System.Drawing.Color.Red
+            }; ;
+        }
 
-		private static string ExtractColorFromUri(Uri uri)
-		{
-			var colorMatch = Regex.Match(uri.Query, @"color:([a-z0-9]+)((%7c)|\|)", RegexOptions.IgnoreCase);
-			Assert.True(colorMatch.Success, "Could not find color component of path.");
-			return colorMatch.Groups[1].Value;
-		}
+        private static string ExtractColorFromUri(Uri uri)
+        {
+            var colorMatch = Regex.Match(uri.Query, @"color:([a-z0-9]+)((%7c)|\|)", RegexOptions.IgnoreCase);
+            Assert.True(colorMatch.Success, "Could not find color component of path.");
+            return colorMatch.Groups[1].Value;
+        }
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		//[ExpectedException(typeof(InvalidOperationException))]
 		public void Encode_set_but_not_all_LatLng_positions()
 		{
 			var request = new StaticMapRequest();
@@ -253,21 +253,19 @@ namespace Google.Maps.Test.StaticMaps
 			Location second = new Location("New York");
 			request.Path = new Path(first, second) { Encode = true };
 
-			var actual = request.ToUri();
-
-			Assert.Fail("Expected an InvalidOperationException because first point was LatLng but second point was Location.");
+			Assert.Throws<InvalidOperationException>(() => request.ToUri());
 		}
 
-		[Test]
-		public void Implicit_Address_set_from_string()
-		{
-			var map = new StaticMapRequest();
-			map.Center = "New York, NY";
+        [Test]
+        public void Implicit_Address_set_from_string()
+        {
+            var map = new StaticMapRequest();
+            map.Center = "New York, NY";
 
-			string expected = "New York, NY";
-			string actual = map.Center.ToString();
+            string expected = "New York, NY";
+            string actual = map.Center.ToString();
 
-			Assert.AreEqual(expected, actual);
-		}
-	}
+            Assert.AreEqual(expected, actual);
+        }
+    }
 }

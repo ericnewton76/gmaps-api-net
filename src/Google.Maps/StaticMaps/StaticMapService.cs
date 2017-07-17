@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 
 namespace Google.Maps.StaticMaps
 {
@@ -77,11 +78,9 @@ namespace Google.Maps.StaticMaps
 
 			int totalBytes = 0;
 
-			WebRequest request = WebRequest.Create(requestUri);
-
-			using(WebResponse response = request.GetResponse())
+			using(HttpClient client = new HttpClient())
 			{
-				Stream inputStream = response.GetResponseStream();
+                Stream inputStream = client.GetStreamAsync(requestUri).Result;
 
 				int bytesRead = 0;
 				const int BYTE_BUFFER_LENGTH = 4096;

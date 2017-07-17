@@ -15,7 +15,6 @@
 * limitations under the License.
 */
 using System;
-using System.Web;
 
 namespace Google.Maps.TimeZone
 {

@@ -79,7 +79,6 @@ namespace Google.Maps.Test
 		}
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Address_set()
 		{
 			var req = new GeocodingRequest();
@@ -87,7 +86,7 @@ namespace Google.Maps.Test
 
 			var actual = req.ToUri();
 
-			Assert.Fail("Should've encountered an InvalidOperationException due to Address property not being set.");
+            Assert.Throws<InvalidOperationException>(() => req.ToUri());
 		}
 	}
 }

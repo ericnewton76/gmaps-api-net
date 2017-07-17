@@ -53,12 +53,12 @@ namespace Google.Maps.Test
 		{
 			LatLng test = new LatLng(40.714224m, -73.961452m);
 
-			System.Globalization.CultureInfo savedCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Globalization.CultureInfo savedCulture = System.Globalization.CultureInfo.CurrentCulture;
 
-			try
+            try
 			{
-				//change the thread culture
-				System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("nl-BE");//belgium uses different numbering
+                //change the thread culture
+                System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("nl-BE");//belgium uses different numbering
 
 				string expected = "40.714224,-73.961452";
 				string actual = test.ToString();
@@ -67,8 +67,8 @@ namespace Google.Maps.Test
 			}
 			finally
 			{
-				System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;
-			}
+                System.Globalization.CultureInfo.CurrentCulture = savedCulture;
+            }
 		}
 
 		[Test]

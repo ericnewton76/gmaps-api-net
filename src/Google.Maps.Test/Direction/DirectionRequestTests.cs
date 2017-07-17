@@ -91,7 +91,7 @@ namespace Google.Maps.Test
 		}
 
 		//TODO: enable this [Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		//[ExpectedException(typeof(InvalidOperationException))]
 		public void GetUrl_no_Destination_set()
 		{
 			var req = new DirectionRequest();
