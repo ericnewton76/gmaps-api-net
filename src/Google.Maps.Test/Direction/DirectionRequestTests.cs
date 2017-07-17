@@ -90,8 +90,7 @@ namespace Google.Maps.Test
 			});
 		}
 
-		//TODO: enable this [Test]
-		[ExpectedException(typeof(InvalidOperationException))]
+		[Test]
 		public void GetUrl_no_Destination_set()
 		{
 			var req = new DirectionRequest();

@@ -87,6 +87,7 @@ namespace Google.Maps.Test.Geocoding
 
 			var response = new GeocodingService().GetResponse(request);
 
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds);
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds.Southwest);
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds.Northeast);

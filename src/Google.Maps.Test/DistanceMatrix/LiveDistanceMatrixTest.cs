@@ -10,17 +10,6 @@ namespace Google.Maps.Test.DistanceMatrix
 	[TestFixture]
 	public class LiveDistanceMatrixTest
 	{
-		[SetUp]
-		public void Setup()
-		{
-
-		}
-
-		public LiveDistanceMatrixTest()
-		{
-			//GoogleSigned.AssignAllServices(new GoogleSigned(apiKey: "your-api-key"));
-		}
-
 		[Test]
 		public void DrivingDistancebyLngLat()
 		{
@@ -34,8 +23,7 @@ namespace Google.Maps.Test.DistanceMatrix
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
@@ -51,8 +39,7 @@ namespace Google.Maps.Test.DistanceMatrix
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
@@ -68,8 +55,7 @@ namespace Google.Maps.Test.DistanceMatrix
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
@@ -86,10 +72,9 @@ namespace Google.Maps.Test.DistanceMatrix
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length == 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.AreEqual(1, response.DestinationAddresses.Length);
+			Assert.AreEqual(1, response.OriginAddresses.Length);
 		}
 
 		[Test]
@@ -106,10 +91,9 @@ namespace Google.Maps.Test.DistanceMatrix
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length == 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.AreEqual(1, response.DestinationAddresses.Length);
+			Assert.AreEqual(1, response.OriginAddresses.Length);
 		}
 
 
@@ -129,10 +113,9 @@ namespace Google.Maps.Test.DistanceMatrix
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length > 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.Greater(response.DestinationAddresses.Length, 1);
+			Assert.AreEqual(1, response.OriginAddresses.Length, 1);
 		}
 
 		[Test]
@@ -150,9 +133,9 @@ namespace Google.Maps.Test.DistanceMatrix
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length > 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.Greater(response.DestinationAddresses.Length, 1);
+			Assert.AreEqual(1, response.OriginAddresses.Length, 1);
 		}
 	}
 }

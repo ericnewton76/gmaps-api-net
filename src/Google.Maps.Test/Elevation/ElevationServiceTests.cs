@@ -26,12 +26,13 @@ namespace Google.Maps.Test.Elevation
 	public class ElevationServiceTests
 	{
 		#region TestFixtureSetup/TearDown
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetup()
 		{
 			Google.Maps.Internal.Http.Factory = new Google.Maps.Test.Integrations.HttpGetResponseFromResourceFactory("Google.Maps.Test.Elevation");
 		}
-		[TestFixtureTearDown]
+
+		[OneTimeTearDown]
 		public void FixtureTearDown()
 		{
 			Google.Maps.Internal.Http.Factory = new Internal.Http.HttpGetResponseFactory();
