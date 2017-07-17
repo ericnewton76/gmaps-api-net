@@ -16,41 +16,42 @@ namespace Google.Maps.Test.StaticMaps
 	{
 
 		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void Invalid_size_propert_set()
 		{
-			StaticMapRequest sm = new StaticMapRequest()
+			Assert.Throws<ArgumentOutOfRangeException>(() =>
 			{
-				Size = new System.Drawing.Size(-1, -1)
-			};
-
-			Assert.Fail("Invalid size was set to property but no exception happened.");
+				StaticMapRequest sm = new StaticMapRequest()
+				{
+					Size = new System.Drawing.Size(-1, -1)
+				};
+			});
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void Invalid_size_max()
 		{
-			StaticMapRequest sm = new StaticMapRequest()
+			Assert.Throws<ArgumentOutOfRangeException>(() =>
 			{
-				Size = new System.Drawing.Size(4097, 4097)
-			};
-
-			Assert.Fail("Invalid size was set to property but no exception happened.");
+				StaticMapRequest sm = new StaticMapRequest()
+				{
+					Size = new System.Drawing.Size(4097, 4097)
+				};
+			});
 		}
 
 
 		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void Zoom_argumentoutofrange_bottom()
 		{
-			StaticMapRequest sm = new StaticMapRequest()
+			Assert.Throws<ArgumentOutOfRangeException>(() =>
 			{
-				Zoom = -1
-			};
-
-			Assert.Fail("Zoom was set to invalid value.");
+				StaticMapRequest sm = new StaticMapRequest()
+				{
+					Zoom = -1
+				};
+			});
 		}
+
 		[Test]
 		public void Zoom_setbacktonull()
 		{
@@ -64,15 +65,15 @@ namespace Google.Maps.Test.StaticMaps
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void Scale_argumentoutofrange()
 		{
-			StaticMapRequest sm = new StaticMapRequest()
+			Assert.Throws<ArgumentOutOfRangeException>(() =>
 			{
-				Scale = 3
-			};
-
-			Assert.Fail("Expected an ArgumentOutOfRange exception.");
+				StaticMapRequest sm = new StaticMapRequest()
+				{
+					Scale = 3
+				};
+			});
 		}
 
 		//needs RowTest extension here.
@@ -86,6 +87,7 @@ namespace Google.Maps.Test.StaticMaps
 
 			Assert.AreEqual(1, sm.Scale);
 		}
+
 		[Test]
 		public void Scale_validvalue_2()
 		{
@@ -96,6 +98,7 @@ namespace Google.Maps.Test.StaticMaps
 
 			Assert.AreEqual(2, sm.Scale);
 		}
+
 		[Test]
 		public void Scale_validvalue_4()
 		{
@@ -244,18 +247,18 @@ namespace Google.Maps.Test.StaticMaps
 		}
 
 		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
 		public void Encode_set_but_not_all_LatLng_positions()
 		{
-			var request = new StaticMapRequest();
+			Assert.Throws<InvalidOperationException>(() =>
+			{
+				var request = new StaticMapRequest();
 
-			LatLng first = new LatLng(30.0, -60.0);
-			Location second = new Location("New York");
-			request.Path = new Path(first, second) { Encode = true };
+				LatLng first = new LatLng(30.0, -60.0);
+				Location second = new Location("New York");
+				request.Path = new Path(first, second) { Encode = true };
 
-			var actual = request.ToUri();
-
-			Assert.Fail("Expected an InvalidOperationException because first point was LatLng but second point was Location.");
+				var actual = request.ToUri();
+			});
 		}
 
 		[Test]
