@@ -93,10 +93,6 @@
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
     <Compile Include="ValueTextComparer.cs" />
     <Compile Include="ViaLatLngTests.cs" />
-    <EmbeddedResource Include="Geocoding\json_queries\address=11+Wall+Street+New+York+NY+10005.json" />
-    <EmbeddedResource Include="Geocoding\json_queries\address=1600+Amphitheatre+Parkway+Mountain+View+CA.json" />
-    <EmbeddedResource Include="Geocoding\json_queries\latlngQuery.json" />
-    <EmbeddedResource Include="Geocoding\json_queries\blank.json" />
     <Compile Include="Geocoding\GeocodingRequestTests.cs" />
     <Compile Include="Geocoding\GeocodingServiceTests.cs" />
     <Compile Include="Integrations\HttpGetResponseFromResource.cs" />
