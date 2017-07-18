@@ -25,8 +25,6 @@ using NUnit.Framework;
 namespace Google.Maps.Test.Geocoding
 {
 	[TestFixture]
-	[Explicit()]
-	[Category("External Integrations")]
 	public class LiveGeocodingTests
 	{
 		[Test]
