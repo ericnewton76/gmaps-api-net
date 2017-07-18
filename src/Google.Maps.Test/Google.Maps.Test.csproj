@@ -129,8 +129,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Elevation\json_queries\query1.json" />
-    <EmbeddedResource Include="Elevation\json_queries\query2.json" />
     <None Include="packages.config" />
     <None Include="sn.snk" />
   </ItemGroup>
