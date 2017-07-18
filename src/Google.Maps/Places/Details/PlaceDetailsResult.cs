@@ -25,7 +25,7 @@ namespace Google.Maps.Places.Details
 		/// FormattedPhoneNumber contains the place's phone number in its local format.
 		/// For example, the formatted_phone_number for Google's Sydney, Australia office is (02) 9374 4000.
 		/// </summary>
-		/// <see cref="http://en.wikipedia.org/wiki/Local_conventions_for_writing_telephone_numbers"/>
+		/// <see href="http://en.wikipedia.org/wiki/Local_conventions_for_writing_telephone_numbers"/>
 		[JsonProperty("formatted_phone_number")]
 		public string FormattedPhoneNumber { get; set; }
 
@@ -77,7 +77,7 @@ namespace Google.Maps.Places.Details
 		/// about place photos and how you can use the images in your application
 		/// can be found in the Place Photos documentation.
 		/// </summary>
-		/// <see cref="https://developers.google.com/places/web-service/photos"/>
+		/// <see href="https://developers.google.com/places/web-service/photos"/>
 		[JsonProperty("photos")]
 		public Photo[] Photos { get; set; }
 
@@ -87,7 +87,7 @@ namespace Google.Maps.Places.Details
 		/// the placeId field of a Places API request. For more information about
 		/// place IDs, see the place ID overview.
 		/// </summary>
-		/// <see cref="https://developers.google.com/places/place-id"/>
+		/// <see href="https://developers.google.com/places/place-id"/>
 		[JsonProperty("place_id")]
 		public string PlaceID { get; set; }
 
@@ -129,7 +129,7 @@ namespace Google.Maps.Places.Details
 		/// Contains an array of feature types describing the given result.
 		/// See the list of supported types for more information.
 		/// </summary>
-		/// <see cref="https://developers.google.com/places/supported_types"/>
+		/// <see href="https://developers.google.com/places/supported_types"/>
 		[JsonProperty("types")]
 		public PlaceType[] Types { get; set; }
 

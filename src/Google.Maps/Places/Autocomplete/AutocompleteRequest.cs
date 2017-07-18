@@ -39,14 +39,14 @@ namespace Google.Maps.Places
 		/// The language in which to return results. See the list of supported domain languages.
 		/// Note that we often update supported languages so this list may not be exhaustive.
 		/// </summary>
-		/// <see cref="https://developers.google.com/places/documentation/search#PlaceSearchRequests"/>
+		/// <see href="https://developers.google.com/places/documentation/search#PlaceSearchRequests"/>
 		public string Language { get; set; }
 
 		/// <summary>
 		/// Restricts the results to Places matching at least one of the
 		/// specified types
 		/// </summary>
-		/// <see cref="https://developers.google.com/places/documentation/supported_types"/>
+		/// <see href="https://developers.google.com/places/documentation/supported_types"/>
 		public PlaceType[] Types { get; set; }
 
 		/// <summary>

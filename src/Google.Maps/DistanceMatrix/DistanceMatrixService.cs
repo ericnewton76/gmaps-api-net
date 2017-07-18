@@ -26,7 +26,7 @@ namespace Google.Maps.DistanceMatrix
 	/// between start and end points, as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
 	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
-	/// <see cref="http://developers.google.com/maps/documentation/distancematrix/"/>
+	/// <see href="http://developers.google.com/maps/documentation/distancematrix/"/>
 	public class DistanceMatrixService
 	{
 		#region Http/Https Uris and Constructors

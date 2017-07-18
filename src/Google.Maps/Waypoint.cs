@@ -4,10 +4,6 @@ namespace Google.Maps
 {
 
 	[Obsolete("Functionality was absorbed by Location being polymorphic", true)]
-	/// <summary>
-	/// Google documentation: https://developers.google.com/maps/documentation/directions/intro
-	/// Specify origins, destinations, and waypoints as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia"), or as latitude/longitude coordinates, or as place IDs.
-	/// </summary>
 	public class Waypoint
 	{
 		/// <summary>
