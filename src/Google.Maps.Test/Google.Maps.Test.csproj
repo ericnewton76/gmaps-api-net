@@ -95,7 +95,6 @@
     <Compile Include="ViaLatLngTests.cs" />
     <Compile Include="Geocoding\GeocodingRequestTests.cs" />
     <Compile Include="Geocoding\GeocodingServiceTests.cs" />
-    <Compile Include="Integrations\HttpGetResponseFromResource.cs" />
     <Compile Include="LatLngTests.cs" />
     <Compile Include="LocationTests.cs" />
     <Compile Include="PolylineEncodingTests.cs" />
