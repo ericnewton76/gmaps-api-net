@@ -23,8 +23,6 @@ namespace Google.Maps.Direction
 {
 	public class DirectionService
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/directions/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/directions/");
 
@@ -34,11 +32,11 @@ namespace Google.Maps.Direction
 			: this(HttpsUri)
 		{
 		}
+
 		public DirectionService(Uri baseUri)
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		public DirectionResponse GetResponse(DirectionRequest request)
 		{

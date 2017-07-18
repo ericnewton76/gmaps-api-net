@@ -29,5 +29,4 @@ namespace Google.Maps.Test.Places
 			GoogleSigned.AssignAllServices(signingInstance);
 		}
 	}
-
 }

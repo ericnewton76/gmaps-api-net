@@ -29,8 +29,6 @@ namespace Google.Maps.DistanceMatrix
 	/// <see href="http://developers.google.com/maps/documentation/distancematrix/"/>
 	public class DistanceMatrixService
 	{
-		#region Http/Https Uris and Constructors
-
 		//if you plan to use apiKey Google forces you to use https. Also it is ok to use https without apiKey.
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/distancematrix/");
 		//public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/distancematrix/");
@@ -41,11 +39,11 @@ namespace Google.Maps.DistanceMatrix
 			: this(HttpsUri)
 		{
 		}
+
 		public DistanceMatrixService(Uri baseUri)
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
 		{

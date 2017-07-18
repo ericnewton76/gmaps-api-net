@@ -29,8 +29,6 @@ namespace Google.Maps.Geocoding
 	/// </summary>
 	public class GeocodingService
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
 
@@ -45,7 +43,6 @@ namespace Google.Maps.Geocoding
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Geocoding web
