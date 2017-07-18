@@ -47,4 +47,6 @@ notifications:
   on_build_failure: true
   on_build_status_changed: true
 
-
+# Temporary workaround for AppVeyor -> NuGet connectivity issues
+hosts:
+  api.nuget.org: 93.184.221.200
