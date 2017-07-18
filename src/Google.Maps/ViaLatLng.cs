@@ -122,8 +122,6 @@ namespace Google.Maps
 			return this.ToString("R");
 		}
 
-		#region Parse
-
 		/// <summary>
 		/// Parses a ViaLatLng from a set of latitude/longitude coordinates
 		/// </summary>
@@ -151,7 +149,6 @@ namespace Google.Maps
 				throw new FormatException("Failed to parse ViaLatLng.", ex);
 			}
 		}
-		#endregion
 
 		public override bool Equals(object obj)
 		{

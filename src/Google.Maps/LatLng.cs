@@ -119,7 +119,6 @@ namespace Google.Maps
 			return this.ToString("0.#######");
 		}
 
-		#region Parse
 		/// <summary>
 		/// Parses a LatLng from a set of latitude/longitude coordinates
 		/// </summary>
@@ -172,7 +171,6 @@ namespace Google.Maps
 
 			return true;
 		}
-		#endregion
 
 		public override bool Equals(object obj)
 		{

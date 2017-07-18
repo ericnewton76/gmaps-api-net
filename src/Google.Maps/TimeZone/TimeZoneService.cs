@@ -26,8 +26,6 @@ namespace Google.Maps.TimeZone
 	/// </summary>
 	public class TimeZoneService
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/timezone/outputFormat?parameters");
 
 		public Uri BaseUri { get; set; }
@@ -41,7 +39,6 @@ namespace Google.Maps.TimeZone
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Time Zone web

@@ -26,8 +26,6 @@ namespace Google.Maps.Places
 	/// </summary>
 	public class PlacesService
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/");
 		public static readonly Uri HttpUri = new Uri("http://maps.googleapis.com/maps/api/place/");
 
@@ -42,7 +40,6 @@ namespace Google.Maps.Places
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Geocoding web

@@ -29,8 +29,6 @@ namespace Google.Maps.StaticMaps
 	/// <see href="https://developers.google.com/maps/documentation/staticmaps/"/>
 	public class StaticMapService
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api");
 
@@ -40,11 +38,11 @@ namespace Google.Maps.StaticMaps
 			: this(HttpsUri)
 		{
 		}
+
 		public StaticMapService(Uri baseUri)
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		/// <summary>
 		/// Retrieves a map and returns back the image bytes

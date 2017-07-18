@@ -29,8 +29,6 @@ namespace Google.Maps.Elevation
 	/// <see href="http://code.google.com/apis/maps/documentation/elevation/"/>
 	public class ElevationService
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/elevation/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/elevation/");
 
@@ -40,11 +38,11 @@ namespace Google.Maps.Elevation
 			: this(HttpsUri)
 		{
 		}
+
 		public ElevationService(Uri baseUri)
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Elevation web
