@@ -25,22 +25,7 @@ namespace Google.Maps.Test.Elevation
 	[TestFixture]
 	public class ElevationServiceTests
 	{
-		#region TestFixtureSetup/TearDown
-		[OneTimeSetUp]
-		public void FixtureSetup()
-		{
-			Google.Maps.Internal.Http.Factory = new Google.Maps.Test.Integrations.HttpGetResponseFromResourceFactory("Google.Maps.Test.Elevation");
-		}
-
-		[OneTimeTearDown]
-		public void FixtureTearDown()
-		{
-			Google.Maps.Internal.Http.Factory = new Internal.Http.HttpGetResponseFactory();
-		}
-		#endregion
-
 		[Test]
-		[Ignore("Tolerances problem")]
 		public void GetElevationForOneLocation()
 		{
 			// expectations
@@ -65,7 +50,6 @@ namespace Google.Maps.Test.Elevation
 		}
 
 		[Test]
-		[Ignore("Tolerances problem")]
 		public void GetElevationForTwoLocations()
 		{
 			// expectations
