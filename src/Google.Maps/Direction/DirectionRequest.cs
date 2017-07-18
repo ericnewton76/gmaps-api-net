@@ -37,14 +37,14 @@ namespace Google.Maps.Direction
 		public bool? Alternatives { get; set; }
 
 		/// <summary>The region code, specified as a ccTLD ("top-level domain") two-character value. See also Region biasing.</summary>
-		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
-		/// <seealso cref="https://developers.google.com/maps/documentation/directions/#RegionBiasing"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
+		/// <seealso href="https://developers.google.com/maps/documentation/directions/#RegionBiasing"/>
 		public string Region { get; set; }
 
 		/// <summary>The language in which to return results. See the list of supported domain languages.
 		/// Note that we often update supported languages so this list may not be exhaustive.
 		/// If language is not supplied, the service will attempt to use the native language of the domain from which the request is sent.</summary>
-		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
 		public string Language { get; set; }
 
 		/// <summary>

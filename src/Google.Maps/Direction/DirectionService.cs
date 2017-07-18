@@ -21,12 +21,6 @@ using System.Globalization;
 
 namespace Google.Maps.Direction
 {
-	/// <summary>
-	///
-	///
-	///
-	/// </summary>
-	/// <see cref=""/>
 	public class DirectionService
 	{
 		#region Http/Https Uris and Constructors

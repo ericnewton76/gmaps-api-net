@@ -27,7 +27,7 @@ namespace Google.Maps.TimeZone
 		/// <summary>
 		/// The latitude and longitude co-ordinates of the location you want the time zone of.
 		/// </summary>
-		/// <see cref="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
+		/// <see href="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
 		/// <remarks>Required.</remarks>
 		public LatLng Location { get; set; }
 
@@ -35,7 +35,7 @@ namespace Google.Maps.TimeZone
 		/// Timestamp specifies the desired date and time.
 		/// The Time Zone API uses the timestamp to determine whether or not Daylight Savings should be applied.
 		/// </summary>
-		/// <see cref="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
+		/// <see href="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
 		/// <remarks>Required.</remarks>
 		public DateTime Timestamp { get; set; }
 
@@ -44,7 +44,7 @@ namespace Google.Maps.TimeZone
 		/// If language is not set, the language will default to en.
 		/// </summary>
 		/// <remarks>Optional.</remarks>
-		/// <see cref="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
+		/// <see href="https://developers.google.com/maps/documentation/timezone/intro?hl=en#Usage"/>
 		public string Language { get; set; }
 
 		public override Uri ToUri()

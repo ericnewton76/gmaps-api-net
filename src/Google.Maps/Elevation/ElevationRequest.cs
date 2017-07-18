@@ -33,7 +33,7 @@ namespace Google.Maps.Elevation
 		/// encoded polyline.
 		/// </summary>
 		/// <remarks>Required if path not present.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Locations"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/elevation/#Locations"/>
 		public IList<LatLng> Locations
 		{
 			get
@@ -67,7 +67,7 @@ namespace Google.Maps.Elevation
 		/// parameter.
 		/// </summary>
 		/// <remarks>Required if locations not present.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Paths"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/elevation/#Paths"/>
 		public IList<LatLng> Path
 		{
 			get

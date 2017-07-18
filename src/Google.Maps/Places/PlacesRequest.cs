@@ -56,7 +56,7 @@ namespace Google.Maps.Places
 		/// Restricts the results to Places matching at least one of the
 		/// specified types
 		/// </summary>
-		/// <see cref="https://developers.google.com/places/documentation/supported_types"/>
+		/// <see href="https://developers.google.com/places/documentation/supported_types"/>
 		public PlaceType[] Types { get; set; }
 
 		/// <summary>

@@ -26,7 +26,7 @@ namespace Google.Maps.Elevation
 	/// In those cases where Google does not possess exact elevation measurements at the precise location you request, the service will interpolate and return an averaged value
 	/// using the four nearest locations.
 	/// </summary>
-	/// <see cref="http://code.google.com/apis/maps/documentation/elevation/"/>
+	/// <see href="http://code.google.com/apis/maps/documentation/elevation/"/>
 	public class ElevationService
 	{
 		#region Http/Https Uris and Constructors

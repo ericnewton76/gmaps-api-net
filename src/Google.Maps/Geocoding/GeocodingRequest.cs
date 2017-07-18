@@ -29,7 +29,7 @@ namespace Google.Maps.Geocoding
 		/// <summary>
 		/// The address that you want to geocode.  Use LatLng to perform a reverse geocoding request.
 		/// </summary>
-		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#ReverseGeocoding"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/geocoding/#ReverseGeocoding"/>
 		/// <remarks>Required if latlng not present.</remarks>
 		public Location Address { get; set; }
 
@@ -48,7 +48,7 @@ namespace Google.Maps.Geocoding
 		/// Optional. This parameter will only influence, not fully restrict, results
 		/// from the geocoder.
 		/// </remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
 		public Viewport Bounds { get; set; }
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace Google.Maps.Geocoding
 		/// Optional. This parameter will only influence, not fully restrict, results
 		/// from the geocoder.
 		/// </remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#RegionCodes"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/geocoding/#RegionCodes"/>
 		public string Region { get; set; }
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace Google.Maps.Geocoding
 		/// the domain from which the request is sent wherever possible.
 		/// </summary>
 		/// <remarks>Optional.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport"/>
+		/// <see href="http://code.google.com/apis/maps/faq.html#languagesupport"/>
 		public string Language { get; set; }
 
 		public override Uri ToUri()
