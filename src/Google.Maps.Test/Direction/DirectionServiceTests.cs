@@ -61,33 +61,17 @@ namespace Google.Maps.Test.Integrations
 			};
 		}
 
-		#region TestFixtureSetup/TearDown
-		[OneTimeSetUp]
-		public void FixtureSetup()
-		{
-			Google.Maps.Internal.Http.Factory = new Google.Maps.Test.Integrations.HttpGetResponseFromResourceFactory("Google.Maps.Test.Direction");
-		}
-
-		[OneTimeTearDown]
-		public void FixtureTearDown()
-		{
-			Google.Maps.Internal.Http.Factory = new Internal.Http.HttpGetResponseFactory();
-		}
-		#endregion
-
 		[Test]
-		public void Empty_address()
+		public void Empty_Address_Fails()
 		{
-			// expectations
-			var expectedStatus = ServiceResponseStatus.ZeroResults;
+			Assert.Throws<System.Net.WebException>(() =>
+			{
+				// Arrange
+				var request = new DirectionRequest { Origin = "" };
 
-			// test
-			var request = new DirectionRequest();
-			request.Origin = "";
-			var response = new DirectionService().GetResponse(request);
-
-			// asserts
-			Assert.AreEqual(expectedStatus, response.Status);
+				// Act
+				var response = new DirectionService().GetResponse(request);
+			});
 		}
 
 		[Test]
@@ -108,10 +92,10 @@ namespace Google.Maps.Test.Integrations
 				southWest: new LatLng(43.65331, -79.38373)
 			);
 
-			var expectedDistance = new ValueText() { Text = "541 km", Value = "540965" };
-			var expectedDuration = new ValueText() { Text = "5 hours 17 mins", Value = "18996" };
+			var expectedDistance = new ValueText() { Text = "542 km", Value = "541600" };
+			var expectedDuration = new ValueText() { Text = "5 hours 19 mins", Value = "19167" };
 
-			var expectedSteps = 16;
+			var expectedSteps = 20;
 
 			var expectedSummary = "ON-401 E";
 
@@ -152,8 +136,5 @@ namespace Google.Maps.Test.Integrations
 			Assert.AreEqual(expectedWaypointAddressType2, response.Waypoints[1].Types[1], "Waypoint.PlaceType2");
 			Assert.AreEqual(expectedWaypointPartialMatch, response.Waypoints[0].PartialMatch, "Waypoint.PartialMatch");
 		}
-
-
-
 	}
 }
