@@ -86,9 +86,9 @@
     <Compile Include="LatLngComparerTests.cs" />
     <Compile Include="Places\PlaceDetailsServiceTests.cs" />
     <Compile Include="Places\PlacesServiceTests.cs" />
-    <Compile Include="Places\Utility.cs" />
     <Compile Include="QuickExamplesTests.cs" />
     <Compile Include="Elevation\ElevationServiceTests.cs" />
+    <Compile Include="SigningHelper.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMap_Path_Tests.cs" />
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />

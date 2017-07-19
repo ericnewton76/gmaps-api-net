@@ -8,6 +8,12 @@ namespace Google.Maps.DistanceMatrix
 	[TestFixture]
 	public class LiveDistanceMatrixTest
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[Test]
 		public void DrivingDistancebyLngLat()
 		{

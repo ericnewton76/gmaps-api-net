@@ -14,7 +14,7 @@ namespace Google.Maps
 		}
 
 		[Test]
-		public void SignedUrl_1()
+		public void Private_Key_Signing()
 		{
 			GoogleSigned sign = GetGoogleSigned_TestInstance();
 
@@ -25,6 +25,16 @@ namespace Google.Maps
 			string actual = sign.GetSignature(uri);
 
 			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		public void Api_Key_Signing()
+		{
+			var sign = new GoogleSigned("mykey");
+
+			string signed = sign.GetSignedUri("http://a/dummy/server?a=b");
+
+			Assert.AreEqual("http://a/dummy/server?a=b&key=mykey", signed);
 		}
 	}
 }

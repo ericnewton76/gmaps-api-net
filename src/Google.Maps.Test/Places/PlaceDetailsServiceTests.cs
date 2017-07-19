@@ -8,6 +8,12 @@ namespace Google.Maps.Places.Details
 	[TestFixture]
 	class PlaceDetailsServiceTests
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[TestCase("ChIJN1t_tDeuEmsRUsoyG83frY4", "Google")]
 		[Test]
 		public void PlacesDetailsTest(string placeID, string placeName)
@@ -22,13 +28,6 @@ namespace Google.Maps.Places.Details
 			Assert.IsNotNull(response.Result.URL);
 			Assert.AreEqual(placeID, response.Result.PlaceID);
 			Assert.AreEqual(placeName, response.Result.Name);
-		}
-
-		[SetUp]
-		public void PlaceDetailsSetUp()
-		{
-			GoogleSigned signingInstance = Utility.GetRealSigningInstance();
-			GoogleSigned.AssignAllServices(signingInstance);
 		}
 	}
 }

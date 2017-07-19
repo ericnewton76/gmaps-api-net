@@ -26,6 +26,12 @@ namespace Google.Maps.Geocoding
 	[TestFixture]
 	public class LiveGeocodingTests
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[Test]
 		public void Geocode_With_AddressComponent_Locking()
 		{

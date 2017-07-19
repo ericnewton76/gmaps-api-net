@@ -9,6 +9,12 @@ namespace Google.Maps.Places
 	[TestFixture]
 	public class PlacesServiceTests
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[Test]
 		public void PlacesTest_Nearby()
 		{
@@ -89,13 +95,6 @@ namespace Google.Maps.Places
 			response = new PlacesService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.InvalidRequest, response.Status);
-		}
-
-		[SetUp]
-		public void PlaceSetUp()
-		{
-			GoogleSigned signingInstance = Utility.GetRealSigningInstance();
-			GoogleSigned.AssignAllServices(signingInstance);
 		}
 	}
 }
