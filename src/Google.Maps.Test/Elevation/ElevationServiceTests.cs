@@ -24,6 +24,12 @@ namespace Google.Maps.Elevation
 	[TestFixture]
 	public class ElevationServiceTests
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[Test]
 		public void GetElevationForOneLocation()
 		{

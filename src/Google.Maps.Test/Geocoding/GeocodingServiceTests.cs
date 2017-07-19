@@ -27,6 +27,12 @@ namespace Google.Maps.Geocoding
 	[TestFixture]
 	class GeocodingServiceTests
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[Test]
 		public void Empty_address()
 		{

@@ -41,7 +41,7 @@ namespace Google.Maps
 		}
 
 		[Test]
-		public void Signed_GeocodingRequest_Works()
+		public void Geocoding_Request_Signed_With_Private_Key()
 		{
 			var request = new GeocodingRequest
 			{
@@ -51,6 +51,26 @@ namespace Google.Maps
 			GoogleSigned.AssignAllServices(GetRealSigningInstance());
 			var response = new GeocodingService().GetResponse(request);
 
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+		}
+
+
+		[Test]
+		public void Geocoding_Request_Signed_With_Api_Key()
+		{
+			// Arrange
+			var sign = new GoogleSigned("AIzaSyDV-0ftj1tsjfd6GnEbtbxwHXnv6iR3UEU");
+			GoogleSigned.AssignAllServices(sign);
+
+			var request = new GeocodingRequest
+			{
+				Address = "Stathern, UK"
+			};
+
+			// Act
+			var response = new GeocodingService().GetResponse(request);
+
+			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 	}

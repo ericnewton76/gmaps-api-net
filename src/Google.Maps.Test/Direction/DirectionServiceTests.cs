@@ -27,6 +27,12 @@ namespace Google.Maps.Direction
 	[TestFixture]
 	class DirectionServiceTests
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[Test]
 		public void Empty_Address_Fails()
 		{
