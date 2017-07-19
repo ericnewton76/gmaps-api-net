@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Google.Maps.DistanceMatrix;
 
-namespace Google.Maps.Test.DistanceMatrix
+using NUnit.Framework;
+
+namespace Google.Maps.DistanceMatrix
 {
 	[TestFixture]
 	public class LiveDistanceMatrixTest

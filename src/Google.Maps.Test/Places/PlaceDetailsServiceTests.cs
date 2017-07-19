@@ -1,7 +1,9 @@
-﻿using Google.Maps.Places.Details;
+﻿using System;
+using System.Collections.Generic;
+
 using NUnit.Framework;
 
-namespace Google.Maps.Test.Places
+namespace Google.Maps.Places.Details
 {
 	[TestFixture]
 	class PlaceDetailsServiceTests

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Google.Maps;
 
-namespace Google.Maps.Test
+using NUnit.Framework;
+
+namespace Google.Maps
 {
 	[TestFixture]
 	public class LatLngTests
@@ -96,6 +94,5 @@ namespace Google.Maps.Test
 			LatLng latLng4 = new LatLng(0d, 0d);
 			Assert.IsFalse(latLng1.Equals(latLng4));
 		}
-
 	}
 }

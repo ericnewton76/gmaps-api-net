@@ -17,12 +17,11 @@
 
 using System.Linq;
 
-using Google.Maps.Geocoding;
 using Google.Maps.Shared;
 
 using NUnit.Framework;
 
-namespace Google.Maps.Test.Geocoding
+namespace Google.Maps.Geocoding
 {
 	[TestFixture]
 	public class LiveGeocodingTests

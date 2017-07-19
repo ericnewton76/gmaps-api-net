@@ -15,52 +15,18 @@
  * limitations under the License.
  */
 
-using System.Linq;
-using NUnit.Framework;
-using Google.Maps.Direction;
 using System;
+using System.Linq;
+
+using NUnit.Framework;
+
 using Google.Maps.Shared;
 
-namespace Google.Maps.Test.Integrations
+namespace Google.Maps.Direction
 {
 	[TestFixture]
 	class DirectionServiceTests
 	{
-
-		private static double GetTolerance(double expected, int decimalPrecision)
-		{
-			int magnitude = 1 + (expected == 0.0 ? -1 : Convert.ToInt32(Math.Floor(Math.Log10(expected))));
-			int precision = 15 - magnitude;
-
-			double tolerance = 1.0 / Math.Pow(10, precision);
-
-			return tolerance;
-		}
-
-		private static AddressComponent MakeAddressComponent(string shortName, string longName, params AddressType[] types)
-		{
-			return new AddressComponent()
-			{
-				ShortName = shortName,
-				LongName = longName,
-				Types = types
-			};
-		}
-		private static Geometry MakeGeometry(LocationType locationType, double locationLat, double locationLong, double swLat, double swLong, double neLat, double neLong)
-		{
-			return new Geometry()
-			{
-				LocationType = locationType
-				,
-				Location = new LatLng(locationLat, locationLong)
-				,
-				Viewport = new Viewport(
-				  southWest: new LatLng(swLat, swLong)
-				  , northEast: new LatLng(neLat, neLong)
-					)
-			};
-		}
-
 		[Test]
 		public void Empty_Address_Fails()
 		{

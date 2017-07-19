@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Google.Maps.StaticMaps;
-using Google.Maps;
+
 using NUnit.Framework;
 
-namespace Google.Maps.Test.StaticMaps
+namespace Google.Maps.StaticMaps
 {
 	[TestFixture]
 	public class StaticMap_uribuilding_Tests

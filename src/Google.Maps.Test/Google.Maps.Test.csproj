@@ -90,6 +90,7 @@
     <Compile Include="QuickExamplesTests.cs" />
     <Compile Include="Elevation\ElevationServiceTests.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
+    <Compile Include="StaticMaps\StaticMap_Path_Tests.cs" />
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
     <Compile Include="ValueTextComparer.cs" />
     <Compile Include="ViaLatLngTests.cs" />

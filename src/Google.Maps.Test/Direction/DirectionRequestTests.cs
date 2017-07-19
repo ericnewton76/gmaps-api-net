@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Google.Maps.Geocoding;
-using System.Reflection;
-using Google.Maps.Direction;
 using System.Collections.Specialized;
 
-namespace Google.Maps.Test
+using NUnit.Framework;
+
+namespace Google.Maps.Direction
 {
 	[TestFixture]
 	public class DirectionRequestTests

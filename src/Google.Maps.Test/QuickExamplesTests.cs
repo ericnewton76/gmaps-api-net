@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Google.Maps.Direction;
+
 using NUnit.Framework;
+
+using Google.Maps.Direction;
 using Google.Maps.Geocoding;
 using Google.Maps.StaticMaps;
 
-namespace Google.Maps.Test
+namespace Google.Maps
 {
 	/*
 	 *  This test fixture was set up to ensure that the online samples work as written and as expected.
 	 */
 	[TestFixture]
-	[Explicit()]
-	[Category("External Integrations")]
 	class QuickExamplesTests
 	{
 
@@ -62,6 +61,5 @@ namespace Google.Maps.Test
 
 			Assert.True(response.Waypoints.Any(wp => wp.PartialMatch));
 		}
-
 	}
 }

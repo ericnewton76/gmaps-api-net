@@ -1,12 +1,10 @@
-﻿using Google.Maps.Places;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
-namespace Google.Maps.Test.Places
+using NUnit.Framework;
+
+namespace Google.Maps.Places
 {
 	[TestFixture]
 	public class PlacesServiceTests
