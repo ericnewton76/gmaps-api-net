@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 using Google.Maps.Geocoding;
 
-namespace Google.Maps.Test
+namespace Google.Maps
 {
 	/*
 	 * These tests require a real Google Maps for Business Client ID and Signing key.

@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
-using System.IO;
+﻿using System.IO;
 
-namespace Google.Maps.Test.Places
+using NUnit.Framework;
+
+namespace Google.Maps.Places
 {
 	class Utility
 	{

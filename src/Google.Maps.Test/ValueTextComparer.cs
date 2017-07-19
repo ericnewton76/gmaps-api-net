@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Google.Maps.Test
+namespace Google.Maps
 {
 	public class ValueTextComparer : IComparer<ValueText>
 	{
-
 		public ValueTextComparer(StringComparer stringComparer)
 		{
 			this._stringComparer = stringComparer;
 		}
 
 		private StringComparer _stringComparer;
-
 
 		public int Compare(ValueText x, ValueText y)
 		{

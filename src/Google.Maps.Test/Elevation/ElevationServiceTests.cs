@@ -15,12 +15,11 @@
  * limitations under the License.
  */
 
-using System.Linq;
-using System.Net;
-using NUnit.Framework;
-using Google.Maps.Elevation;
+using System;
 
-namespace Google.Maps.Test.Elevation
+using NUnit.Framework;
+
+namespace Google.Maps.Elevation
 {
 	[TestFixture]
 	public class ElevationServiceTests

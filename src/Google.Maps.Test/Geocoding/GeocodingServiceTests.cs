@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-using System.Linq;
-using NUnit.Framework;
-using Google.Maps.Geocoding;
-using Google.Maps.Shared;
 using System;
+using System.Linq;
 
-namespace Google.Maps.Test.Integrations
+using NUnit.Framework;
+
+using Google.Maps.Shared;
+
+namespace Google.Maps.Geocoding
 {
 	[TestFixture]
 	class GeocodingServiceTests

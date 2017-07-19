@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using NUnit.Framework;
-using Google.Maps.Elevation;
-using System.Reflection;
 
-namespace Google.Maps.Test.Elevation
+namespace Google.Maps.Elevation
 {
 	[TestFixture]
 	class ElevationRequestTests
@@ -23,8 +19,5 @@ namespace Google.Maps.Test.Elevation
 
 			Assert.AreEqual(expected, actual);
 		}
-
-
-
 	}
 }
