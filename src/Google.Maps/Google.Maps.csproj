@@ -103,6 +103,8 @@
     <Compile Include="Elevation\ElevationResponse.cs" />
     <Compile Include="Elevation\ElevationResult.cs" />
     <Compile Include="Elevation\ElevationService.cs" />
+    <Compile Include="Internal\HttpGetResponse.cs" />
+    <Compile Include="Internal\HttpGetResponseFactory.cs" />
     <Compile Include="Places\Details\AltID.cs" />
     <Compile Include="Places\Details\AspectRating.cs" />
     <Compile Include="Places\Details\AspectType.cs" />
