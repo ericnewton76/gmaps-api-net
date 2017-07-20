@@ -54,7 +54,9 @@ namespace Google.Maps.Elevation
 		public ElevationResponse GetResponse(ElevationRequest request)
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<ElevationResponse>();
+
+			var http = new Internal.MapsHttp();
+			return http.Get<ElevationResponse>(url);
 		}
 	}
 }

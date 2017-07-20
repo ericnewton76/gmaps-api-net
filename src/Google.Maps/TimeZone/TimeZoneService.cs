@@ -50,7 +50,9 @@ namespace Google.Maps.TimeZone
 		public TimeZoneResponse GetResponse(TimeZoneRequest request)
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<TimeZoneResponse>();
+
+			var http = new Internal.MapsHttp();
+			return http.Get<TimeZoneResponse>(url);
 		}
 	}
 }

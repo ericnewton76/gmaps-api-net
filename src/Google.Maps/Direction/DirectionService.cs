@@ -41,7 +41,9 @@ namespace Google.Maps.Direction
 		public DirectionResponse GetResponse(DirectionRequest request)
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<DirectionResponse>();
+
+			var http = new Internal.MapsHttp();
+			return http.Get<DirectionResponse>(url);
 		}
 	}
 }

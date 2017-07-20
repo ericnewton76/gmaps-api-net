@@ -14,10 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 
 namespace Google.Maps.Geocoding
 {
@@ -54,7 +52,9 @@ namespace Google.Maps.Geocoding
 		public GeocodeResponse GetResponse(GeocodingRequest request)
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<GeocodeResponse>();
+
+			var http = new Internal.MapsHttp();
+			return http.Get<GeocodeResponse>(url);
 		}
 	}
 }

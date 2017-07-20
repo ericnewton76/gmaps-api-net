@@ -51,7 +51,9 @@ namespace Google.Maps.Places
 		public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<PlacesResponse>();
+
+			var http = new Internal.MapsHttp();
+			return http.Get<PlacesResponse>(url);
 		}
 
 		/// <summary>
@@ -64,7 +66,9 @@ namespace Google.Maps.Places
 		public AutocompleteResponse GetAutocompleteResponse(AutocompleteRequest request)
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<AutocompleteResponse>();
+
+			var http = new Internal.MapsHttp();
+			return http.Get<AutocompleteResponse>(url);
 		}
 	}
 }

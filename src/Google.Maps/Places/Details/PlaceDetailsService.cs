@@ -53,7 +53,9 @@ namespace Google.Maps.Places.Details
 		public PlaceDetailsResponse GetResponse(PlaceDetailsRequest request)
 		{
 			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<PlaceDetailsResponse>();
+
+			var http = new Internal.MapsHttp();
+			return http.Get<PlaceDetailsResponse>(url);
 		}
 	}
 }
