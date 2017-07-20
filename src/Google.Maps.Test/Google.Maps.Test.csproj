@@ -78,7 +78,7 @@
     <Compile Include="Direction\DirectionServiceTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DistanceMatrix\LiveDistanceMatrixTest.cs" />
+    <Compile Include="DistanceMatrix\DistanceMatrixServiceTests.cs" />
     <Compile Include="GoogleMapsForBusinessTests.cs" />
     <Compile Include="GoogleSignedTests.cs" />
     <Compile Include="Elevation\ElevationRequestTests.cs" />

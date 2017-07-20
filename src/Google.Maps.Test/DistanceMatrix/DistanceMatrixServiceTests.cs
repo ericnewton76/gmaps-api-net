@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Google.Maps.DistanceMatrix
 {
 	[TestFixture]
-	public class LiveDistanceMatrixTest
+	public class DistanceMatrixServiceTests
 	{
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
