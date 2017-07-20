@@ -36,6 +36,7 @@ namespace Google.Maps.Internal
 		{
 			return GetStreamReader(uri, GoogleSigned.SigningInstance);
 		}
+
 		protected virtual StreamReader GetStreamReader(Uri uri, GoogleSigned signingInstance)
 		{
 			if (signingInstance != null)
@@ -47,18 +48,6 @@ namespace Google.Maps.Internal
 
 			StreamReader sr = new StreamReader(response.GetResponseStream());
 			return sr;
-		}
-
-		public virtual string AsString()
-		{
-			var output = String.Empty;
-
-			using (var reader = GetStreamReader(this.RequestUri))
-			{
-				output = reader.ReadToEnd();
-			}
-
-			return output;
 		}
 
 		public virtual T As<T>() where T : class
