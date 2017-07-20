@@ -55,11 +55,6 @@ namespace Google.Maps
 		public static void AssignAllServices(GoogleSigned signingInstance)
 		{
 			S_universalSigningInstance = signingInstance;
-			//Direction.DirectionService.SigningInstance = signingInstance;
-			//DistanceMatrix.DistanceMatrixService.SigningInstance = signingInstance;
-			//Elevation.ElevationService.SigningInstance = signingInstance;
-			//Geocoding.GeocodingService.SigningInstance = signingInstance;
-			//StaticMaps.StaticMapService.SigningInstance = signingInstance;
 		}
 
 		public string GetSignedUri(Uri uri)
