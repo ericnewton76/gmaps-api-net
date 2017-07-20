@@ -71,7 +71,6 @@ namespace Google.Maps.Geocoding
 			Assert.That(expectedViewport.Northeast, Is.EqualTo(result.Geometry.Viewport.Northeast).Using(LatLngComparer.Within(0.00001f)));
 		}
 
-
 		[Test]
 		public void GetGeocodingForAddress2()
 		{
@@ -87,6 +86,87 @@ namespace Google.Maps.Geocoding
 			var actualResult = actual.Results.Single();
 			Assert.AreEqual(new AddressType[] { AddressType.StreetAddress }, actualResult.Types);
 			Assert.AreEqual("11 Wall St, New York, NY 10005, USA", actualResult.FormattedAddress);
+		}
+
+		[Test]
+		public void Geocode_With_AddressComponent_Locking()
+		{
+			var requestGB = new GeocodingRequest
+			{
+				Address = "Boston",
+				Components = "country:GB"
+			};
+
+			var requestUS = new GeocodingRequest
+			{
+				Address = "Boston",
+				Components = "country:US"
+			};
+
+			var responseGB = new GeocodingService().GetResponse(requestGB);
+			var responseUS = new GeocodingService().GetResponse(requestUS);
+
+			Assert.AreEqual(ServiceResponseStatus.Ok, responseGB.Status);
+			Assert.AreEqual(ServiceResponseStatus.Ok, responseUS.Status);
+
+			foreach (var r in responseGB.Results)
+			{
+				Assert.IsTrue(r.FormattedAddress.EndsWith("UK"), r.FormattedAddress + " <- Should be in UK");
+			}
+
+			foreach (var r in responseUS.Results)
+			{
+				Assert.IsTrue(r.FormattedAddress.EndsWith("USA"), r.FormattedAddress + " <- Should be in USA");
+			}
+		}
+
+		[Test]
+		public void Geocode_Without_AddressComponent_Locking()
+		{
+			var request = new GeocodingRequest
+			{
+				Address = "Boston"
+			};
+
+			var response = new GeocodingService().GetResponse(request);
+
+			foreach (var r in response.Results)
+			{
+				Assert.IsTrue(r.FormattedAddress.EndsWith("USA"));
+			}
+		}
+
+		[Test]
+		public void GeocodeResult_Has_BoundsProperty()
+		{
+			var request = new GeocodingRequest
+			{
+				Address = "Boston"
+			};
+
+			var response = new GeocodingService().GetResponse(request);
+
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.IsNotNull(response.Results[0].Geometry.Bounds);
+			Assert.IsNotNull(response.Results[0].Geometry.Bounds.Southwest);
+			Assert.IsNotNull(response.Results[0].Geometry.Bounds.Northeast);
+		}
+
+		[Test]
+		public void GeocodeResult_Supports_PostalTownAndPostalCodePrefix()
+		{
+			var request = new GeocodingRequest
+			{
+				Address = "Stathern, UK"
+			};
+
+			var response = new GeocodingService().GetResponse(request);
+
+			var postalTown = response.Results[0].AddressComponents.First(x => x.ShortName == "Melton Mowbray");
+			Assert.IsFalse(postalTown.Types.Contains(AddressType.Unknown), postalTown.ShortName + " should be AddressType PostalTown");
+
+			var postalCodePrefix = response.Results[0].AddressComponents.First(x => x.ShortName == "LE14");
+			Assert.IsFalse(postalCodePrefix.Types.Contains(AddressType.Unknown), postalCodePrefix.ShortName + " should be AddressType PostalCodePrefix");
 		}
 	}
 }

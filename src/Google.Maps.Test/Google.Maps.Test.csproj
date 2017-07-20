@@ -79,7 +79,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DistanceMatrix\LiveDistanceMatrixTest.cs" />
-    <Compile Include="Geocoding\LiveGeocodingTests.cs" />
     <Compile Include="GoogleMapsForBusinessTests.cs" />
     <Compile Include="GoogleSignedTests.cs" />
     <Compile Include="Elevation\ElevationRequestTests.cs" />
