@@ -79,7 +79,6 @@
     <Compile Include="BaseRequest.cs" />
     <Compile Include="Avoid.cs" />
     <Compile Include="AvoidHelper.cs" />
-    <Compile Include="BaseSigningService.cs" />
     <Compile Include="ComponentFilter.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Direction\DirectionLeg.cs" />
