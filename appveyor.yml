@@ -5,6 +5,10 @@ configuration: Release
 shallow_clone: true
 clone_depth: 10
 
+environment:
+  GOOGLE_API_KEY:
+    secure: pnYRPfFKB+uub3hlM9mX2q3CzVKsqCg/EM/lFZ2DN6yePU4wBbhr0PhBf3dDVgU4
+
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
