@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Google.Maps;
 
-namespace Google.Maps.Test
+using NUnit.Framework;
+
+namespace Google.Maps
 {
 	[TestFixture]
 	public class PolylineEncodingTests

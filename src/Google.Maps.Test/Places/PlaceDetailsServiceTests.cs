@@ -1,11 +1,19 @@
-﻿using Google.Maps.Places.Details;
+﻿using System;
+using System.Collections.Generic;
+
 using NUnit.Framework;
 
-namespace Google.Maps.Test.Places
+namespace Google.Maps.Places.Details
 {
 	[TestFixture]
 	class PlaceDetailsServiceTests
 	{
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+		}
+
 		[TestCase("ChIJN1t_tDeuEmsRUsoyG83frY4", "Google")]
 		[Test]
 		public void PlacesDetailsTest(string placeID, string placeName)
@@ -21,13 +29,5 @@ namespace Google.Maps.Test.Places
 			Assert.AreEqual(placeID, response.Result.PlaceID);
 			Assert.AreEqual(placeName, response.Result.Name);
 		}
-
-		[SetUp]
-		public void PlaceDetailsSetUp()
-		{
-			GoogleSigned signingInstance = Utility.GetRealSigningInstance();
-			GoogleSigned.AssignAllServices(signingInstance);
-		}
 	}
-
 }

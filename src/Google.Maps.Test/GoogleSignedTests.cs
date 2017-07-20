@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using NUnit.Framework;
 
-namespace Google.Maps.Test
+namespace Google.Maps
 {
 	[TestFixture]
 	class GoogleSignedTests
 	{
-
 		private GoogleSigned GetGoogleSigned_TestInstance()
 		{
 			return new GoogleSigned("gme-YOUR_CLIENT_ID", "vNIXE0xscrmjlyV-12Nj_BvUPaw=");
 		}
 
 		[Test]
-		public void SignedUrl_1()
+		public void Private_Key_Signing()
 		{
 			GoogleSigned sign = GetGoogleSigned_TestInstance();
 
@@ -29,5 +27,14 @@ namespace Google.Maps.Test
 			Assert.AreEqual(expected, actual);
 		}
 
+		[Test]
+		public void Api_Key_Signing()
+		{
+			var sign = new GoogleSigned("mykey");
+
+			string signed = sign.GetSignedUri("http://a/dummy/server?a=b");
+
+			Assert.AreEqual("http://a/dummy/server?a=b&key=mykey", signed);
+		}
 	}
 }

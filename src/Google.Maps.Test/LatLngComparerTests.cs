@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using NUnit.Framework;
 
-namespace Google.Maps.Test
+namespace Google.Maps
 {
 	[TestFixture]
 	class LatLngComparerTests
 	{
-
 		[Test]
 		public void Ex_1_precision()
 		{
@@ -21,7 +18,6 @@ namespace Google.Maps.Test
 			Assert.That(expected, Is.EqualTo(actual).Using(LatLngComparer.Within(0.1f)));
 		}
 
-
 		[Test]
 		public void Ex_6_precision()
 		{
@@ -31,6 +27,5 @@ namespace Google.Maps.Test
 
 			Assert.That(expected, Is.EqualTo(actual).Using(LatLngComparer.Within(0.000001f)));
 		}
-
 	}
 }

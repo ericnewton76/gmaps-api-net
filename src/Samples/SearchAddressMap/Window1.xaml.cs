@@ -30,7 +30,6 @@ namespace SearchAddressMap
 			map.Size = new System.Drawing.Size(332, 332);
 			map.Markers.Add(map.Center);
 			map.MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true);
-			map.Sensor = false;
 
 			var image = new BitmapImage();
 			image.BeginInit();
@@ -50,7 +49,6 @@ namespace SearchAddressMap
 		{
 			var request = new GeocodingRequest();
 			request.Address = searchTextBox.Text;
-			request.Sensor = false;
 			var response = new GeocodingService().GetResponse(request);
 
 			if(response.Status == ServiceResponseStatus.Ok)

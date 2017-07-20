@@ -33,7 +33,7 @@ namespace Google.Maps.Elevation
 		/// encoded polyline.
 		/// </summary>
 		/// <remarks>Required if path not present.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Locations"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/elevation/#Locations"/>
 		public IList<LatLng> Locations
 		{
 			get
@@ -67,7 +67,7 @@ namespace Google.Maps.Elevation
 		/// parameter.
 		/// </summary>
 		/// <remarks>Required if locations not present.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Paths"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/elevation/#Paths"/>
 		public IList<LatLng> Path
 		{
 			get
@@ -86,38 +86,17 @@ namespace Google.Maps.Elevation
 		/// <remarks>Required if a path is specified.</remarks>
 		public int? Samples { get; set; }
 
-		/// <summary>
-		/// Specifies whether the application requesting elevation data is
-		/// using a sensor to determine the user's location. This parameter
-		/// is required for all elevation requests.
-		/// </summary>
-		/// <remarks>Required.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/elevation/#Sensor"/>
-		public bool? Sensor { get; set; }
-
 		public override Uri ToUri()
 		{
-			this.EnsureSensor(true);
-
 			var qsb = new Internal.QueryStringBuilder()
 
 				.Append("locations", RequestUtils.GetLatLngCollectionStr(this._locations))
 				.Append("path", RequestUtils.GetLatLngCollectionStr(this._path))
-				.Append("samples", (Samples.GetValueOrDefault() > 0 ? Samples.ToString() : ""))
-				.Append("sensor", (Sensor.Value ? "true" : "false"));
+				.Append("samples", (Samples.GetValueOrDefault() > 0 ? Samples.ToString() : ""));
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
-		}
-
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if(Sensor == null)
-			{
-				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
 		}
 
 		private string GetLocationsStr()

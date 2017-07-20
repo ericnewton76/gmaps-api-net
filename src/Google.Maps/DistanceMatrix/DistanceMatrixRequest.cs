@@ -42,21 +42,15 @@ namespace Google.Maps.DistanceMatrix
 
 		/// <summary>
 		///  (optional) Specifies the unit system to use when expressing distance as text.
-		///   <see cref="http://code.google.com/intl/it-IT/apis/maps/documentation/distancematrix/#unit_systems"/>
+		///   <see href="http://code.google.com/intl/it-IT/apis/maps/documentation/distancematrix/#unit_systems"/>
 		/// </summary>
 		public Units Units { get; set; }
 
 		/// <summary>
 		/// (optional) The language in which to return results.
-		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport" />
+		/// <see href="http://code.google.com/apis/maps/faq.html#languagesupport" />
 		/// </summary>
 		public string Language { get; set; }
-
-		/// <summary>
-		///
-		///
-		/// </summary>
-		public bool? Sensor { get; set; }
 
 		/// <summary>
 		///  List of origin waypoints
@@ -158,29 +152,17 @@ namespace Google.Maps.DistanceMatrix
 		/// <returns></returns>
 		public override Uri ToUri()
 		{
-			this.EnsureSensor(true);
-
 			var qsb = new Internal.QueryStringBuilder()
 				.Append("origins", WaypointsToUri(_waypointsOrigin))
 				.Append("destinations", WaypointsToUri(_waypointsDestination))
 				.Append("mode", Mode.ToString())
 				.Append("language", Language)
 				.Append("units", Units.ToString())
-				.Append("sensor", (Sensor.Value ? "true" : "false"))
 				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid));
 
 			var url = "json?" + qsb.ToString();
 
 			return new Uri(url, UriKind.Relative);
-		}
-
-		private void EnsureSensor(bool throwIfNotSet)
-		{
-			if(Sensor == null)
-			{
-				if(throwIfNotSet) throw new InvalidOperationException("Sensor isn't set to a valid value.");
-				else return;
-			}
 		}
 	}
 

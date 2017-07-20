@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Google.Maps.DistanceMatrix;
 
-namespace Google.Maps.Test.DistanceMatrix
+using NUnit.Framework;
+
+namespace Google.Maps.DistanceMatrix
 {
 	[TestFixture]
-	public class LiveDistanceMatrixTest
+	public class DistanceMatrixServiceTests
 	{
-		[SetUp]
-		public void Setup()
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
 		{
-
-		}
-
-		public LiveDistanceMatrixTest()
-		{
-			//GoogleSigned.AssignAllServices(new GoogleSigned(apiKey: "your-api-key"));
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
 		}
 
 		[Test]
@@ -30,13 +23,11 @@ namespace Google.Maps.Test.DistanceMatrix
 			//rotherham
 			request.AddOrigin(new LatLng(latitude: 53.434297m,longitude: -1.364678m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
@@ -48,13 +39,11 @@ namespace Google.Maps.Test.DistanceMatrix
 			//rotherham
 			request.AddOrigin(new LatLng(latitude: 53.434297m, longitude: -1.364678m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
@@ -66,13 +55,11 @@ namespace Google.Maps.Test.DistanceMatrix
 			//rotherham
 			request.AddOrigin(new Location("Rotherham"));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
@@ -85,15 +72,13 @@ namespace Google.Maps.Test.DistanceMatrix
 			//sheffield
 			request.AddDestination(new LatLng(latitude: 53.378243m, longitude: -1.462131m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length == 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.AreEqual(1, response.DestinationAddresses.Length);
+			Assert.AreEqual(1, response.OriginAddresses.Length);
 		}
 
 		[Test]
@@ -106,15 +91,13 @@ namespace Google.Maps.Test.DistanceMatrix
 			//sheffield
 			request.AddDestination(new Location("Sheffield"));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length == 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.AreEqual(1, response.DestinationAddresses.Length);
+			Assert.AreEqual(1, response.OriginAddresses.Length);
 		}
 
 
@@ -130,15 +113,13 @@ namespace Google.Maps.Test.DistanceMatrix
 			request.AddDestination(new LatLng(latitude: 53.378243m, longitude: -1.462131m));
 			request.AddDestination(new LatLng(latitude: 51.378243m, longitude: -1.162131m));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length > 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
-
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.Greater(response.DestinationAddresses.Length, 1);
+			Assert.AreEqual(1, response.OriginAddresses.Length, 1);
 		}
 
 		[Test]
@@ -152,14 +133,13 @@ namespace Google.Maps.Test.DistanceMatrix
 			request.AddDestination(new Location("Sheffield"));
 			request.AddDestination(new Location("London"));
 
-			request.Sensor = true;
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
 
-			Assert.IsTrue(response.Status == ServiceResponseStatus.Ok);
-			Assert.IsTrue(response.DestinationAddresses.Length > 1);
-			Assert.IsTrue(response.OriginAddresses.Length == 1);
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.Greater(response.DestinationAddresses.Length, 1);
+			Assert.AreEqual(1, response.OriginAddresses.Length, 1);
 		}
 	}
 }

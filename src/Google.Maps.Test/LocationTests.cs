@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using NUnit.Framework;
 
-namespace Google.Maps.Test
+namespace Google.Maps
 {
 	[TestFixture]
 	public class LocationTests

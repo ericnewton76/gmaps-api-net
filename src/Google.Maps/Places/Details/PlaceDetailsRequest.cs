@@ -22,7 +22,7 @@ namespace Google.Maps.Places.Details
 		/// Optional. This parameter will only influence, not fully restrict, results
 		/// from the geocoder.
 		/// </remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/geocoding/#Viewports"/>
 		[System.Obsolete("Use PlaceID")]
 		public string Reference { get; set; }
 
@@ -34,7 +34,7 @@ namespace Google.Maps.Places.Details
 		/// Optional. This parameter will only influence, not fully restrict, results
 		/// from the geocoder.
 		/// </remarks>
-		/// <see cref="http://code.google.com/apis/maps/documentation/geocoding/#RegionCodes"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/geocoding/#RegionCodes"/>
 		public string Extensions { get; set; }
 
 		/// <summary>
@@ -43,19 +43,8 @@ namespace Google.Maps.Places.Details
 		/// the domain from which the request is sent wherever possible.
 		/// </summary>
 		/// <remarks>Optional.</remarks>
-		/// <see cref="http://code.google.com/apis/maps/faq.html#languagesupport"/>
+		/// <see href="http://code.google.com/apis/maps/faq.html#languagesupport"/>
 		public string Language { get; set; }
-
-		/// <summary>
-		/// Indicates whether or not the geocoding request comes from a device
-		/// with a location sensor. This value must be either true or false.
-		///
-		/// The Google Places API Web Service previously required that you include the sensor
-		/// parameter to indicate whether your application used a sensor to determine the user's
-		/// location. This parameter is no longer required.
-		/// </summary>
-		public bool? Sensor { get; set; }
-
 
 		public override Uri ToUri()
 		{

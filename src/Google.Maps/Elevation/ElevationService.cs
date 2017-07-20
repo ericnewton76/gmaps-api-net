@@ -26,11 +26,9 @@ namespace Google.Maps.Elevation
 	/// In those cases where Google does not possess exact elevation measurements at the precise location you request, the service will interpolate and return an averaged value
 	/// using the four nearest locations.
 	/// </summary>
-	/// <see cref="http://code.google.com/apis/maps/documentation/elevation/"/>
+	/// <see href="http://code.google.com/apis/maps/documentation/elevation/"/>
 	public class ElevationService
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/elevation/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/elevation/");
 
@@ -40,11 +38,11 @@ namespace Google.Maps.Elevation
 			: this(HttpsUri)
 		{
 		}
+
 		public ElevationService(Uri baseUri)
 		{
 			this.BaseUri = baseUri;
 		}
-		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Elevation web

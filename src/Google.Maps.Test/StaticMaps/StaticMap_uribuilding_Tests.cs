@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Google.Maps.StaticMaps;
-using Google.Maps;
+
 using NUnit.Framework;
 
-namespace Google.Maps.Test.StaticMaps
+namespace Google.Maps.StaticMaps
 {
 	[TestFixture]
 	public class StaticMap_uribuilding_Tests
@@ -16,11 +13,10 @@ namespace Google.Maps.Test.StaticMaps
 		[Test]
 		public void BasicUri()
 		{
-			string expected = "/maps/api/staticmap?center=30.1,-60.2&size=512x512&sensor=false";
+			string expected = "/maps/api/staticmap?center=30.1,-60.2&size=512x512";
 
 			StaticMapRequest sm = new StaticMapRequest()
 			{
-				Sensor = false,
 				Center = new LatLng(30.1, -60.2)
 			};
 

@@ -13,10 +13,10 @@ assembly_info:
   assembly_informational_version: '{version}'
 
 before_build:
-- cmd: set
+  - nuget restore src\GoogleMapsForNET.sln
 
 build_script:
-- cmd: msbuild /p:Configuration=Release src\GoogleMapsForNET.sln /verbosity:minimal
+- cmd: msbuild /p:Configuration=Release src\GoogleMapsForNET.sln /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 after_build:
 - cmd: call nuget_pack.cmd
@@ -24,10 +24,10 @@ after_build:
 test:
   assemblies:
     only:
-    - src\Google.Maps.Tests\**\*Tests.dll
+    - src\Google.Maps.Test\bin\Release\*Test.dll
 
 artifacts:
-- path: Build\Nuget\*.nupkg
+- path: Build\NuGet\*.nupkg
   name: NugetPackage
 
 deploy:
@@ -47,4 +47,6 @@ notifications:
   on_build_failure: true
   on_build_status_changed: true
 
-
+# Temporary workaround for AppVeyor -> NuGet connectivity issues
+hosts:
+  api.nuget.org: 93.184.221.200

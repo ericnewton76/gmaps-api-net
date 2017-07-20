@@ -37,20 +37,15 @@ namespace Google.Maps.Direction
 		public bool? Alternatives { get; set; }
 
 		/// <summary>The region code, specified as a ccTLD ("top-level domain") two-character value. See also Region biasing.</summary>
-		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
-		/// <seealso cref="https://developers.google.com/maps/documentation/directions/#RegionBiasing"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
+		/// <seealso href="https://developers.google.com/maps/documentation/directions/#RegionBiasing"/>
 		public string Region { get; set; }
 
 		/// <summary>The language in which to return results. See the list of supported domain languages.
 		/// Note that we often update supported languages so this list may not be exhaustive.
 		/// If language is not supplied, the service will attempt to use the native language of the domain from which the request is sent.</summary>
-		/// <see cref="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
+		/// <see href="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
 		public string Language { get; set; }
-
-		/// <summary>
-		///  Indicates whether or not the directions request comes from a device with a location sensor. This value must be either true or false.
-		/// </summary>
-		public bool? Sensor { get; set; }
 
 		/// <summary>
 		/// departure_time specifies the desired time of departure as seconds since midnight, January 1, 1970 UTC. The departure time may be specified in two cases:
@@ -112,7 +107,7 @@ namespace Google.Maps.Direction
 
 		public override Uri ToUri()
 		{
-			EnsureSensor();
+			if (Origin == null) throw new InvalidOperationException("Origin is required");
 
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
 				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
@@ -123,7 +118,6 @@ namespace Google.Maps.Direction
 				.Append("waypoints", WaypointsToUri())
 				.Append("region", Region)
 				.Append("language", Language)
-				.Append("sensor", Sensor.Value ? "true" : "false")
 				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid))
 				.Append("alternatives", Alternatives.HasValue ? (Alternatives.Value ? "true" : "false") : (string)null);
 
@@ -131,11 +125,5 @@ namespace Google.Maps.Direction
 
 			return new Uri(url, UriKind.Relative);
 		}
-
-		private void EnsureSensor()
-		{
-			if(this.Sensor == null) throw new InvalidOperationException("Sensor property hasn't been set.");
-		}
-
 	}
 }

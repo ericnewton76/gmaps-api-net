@@ -15,31 +15,22 @@
  * limitations under the License.
  */
 
-using System.Linq;
-using System.Net;
-using NUnit.Framework;
-using Google.Maps.Elevation;
+using System;
 
-namespace Google.Maps.Test.Elevation
+using NUnit.Framework;
+
+namespace Google.Maps.Elevation
 {
 	[TestFixture]
 	public class ElevationServiceTests
 	{
-		#region TestFixtureSetup/TearDown
-		[TestFixtureSetUp]
-		public void FixtureSetup()
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
 		{
-			Google.Maps.Internal.Http.Factory = new Google.Maps.Test.Integrations.HttpGetResponseFromResourceFactory("Google.Maps.Test.Elevation");
+			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
 		}
-		[TestFixtureTearDown]
-		public void FixtureTearDown()
-		{
-			Google.Maps.Internal.Http.Factory = new Internal.Http.HttpGetResponseFactory();
-		}
-		#endregion
 
 		[Test]
-		[Ignore("Tolerances problem")]
 		public void GetElevationForOneLocation()
 		{
 			// expectations
@@ -52,7 +43,6 @@ namespace Google.Maps.Test.Elevation
 			var request = new ElevationRequest();
 
 			request.AddLocations(expectedLocation);
-			request.Sensor = false;
 			var response = new ElevationService().GetResponse(request);
 
 			// asserts
@@ -65,7 +55,6 @@ namespace Google.Maps.Test.Elevation
 		}
 
 		[Test]
-		[Ignore("Tolerances problem")]
 		public void GetElevationForTwoLocations()
 		{
 			// expectations
@@ -81,7 +70,6 @@ namespace Google.Maps.Test.Elevation
 			var request = new ElevationRequest();
 
 			request.AddLocations(expectedLocation1, expectedLocation2);
-			request.Sensor = false;
 			var response = new ElevationService().GetResponse(request);
 
 			// asserts
