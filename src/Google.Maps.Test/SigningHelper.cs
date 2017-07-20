@@ -32,6 +32,7 @@ namespace Google.Maps
 			}
 
 			//Log.Info("Using ApiKey '{0}' for testing.", S_ApiKey);
+			Console.WriteLine("Using ApiKey '{0}' for testing.", S_ApiKey);
 		}
 
 		/// <summary>Holds the ApiKey used for testing</summary>
