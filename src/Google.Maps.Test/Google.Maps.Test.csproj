@@ -91,6 +91,7 @@
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMap_Path_Tests.cs" />
     <Compile Include="StaticMaps\StaticMap_uribuilding_Tests.cs" />
+    <Compile Include="TimeZone\TimeZoneServiceTests.cs" />
     <Compile Include="ValueTextComparer.cs" />
     <Compile Include="ViaLatLngTests.cs" />
     <Compile Include="Geocoding\GeocodingRequestTests.cs" />
