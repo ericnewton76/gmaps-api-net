@@ -15,29 +15,26 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
+
+using Google.Maps.Internal;
 
 namespace Google.Maps.TimeZone
 {
 	/// <summary>
 	/// Provides a direct way to access a time zone service via an HTTP request.
 	/// </summary>
-	public class TimeZoneService
+	public class TimeZoneService : IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/timezone/outputFormat?parameters");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public TimeZoneService()
-			: this(HttpsUri)
+		public TimeZoneService(Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public TimeZoneService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>
@@ -49,10 +46,18 @@ namespace Google.Maps.TimeZone
 		/// <returns></returns>
 		public TimeZoneResponse GetResponse(TimeZoneRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
+			var url = new Uri(baseUri, request.ToUri());
 
-			var http = new Internal.MapsHttp();
 			return http.Get<TimeZoneResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }

@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
+
+using Google.Maps.Internal;
 
 namespace Google.Maps.DistanceMatrix
 {
@@ -27,30 +26,35 @@ namespace Google.Maps.DistanceMatrix
 	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
 	/// <see href="http://developers.google.com/maps/documentation/distancematrix/"/>
-	public class DistanceMatrixService
+	public class DistanceMatrixService : IDisposable
 	{
-		//if you plan to use apiKey Google forces you to use https. Also it is ok to use https without apiKey.
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/distancematrix/");
-		//public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/distancematrix/");
+		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/distancematrix/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public DistanceMatrixService()
-			: this(HttpsUri)
+		public DistanceMatrixService(Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public DistanceMatrixService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(GoogleSigned.SigningInstance);
 		}
 
 		public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
+			var url = new Uri(baseUri, request.ToUri());
 
-			var http = new Internal.MapsHttp();
 			return http.Get<DistanceMatrixResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }

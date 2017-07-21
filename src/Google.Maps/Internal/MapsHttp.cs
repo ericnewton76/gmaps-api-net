@@ -24,25 +24,31 @@ using Newtonsoft.Json;
 
 namespace Google.Maps.Internal
 {
-	public class MapsHttp
+	public class MapsHttp : IDisposable
 	{
 		JsonSerializerSettings settings = new JsonSerializerSettings
 		{
 			Converters = new List<JsonConverter> { new JsonEnumTypeConverter(), new JsonLocationConverter() }
 		};
 
+		GoogleSigned signingSvc;
+		HttpClient client;
+
+		public MapsHttp(GoogleSigned signingSvc)
+		{
+			this.signingSvc = signingSvc;
+			this.client = new HttpClient();
+		}
+
 		public async Task<T> GetAsync<T>(Uri uri) where T : class
 		{
 			uri = SignUri(uri);
 
-			using (var client = new HttpClient())
-			{
-				var json = await client.GetStringAsync(uri).ConfigureAwait(false);
+			var json = await client.GetStringAsync(uri).ConfigureAwait(false);
 
-				var result = JsonConvert.DeserializeObject<T>(json, settings);
+			var result = JsonConvert.DeserializeObject<T>(json, settings);
 
-				return result;
-			}
+			return result;
 		}
 
 		public T Get<T>(Uri uri) where T : class
@@ -52,11 +58,18 @@ namespace Google.Maps.Internal
 
 		Uri SignUri(Uri uri)
 		{
-			var signingInstance = GoogleSigned.SigningInstance;
+			if (signingSvc == null) return uri;
 
-			if (signingInstance == null) return uri;
+			return new Uri(signingSvc.GetSignedUri(uri));
+		}
 
-			return new Uri(signingInstance.GetSignedUri(uri));
+		public void Dispose()
+		{
+			if (client != null)
+			{
+				client.Dispose();
+				client = null;
+			}
 		}
 	}
 }

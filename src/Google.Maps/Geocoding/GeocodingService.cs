@@ -17,6 +17,8 @@
 
 using System;
 
+using Google.Maps.Internal;
+
 namespace Google.Maps.Geocoding
 {
 	/// <summary>
@@ -25,21 +27,19 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService
+	public class GeocodingService : IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public GeocodingService()
-			: this(HttpsUri)
+		public GeocodingService(Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public GeocodingService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>
@@ -51,10 +51,18 @@ namespace Google.Maps.Geocoding
 		/// <returns></returns>
 		public GeocodeResponse GetResponse(GeocodingRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
+			var url = new Uri(baseUri, request.ToUri());
 
-			var http = new Internal.MapsHttp();
 			return http.Get<GeocodeResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }

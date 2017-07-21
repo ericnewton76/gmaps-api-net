@@ -16,6 +16,8 @@
  */
 using System;
 
+using Google.Maps.Internal;
+
 namespace Google.Maps.Places
 {
 	/// <summary>
@@ -24,21 +26,19 @@ namespace Google.Maps.Places
 	/// points of interest, geographic locations, and more. You can search 
 	/// for places either by proximity or a text string.
 	/// </summary>
-	public class PlacesService
+	public class PlacesService : IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/");
 		public static readonly Uri HttpUri = new Uri("http://maps.googleapis.com/maps/api/place/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public PlacesService()
-			: this(HttpsUri)
+		public PlacesService(Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public PlacesService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>
@@ -50,9 +50,8 @@ namespace Google.Maps.Places
 		/// <returns></returns>
 		public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
+			var url = new Uri(baseUri, request.ToUri());
 
-			var http = new Internal.MapsHttp();
 			return http.Get<PlacesResponse>(url);
 		}
 
@@ -65,10 +64,18 @@ namespace Google.Maps.Places
 		/// <returns></returns>
 		public AutocompleteResponse GetAutocompleteResponse(AutocompleteRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
+			var url = new Uri(baseUri, request.ToUri());
 
-			var http = new Internal.MapsHttp();
 			return http.Get<AutocompleteResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }
