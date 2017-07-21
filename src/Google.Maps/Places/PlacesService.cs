@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 using System;
+using System.Threading.Tasks;
 
 using Google.Maps.Internal;
 
@@ -55,6 +56,13 @@ namespace Google.Maps.Places
 			return http.Get<PlacesResponse>(url);
 		}
 
+		public async Task<PlacesResponse> GetResponseAsync<TRequest>(TRequest request) where TRequest : PlacesRequest
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<PlacesResponse>(url);
+		}
+
 		/// <summary>
 		/// Sends the specified request to the Google Maps Places Autocomplate web
 		/// service and parses the response as an AutocompleteResponse
@@ -67,6 +75,13 @@ namespace Google.Maps.Places
 			var url = new Uri(baseUri, request.ToUri());
 
 			return http.Get<AutocompleteResponse>(url);
+		}
+
+		public async Task<AutocompleteResponse> GetAutocompleteResponseAsync(AutocompleteRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<AutocompleteResponse>(url);
 		}
 
 		public void Dispose()

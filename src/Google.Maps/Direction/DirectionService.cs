@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 using System;
+using System.Threading.Tasks;
 
 using Google.Maps.Internal;
 
@@ -40,6 +41,13 @@ namespace Google.Maps.Direction
 			var url = new Uri(baseUri, request.ToUri());
 
 			return http.Get<DirectionResponse>(url);
+		}
+
+		public async Task<DirectionResponse> GetResponseAsync(DirectionRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<DirectionResponse>(url);
 		}
 
 		public void Dispose()

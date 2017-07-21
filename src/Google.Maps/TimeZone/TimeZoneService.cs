@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 using System;
+using System.Threading.Tasks;
 
 using Google.Maps.Internal;
 
@@ -49,6 +50,13 @@ namespace Google.Maps.TimeZone
 			var url = new Uri(baseUri, request.ToUri());
 
 			return http.Get<TimeZoneResponse>(url);
+		}
+
+		public async Task<TimeZoneResponse> GetResponseAsync(TimeZoneRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<TimeZoneResponse>(url);
 		}
 
 		public void Dispose()

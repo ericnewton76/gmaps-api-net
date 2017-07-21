@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 using System;
+using System.Threading.Tasks;
 
 using Google.Maps.Internal;
 
@@ -53,6 +54,13 @@ namespace Google.Maps.Elevation
 			var url = new Uri(baseUri, request.ToUri());
 
 			return http.Get<ElevationResponse>(url);
+		}
+
+		public async Task<ElevationResponse> GetResponseAsync(ElevationRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<ElevationResponse>(url);
 		}
 
 		public void Dispose()

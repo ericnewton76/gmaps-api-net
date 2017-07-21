@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Threading.Tasks;
 
 using Google.Maps.Internal;
 
@@ -54,6 +55,13 @@ namespace Google.Maps.Geocoding
 			var url = new Uri(baseUri, request.ToUri());
 
 			return http.Get<GeocodeResponse>(url);
+		}
+
+		public async Task<GeocodeResponse> GetResponseAsync(GeocodingRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<GeocodeResponse>(url);
 		}
 
 		public void Dispose()

@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 using System;
+using System.Threading.Tasks;
 
 using Google.Maps.Internal;
 
@@ -50,6 +51,13 @@ namespace Google.Maps.Places.Details
 			var url = new Uri(baseUri, request.ToUri());
 
 			return http.Get<PlaceDetailsResponse>(url);
+		}
+
+		public async Task<PlaceDetailsResponse> GetResponseAsync(PlaceDetailsRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<PlaceDetailsResponse>(url);
 		}
 
 		public void Dispose()
