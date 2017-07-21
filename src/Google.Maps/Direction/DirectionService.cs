@@ -15,33 +15,40 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
+
+using Google.Maps.Internal;
 
 namespace Google.Maps.Direction
 {
-	public class DirectionService
+	public class DirectionService : IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/directions/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/directions/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public DirectionService()
-			: this(HttpsUri)
+		public DirectionService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public DirectionService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		public DirectionResponse GetResponse(DirectionRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<DirectionResponse>();
+			var url = new Uri(baseUri, request.ToUri());
+
+			return http.Get<DirectionResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }

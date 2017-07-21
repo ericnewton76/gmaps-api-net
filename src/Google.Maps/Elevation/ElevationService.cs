@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
+
+using Google.Maps.Internal;
 
 namespace Google.Maps.Elevation
 {
@@ -27,21 +26,19 @@ namespace Google.Maps.Elevation
 	/// using the four nearest locations.
 	/// </summary>
 	/// <see href="http://code.google.com/apis/maps/documentation/elevation/"/>
-	public class ElevationService
+	public class ElevationService : IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/elevation/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/elevation/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public ElevationService()
-			: this(HttpsUri)
+		public ElevationService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public ElevationService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>
@@ -53,8 +50,18 @@ namespace Google.Maps.Elevation
 		/// <returns></returns>
 		public ElevationResponse GetResponse(ElevationRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<ElevationResponse>();
+			var url = new Uri(baseUri, request.ToUri());
+
+			return http.Get<ElevationResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }
