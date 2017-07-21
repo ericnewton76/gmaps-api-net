@@ -28,11 +28,11 @@ namespace Google.Maps.Direction
 		Uri baseUri;
 		MapsHttp http;
 
-		public DirectionService(Uri baseUri = null)
+		public DirectionService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
 			this.baseUri = baseUri ?? HttpsUri;
 
-			this.http = new MapsHttp(GoogleSigned.SigningInstance);
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		public DirectionResponse GetResponse(DirectionRequest request)

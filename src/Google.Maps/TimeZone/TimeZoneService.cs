@@ -30,11 +30,11 @@ namespace Google.Maps.TimeZone
 		Uri baseUri;
 		MapsHttp http;
 
-		public TimeZoneService(Uri baseUri = null)
+		public TimeZoneService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
 			this.baseUri = baseUri ?? HttpsUri;
 
-			this.http = new MapsHttp(GoogleSigned.SigningInstance);
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>

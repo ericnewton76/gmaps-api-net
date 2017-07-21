@@ -35,11 +35,11 @@ namespace Google.Maps.Geocoding
 		Uri baseUri;
 		MapsHttp http;
 
-		public GeocodingService(Uri baseUri = null)
+		public GeocodingService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
 			this.baseUri = baseUri ?? HttpsUri;
 
-			this.http = new MapsHttp(GoogleSigned.SigningInstance);
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>

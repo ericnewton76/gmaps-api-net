@@ -34,11 +34,11 @@ namespace Google.Maps.Elevation
 		Uri baseUri;
 		MapsHttp http;
 
-		public ElevationService(Uri baseUri = null)
+		public ElevationService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
 			this.baseUri = baseUri ?? HttpsUri;
 
-			this.http = new MapsHttp(GoogleSigned.SigningInstance);
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>

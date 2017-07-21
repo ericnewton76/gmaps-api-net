@@ -34,11 +34,11 @@ namespace Google.Maps.Places
 		Uri baseUri;
 		MapsHttp http;
 
-		public PlacesService(Uri baseUri = null)
+		public PlacesService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
 			this.baseUri = baseUri ?? HttpsUri;
 
-			this.http = new MapsHttp(GoogleSigned.SigningInstance);
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>

@@ -30,12 +30,13 @@ namespace Google.Maps.Places.Details
 		Uri baseUri;
 		MapsHttp http;
 
-		public PlaceDetailsService(Uri baseUri = null)
+		public PlaceDetailsService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
 			this.baseUri = baseUri ?? HttpsUri;
 
-			this.http = new MapsHttp(GoogleSigned.SigningInstance);
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
+
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Places web

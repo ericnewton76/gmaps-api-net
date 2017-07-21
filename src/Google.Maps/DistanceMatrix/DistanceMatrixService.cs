@@ -34,11 +34,11 @@ namespace Google.Maps.DistanceMatrix
 		Uri baseUri;
 		MapsHttp http;
 
-		public DistanceMatrixService(Uri baseUri = null)
+		public DistanceMatrixService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
 			this.baseUri = baseUri ?? HttpsUri;
 
-			this.http = new MapsHttp(GoogleSigned.SigningInstance);
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
