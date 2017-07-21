@@ -15,33 +15,29 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
+using System.Threading.Tasks;
+
+using Google.Maps.Internal;
 
 namespace Google.Maps.Places.Details
 {
 	/// <summary>
 	/// Provides a direct way to access Places Details via an HTTP request.
 	/// </summary>
-	public class PlaceDetailsService
+	public class PlaceDetailsService : IDisposable
 	{
-		#region Http/Https Uris and Constructors
-
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/details/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public PlaceDetailsService()
-			: this(HttpsUri)
+		public PlaceDetailsService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
+			this.baseUri = baseUri ?? HttpsUri;
+
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
-		public PlaceDetailsService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
-		}
-		#endregion
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Places web
@@ -52,8 +48,25 @@ namespace Google.Maps.Places.Details
 		/// <returns></returns>
 		public PlaceDetailsResponse GetResponse(PlaceDetailsRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<PlaceDetailsResponse>();
+			var url = new Uri(baseUri, request.ToUri());
+
+			return http.Get<PlaceDetailsResponse>(url);
+		}
+
+		public async Task<PlaceDetailsResponse> GetResponseAsync(PlaceDetailsRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<PlaceDetailsResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }

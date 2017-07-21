@@ -17,6 +17,7 @@
 
 using System;
 using System.Linq;
+using System.Net.Http;
 
 using NUnit.Framework;
 
@@ -36,7 +37,7 @@ namespace Google.Maps.Geocoding
 		[Test]
 		public void Empty_address()
 		{
-			Assert.Throws<System.Net.WebException>(() =>
+			Assert.Throws<HttpRequestException>(() =>
 			{
 				var request = new GeocodingRequest { Address = "" };
 				var response = new GeocodingService().GetResponse(request);

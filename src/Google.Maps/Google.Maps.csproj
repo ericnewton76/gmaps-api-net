@@ -74,6 +74,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRequest.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Elevation\ElevationResponse.cs" />
     <Compile Include="Elevation\ElevationResult.cs" />
     <Compile Include="Elevation\ElevationService.cs" />
+    <Compile Include="Internal\MapsHttp.cs" />
     <Compile Include="Places\Details\AltID.cs" />
     <Compile Include="Places\Details\AspectRating.cs" />
     <Compile Include="Places\Details\AspectType.cs" />
@@ -126,7 +128,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Internal\ConvertUtil.cs" />
-    <Compile Include="Internal\Http.cs" />
     <Compile Include="Internal\QueryStringBuilder.cs" />
     <Compile Include="Internal\RequestUtils.cs" />
     <Compile Include="JsonCreationConverter.cs" />
