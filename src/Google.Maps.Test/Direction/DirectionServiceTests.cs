@@ -17,6 +17,7 @@
 
 using System;
 using System.Linq;
+using System.Net.Http;
 
 using NUnit.Framework;
 
@@ -36,7 +37,7 @@ namespace Google.Maps.Direction
 		[Test]
 		public void Empty_Address_Fails()
 		{
-			Assert.Throws<System.Net.WebException>(() =>
+			Assert.Throws<HttpRequestException>(() =>
 			{
 				// Arrange
 				var request = new DirectionRequest { Origin = "" };

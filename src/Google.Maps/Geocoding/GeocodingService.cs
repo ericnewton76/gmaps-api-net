@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
+
+using Google.Maps.Internal;
 
 namespace Google.Maps.Geocoding
 {
@@ -27,21 +27,19 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService
+	public class GeocodingService : IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
 		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public GeocodingService()
-			: this(HttpsUri)
+		public GeocodingService(Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public GeocodingService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>
@@ -53,8 +51,18 @@ namespace Google.Maps.Geocoding
 		/// <returns></returns>
 		public GeocodeResponse GetResponse(GeocodingRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<GeocodeResponse>();
+			var url = new Uri(baseUri, request.ToUri());
+
+			return http.Get<GeocodeResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }
