@@ -16,7 +16,7 @@
  */
 
 using System;
-using System.Web;
+
 using Google.Maps.Shared;
 
 namespace Google.Maps.Geocoding
