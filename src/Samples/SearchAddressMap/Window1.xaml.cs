@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Threading.Tasks;
+
 using Google.Maps.Geocoding;
 using Google.Maps.StaticMaps;
 using Google.Maps;
@@ -24,20 +26,27 @@ namespace SearchAddressMap
 			if(resultsTreeView.SelectedItem == null) return;
 
 			var location = ((LatLng)((TreeViewItem)resultsTreeView.SelectedItem).Tag);
-			var map = new StaticMapRequest();
-			map.Center = location;
-			map.Zoom = Convert.ToInt32(zoomSlider.Value);
-			map.Size = new System.Drawing.Size(332, 332);
-			map.Markers.Add(map.Center);
-			map.MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true);
 
-			var image = new BitmapImage();
-			image.BeginInit();
-			image.CacheOption = BitmapCacheOption.OnDemand;
-			image.UriSource = map.ToUri();
-			image.DownloadFailed += new EventHandler<ExceptionEventArgs>(image_DownloadFailed);
-			image.EndInit();
-			image1.Source = image;
+			var map = new StaticMapRequest
+			{
+				Center = location,
+				Zoom = Convert.ToInt32(zoomSlider.Value),
+				Size = new System.Drawing.Size(332, 332),
+				MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true)
+			};
+			map.Markers.Add(map.Center);
+
+			var mapSvc = new StaticMapService();
+
+			using (var ms = new System.IO.MemoryStream(mapSvc.GetImage(map)))
+			{
+				var image = new BitmapImage();
+				image.BeginInit();
+				image.StreamSource = mapSvc.GetStream(map);
+				image.CacheOption = BitmapCacheOption.OnLoad;
+				image.EndInit();
+				image1.Source = image;
+			}
 		}
 
 		void image_DownloadFailed(object sender, ExceptionEventArgs e)

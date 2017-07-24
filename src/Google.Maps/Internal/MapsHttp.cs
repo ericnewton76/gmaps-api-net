@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.IO;
 
 using Newtonsoft.Json;
 
@@ -54,6 +55,18 @@ namespace Google.Maps.Internal
 		public T Get<T>(Uri uri) where T : class
 		{
 			return GetAsync<T>(uri).GetAwaiter().GetResult();
+		}
+
+		public async Task<Stream> GetStreamAsync(Uri uri)
+		{
+			uri = SignUri(uri);
+
+			return await client.GetStreamAsync(uri).ConfigureAwait(false);
+		}
+
+		public Stream GetStream(Uri uri)
+		{
+			return GetStreamAsync(uri).GetAwaiter().GetResult();
 		}
 
 		Uri SignUri(Uri uri)
