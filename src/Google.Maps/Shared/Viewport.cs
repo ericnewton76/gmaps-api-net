@@ -20,7 +20,6 @@ using System;
 
 namespace Google.Maps.Shared
 {
-	[Serializable]
 	[JsonObject(MemberSerialization.OptIn)]
 	public class Viewport
 	{

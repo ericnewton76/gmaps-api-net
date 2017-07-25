@@ -22,7 +22,6 @@ using System.Globalization;
 namespace Google.Maps
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[Serializable]
 	public class LatLng : Location, IEquatable<LatLng>
 	{
 		private double _latitude;
