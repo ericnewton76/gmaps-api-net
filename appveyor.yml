@@ -1,9 +1,13 @@
 version: 0.18.{build}
+
 pull_requests:
   do_not_increment_build_number: true
+
 configuration: Release
+
 shallow_clone: true
-clone_depth: 10
+
+image: Visual Studio 2017
 
 assembly_info:
   patch: true
@@ -16,24 +20,19 @@ init:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 before_build:
-  - nuget restore src\GoogleMapsForNET.sln
+  - msbuild src\GoogleMapsForNET.sln /t:restore
 
 build_script:
-- cmd: msbuild /p:Configuration=Release src\GoogleMapsForNET.sln /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-after_build:
-- cmd: call nuget_pack.cmd
+- cmd: msbuild src\GoogleMapsForNET.sln /t:build /p:Configuration=Release /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 before_test:
 - cmd: curl -s "https://maps.googleapis.com/maps/api/geocode/json?address=1600%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA&key=AIzaSyCmNnjnAEpmO_-vl1nnfWkREsEufwvWo4M" -o pretest_response.json
 
-test:
-  assemblies:
-    only:
-    - src\Google.Maps.Test\bin\Release\*Test.dll
+after_test:
+- cmd: nuget pack gmaps-api-net.nuspec -version %APPVEYOR_BUILD_VERSION%
 
 artifacts:
-- path: Build\NuGet\*.nupkg
+- path: '*.nupkg'
   name: NuGetPackage
 
 deploy:
