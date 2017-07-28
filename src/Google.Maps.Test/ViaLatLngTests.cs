@@ -45,6 +45,7 @@ namespace Google.Maps
 			Assert.AreEqual(expected.Longitude, actual.Longitude);
 		}
 
+#if HAS_CURRENTCULTURE
 		[Test]
 		public void ToString_using_invariant_culture_settings()
 		{
@@ -67,6 +68,7 @@ namespace Google.Maps
 				System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;
 			}
 		}
+#endif
 
 		[Test]
 		[TestCase(30.1d, 60.2d)]

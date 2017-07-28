@@ -12,9 +12,12 @@
 
 		public int Height { get; set; }
 
+#if HAS_SYSTEMDRAWING
 		public static implicit operator MapSize(System.Drawing.Size systemSize)
 		{
 			return new MapSize(systemSize.Width, systemSize.Height);
 		}
+#endif
+
 	}
 }

@@ -85,9 +85,12 @@ namespace Google.Maps
 			return (int)value;
 		}
 
+#if HAS_SYSTEMDRAWING
 		public static implicit operator MapColor(System.Drawing.Color systemColor)
 		{
 			return FromArgb(systemColor.A, systemColor.R, systemColor.G, systemColor.B);
 		}
+#endif
+
 	}
 }

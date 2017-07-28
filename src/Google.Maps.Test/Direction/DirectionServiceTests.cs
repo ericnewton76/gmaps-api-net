@@ -72,8 +72,8 @@ namespace Google.Maps.Direction
 			Assert.AreEqual("27 Victoria Dr, Lyneham, Chippenham SN15 4RA, UK", currentLeg.EndAddress);
 			Assert.That(currentLeg.EndLocation, Is.EqualTo(new LatLng(51.505,-1.958)).Using(LatLngComparer.Within(0.001f)));
 
-			Assert.That(currentLeg.Distance, Is.EqualTo(new ValueText { Text = "53.9 km", Value = "53939" }).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
-			Assert.That(currentLeg.Duration, Is.EqualTo(new ValueText { Text = "49 mins", Value = "2946" }).Using(new ValueTextComparer(StringComparer.InvariantCultureIgnoreCase)));
+			Assert.That(currentLeg.Distance, Is.EqualTo(new ValueText { Text = "53.9 km", Value = "53939" }).Using(new ValueTextComparer(StringComparer.OrdinalIgnoreCase)));
+			Assert.That(currentLeg.Duration, Is.EqualTo(new ValueText { Text = "49 mins", Value = "2946" }).Using(new ValueTextComparer(StringComparer.OrdinalIgnoreCase)));
 
 			Assert.AreEqual(19, currentLeg.Steps.Count());
 

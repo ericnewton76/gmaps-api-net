@@ -23,7 +23,7 @@ before_build:
   - msbuild src\GoogleMapsForNET.sln /t:restore
 
 build_script:
-- cmd: msbuild src\GoogleMapsForNET.sln /t:build /p:Configuration=Release /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- cmd: msbuild src\GoogleMapsForNET.sln /t:build /p:Configuration=Release /verbosity:minimal
 
 before_test:
 - cmd: curl -s "https://maps.googleapis.com/maps/api/geocode/json?address=1600%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA&key=AIzaSyCmNnjnAEpmO_-vl1nnfWkREsEufwvWo4M" -o pretest_response.json

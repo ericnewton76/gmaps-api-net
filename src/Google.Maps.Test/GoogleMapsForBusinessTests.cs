@@ -23,6 +23,10 @@ namespace Google.Maps
 	{
 		private GoogleSigned GetRealSigningInstance()
 		{
+#if NETSTANDARD1
+			Assert.Ignore("TODO");
+			return null;
+#else
 			try
 			{
 				using(var keys = new StreamReader(@"..\..\PrivateSigningKeys.txt"))
@@ -38,6 +42,7 @@ namespace Google.Maps
 				Assert.Ignore("PrivateSigningKeys.txt could not be found - ignoring test");
 				return null;
 			}
+#endif
 		}
 
 		[Test]

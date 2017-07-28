@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Reflection;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -13,7 +12,7 @@ namespace Google.Maps
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(T).IsAssignableFrom(objectType);
+			return typeof(T).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType,
