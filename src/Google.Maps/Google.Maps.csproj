@@ -169,9 +169,6 @@
     <Compile Include="TravelMode.cs" />
     <Compile Include="Units.cs" />
     <Compile Include="ViaLatLng.cs" />
-    <Compile Include="ViewportComparer.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
