@@ -8,6 +8,8 @@ clone_depth: 10
 environment:
   GOOGLE_API_KEY:
     secure: pnYRPfFKB+uub3hlM9mX2q3CzVKsqCg/EM/lFZ2DN6yePU4wBbhr0PhBf3dDVgU4
+#  APPVEYOR_RDP_PASSWORD:
+#    Letmein1!
 
 assembly_info:
   patch: true
@@ -24,6 +26,9 @@ build_script:
 
 after_build:
 - cmd: call nuget_pack.cmd
+
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 test:
   assemblies:
