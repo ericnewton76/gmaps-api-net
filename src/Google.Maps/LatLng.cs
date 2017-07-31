@@ -15,9 +15,10 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using System;
 using System.Globalization;
+
+using Newtonsoft.Json;
 
 namespace Google.Maps
 {
