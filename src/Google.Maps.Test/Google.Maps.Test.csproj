@@ -85,6 +85,7 @@
     <Compile Include="GoogleSignedTests.cs" />
     <Compile Include="Elevation\ElevationRequestTests.cs" />
     <Compile Include="LatLngComparerTests.cs" />
+    <Compile Include="MapColorTests.cs" />
     <Compile Include="Places\PlaceDetailsServiceTests.cs" />
     <Compile Include="Places\PlacesServiceTests.cs" />
     <Compile Include="QuickExamplesTests.cs" />

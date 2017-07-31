@@ -45,7 +45,7 @@ namespace Google.Maps.StaticMaps
 			var map = new StaticMapRequest();
 			map.Paths.Add(new Path(new LatLng(30.0, -60.0))
 			{
-				Color = System.Drawing.Color.FromArgb(0x80, 0xA0, 0xC0)
+				Color = MapColor.FromArgb(0x80, 0xA0, 0xC0)
 			});
 			string color = ExtractColorFromUri(map.ToUri());
 			Assert.AreEqual("0X80A0C0FF", color.ToUpper());
@@ -88,7 +88,7 @@ namespace Google.Maps.StaticMaps
 				new LatLng(47.3017, -96.5299)
 			)
 			{
-				Color = System.Drawing.Color.Green
+				Color =  MapColor.FromName("green")
 			};
 		}
 
@@ -101,8 +101,8 @@ namespace Google.Maps.StaticMaps
 				new LatLng(47.3105, -96.5326)
 			)
 			{
-				Color = System.Drawing.Color.Red
-			}; ;
+				Color = MapColor.FromName("red")
+			};
 		}
 
 		private static string ExtractColorFromUri(Uri uri)

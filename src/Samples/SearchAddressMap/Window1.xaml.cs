@@ -31,7 +31,7 @@ namespace SearchAddressMap
 			{
 				Center = location,
 				Zoom = Convert.ToInt32(zoomSlider.Value),
-				Size = new System.Drawing.Size(332, 332),
+				Size = new MapSize(332, 332),
 				MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true)
 			};
 			map.Markers.Add(map.Center);

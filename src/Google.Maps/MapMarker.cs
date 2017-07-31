@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
-using Color = System.Drawing.Color;
 using System.ComponentModel;
 
 namespace Google.Maps
@@ -47,7 +45,7 @@ namespace Google.Maps
 		/// or a predefined color from the set {black, brown, green, purple, yellow, blue, gray, orange, red, white}.
 		/// (optional)
 		/// </summary>
-		public Color Color { get; set; }
+		public MapColor Color { get; set; }
 
 
 		/// <summary>

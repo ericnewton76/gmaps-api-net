@@ -21,9 +21,6 @@ using System.Collections.Generic;
 
 using Google.Maps.Internal;
 
-using Size = System.Drawing.Size;
-using Color = System.Drawing.Color;
-
 namespace Google.Maps.StaticMaps
 {
 	/// <summary>
@@ -37,7 +34,7 @@ namespace Google.Maps.StaticMaps
 	{
 		public StaticMapRequest()
 		{
-			this.Size = new Size(512, 512); //default size is 512x512
+			this.Size = new MapSize(512, 512); //default size is 512x512
 			this.Visible = new List<Location>(1);
 			this.Markers = new MapMarkersCollection();
 			this.Paths = new List<Path>();
@@ -85,7 +82,7 @@ namespace Google.Maps.StaticMaps
 		/// create a static map that is 100 pixels wide or smaller, the
 		/// "Powered by Google" logo is automatically reduced in size. (required)
 		/// </summary>
-		public Size Size
+		public MapSize Size
 		{
 			get { return _size; }
 			set
@@ -97,7 +94,7 @@ namespace Google.Maps.StaticMaps
 				this._size = value;
 			}
 		}
-		private Size _size;
+		private MapSize _size;
 
 		/// <summary>
 		/// affects the number of pixels that are returned. scale=2 returns twice as many pixels as scale=1
@@ -264,15 +261,15 @@ namespace Google.Maps.StaticMaps
 			{
 				sb.Length = 0;
 
-				if(currentPath.Color.Equals(Color.Empty) == false)
+				if(!currentPath.Color.IsUndefined)
 				{
-					sb.Append("color:").Append(GetColorEncoded(currentPath.Color, true));
+					sb.Append("color:").Append(currentPath.Color.To32BitColorString());
 				}
 
-				if(currentPath.FillColor.Equals(Color.Empty) == false)
+				if(!currentPath.FillColor.IsUndefined)
 				{
 					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
-					sb.Append("fillcolor:").Append(GetColorEncoded(currentPath.FillColor, false));
+					sb.Append("fillcolor:").Append(currentPath.FillColor.To32BitColorString());
 				}
 
 				if(currentPath.Encode.GetValueOrDefault() == true)
@@ -309,22 +306,6 @@ namespace Google.Maps.StaticMaps
 			}
 
 			return string.Join("&", pathParam);
-		}
-
-		/// <summary>
-		/// The color encoding for google static maps API puts the alpha last (0xrrggbbaa)
-		/// whereas .NET encodes it alpha first by default (0xaarrggbb).
-		/// </summary>
-		private static string GetColorEncoded(Color color, bool useNamedColorIfPossible)
-		{
-			if(useNamedColorIfPossible && color.IsNamedColor && Constants.IsExpectedNamedColor(color.Name))
-			{
-				return color.Name.ToLowerInvariant();
-			}
-			else
-			{
-				return string.Format("0x{0:X2}{1:X2}{2:X2}{3:X2}", color.R, color.G, color.B, color.A);
-			}
 		}
 
 		private static string GetPathEncoded(Path currentPath)
@@ -380,18 +361,11 @@ namespace Google.Maps.StaticMaps
 				}
 
 				//check for a color specified for the markers and add that style attribute if so
-				if(current.Color.Equals(Color.Empty) == false)
+				if(!current.Color.IsUndefined)
 				{
 					if(sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 
-					if(current.Color.IsNamedColor && Constants.IsExpectedNamedColor(current.Color.Name))
-					{
-						sb.AppendFormat("color:{0}", current.Color.Name.ToLowerInvariant());
-					}
-					else
-					{
-						sb.AppendFormat("color:0x{0:X6}", (current.Color.ToArgb() & 0x00FFFFFF));
-					}
+					sb.AppendFormat(current.Color.To24BitColorString());
 				}
 
 				// add a label, but if the MarkerSize is MarkerSizes.Tiny or Small then you can't have a label.

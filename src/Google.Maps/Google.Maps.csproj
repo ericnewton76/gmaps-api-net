@@ -105,6 +105,8 @@
     <Compile Include="Elevation\ElevationResult.cs" />
     <Compile Include="Elevation\ElevationService.cs" />
     <Compile Include="Internal\MapsHttp.cs" />
+    <Compile Include="MapColor.cs" />
+    <Compile Include="MapSize.cs" />
     <Compile Include="Places\Details\AltID.cs" />
     <Compile Include="Places\Details\AspectRating.cs" />
     <Compile Include="Places\Details\AspectType.cs" />

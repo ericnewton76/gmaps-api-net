@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using System.ComponentModel;
-using Color = System.Drawing.Color;
 
 namespace Google.Maps
 {
@@ -33,7 +31,7 @@ namespace Google.Maps
 		/// (optional) specifies a color either as a 24-bit (example: color=0xFFFFCC) or 32-bit hexadecimal value (example: color=0xFFFFCCFF), 
 		/// or from the set {black, brown, green, purple, yellow, blue, gray, orange, red, white}.  Default opacity appears to be 50%. 
 		/// </summary>
-		public Color Color { get; set; }
+		public MapColor Color { get; set; }
 
 		/// <summary>
 		/// indicates both that the path marks off a polygonal area and specifies the fill color to use as an overlay within that area. The 
@@ -41,7 +39,7 @@ namespace Google.Maps
 		/// Note, however, that any stroke on the exterior of the filled area will not be closed unless you specifically provide the same 
 		/// beginning and end location.
 		/// </summary>
-		public Color FillColor { get; set; }
+		public MapColor FillColor { get; set; }
 
 		/// <summary>
 		/// Gets or sets the collection of points for this path
