@@ -20,7 +20,6 @@ using System;
 
 namespace Google.Maps.Shared
 {
-	[Serializable]
 	public class AddressComponent : IEquatable<AddressComponent>
 	{
 		/// <summary>

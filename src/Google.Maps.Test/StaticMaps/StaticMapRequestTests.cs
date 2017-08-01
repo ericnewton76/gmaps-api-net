@@ -14,7 +14,7 @@ namespace Google.Maps.StaticMaps
 			{
 				StaticMapRequest sm = new StaticMapRequest()
 				{
-					Size = new System.Drawing.Size(-1, -1)
+					Size = new MapSize(-1, -1)
 				};
 			});
 		}
@@ -26,7 +26,7 @@ namespace Google.Maps.StaticMaps
 			{
 				StaticMapRequest sm = new StaticMapRequest()
 				{
-					Size = new System.Drawing.Size(4097, 4097)
+					Size = new MapSize(4097, 4097)
 				};
 			});
 		}

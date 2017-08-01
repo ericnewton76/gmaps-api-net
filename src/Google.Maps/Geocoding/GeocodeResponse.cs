@@ -20,7 +20,6 @@ using System;
 
 namespace Google.Maps.Geocoding
 {
-	[Serializable]
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GeocodeResponse
 	{

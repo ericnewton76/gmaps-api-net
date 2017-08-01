@@ -40,7 +40,7 @@ namespace Google.Maps
 		{
 			var map = new StaticMapRequest();
 			map.Center = new Location("1600 Amphitheatre Parkway Mountain View, CA 94043");
-			map.Size = new System.Drawing.Size(400, 400);
+			map.Size = new MapSize(400, 400);
 			map.Zoom = 14;
 
 			var imgTagSrc = map.ToUri();

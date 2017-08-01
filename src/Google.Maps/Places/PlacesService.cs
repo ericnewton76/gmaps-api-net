@@ -15,6 +15,9 @@
  * limitations under the License.
  */
 using System;
+using System.Threading.Tasks;
+
+using Google.Maps.Internal;
 
 namespace Google.Maps.Places
 {
@@ -24,21 +27,19 @@ namespace Google.Maps.Places
 	/// points of interest, geographic locations, and more. You can search 
 	/// for places either by proximity or a text string.
 	/// </summary>
-	public class PlacesService
+	public class PlacesService : IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/");
 		public static readonly Uri HttpUri = new Uri("http://maps.googleapis.com/maps/api/place/");
 
-		public Uri BaseUri { get; set; }
+		Uri baseUri;
+		MapsHttp http;
 
-		public PlacesService()
-			: this(HttpsUri)
+		public PlacesService(GoogleSigned signingSvc = null, Uri baseUri = null)
 		{
-		}
+			this.baseUri = baseUri ?? HttpsUri;
 
-		public PlacesService(Uri baseUri)
-		{
-			this.BaseUri = baseUri;
+			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
 		}
 
 		/// <summary>
@@ -50,8 +51,16 @@ namespace Google.Maps.Places
 		/// <returns></returns>
 		public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<PlacesResponse>();
+			var url = new Uri(baseUri, request.ToUri());
+
+			return http.Get<PlacesResponse>(url);
+		}
+
+		public async Task<PlacesResponse> GetResponseAsync<TRequest>(TRequest request) where TRequest : PlacesRequest
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<PlacesResponse>(url);
 		}
 
 		/// <summary>
@@ -63,8 +72,25 @@ namespace Google.Maps.Places
 		/// <returns></returns>
 		public AutocompleteResponse GetAutocompleteResponse(AutocompleteRequest request)
 		{
-			var url = new Uri(this.BaseUri, request.ToUri());
-			return Internal.Http.Get(url).As<AutocompleteResponse>();
+			var url = new Uri(baseUri, request.ToUri());
+
+			return http.Get<AutocompleteResponse>(url);
+		}
+
+		public async Task<AutocompleteResponse> GetAutocompleteResponseAsync(AutocompleteRequest request)
+		{
+			var url = new Uri(baseUri, request.ToUri());
+
+			return await http.GetAsync<AutocompleteResponse>(url);
+		}
+
+		public void Dispose()
+		{
+			if (http != null)
+			{
+				http.Dispose();
+				http = null;
+			}
 		}
 	}
 }

@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using System;
 using System.Globalization;
+
+using Newtonsoft.Json;
 
 namespace Google.Maps
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[Serializable]
 	public class LatLng : Location, IEquatable<LatLng>
 	{
 		private double _latitude;
