@@ -31,8 +31,8 @@ namespace Google.Maps
 				S_ApiKey = "AIzaSyDV-0ftj1tsjfd6GnEbtbxwHXnv6iR3UEU";
 			}
 
-			//Log.Info("Using ApiKey '{0}' for testing.", S_ApiKey);
-			Console.WriteLine("Using ApiKey '{0}' for testing.", S_ApiKey);
+			//Note: don't specifically say code or api key or something here.  The key should be IP restricted but lets keep it obscure.
+			Console.WriteLine("SigningHelper: Initialized using '{0}' for testing.", S_ApiKey);
 		}
 
 		/// <summary>Holds the ApiKey used for testing</summary>

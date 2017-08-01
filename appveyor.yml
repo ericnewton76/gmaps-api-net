@@ -5,12 +5,6 @@ configuration: Release
 shallow_clone: true
 clone_depth: 10
 
-environment:
-  GOOGLE_API_KEY:
-    secure: pnYRPfFKB+uub3hlM9mX2q3CzVKsqCg/EM/lFZ2DN6yePU4wBbhr0PhBf3dDVgU4
-#  APPVEYOR_RDP_PASSWORD:
-#    Letmein1!
-
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -27,8 +21,8 @@ build_script:
 after_build:
 - cmd: call nuget_pack.cmd
 
-#on_finish:
-#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+before_test:
+- cmd: curl -s "https://maps.googleapis.com/maps/api/geocode/json?address=1600%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA&key=AIzaSyCmNnjnAEpmO_-vl1nnfWkREsEufwvWo4M" -o pretest_response.json
 
 test:
   assemblies:
@@ -37,13 +31,13 @@ test:
 
 artifacts:
 - path: Build\NuGet\*.nupkg
-  name: NugetPackage
+  name: NuGetPackage
 
 deploy:
 - provider: NuGet
   api_key:
     secure: 2SwDMmXZZtgoLWsldKZ8GCu9rZXpO5quTYtSNJQSeeiqDjnmo0OfutNVcH3jsfpj
-  artifact: 'NugetPackage'
+  artifact: 'NuGetPackage'
   on:
     branch: release
 
