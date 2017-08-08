@@ -8,10 +8,18 @@ namespace Google.Maps.DistanceMatrix
 	[TestFixture]
 	public class DistanceMatrixServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
+		DistanceMatrixService CreateService()
+		{
+			var svc = new DistanceMatrixService(TestingApiKey);
+			return svc;
+		}
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
 		}
 
 		[Test]
@@ -25,7 +33,7 @@ namespace Google.Maps.DistanceMatrix
 
 			request.Mode = TravelMode.driving;
 
-			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
@@ -41,7 +49,7 @@ namespace Google.Maps.DistanceMatrix
 
 			request.Mode = TravelMode.driving;
 
-			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
@@ -57,7 +65,7 @@ namespace Google.Maps.DistanceMatrix
 
 			request.Mode = TravelMode.driving;
 
-			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
@@ -74,7 +82,7 @@ namespace Google.Maps.DistanceMatrix
 
 			request.Mode = TravelMode.driving;
 
-			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual(1, response.DestinationAddresses.Length);
@@ -93,7 +101,7 @@ namespace Google.Maps.DistanceMatrix
 
 			request.Mode = TravelMode.driving;
 
-			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual(1, response.DestinationAddresses.Length);
@@ -115,7 +123,7 @@ namespace Google.Maps.DistanceMatrix
 
 			request.Mode = TravelMode.driving;
 
-			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.Greater(response.DestinationAddresses.Length, 1);
@@ -135,7 +143,7 @@ namespace Google.Maps.DistanceMatrix
 
 			request.Mode = TravelMode.driving;
 
-			DistanceMatrixResponse response = new DistanceMatrixService().GetResponse(request);
+			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.Greater(response.DestinationAddresses.Length, 1);

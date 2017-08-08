@@ -24,10 +24,18 @@ namespace Google.Maps.Elevation
 	[TestFixture]
 	public class ElevationServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
+		ElevationService CreateService()
+		{
+			var svc = new ElevationService(TestingApiKey);
+			return svc;
+		}
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
 		}
 
 		[Test]
@@ -43,7 +51,7 @@ namespace Google.Maps.Elevation
 			var request = new ElevationRequest();
 
 			request.AddLocations(expectedLocation);
-			var response = new ElevationService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
@@ -70,7 +78,7 @@ namespace Google.Maps.Elevation
 			var request = new ElevationRequest();
 
 			request.AddLocations(expectedLocation1, expectedLocation2);
-			var response = new ElevationService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);

@@ -28,10 +28,18 @@ namespace Google.Maps.Geocoding
 	[TestFixture]
 	class GeocodingServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
+		GeocodingService CreateService()
+		{
+			var svc = new GeocodingService(TestingApiKey);
+			return svc;
+		}
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
 		}
 
 		[Test]
@@ -40,7 +48,7 @@ namespace Google.Maps.Geocoding
 			Assert.Throws<HttpRequestException>(() =>
 			{
 				var request = new GeocodingRequest { Address = "" };
-				var response = new GeocodingService().GetResponse(request);
+				var response = CreateService().GetResponse(request);
 			});
 		}
 
@@ -51,7 +59,7 @@ namespace Google.Maps.Geocoding
 			var request = new GeocodingRequest { Address = "1600 Amphitheatre Parkway Mountain View CA" };
 
 			// Act
-			var response = new GeocodingService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
@@ -78,7 +86,7 @@ namespace Google.Maps.Geocoding
 			// test
 			var request = new GeocodingRequest();
 			request.Address = "11 Wall Street New York NY 10005";
-			var actual = new GeocodingService().GetResponse(request);
+			var actual = CreateService().GetResponse(request);
 
 			// asserts
 			Assert.AreEqual(ServiceResponseStatus.Ok, actual.Status);
@@ -104,8 +112,8 @@ namespace Google.Maps.Geocoding
 				Components = "country:US"
 			};
 
-			var responseGB = new GeocodingService().GetResponse(requestGB);
-			var responseUS = new GeocodingService().GetResponse(requestUS);
+			var responseGB = CreateService().GetResponse(requestGB);
+			var responseUS = CreateService().GetResponse(requestUS);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, responseGB.Status);
 			Assert.AreEqual(ServiceResponseStatus.Ok, responseUS.Status);
@@ -129,7 +137,7 @@ namespace Google.Maps.Geocoding
 				Address = "Boston"
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			foreach (var r in response.Results)
 			{
@@ -145,7 +153,7 @@ namespace Google.Maps.Geocoding
 				Address = "Boston"
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds);
@@ -161,7 +169,7 @@ namespace Google.Maps.Geocoding
 				Address = "Stathern, UK"
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			var postalTown = response.Results[0].AddressComponents.First(x => x.ShortName == "Melton Mowbray");
 			Assert.IsFalse(postalTown.Types.Contains(AddressType.Unknown), postalTown.ShortName + " should be AddressType PostalTown");

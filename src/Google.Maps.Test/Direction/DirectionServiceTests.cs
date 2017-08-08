@@ -28,10 +28,18 @@ namespace Google.Maps.Direction
 	[TestFixture]
 	class DirectionServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
+		DirectionService CreateService()
+		{
+			var svc = new DirectionService(TestingApiKey);
+			return svc;
+		}
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
 		}
 
 		[Test]
@@ -43,7 +51,7 @@ namespace Google.Maps.Direction
 				var request = new DirectionRequest { Origin = "" };
 
 				// Act
-				var response = new DirectionService().GetResponse(request);
+				var response = CreateService().GetResponse(request);
 			});
 		}
 
@@ -58,7 +66,7 @@ namespace Google.Maps.Direction
 			};
 
 			// Act
-			var response = new DirectionService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status, "Status");

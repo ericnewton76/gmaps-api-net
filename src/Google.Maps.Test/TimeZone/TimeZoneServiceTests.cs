@@ -24,10 +24,18 @@ namespace Google.Maps.TimeZone
 {
 	public class TimeZoneServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
+		TimeZoneService CreateService()
+		{
+			var svc = new TimeZoneService(TestingApiKey);
+			return svc;
+		}
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
 		}
 
 		[Test]
@@ -41,7 +49,7 @@ namespace Google.Maps.TimeZone
 			};
 
 			// Act
-			var response = new TimeZoneService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
@@ -61,7 +69,7 @@ namespace Google.Maps.TimeZone
 			};
 
 			// Act
-			var response = new TimeZoneService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
