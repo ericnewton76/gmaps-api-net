@@ -58,7 +58,7 @@ namespace Google.Maps.Geocoding
 			Assert.AreEqual(1, response.Results.Length);
 
 			var result = response.Results.Single();
-			Assert.AreEqual("Google Bldg 41, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", result.FormattedAddress);
+			Assert.AreEqual("Google Bldg 42, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", result.FormattedAddress);
 			Assert.AreEqual(LocationType.Rooftop, result.Geometry.LocationType);
 
 			var expectedLocation = new LatLng(37.42219410, -122.08459320);
