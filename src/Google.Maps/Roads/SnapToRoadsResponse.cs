@@ -6,6 +6,6 @@ namespace Google.Maps.Roads
 	public class SnapToRoadsResponse
 	{
 		[JsonProperty("snappedPoints")]
-		SnappedPoint[] SnappedPoints { get; set; }
+		public SnappedPoint[] SnappedPoints { get; set; }
 	}
 }
