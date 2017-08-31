@@ -163,6 +163,11 @@
     <Compile Include="Shared\LocationType.cs" />
     <Compile Include="Shared\Viewport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roads\SnappedPoint.cs" />
+    <Compile Include="Roads\SnappedPointLocation.cs" />
+    <Compile Include="Roads\SnapToRoadsRequest.cs" />
+    <Compile Include="Roads\SnapToRoadsResponse.cs" />
+    <Compile Include="Roads\RoadsService.cs" />
     <Compile Include="StaticMaps\StaticMapRequest.cs" />
     <Compile Include="StaticMaps\StaticMapService.cs" />
     <Compile Include="TimeZone\TimeZoneRequest.cs" />
