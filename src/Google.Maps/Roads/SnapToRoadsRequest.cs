@@ -22,7 +22,10 @@ namespace Google.Maps.Roads
 
 		public override Uri ToUri()
 		{
-			if (Path == null) throw new InvalidOperationException("Path is required");
+			if (Path == null || !Path.Any())
+			{
+				throw new InvalidOperationException("Path is required");
+			}
 
 			var qsb = new Internal.QueryStringBuilder();
 
@@ -30,7 +33,7 @@ namespace Google.Maps.Roads
 
 			qsb.Append("interpolate", Interpolate ? "true" : "false");
 
-			var url = "snapToRoads?" + qsb.ToString();
+			var url = "snapToRoads?" + qsb;
 
 			return new Uri(url, UriKind.Relative);
 		}

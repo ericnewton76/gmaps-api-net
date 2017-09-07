@@ -90,6 +90,8 @@
     <Compile Include="Places\PlacesServiceTests.cs" />
     <Compile Include="QuickExamplesTests.cs" />
     <Compile Include="Elevation\ElevationServiceTests.cs" />
+    <Compile Include="Roads\SnapToRoadsRequestTests.cs" />
+    <Compile Include="Roads\RoadsServiceTests.cs" />
     <Compile Include="SigningHelper.cs" />
     <Compile Include="StaticMaps\StaticMapRequestTests.cs" />
     <Compile Include="StaticMaps\StaticMap_Path_Tests.cs" />
