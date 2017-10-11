@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+
 using NUnit.Framework;
 
 namespace Google.Maps.StaticMaps

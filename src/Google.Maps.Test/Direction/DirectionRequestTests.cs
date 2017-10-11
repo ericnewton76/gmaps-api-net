@@ -27,6 +27,7 @@ namespace Google.Maps.Direction
 			var nvcol = System.Web.HttpUtility.ParseQueryString(query);
 			return nvcol;
 		}
+
 		#endregion
 
 		//[Test]

@@ -1,17 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B74E7466-5EBB-4FB1-9AF0-B0C57C139612}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{077D91A6-703F-43AB-9AEF-F18A66E23415}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAddressMap", "Samples\SearchAddressMap\SearchAddressMap.csproj", "{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Maps", "Google.Maps\Google.Maps.csproj", "{44C0377C-9B5C-4B25-9735-FECF5D165C1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google.Maps", "Google.Maps\Google.Maps.csproj", "{44C0377C-9B5C-4B25-9735-FECF5D165C1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Maps.Test", "Google.Maps.Test\Google.Maps.Test.csproj", "{55C59856-FB23-43F6-9A2A-42EDA45A6A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Maps.Test", "Google.Maps.Test\Google.Maps.Test.csproj", "{C2E1656D-A708-4240-8E67-EA97BAD208F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,16 +24,15 @@ Global
 		{44C0377C-9B5C-4B25-9735-FECF5D165C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44C0377C-9B5C-4B25-9735-FECF5D165C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44C0377C-9B5C-4B25-9735-FECF5D165C1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55C59856-FB23-43F6-9A2A-42EDA45A6A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55C59856-FB23-43F6-9A2A-42EDA45A6A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55C59856-FB23-43F6-9A2A-42EDA45A6A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55C59856-FB23-43F6-9A2A-42EDA45A6A35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2E1656D-A708-4240-8E67-EA97BAD208F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2E1656D-A708-4240-8E67-EA97BAD208F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2E1656D-A708-4240-8E67-EA97BAD208F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2E1656D-A708-4240-8E67-EA97BAD208F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE} = {B74E7466-5EBB-4FB1-9AF0-B0C57C139612}
-		{55C59856-FB23-43F6-9A2A-42EDA45A6A35} = {077D91A6-703F-43AB-9AEF-F18A66E23415}
 	EndGlobalSection
 EndGlobal

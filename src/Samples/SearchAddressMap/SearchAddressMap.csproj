@@ -100,12 +100,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Google.Maps\Google.Maps.csproj">
-      <Project>{44C0377C-9B5C-4B25-9735-FECF5D165C1D}</Project>
-      <Name>Google.Maps</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -124,6 +118,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Google.Maps\Google.Maps.csproj">
+      <Project>{44c0377c-9b5c-4b25-9735-fecf5d165c1d}</Project>
+      <Name>Google.Maps</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

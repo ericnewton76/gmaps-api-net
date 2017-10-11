@@ -177,5 +177,20 @@ namespace Google.Maps.Geocoding
 			var postalCodePrefix = response.Results[0].AddressComponents.First(x => x.ShortName == "LE14");
 			Assert.IsFalse(postalCodePrefix.Types.Contains(AddressType.Unknown), postalCodePrefix.ShortName + " should be AddressType PostalCodePrefix");
 		}
+
+		[Test]
+		public void Utf8_Request_And_Response()
+		{
+			var request = new GeocodingRequest
+			{
+				Address = "AL. GRUNWALDZKA 141, Gdańsk, 80 - 264, POLAND"
+			};
+
+			var response = new GeocodingService().GetResponse(request);
+
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.AreEqual(LocationType.Rooftop, response.Results[0].Geometry.LocationType);
+			Assert.AreEqual("Gdańsk", response.Results[0].AddressComponents[3].LongName);
+		}
 	}
 }

@@ -16,6 +16,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="lib\Google.Maps.dll" target="lib" />
+        <file src="src\Google.Maps\bin\Release\net461\Google.Maps.dll" target="lib\net461" />
+        <file src="src\Google.Maps\bin\Release\netstandard1.3\Google.Maps.dll" target="lib\netstandard1.3" />
     </files>
 </package>
