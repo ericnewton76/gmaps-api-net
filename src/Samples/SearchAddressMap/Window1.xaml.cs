@@ -150,9 +150,5 @@ namespace SearchAddressMap
 			GoogleSigned.AssignAllServices(new GoogleSigned(txtGoogleApiKey.Text));
 		}
 
-		private void btnTestUrl_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
 	}
 }

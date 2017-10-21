@@ -22,6 +22,7 @@ Currently the library supports full coverage of the following Google Maps APIs:
   * Distance Matrix
   * Places
   * Time Zones
+  * Street View, added to v0.19
 
 ## Quick Examples
 Using Google Maps API for .NET is designed to be really easy.
