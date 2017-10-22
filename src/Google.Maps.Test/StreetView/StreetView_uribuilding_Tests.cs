@@ -5,8 +5,9 @@ using NUnit.Framework;
 using Google.Maps.StreetView;
 using FluentAssertions.Collections;
 using FluentAssertions;
+using Google.Maps.Test;
 
-namespace Google.Maps.Tests.StreetView
+namespace Google.Maps.StreetView
 {
 	[TestFixture]
 	public class StreetView_uribuilding_Tests
