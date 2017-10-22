@@ -10,7 +10,7 @@ PS> Install-Package gmaps-api-net
 ```
 
 ## Overview
-This project attempts to provide all the features available in the Google Maps API. It is being developed in C# for the Microsoft .NET Framework v3.5 and up. *gmaps-api-net* is a fully featured API client library, providing strongly typed access to the API.
+This project attempts to provide all the features available in the Google Maps API. It is being developed in C# for the Microsoft .NET including .Net Framework v4.6.1+ and .Net Standard v1.3+. *gmaps-api-net* is a fully featured API client library, providing strongly typed access to the API.
 
 ## API Support
 
@@ -27,13 +27,18 @@ Currently the library supports full coverage of the following Google Maps APIs:
 ## Quick Examples
 Using Google Maps API for .NET is designed to be really easy.
 
+### Quick Note about the Google Maps API Key
+Google is now requiring a proper API key for accessing the service.  Use the Google Developers Console to create one for your project.  
+
 ### Getting an address from the Geocoding service
 Let's suppose we want to search an address and get more information about it. We can write:
 
 ```c#
+//always need to use YOUR_API_KEY for requests.  Do this in App_Start.
+GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
+
 var request = new GeocodingRequest();
-request.Address = "1600 Amphitheatre Parkway";
-request.Sensor = false;
+request.Address = "1600 Pennsylvania Ave NW, Washington, DC 20500";
 var response = new GeocodingService().GetResponse(request);
 ```
 
@@ -44,41 +49,71 @@ Assuming we received at least one result, let's get some of its properties:
 ```c#
 var result = response.Results.First();
 
-Console.WriteLine("Full Address: " + result.FormattedAddress);         // "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"
-Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 37.4230180
-Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -122.0818530
+Console.WriteLine("Full Address: " + result.FormattedAddress);         // "1600 Pennsylvania Ave NW, Washington, DC 20500, USA"
+Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 38.8976633
+Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -77.0365739
 ```
 
 ### Getting a static map URL
-Static Maps support allows you to get a valid url which you can use, for example, with an `<img src="">` tag.
+Static Maps API support allows you to get a valid url or a streamed bitmap which you can use:
 
 ```c#
+//always need to use YOUR_API_KEY for requests.  Do this in App_Start.
+GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
 var map = new StaticMapRequest();
-map.Center = new Location("1600 Amphitheatre Parkway Mountain View, CA 94043");
+map.Center = new Location("1600 Pennsylvania Ave NW, Washington, DC 20500");
 map.Size = new System.Drawing.Size(400, 400);
 map.Zoom = 14;
-map.Sensor = false;
+```
 
-var imgTagSrc = map.ToUri();
+Sample for ASP.Net WebForms:
+
+```c#
+//Web Forms: Page method contains above code to create the request
+var hyperlink = (Hyperlink)Page.FindControl("Hyperlink1");
+hyperlink.NavigateUrl = map.ToUri().ToString();
+```
+
+For MVC controllers/views:
+
+```c#
+//MVC: controller contains above code to create the request
+ViewBag["StaticMapUri"] = map.ToUri();
+
+//MVC: view code
+<img src="@ViewBag["StaticMapUri"]" alt="Static Map Image" />
+```
+
+You can also directly retrieve the bitmap as a byte array (`byte[]`) or as a `Stream`:
+
+For WPF/xaml applications:
+```c#
+//for WPF:
+BitmapImage img = new BitmapImage();
+img.SourceStream = staticMapsService.GetStream(staticMapsRequest);
+
+this.imageControl.Image = img;
 ```
 
 ### Using a Google Maps for Business key
 
 ```c#
+//enterprise users to use your supplied information for requests.  Do this in App_Start.
 GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
 
 // Then do as many requests as you like...
-var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
+var request = new GeocodingRequest { Address="1600 Pennsylvania Ave NW, Washington, DC 20500" };
 var response = GeocodingService.GetResponse(request);
 ```
 
 ### Using a Google Maps API key
 
 ```c#
+//always need to use YOUR_API_KEY for requests.  Do this in App_Start.
 GoogleSigned.AssignAllServices(new GoogleSigned("your-api-key"));
 
 // Then do as many requests as you like...
-var request = new GeocodingRequest { Address="1600 Amphitheatre Parkway", Sensor = false };
+var request = new GeocodingRequest { Address="1600 Pennsylvania Ave NW, Washington, DC 20006" };
 var response = GeocodingService.GetResponse(request);
 ```
 
