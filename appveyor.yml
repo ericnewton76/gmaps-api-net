@@ -1,4 +1,4 @@
-version: 0.19.{build}
+version: 0.20.{build}
 
 pull_requests:
   do_not_increment_build_number: true
