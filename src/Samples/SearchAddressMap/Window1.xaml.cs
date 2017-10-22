@@ -9,6 +9,8 @@ using Google.Maps.Geocoding;
 using Google.Maps.StaticMaps;
 using Google.Maps;
 using Google.Maps.StreetView;
+using System.Net.Http;
+using System.IO;
 
 namespace SearchAddressMap
 {
@@ -150,5 +152,42 @@ namespace SearchAddressMap
 			GoogleSigned.AssignAllServices(new GoogleSigned(txtGoogleApiKey.Text));
 		}
 
+		private void btnTestUrl_Click(object sender, RoutedEventArgs e)
+		{
+			System.Text.RegularExpressions.Regex keyRegex = new System.Text.RegularExpressions.Regex(@"key=([^&]*)");
+
+			var testUrl = txtTestUrl.Text;
+
+			testUrl = keyRegex.Replace(testUrl, "key=" + txtGoogleApiKey.Text);
+
+			HttpClient httpClient = new HttpClient();
+			var httpResponse = httpClient.GetAsync(testUrl).Result;
+
+			if(httpResponse.IsSuccessStatusCode == false)
+			{
+				string message = "";
+				try
+				{
+					message += string.Format("Status code returned: {0} {1}", httpResponse.StatusCode, httpResponse.ReasonPhrase);
+					message += string.Format("\nBody:\n{0}", httpResponse.Content.ReadAsStringAsync().Result);
+				} catch { }
+				MessageBox.Show(message);
+			}
+
+			try
+			{
+				var imageSource = new BitmapImage();
+				imageSource.BeginInit();
+				imageSource.StreamSource = httpResponse.Content.ReadAsStreamAsync().Result;
+				imageSource.CacheOption = BitmapCacheOption.OnLoad;
+				imageSource.EndInit();
+
+				image3.Source = imageSource;
+			}
+			catch
+			{
+
+			}
+		}
 	}
 }

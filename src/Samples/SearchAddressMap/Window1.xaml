@@ -54,6 +54,21 @@
 
 
 				</TabItem>
+				<TabItem Header="Test a URL">
+					<StackPanel Orientation="Vertical" Margin="0,0,0,0">
+						<DockPanel>
+							<Label DockPanel.Dock="Left" Content="URL:" />
+							<TextBox Name="txtTestUrl" Margin="3,3,3,3" Width="300" />
+							<Button DockPanel.Dock="Right" Name="btnTestUrl" Content="Go" Width="50" Margin="3,3,3,3" Click="btnTestUrl_Click" />
+						</DockPanel>
+						<Border Name="imgborder3" BorderBrush="Black" BorderThickness="1" Margin="10,10,10,10" Height="253">
+							<Image Name="image3" Stretch="Fill" />
+						</Border>
+					</StackPanel>
+				</TabItem>
+
+
+
 
 			</TabControl>
 		</StackPanel>
