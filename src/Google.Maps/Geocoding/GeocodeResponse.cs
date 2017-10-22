@@ -28,5 +28,8 @@ namespace Google.Maps.Geocoding
 
 		[JsonProperty("results")]
 		public Result[] Results { get; set; }
+
+		[JsonProperty("error_message")]
+		public string ErrorMessage { get; set; }
 	}
 }

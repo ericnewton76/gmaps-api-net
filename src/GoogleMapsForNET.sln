@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B74E7466-5EBB-4FB1-9AF0-B0C57C139612}"
 EndProject
@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAddressMap", "Samples
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google.Maps", "Google.Maps\Google.Maps.csproj", "{44C0377C-9B5C-4B25-9735-FECF5D165C1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Maps.Test", "Google.Maps.Test\Google.Maps.Test.csproj", "{C2E1656D-A708-4240-8E67-EA97BAD208F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google.Maps.Test", "Google.Maps.Test\Google.Maps.Test.csproj", "{C2E1656D-A708-4240-8E67-EA97BAD208F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{81703210-2D39-4A33-8F6B-7E1689F65B9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,11 +30,18 @@ Global
 		{C2E1656D-A708-4240-8E67-EA97BAD208F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2E1656D-A708-4240-8E67-EA97BAD208F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2E1656D-A708-4240-8E67-EA97BAD208F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81703210-2D39-4A33-8F6B-7E1689F65B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81703210-2D39-4A33-8F6B-7E1689F65B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81703210-2D39-4A33-8F6B-7E1689F65B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81703210-2D39-4A33-8F6B-7E1689F65B9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE} = {B74E7466-5EBB-4FB1-9AF0-B0C57C139612}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C033920-B14E-4E99-BE83-45EC87FEA965}
 	EndGlobalSection
 EndGlobal
