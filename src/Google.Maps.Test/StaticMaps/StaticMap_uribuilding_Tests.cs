@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 
 using NUnit.Framework;
+using FluentAssertions;
+using Google.Maps.Test;
+using Google.Maps.StaticMaps;
 
 namespace Google.Maps.StaticMaps
 {
@@ -13,7 +16,7 @@ namespace Google.Maps.StaticMaps
 		[Test]
 		public void BasicUri()
 		{
-			string expected = "/maps/api/staticmap?center=30.1,-60.2&size=512x512";
+			var expected = Helpers.ParseQueryString("/maps/api/staticmap?center=30.1,-60.2&size=512x512");
 
 			StaticMapRequest sm = new StaticMapRequest()
 			{
@@ -21,9 +24,9 @@ namespace Google.Maps.StaticMaps
 			};
 
 			Uri actualUri = sm.ToUri();
-			string actual = actualUri.PathAndQuery;
+			var actual = Helpers.ParseQueryString(actualUri.PathAndQuery);
 
-			Assert.AreEqual(expected, actual);
+			actual.ShouldBeEquivalentTo(expected);
 		}
 	}
 }
