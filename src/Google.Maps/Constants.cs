@@ -74,6 +74,20 @@ namespace Google.Maps
 			}
 			return sb.ToString();
 		}
+
+		internal static void CheckHeadingRange(short value, string parameterName)
+		{
+			const string HEADING_PARAMETER_RANGE = "Heading value must be greater or equal to 0 and less than or equal to 360";
+			if(value < 0) throw new ArgumentOutOfRangeException(parameterName, HEADING_PARAMETER_RANGE);
+			if(value > 360) throw new ArgumentOutOfRangeException(parameterName, HEADING_PARAMETER_RANGE);
+		}
+
+		internal static void CheckPitchRange(short value, string parameterName)
+		{
+			const string PITCH_PARAMETER_RANGE = "Pitch value must be greater or equal to -90 and less than or equal to 90.";
+			if(value < -90 || value > 90) throw new ArgumentOutOfRangeException(PITCH_PARAMETER_RANGE, parameterName);
+		}
+
 		#endregion
 
 	}
