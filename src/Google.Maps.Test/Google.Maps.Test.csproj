@@ -13,6 +13,7 @@
     <Compile Remove="Direction\DirectionRequestTests.cs" Condition="'$(TargetFramework)' != 'net461'" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="4.19.4" />
     <PackageReference Include="nunit" Version="3.7.1" />
   </ItemGroup>
   <ItemGroup>
