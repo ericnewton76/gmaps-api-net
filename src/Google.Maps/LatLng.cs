@@ -189,5 +189,13 @@ namespace Google.Maps
 			//else
 			return false;
 		}
+
+		public override int GetHashCode()
+		{
+			int hash = 13;
+			hash += (hash * 7) + this.Latitude.GetHashCode();
+			hash += (hash * 7) + this.Longitude.GetHashCode();
+			return hash;
+		}
 	}
 }

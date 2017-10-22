@@ -73,5 +73,23 @@ namespace Google.Maps.Shared
 			//they seem to be equal
 			return true;
 		}
+
+		public override int GetHashCode()
+		{
+			int hash = 13;
+
+			//let hash code overflow and roll around
+			unchecked
+			{
+				hash += (hash * 7) + (this.ShortName ?? "").GetHashCode();
+				hash += (hash * 7) + (this.LongName ?? "").GetHashCode();
+				if(this.Types != null)
+				{
+					foreach(var type in this.Types) hash += (hash * 7) + type.GetHashCode();
+				}
+			}
+
+			return hash;
+		}
 	}
 }
