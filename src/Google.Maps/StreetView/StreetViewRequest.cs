@@ -155,14 +155,21 @@ namespace Google.Maps.StreetView
 				throw new InvalidOperationException("Either Location or PanoramaId property are required.");
 			}
 
+			var InvariantCulture = System.Globalization.CultureInfo.InvariantCulture;
+
 			if(this.Pitch != 0)
 			{
-				qs.Append("pitch", Pitch.ToString(System.Globalization.CultureInfo.InvariantCulture));
+				qs.Append("pitch", Pitch.ToString(InvariantCulture));
+			}
+
+			if(this.Heading != null && this.Heading.GetValueOrDefault(0) != 0)
+			{
+				qs.Append("heading", Heading.Value.ToString(InvariantCulture));
 			}
 
 			WriteBitmapOutputParameters(qs);
 
-			var url = "streeview?" + qs.ToString();
+			var url = "streetview?" + qs.ToString();
 
 			return new Uri(StreetViewService.HttpsUri, new Uri(url, UriKind.Relative));
 		}
