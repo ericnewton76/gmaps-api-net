@@ -3,7 +3,7 @@
 using NUnit.Framework;
 using Google.Maps.StreetView;
 
-namespace Google.Maps.Tests.StreetView
+namespace Google.Maps.StreetView
 {
 	[TestFixture]
 	public class StreetViewRequestTests
