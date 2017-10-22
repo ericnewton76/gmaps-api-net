@@ -40,18 +40,24 @@ GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
 var request = new GeocodingRequest();
 request.Address = "1600 Pennsylvania Ave NW, Washington, DC 20500";
 var response = new GeocodingService().GetResponse(request);
-```
 
-The `GeocodingService` class submits the request to the API web service, and returns 
-the response strongly typed as a `GeocodeResponse` object which may contain zero, one or more results. 
-Assuming we received at least one result, let's get some of its properties:
+//The GeocodingService class submits the request to the API web service, and returns the
+//response strongly typed as a GeocodeResponse object which may contain zero, one or more results.
 
-```c#
-var result = response.Results.First();
+//Assuming we received at least one result, let's get some of its properties:
+if(response.Status == ServiceResponseStatus.Ok && response.Results.Count() > 0)
+{
+    var result = response.Results.First();
 
-Console.WriteLine("Full Address: " + result.FormattedAddress);         // "1600 Pennsylvania Ave NW, Washington, DC 20500, USA"
-Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 38.8976633
-Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -77.0365739
+    Console.WriteLine("Full Address: " + result.FormattedAddress);         // "1600 Pennsylvania Ave NW, Washington, DC 20500, USA"
+    Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 38.8976633
+    Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -77.0365739
+    Console.WriteLine();
+}
+else
+{
+    Console.WriteLine("Unable to geocode.  Status={0} and ErrorMessage={1}", response.Status, response.ErrorMessage);
+}
 ```
 
 ### Getting a static map URL
@@ -102,7 +108,8 @@ this.imageControl.Image = img;
 GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
 
 // Then do as many requests as you like...
-var request = new GeocodingRequest { Address="1600 Pennsylvania Ave NW, Washington, DC 20500" };
+var request = new GeocodingRequest();
+//...
 var response = GeocodingService.GetResponse(request);
 ```
 
@@ -113,8 +120,18 @@ var response = GeocodingService.GetResponse(request);
 GoogleSigned.AssignAllServices(new GoogleSigned("your-api-key"));
 
 // Then do as many requests as you like...
-var request = new GeocodingRequest { Address="1600 Pennsylvania Ave NW, Washington, DC 20006" };
+var request = new GeocodingRequest();
+//...
 var response = GeocodingService.GetResponse(request);
+```
+
+You can also use a particular key for a single request:
+
+```c#
+const GoogleSigned apikey = new GoogleSigned("special_api_key_here");
+var request = new GeocodingRequest();
+//...
+var service = new GeocodingService(request, apikey);
 ```
 
 ## Contact
