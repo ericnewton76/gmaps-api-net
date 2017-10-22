@@ -155,6 +155,8 @@ namespace Google.Maps.StreetView
 				throw new InvalidOperationException("Either Location or PanoramaId property are required.");
 			}
 
+			WriteBitmapOutputParameters(qs);
+
 			var InvariantCulture = System.Globalization.CultureInfo.InvariantCulture;
 
 			if(this.Pitch != 0)
@@ -167,7 +169,6 @@ namespace Google.Maps.StreetView
 				qs.Append("heading", Heading.Value.ToString(InvariantCulture));
 			}
 
-			WriteBitmapOutputParameters(qs);
 
 			var url = "streetview?" + qs.ToString();
 
