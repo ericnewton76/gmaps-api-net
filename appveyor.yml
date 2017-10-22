@@ -30,7 +30,7 @@ build_script:
 - cmd: msbuild src\GoogleMapsForNET.sln /t:build /p:Configuration=Release /verbosity:minimal
 
 before_test:
-- cmd: curl -isS "https://maps.googleapis.com/maps/api/geocode/json?address=1600 Pennsylvania Ave NW, Washington, DC 20500, USA&key=%GOOGLE_API_KEY%" 
+- cmd: curl -isS "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Pennsylvania+Ave+NW%2c+Washington%2c+DC+20500%2c+USA&key=%GOOGLE_API_KEY%" 
 
 after_test:
 - cmd: nuget pack gmaps-api-net.nuspec -version %APPVEYOR_BUILD_VERSION%
