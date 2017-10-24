@@ -35,6 +35,9 @@ namespace Google.Maps.Direction
 		[JsonProperty("distance")]
 		public ValueText Distance { get; set; }
 
+		[JsonProperty("steps")]
+		public DirectionStep[] Steps { get; set; }
+
 		public DirectionStep() { }
 
 		public DirectionStep(LatLng start, LatLng end)
