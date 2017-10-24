@@ -29,5 +29,15 @@ namespace Google.Maps.Test
 
 			return values;
 		}
+
+		public static string GetSHA1HashString(string value)
+		{
+			using(var sha1 = System.Security.Cryptography.SHA1.Create())
+			{
+				byte[] hashbytes = sha1.ComputeHash(System.Text.Encoding.UTF8.GetBytes(value));
+
+				return BitConverter.ToString(hashbytes).Replace("-", "");
+			}
+		}
 	}
 }
