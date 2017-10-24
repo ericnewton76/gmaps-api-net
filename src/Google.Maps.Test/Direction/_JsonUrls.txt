@@ -1,0 +1,9 @@
+﻿{
+	"type": "Google.Maps.Direction.DirectionResponse",
+	"urls" : [
+		"/maps/api/directions/json?origin=oxford+street+london+UK&destination=bond+street+london+UK&mode=transit",
+		"/maps/api/directions/json?origin=32801&destination=32803&mode=transit"
+	]
+}
+
+		

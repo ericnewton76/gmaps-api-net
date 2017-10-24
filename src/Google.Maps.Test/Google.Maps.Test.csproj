@@ -13,7 +13,12 @@
     <Compile Remove="Direction\DirectionRequestTests.cs" Condition="'$(TargetFramework)' != 'net461'" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Direction\_directions.527901D0.json" />
+    <EmbeddedResource Include="Direction\_directions.65779756.json" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="nunit" Version="3.7.1" />
   </ItemGroup>
   <ItemGroup>
