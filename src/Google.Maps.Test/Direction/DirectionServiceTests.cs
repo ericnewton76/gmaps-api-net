@@ -81,7 +81,7 @@ namespace Google.Maps.Direction
 			Assert.That(currentLeg.EndLocation, Is.EqualTo(new LatLng(51.505,-1.958)).Using(LatLngComparer.Within(0.001f)));
 
 			Assert.That(currentLeg.Distance.Value, Is.EqualTo(53939));
-			Assert.That(currentLeg.Duration.Value, Is.EqualTo(2949));
+			Assert.That(currentLeg.Duration.Value, Is.EqualTo(2956));
 
 			Assert.AreEqual(19, currentLeg.Steps.Count());
 
