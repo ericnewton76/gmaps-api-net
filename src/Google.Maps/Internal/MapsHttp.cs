@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using System.IO;
 
 using Newtonsoft.Json;
+using Google.Maps.Internal.Serialization;
 
 namespace Google.Maps.Internal
 {
@@ -29,7 +30,11 @@ namespace Google.Maps.Internal
 	{
 		JsonSerializerSettings settings = new JsonSerializerSettings
 		{
-			Converters = new List<JsonConverter> { new JsonEnumTypeConverter(), new JsonLocationConverter() }
+			Converters = new List<JsonConverter>
+			{
+				new JsonEnumTypeConverter(),
+				new JsonLatLngConverter()
+			}
 		};
 
 		GoogleSigned signingSvc;
