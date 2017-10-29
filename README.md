@@ -64,11 +64,14 @@ else
 Static Maps API support allows you to get a valid url or a streamed bitmap which you can use:
 
 ```c#
+using Google.Maps;
+using Google.Maps.Common;
+
 //always need to use YOUR_API_KEY for requests.  Do this in App_Start.
 GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
 var map = new StaticMapRequest();
 map.Center = new Location("1600 Pennsylvania Ave NW, Washington, DC 20500");
-map.Size = new System.Drawing.Size(400, 400);
+map.Size = new GSize(400, 400);
 map.Zoom = 14;
 ```
 
@@ -143,6 +146,7 @@ Questions, comments and/or suggestions are welcome! Please raise an [issue](http
 ## Contributors
 A big thank you to all of our [contributors](https://github.com/ericnewton76/gmaps-api-net/graphs/contributors) including:
 
+- [Luis Farzati](https://github.com/luisfarzati)
 - [Eric Newton](https://github.com/ericnewton76)
 - [Sheepzez](https://github.com/Sheepzez)
 - [Mieliespoor](https://github.com/mieliespoor)
