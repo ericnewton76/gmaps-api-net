@@ -16,6 +16,7 @@
  */
 
 using Newtonsoft.Json;
+using Google.Maps.Common;
 
 namespace Google.Maps.Elevation
 {

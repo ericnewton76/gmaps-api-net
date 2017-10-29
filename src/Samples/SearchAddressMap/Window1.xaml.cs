@@ -12,6 +12,8 @@ using Google.Maps.StreetView;
 using System.Net.Http;
 using System.IO;
 
+using Google.Maps.Common;
+
 namespace SearchAddressMap
 {
 	/// <summary>

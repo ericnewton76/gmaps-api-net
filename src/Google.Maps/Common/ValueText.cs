@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Google.Maps
+namespace Google.Maps.Common
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class ValueText

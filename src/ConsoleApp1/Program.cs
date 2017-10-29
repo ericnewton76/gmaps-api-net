@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Google.Maps;
 using Google.Maps.Geocoding;
+using Google.Maps.Common;
 
 namespace ConsoleApp1
 {

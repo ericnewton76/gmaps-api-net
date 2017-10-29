@@ -21,7 +21,8 @@ using System.Net.Http;
 
 using NUnit.Framework;
 
-using Google.Maps.Shared;
+using Google.Maps.Common;
+using Google.Maps.Internal;
 
 namespace Google.Maps.Direction
 {
