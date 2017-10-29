@@ -36,7 +36,7 @@ namespace Google.Maps.StaticMaps
 	{
 		public StaticMapRequest()
 		{
-			this.Size = new MapSize(512, 512); //default size is 512x512
+			this.Size = new GSize(512, 512); //default size is 512x512
 			this.Visible = new List<Location>(1);
 			this.Markers = new MapMarkersCollection();
 			this.Paths = new List<Path>();
@@ -84,7 +84,7 @@ namespace Google.Maps.StaticMaps
 		/// create a static map that is 100 pixels wide or smaller, the
 		/// "Powered by Google" logo is automatically reduced in size. (required)
 		/// </summary>
-		public MapSize Size
+		public GSize Size
 		{
 			get { return _size; }
 			set
@@ -96,7 +96,7 @@ namespace Google.Maps.StaticMaps
 				this._size = value;
 			}
 		}
-		private MapSize _size;
+		private GSize _size;
 
 		/// <summary>
 		/// affects the number of pixels that are returned. scale=2 returns twice as many pixels as scale=1

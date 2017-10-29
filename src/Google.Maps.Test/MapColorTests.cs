@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Google.Maps.Common;
 
 namespace Google.Maps
 {
@@ -8,9 +9,9 @@ namespace Google.Maps
 		[Test]
 		public void IsUndefined_Works()
 		{
-			var undefined = new MapColor();
-			var definedName = MapColor.FromName("red");
-			var definedRGB = MapColor.FromArgb(255,255,255);
+			var undefined = new GColor();
+			var definedName = GColor.FromName("red");
+			var definedRGB = GColor.FromArgb(255,255,255);
 
 			Assert.AreEqual(true, undefined.IsUndefined);
 			Assert.AreEqual(false, definedName.IsUndefined);
@@ -20,9 +21,9 @@ namespace Google.Maps
 		[Test]
 		public void To24BitColor_Works()
 		{
-			var namedColor = MapColor.FromName("red");
-			var rgbColor = MapColor.FromArgb(255, 0, 0);
-			var rgbaColor = MapColor.FromArgb(255, 255, 0, 0);
+			var namedColor = GColor.FromName("red");
+			var rgbColor = GColor.FromArgb(255, 0, 0);
+			var rgbaColor = GColor.FromArgb(255, 255, 0, 0);
 
 			Assert.AreEqual("red", namedColor.To24BitColorString());
 			Assert.AreEqual("0xFF0000", rgbColor.To24BitColorString());
@@ -32,9 +33,9 @@ namespace Google.Maps
 		[Test]
 		public void To32BitColor_Works()
 		{
-			var namedColor = MapColor.FromName("red");
-			var rgbColor = MapColor.FromArgb(255, 0, 0);
-			var rgbaColor = MapColor.FromArgb(255, 255, 0, 0);
+			var namedColor = GColor.FromName("red");
+			var rgbColor = GColor.FromArgb(255, 0, 0);
+			var rgbaColor = GColor.FromArgb(255, 255, 0, 0);
 
 			Assert.AreEqual("red", namedColor.To32BitColorString());
 			Assert.AreEqual("0xFF0000FF", rgbColor.To32BitColorString());
