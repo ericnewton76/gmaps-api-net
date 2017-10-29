@@ -18,9 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Google.Maps;
 using System.Text;
 using System.Linq;
+
+using Google.Maps;
+using Google.Maps.Common;
 
 namespace Google.Maps.DistanceMatrix
 {

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace Google.Maps.Shared
+namespace Google.Maps.Common
 {
 	public enum LocationType
 	{

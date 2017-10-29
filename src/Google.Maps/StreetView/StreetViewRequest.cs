@@ -19,8 +19,11 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using Google.Maps;
+using Google.Maps.Common;
 using Google.Maps.Internal;
 using System.ComponentModel;
+
 
 namespace Google.Maps.StreetView
 {

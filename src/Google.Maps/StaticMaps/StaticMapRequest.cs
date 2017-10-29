@@ -20,6 +20,8 @@ using System.Linq;
 using System.Collections.Generic;
 
 using Google.Maps.Internal;
+using Google.Maps;
+using Google.Maps.Common;
 
 namespace Google.Maps.StaticMaps
 {
