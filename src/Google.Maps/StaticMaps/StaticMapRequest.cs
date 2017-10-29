@@ -128,7 +128,7 @@ namespace Google.Maps.StaticMaps
 		/// greater compression, while GIF and PNG provide greater detail. (optional)
 		/// </summary>
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#ImageFormats</remarks>
-		public GMapsImageFormats Format { get; set; }
+		public MapImageFormats Format { get; set; }
 
 		/// <summary>
 		/// Defines the type of map to construct. There are several possible
@@ -207,8 +207,8 @@ namespace Google.Maps.StaticMaps
 			string formatStr = null;
 			switch(this.Format)
 			{
-				case GMapsImageFormats.Unspecified: break;
-				case GMapsImageFormats.JPGbaseline: formatStr = "jpg-baseline"; break;
+				case MapImageFormats.Unspecified: break;
+				case MapImageFormats.JPGbaseline: formatStr = "jpg-baseline"; break;
 				default: formatStr = this.Format.ToString().ToLower(); break;
 			}
 

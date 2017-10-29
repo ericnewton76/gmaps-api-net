@@ -3,6 +3,7 @@
 using NUnit.Framework;
 
 using Google.Maps.Geocoding;
+using Google.Maps.Common;
 
 namespace Google.Maps
 {

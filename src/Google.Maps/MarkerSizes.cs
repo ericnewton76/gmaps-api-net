@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Google.Maps
+namespace Google.Maps.Common
 {
 	/// <summary>
 	/// The set of marker sizes available for the current Google Maps API.

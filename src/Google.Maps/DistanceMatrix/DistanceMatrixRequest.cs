@@ -23,6 +23,7 @@ using System.Linq;
 
 using Google.Maps;
 using Google.Maps.Common;
+using Google.Maps.Internal;
 
 namespace Google.Maps.DistanceMatrix
 {

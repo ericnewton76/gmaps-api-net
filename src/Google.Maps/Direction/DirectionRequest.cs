@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 using Google.Maps;
 using Google.Maps.Common;
+using Google.Maps.Internal;
 
 namespace Google.Maps.Direction
 {

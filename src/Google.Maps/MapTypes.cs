@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Google.Maps
+namespace Google.Maps.Common
 {
 	/// <summary>
 	/// The available map types for the current Google Maps API.
