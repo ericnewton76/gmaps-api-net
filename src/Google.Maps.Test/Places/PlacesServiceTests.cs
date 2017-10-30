@@ -9,10 +9,17 @@ namespace Google.Maps.Places
 	[TestFixture]
 	public class PlacesServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
+		}
+
+		private PlacesService CreateService()
+		{
+			return new PlacesService(TestingApiKey);
 		}
 
 		[Test]
@@ -23,7 +30,7 @@ namespace Google.Maps.Places
 				Location = new LatLng(40.741895, -73.989308),
 				Radius = 10000
 			};
-			PlacesResponse response = new PlacesService().GetResponse(request);
+			PlacesResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 
@@ -37,7 +44,7 @@ namespace Google.Maps.Places
 				Radius = 10000,
 				PageToken = response.NextPageToken
 			};
-			response = new PlacesService().GetResponse(request);
+			response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 
@@ -51,7 +58,7 @@ namespace Google.Maps.Places
 				Radius = 10000,
 				PageToken = response.NextPageToken + "A" // invalid token
 			};
-			response = new PlacesService().GetResponse(request);
+			response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.InvalidRequest, response.Status);
 		}
@@ -78,7 +85,7 @@ namespace Google.Maps.Places
 				Radius = 10000,
 				PageToken = response.NextPageToken
 			};
-			response = new PlacesService().GetResponse(request);
+			response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 
@@ -92,7 +99,7 @@ namespace Google.Maps.Places
 				Radius = 10000,
 				PageToken = response.NextPageToken + "A" // invalid token
 			};
-			response = new PlacesService().GetResponse(request);
+			response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.InvalidRequest, response.Status);
 		}
