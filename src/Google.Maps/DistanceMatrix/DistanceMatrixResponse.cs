@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Google.Maps.Common;
 
 namespace Google.Maps.DistanceMatrix
 {
@@ -8,10 +9,19 @@ namespace Google.Maps.DistanceMatrix
 	///
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
-	public class DistanceMatrixResponse
+	public class DistanceMatrixResponse : IServiceResponse
 	{
+		/// <summary>
+		/// Contains the ServiceResponseStatus.
+		/// </summary>
 		[JsonProperty("status")]
 		public ServiceResponseStatus Status { get; set; }
+
+		/// <summary>
+		/// More detailed information about the reasons behind the given status code, if other than OK.
+		/// </summary>
+		[JsonProperty("error_message")]
+		public string ErrorMessage { get; set; }
 
 		[JsonProperty("destination_addresses")]
 		public string[] DestinationAddresses { get; set; }
