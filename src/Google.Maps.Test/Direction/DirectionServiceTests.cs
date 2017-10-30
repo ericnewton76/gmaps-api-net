@@ -22,6 +22,7 @@ using System.Net.Http;
 using NUnit.Framework;
 
 using Google.Maps.Shared;
+using Google.ApiCore;
 
 namespace Google.Maps.Direction
 {
@@ -32,7 +33,14 @@ namespace Google.Maps.Direction
 
 		DirectionService CreateService()
 		{
-			var svc = new DirectionService(TestingApiKey);
+			var svc = new DirectionService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri:null);
+
 			return svc;
 		}
 

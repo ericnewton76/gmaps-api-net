@@ -22,6 +22,7 @@ using System.Net.Http;
 using NUnit.Framework;
 
 using Google.Maps.Shared;
+using Google.ApiCore;
 
 namespace Google.Maps.Geocoding
 {
@@ -32,7 +33,14 @@ namespace Google.Maps.Geocoding
 
 		GeocodingService CreateService()
 		{
-			var svc = new GeocodingService(TestingApiKey);
+			var svc = new GeocodingService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri: null
+			);
 			return svc;
 		}
 
