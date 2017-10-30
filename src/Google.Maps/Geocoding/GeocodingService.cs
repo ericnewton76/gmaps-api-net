@@ -19,7 +19,6 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.Maps.ApiCore;
 using Google.ApiCore;
 
 namespace Google.Maps.Geocoding
@@ -30,7 +29,7 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService : BaseGmapsService<GeocodingRequest, GeocodeResponse>
+	public class GeocodingService : ApiCore.BaseGmapsServiceTypedResponse<GeocodingRequest, GeocodeResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
 

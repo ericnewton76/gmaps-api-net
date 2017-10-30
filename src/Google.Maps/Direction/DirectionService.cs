@@ -18,45 +18,20 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.ApiCore;
 
 namespace Google.Maps.Direction
 {
-	public class DirectionService : IDisposable
+
+	public class DirectionService : ApiCore.BaseGmapsServiceTypedResponse<DirectionRequest, DirectionResponse>, IDisposable
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/directions/");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/directions/");
 
-		Uri baseUri;
-		MapsHttp http;
-
-		public DirectionService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public DirectionService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
-		public DirectionResponse GetResponse(DirectionRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return http.Get<DirectionResponse>(url);
-		}
-
-		public async Task<DirectionResponse> GetResponseAsync(DirectionRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return await http.GetAsync<DirectionResponse>(url);
-		}
-
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }

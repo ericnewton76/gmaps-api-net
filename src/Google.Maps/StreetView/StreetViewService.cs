@@ -22,25 +22,16 @@ using Google.Maps.Internal;
 
 namespace Google.Maps.StreetView
 {
+
 	/// <summary>
 	/// The Google Street View Image API lets you embed a static (non-interactive) Street View panorama or thumbnail
 	/// into your web page, without the use of JavaScript. The viewport is defined with URL parameters sent through
 	/// a standard HTTP request, and is returned as a static image.
 	/// </summary>
 	/// <see href="https://developers.google.com/maps/documentation/streetview/intro"/>
-	public class StreetViewService : IDisposable
+	public class StreetViewService : ApiCore.BaseGmapsService<StreetViewRequest>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/streetview");
-
-		Uri baseUri;
-		MapsHttp http;
-
-		public StreetViewService(GoogleSigned signingSvc = null, Uri baseUri = null)
-		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
-		}
 
 		public byte[] GetImage(StreetViewRequest request)
 		{
@@ -58,16 +49,16 @@ namespace Google.Maps.StreetView
 
 		public Stream GetStream(StreetViewRequest request)
 		{
-			var uri = new Uri(baseUri, request.ToUri());
+			var uri = new Uri(BaseUri, request.ToUri());
 
-			return http.GetStream(uri);
+			return HttpService.GetStream(uri);
 		}
 
 		public Task<Stream> GetStreamAsync(StreetViewRequest request)
 		{
-			var uri = new Uri(baseUri, request.ToUri());
+			var uri = new Uri(BaseUri, request.ToUri());
 
-			return http.GetStreamAsync(uri);
+			return HttpService.GetStreamAsync(uri);
 		}
 
 		Byte[] StreamToArray(Stream inputStream)
@@ -88,13 +79,5 @@ namespace Google.Maps.StreetView
 			return outputStream.ToArray();
 		}
 
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }
