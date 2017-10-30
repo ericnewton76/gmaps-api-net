@@ -8,26 +8,12 @@ using Google.ApiCore;
 
 namespace Google.Maps.ApiCore
 {
-	public abstract class BaseGmapsService<TRequest, TResponse> : IGmapsService<TRequest, TResponse>
-			where TRequest : BaseRequest
-			where TResponse : class
+	public abstract class BaseGmapsService<TRequest>
+		where TRequest : BaseRequest
 	{
 		public IHttpService HttpService { get; protected set; }
 		public Uri BaseUri { get; protected set; }
 
-		public virtual TResponse GetResponse(TRequest request)
-		{
-			var url = new Uri(BaseUri, request.ToUri());
-
-			return HttpService.Get<TResponse>(url);
-		}
-
-		public async Task<TResponse> GetResponseAsync(TRequest request)
-		{
-			var url = new Uri(BaseUri, request.ToUri());
-
-			return await HttpService.GetAsync<TResponse>(url);
-		}
 
 		public void Dispose()
 		{
@@ -42,6 +28,7 @@ namespace Google.Maps.ApiCore
 				HttpService = null;
 			}
 		}
+
 	}
 
 }
