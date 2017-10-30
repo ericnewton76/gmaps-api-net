@@ -10,6 +10,9 @@
     <DefineConstants>HAS_SYSTEMDRAWING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Internal\AsyncHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
   <ItemGroup>
