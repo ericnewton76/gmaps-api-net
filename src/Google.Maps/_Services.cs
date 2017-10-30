@@ -14,9 +14,13 @@ namespace Google.Maps
 	/// </summary>
     public class Services
     {
-		public Services(string apiKey)
+		public Services(string apiKey) : this(new GoogleSigned(apiKey))
 		{
-			this._SigningService = new GoogleApiSigningService(new GoogleSigned(apiKey));
+		}
+
+		public Services(GoogleSigned signingInstance) 
+		{
+			this._SigningService = new GoogleApiSigningService(signingInstance);
 			this._HttpService = new Google.Maps.Internal.MapsHttp(this._SigningService);
 		}
 
@@ -39,9 +43,17 @@ namespace Google.Maps
 		public IHttpService HttpService { get { return this._HttpService; } }
 
 
+		public Direction.DirectionService DirectionService
+		{
+			get { return new Direction.DirectionService(HttpService, null); }
+		}
 		public Geocoding.GeocodingService GeocodingService
 		{
 			get { return new Geocoding.GeocodingService(HttpService, null); }
+		}
+		public StaticMaps.StaticMapService StaticMapsService
+		{
+			get { return new StaticMaps.StaticMapService(HttpService, null); }
 		}
 
 

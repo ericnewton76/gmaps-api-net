@@ -17,12 +17,23 @@ namespace Google.Maps
 	class QuickExamplesTests
 	{
 
+		[OneTimeSetUp]
+		public void OneTimeSetup()
+		{
+			this.TestingApiKey = SigningHelper.GetApiKey();
+			this.GMaps = new Services(TestingApiKey);
+		}
+		GoogleSigned TestingApiKey;
+		Google.Maps.Services GMaps;
+
 		[Test]
 		public void GeocodingRequest_Example()
 		{
+			//var GMaps = new Google.Maps.Services("YOUR_API_KEY");
+			
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway";
-			var response = new GeocodingService().GetResponse(request);
+			var response = GMaps.GeocodingService.GetResponse(request);
 
 			// --break in the online version here-- //
 
@@ -57,7 +68,7 @@ namespace Google.Maps
 				Origin = new Location("410 Beeeeeechwood Rd, NJ 07450"),
 				Destination = new Location("204 Powell Ave, CA 94523")
 			};
-			var response = new DirectionService().GetResponse(request);
+			var response = GMaps.DirectionService.GetResponse(request);
 
 			Assert.True(response.Waypoints.Any(wp => wp.PartialMatch));
 		}

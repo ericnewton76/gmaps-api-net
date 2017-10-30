@@ -17,6 +17,7 @@
 
 using System;
 using NUnit.Framework;
+using Google.ApiCore;
 
 namespace Google.Maps.Roads
 {
@@ -33,7 +34,14 @@ namespace Google.Maps.Roads
 
 		private RoadsService CreateService()
 		{
-			return new RoadsService(TestingApiKey);
+			return new RoadsService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri: null
+			);
 		}
 
 		[Test]

@@ -194,7 +194,7 @@ namespace Google.Maps.Geocoding
 				Address = "AL. GRUNWALDZKA 141, Gdańsk, 80 - 264, POLAND"
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual(LocationType.Rooftop, response.Results[0].Geometry.LocationType);

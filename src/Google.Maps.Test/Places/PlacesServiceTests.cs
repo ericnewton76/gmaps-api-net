@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 using NUnit.Framework;
+using Google.ApiCore;
 
 namespace Google.Maps.Places
 {
@@ -19,7 +20,14 @@ namespace Google.Maps.Places
 
 		private PlacesService CreateService()
 		{
-			return new PlacesService(TestingApiKey);
+			return new PlacesService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri: null
+			);
 		}
 
 		[Test]
@@ -71,7 +79,7 @@ namespace Google.Maps.Places
 				Query = "New York, NY",
 				Radius = 10000
 			};
-			PlacesResponse response = new PlacesService().GetResponse(request);
+			PlacesResponse response = CreateService().GetResponse(request);
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 

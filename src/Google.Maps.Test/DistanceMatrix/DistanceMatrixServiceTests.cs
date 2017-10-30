@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using NUnit.Framework;
+using Google.ApiCore;
 
 namespace Google.Maps.DistanceMatrix
 {
@@ -12,7 +13,14 @@ namespace Google.Maps.DistanceMatrix
 
 		DistanceMatrixService CreateService()
 		{
-			var svc = new DistanceMatrixService(TestingApiKey);
+			var svc = new DistanceMatrixService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri: null
+			);
 			return svc;
 		}
 

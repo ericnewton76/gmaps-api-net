@@ -51,7 +51,7 @@ namespace SearchAddressMap
 			};
 			request.Markers.Add(request.Center);
 
-			var mapSvc = new StaticMapService();
+			var mapSvc = GMaps.StaticMapsService;
 
 			var imageSource = new BitmapImage();
 			imageSource.BeginInit();
@@ -95,7 +95,7 @@ namespace SearchAddressMap
 			var request = new GeocodingRequest();
 			request.Address = searchTextBox.Text;
 
-			var response = await new GeocodingService().GetResponseAsync(request);
+			var response = await GMaps.GeocodingService.GetResponseAsync(request);
 
 			if(response.Status == ServiceResponseStatus.Ok)
 			{
@@ -149,8 +149,10 @@ namespace SearchAddressMap
 
 		private void txtGoogleApiKey_LostFocus(object sender, RoutedEventArgs e)
 		{
-			GoogleSigned.AssignAllServices(new GoogleSigned(txtGoogleApiKey.Text));
+			GMaps = new Services(txtGoogleApiKey.Text);
 		}
+
+		Google.Maps.Services GMaps = new Services("YOUR_API_KEY");
 
 		private void btnTestUrl_Click(object sender, RoutedEventArgs e)
 		{
