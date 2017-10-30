@@ -30,7 +30,7 @@ namespace Google.Maps.DistanceMatrix
 	/// <see href="http://developers.google.com/maps/documentation/distancematrix/"/>
 	public class DistanceMatrixService : ApiCore.BaseGmapsServiceTypedResponse<DistanceMatrixRequest, DistanceMatrixResponse>
 	{
-		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/elevation/");
+		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/distancematrix/");
 
 		public DistanceMatrixService(IHttpService httpService, Uri baseUri)
 		{
