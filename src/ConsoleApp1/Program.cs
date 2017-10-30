@@ -27,11 +27,11 @@ namespace ConsoleApp1
 		static void README_QuickStart_Sample1()
 		{
 			//always need to use YOUR_API_KEY for requests.  Do this in App_Start.
-			GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
+			var GMaps = new Google.Maps.Services("YOUR_API_KEY");
 
 			var request = new GeocodingRequest();
 			request.Address = "1600 Pennsylvania Ave NW, Washington, DC 20500";
-			var response = new GeocodingService().GetResponse(request);
+			var response = GMaps.GeocodingService.GetResponse(request);
 
 			//The GeocodingService class submits the request to the API web service, and returns the
 			//response strongly typed as a GeocodeResponse object which may contain zero, one or more results.
@@ -83,8 +83,7 @@ namespace ConsoleApp1
 		static void DoGeocodeRequest()
 		{
 			//always need to use YOUR_API_KEY for requests.  Do this in App_Start.
-			//GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
-			//commented out in the loop
+			var GMaps = new Google.Maps.Services("YOUR_API_KEY");
 
 			Console.WriteLine();
 			Console.WriteLine("Enter an address to geocode: ");
@@ -92,7 +91,7 @@ namespace ConsoleApp1
 
 			var request = new GeocodingRequest();
 			request.Address = geocodeAddress;
-			var response = new GeocodingService().GetResponse(request);
+			var response = GMaps.GeocodingService.GetResponse(request);
 
 			//The GeocodingService class submits the request to the API web service, and returns the
 			//response strongly typed as a GeocodeResponse object which may contain zero, one or more results.

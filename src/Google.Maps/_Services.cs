@@ -38,5 +38,12 @@ namespace Google.Maps
 		public ISigningService SigningService { get { return this._SigningService; } }
 		public IHttpService HttpService { get { return this._HttpService; } }
 
+
+		public Geocoding.GeocodingService GeocodingService
+		{
+			get { return new Geocoding.GeocodingService(HttpService, null); }
+		}
+
+
 	}
 }

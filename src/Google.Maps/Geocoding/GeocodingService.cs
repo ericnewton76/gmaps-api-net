@@ -19,6 +19,8 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.Maps.ApiCore;
+using Google.ApiCore;
 
 namespace Google.Maps.Geocoding
 {
@@ -28,49 +30,15 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService : IDisposable
+	public class GeocodingService : BaseGmapsService<GeocodingRequest, GeocodeResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
 
-		Uri baseUri;
-		MapsHttp http;
-
-		public GeocodingService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public GeocodingService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
-		/// <summary>
-		/// Sends the specified request to the Google Maps Geocoding web
-		/// service and parses the response as an GeocodingResponse
-		/// object.
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		public GeocodeResponse GetResponse(GeocodingRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return http.Get<GeocodeResponse>(url);
-		}
-
-		public async Task<GeocodeResponse> GetResponseAsync(GeocodingRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return await http.GetAsync<GeocodeResponse>(url);
-		}
-
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }
