@@ -56,7 +56,7 @@ namespace Google.Maps.Direction
 		}
 
 		[Test]
-		[Ignore]
+		[Ignore("currentLeg.Duration value keeps changing")]
 		public void GetResultForDirections_ex1()
 		{
 			// Arrange
