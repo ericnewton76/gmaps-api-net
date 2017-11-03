@@ -17,11 +17,12 @@
 
 using Newtonsoft.Json;
 using System;
+using Google.Maps.Common;
 
 namespace Google.Maps.TimeZone
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class TimeZoneResponse
+	public class TimeZoneResponse : IServiceResponse
 	{
 		/// <summary>
 		/// Contains the ServiceResponseStatus.
