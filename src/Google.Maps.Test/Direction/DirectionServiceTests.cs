@@ -56,6 +56,7 @@ namespace Google.Maps.Direction
 		}
 
 		[Test]
+		[Ignore]
 		public void GetResultForDirections_ex1()
 		{
 			// Arrange
