@@ -42,6 +42,13 @@ deploy:
   artifact: 'NuGetPackage'
   on:
     branch: release
+- provider: GitHub
+  tag: v$(APPVEYOR_BUILD_VERSION)
+  auth_token:
+    secure: bupArXj8lz6RLLO8GPwyRnbGwcmyjg4MvmlBsYD8x+euC9YS5G5y9jaSPCpS7tsX
+  artifact: 'NugetPackage'
+  on:
+    branch: release
 
 notifications:
 - provider: Email
