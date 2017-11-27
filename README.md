@@ -1,6 +1,7 @@
 # Google Maps API for .NET
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ni8ha94ofk7acjmf/branch/master)](https://ci.appveyor.com/project/EricNewton/gmaps-api-net)
+[![AppVeyor](https://img.shields.io/appveyor/ci/EricNewton/gmaps-api-net.svg)](https://ci.appveyor.com/project/EricNewton/gmaps-api-net)
+[![Join the chat at https://gitter.im/gmaps-api-net/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gmaps-api-net/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A .NET library for interacting with the Google Maps API suite.
 
