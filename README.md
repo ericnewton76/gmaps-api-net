@@ -29,7 +29,7 @@ Currently the library supports full coverage of the following Google Maps APIs:
 Using Google Maps API for .NET is designed to be really easy.
 
 ### Quick Note about the Google Maps API Key
-Google is now requiring a proper API key for accessing the service.  Use the Google Developers Console to create one for your project.  
+Google is now requiring a proper API key for accessing the service. Create a key [here](https://developers.google.com/maps/documentation/geocoding/get-api-key), or create/find an existing one in your Google Developers Console.
 
 ### Getting an address from the Geocoding service
 Let's suppose we want to search an address and get more information about it. We can write:
