@@ -271,6 +271,18 @@ namespace Google.Maps.Places
 		/// <summary>
 		/// Indicates an second-order civil entity below a locality.
 		/// </summary>
-		SublocalityLevel1
+		SublocalityLevel1,
+
+		/// <summary>
+		/// Indicates the '(cities)' collection. 
+		/// <see href="https://developers.google.com/places/web-service/autocomplete#place_types">Place Types</see>
+		/// </summary>
+		CitiesCollection,
+
+		/// <summary>
+		/// Indicates the '(regions)' collection. 
+		/// <see href="https://developers.google.com/places/web-service/autocomplete#place_types">Place Types</see>
+		/// </summary>
+		RegionsCollection
 	}
 }
