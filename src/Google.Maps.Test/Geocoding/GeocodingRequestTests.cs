@@ -51,6 +51,7 @@ namespace Google.Maps.Geocoding
 		//}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Implicit_Address_set_from_string()
 		{
 			var req = new GeocodingRequest();
@@ -63,6 +64,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void LatLng_for_address_will_invoke_reverse_geocoding()
 		{
 			var req = new GeocodingRequest();
