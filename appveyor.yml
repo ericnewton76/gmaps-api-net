@@ -29,11 +29,21 @@ before_build:
 build_script:
 - cmd: msbuild src\GoogleMapsForNET.sln /t:build /p:Configuration=Release /verbosity:minimal
 
-before_test:
-#- cmd: curl -isS "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Pennsylvania+Ave+NW%2c+Washington%2c+DC+20500%2c+USA&key=%GOOGLE_API_KEY%" 
-
-after_test:
+after_build:
 - cmd: nuget pack gmaps-api-net.nuspec -version %APPVEYOR_BUILD_VERSION%
+
+test_script:
+- ps: >-
+    
+    $DLL_LOCATION=".\src\Google.Maps.Test\bin\Release\net461\Google.Maps.Test.dll"
+    
+    nunit3-console $DLL_LOCATION --where:"cat!=ValueTesting" "--result=testresults.xml;format=AppVeyor"
+
+    if($? -eq $true) {
+
+      nunit3-console $DLL_LOCATION --where:"cat!=ValueTesting" "--result=testresults2.xml;format=AppVeyor"
+
+    }
 
 artifacts:
 - path: '*.nupkg'
