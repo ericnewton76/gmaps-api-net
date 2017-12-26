@@ -39,6 +39,7 @@ namespace Google.Maps.TimeZone
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void TimeZoneService_Works_During_DST()
 		{
 			// Arrange
@@ -59,6 +60,7 @@ namespace Google.Maps.TimeZone
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void TimeZoneService_Works_Outside_DST()
 		{
 			// Arrange
