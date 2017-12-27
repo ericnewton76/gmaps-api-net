@@ -25,6 +25,12 @@ Currently the library supports full coverage of the following Google Maps APIs:
   * Time Zones
   * Street View, added to v0.19
 
+## Notable Upcoming 
+
+* Trying to achieve a formal v1.0 release for 2018. This is basically on-track for first week of January. File any major issues quickly to get addressed before v1.0!
+* Planning a slight namespace/usage change for v2.0 release soon thereafter to support dependency injection and mocking away the library in your own testing apparatus.  Intention here is to isolate away the library returning values to returning known values during your testing.
+* In relation to above, we will begin removing our tests for specific values, and testing instead for schema changes that Google is pushing through.
+
 ## Quick Examples
 Using Google Maps API for .NET is designed to be really easy.
 
