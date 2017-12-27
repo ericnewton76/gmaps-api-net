@@ -1,4 +1,4 @@
-version: 0.21.{build}
+version: 0.22.{build}
 
 pull_requests:
   do_not_increment_build_number: true
@@ -13,7 +13,7 @@ init:
 - ps: >
     if($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_TAG_NAME.StartsWith("v") -eq $true) {
 
-      Set-AppVeyorBuildVariable -Name APPVEYOR_BUILD_VERSION -Value $env:APPVEYOR_REPO_TAG_NAME
+      Set-AppVeyorBuildVariable -Name APPVEYOR_BUILD_VERSION -Value $env:APPVEYOR_REPO_TAG_NAME.Substring(1)
 
     }
   
