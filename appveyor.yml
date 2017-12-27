@@ -37,11 +37,11 @@ test_script:
     
     $DLL_LOCATION=".\src\Google.Maps.Test\bin\Release\net461\Google.Maps.Test.dll"
     
-    nunit3-console $DLL_LOCATION --where:"cat!=ValueTesting" "--result=testresults.xml;format=AppVeyor"
+    nunit3-console $DLL_LOCATION --labels=All --where:"cat!=ValueTesting" "--result=testresults.xml;format=AppVeyor"
 
     if($? -eq $true) {
 
-      nunit3-console $DLL_LOCATION --where:"cat!=ValueTesting" "--result=testresults2.xml;format=AppVeyor"
+      nunit3-console $DLL_LOCATION --labels=All --where:"cat!=ValueTesting" "--result=testresults2.xml;format=AppVeyor"
 
     }
 
