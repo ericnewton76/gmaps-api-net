@@ -11,11 +11,11 @@ image: Visual Studio 2017
 
 init:
 - ps: >
-  if($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_TAG_NAME.StartsWith("v") -eq $true) {
+    if($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_TAG_NAME.StartsWith("v") -eq $true) {
 
-    Set-AppVeyorBuildVariable -Name APPVEYOR_BUILD_VERSION -Value $env:APPVEYOR_REPO_TAG_NAME
+      Set-AppVeyorBuildVariable -Name APPVEYOR_BUILD_VERSION -Value $env:APPVEYOR_REPO_TAG_NAME
 
-  }
+    }
   
 
 assembly_info:
