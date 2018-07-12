@@ -34,6 +34,14 @@ namespace Google.Maps.Geocoding
 		public Location Address { get; set; }
 
 		/// <summary>
+		/// The place ID of the place for which you wish to obtain the human-readable address. The
+		/// place ID is a unique identifier that can be used from/with other Google APIs (Roads API,
+		/// Places API).
+		/// <see href="https://developers.google.com/maps/documentation/geocoding/intro#place-id"/>
+		/// </summary>
+		public string PlaceId { get; set; }
+
+		/// <summary>
 		/// Undocumented address component filters.
 		/// Only geocoding results matching the component filters will be returned.
 		/// </summary>
@@ -73,7 +81,7 @@ namespace Google.Maps.Geocoding
 
 		public override Uri ToUri()
 		{
-			if (Address == null) throw new InvalidOperationException("Address is required");
+			if (Address == null && String.IsNullOrWhiteSpace(PlaceId)) throw new InvalidOperationException("Address/LatLng or PlaceId is required");
 
 			var qsb = new Internal.QueryStringBuilder();
 
@@ -87,6 +95,10 @@ namespace Google.Maps.Geocoding
 				{
 					qsb.Append("address", Address.GetAsUrlParameter());
 				}
+			}
+			else
+			{
+				qsb.Append("place_id", PlaceId);
 			}
 
 			qsb.Append("bounds", GetBoundsStr())

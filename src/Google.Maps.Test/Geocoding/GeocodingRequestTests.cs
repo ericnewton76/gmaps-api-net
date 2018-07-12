@@ -78,6 +78,20 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
+		public void Implicit_PlaceId_set_from_string()
+		{
+			var req = new GeocodingRequest();
+
+			req.PlaceId = "ChIJN1t_tDeuEmsRUsoyG83frY4"; // Google
+
+			Uri expected = new Uri("json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
 		public void GetUrl_no_Address_set()
 		{
 			Assert.Throws<InvalidOperationException>(() =>
