@@ -11,6 +11,8 @@ image: Visual Studio 2017
 
 init:
 - ps: >
+    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
     if($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_TAG_NAME.StartsWith("v") -eq $true) {
 
       Set-AppVeyorBuildVariable -Name APPVEYOR_BUILD_VERSION -Value $env:APPVEYOR_REPO_TAG_NAME.Substring(1)
@@ -28,6 +30,8 @@ assembly_info:
 environment:
   GOOGLE_API_KEY:
     secure: pnYRPfFKB+uub3hlM9mX2q3CzVKsqCg/EM/lFZ2DN6yePU4wBbhr0PhBf3dDVgU4
+  APPVEYOR_RDP_PASSWORD: 
+    secure: tXLj55KTiLnAgoQp6lXCHg==
 
 before_build:
   - msbuild src\GoogleMapsForNET.sln /t:restore
