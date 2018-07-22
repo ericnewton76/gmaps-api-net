@@ -23,6 +23,7 @@ namespace Google.Maps.Places
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void PlacesTest_Nearby()
 		{
 			PlacesRequest request = new NearbySearchRequest()
