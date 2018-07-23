@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using NUnit.Framework;
+using Google.Maps.Common;
 
 namespace Google.Maps.Places.Details
 {

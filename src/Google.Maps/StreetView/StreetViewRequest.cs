@@ -19,8 +19,11 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using Google.Maps;
+using Google.Maps.Common;
 using Google.Maps.Internal;
 using System.ComponentModel;
+
 
 namespace Google.Maps.StreetView
 {
@@ -35,7 +38,7 @@ namespace Google.Maps.StreetView
 	{
 		public StreetViewRequest()
 		{
-			this.Size = new MapSize(512, 512); //default size is 512x512
+			this.Size = new GSize(512, 512); //default size is 512x512
 		}
 
 		/// <summary>
@@ -58,7 +61,7 @@ namespace Google.Maps.StreetView
 		/// Size specifies the output size of the image in pixels.
 		/// For example Size = new MapSize(600,400) returns an image 600 pixels wide, and 400 high.
 		/// </summary>
-		public MapSize Size
+		public GSize Size
 		{
 			get { return _size; }
 			set
@@ -70,7 +73,7 @@ namespace Google.Maps.StreetView
 				this._size = value;
 			}
 		}
-		private MapSize _size;
+		private GSize _size;
 
 		/// <summary>
 		/// Defines the format of the resulting image. By default, the Static
@@ -80,7 +83,7 @@ namespace Google.Maps.StreetView
 		/// greater compression, while GIF and PNG provide greater detail. (optional)
 		/// </summary>
 		/// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#ImageFormats</remarks>
-		public GMapsImageFormats Format { get; set; }
+		public MapImageFormats Format { get; set; }
 
 		/// <summary>
 		/// Heading indicates the compass heading of the camera. Accepted values are from 0 to 360
@@ -180,8 +183,8 @@ namespace Google.Maps.StreetView
 			string formatStr = null;
 			switch(this.Format)
 			{
-				case GMapsImageFormats.Unspecified: break;
-				case GMapsImageFormats.JPGbaseline: formatStr = "jpg-baseline"; break;
+				case MapImageFormats.Unspecified: break;
+				case MapImageFormats.JPGbaseline: formatStr = "jpg-baseline"; break;
 				default: formatStr = this.Format.ToString().ToLower(); break;
 			}
 

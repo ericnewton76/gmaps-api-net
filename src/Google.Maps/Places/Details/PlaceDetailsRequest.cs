@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Google.Maps;
+using Google.Maps.Common;
+
 namespace Google.Maps.Places.Details
 {
 	public class PlaceDetailsRequest : BaseRequest

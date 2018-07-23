@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Google.Maps
+namespace Google.Maps.Common
 {
 	/// <summary>
 	/// Represents a Google Maps color.
 	/// </summary>
-	public struct MapColor
+	public struct GColor
 	{
 		UInt32 value;
 		string colorName;
@@ -35,9 +35,9 @@ namespace Google.Maps
 		/// <summary>
 		/// Create a color froma CSS3 color name
 		/// </summary>
-		public static MapColor FromName(string cssColor)
+		public static GColor FromName(string cssColor)
 		{
-			var color = new MapColor();
+			var color = new GColor();
 			color.colorName = cssColor.ToLower();
 			return color;
 		}
@@ -45,7 +45,7 @@ namespace Google.Maps
 		/// <summary>
 		/// Create a color from RGB values and a fully opaque alpha
 		/// </summary>
-		public static MapColor FromArgb(int red, int green, int blue)
+		public static GColor FromArgb(int red, int green, int blue)
 		{
 			return FromArgb(255, red, green, blue);
 		}
@@ -53,29 +53,29 @@ namespace Google.Maps
 		/// <summary>
 		/// Create a color from RGB and alpha values
 		/// </summary>
-		public static MapColor FromArgb(int alpha, int red, int green, int blue)
+		public static GColor FromArgb(int alpha, int red, int green, int blue)
 		{
-			var color = new MapColor();
+			var color = new GColor();
 			color.value = (uint)(((uint)red << 24) + (green << 16) + (blue << 8) + alpha);
 			return color;
 		}
 
-		public static bool operator ==(MapColor a, MapColor b)
+		public static bool operator ==(GColor a, GColor b)
 		{
 			if (a.isNamedColor && b.isNamedColor) return a.colorName == b.colorName;
 			if (a.isNamedColor ^ b.isNamedColor) return false;
 			return a.value == b.value;
 		}
 
-		public static bool operator !=(MapColor a, MapColor b)
+		public static bool operator !=(GColor a, GColor b)
 		{
 			return a != b;
 		}
 
 		public override bool Equals(object obj)
 		{
-			if (!(obj is MapColor)) return false;
-			var o = (MapColor)obj;
+			if (!(obj is GColor)) return false;
+			var o = (GColor)obj;
 			return this == o;
 		}
 
@@ -86,7 +86,7 @@ namespace Google.Maps
 		}
 
 #if HAS_SYSTEMDRAWING
-		public static implicit operator MapColor(System.Drawing.Color systemColor)
+		public static implicit operator GColor(System.Drawing.Color systemColor)
 		{
 			return FromArgb(systemColor.A, systemColor.R, systemColor.G, systemColor.B);
 		}

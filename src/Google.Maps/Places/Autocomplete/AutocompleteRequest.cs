@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using Google.Maps.Internal;
 
+using Google.Maps;
+using Google.Maps.Common;
+
 namespace Google.Maps.Places
 {
 	public class AutocompleteRequest : BaseRequest {

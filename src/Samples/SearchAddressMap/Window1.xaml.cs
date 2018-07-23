@@ -12,6 +12,8 @@ using Google.Maps.StreetView;
 using System.Net.Http;
 using System.IO;
 
+using Google.Maps.Common;
+
 namespace SearchAddressMap
 {
 	/// <summary>
@@ -46,7 +48,7 @@ namespace SearchAddressMap
 			{
 				Center = location
 				,Zoom = Convert.ToInt32(zoomSlider.Value)
-				,Size = new MapSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
+				,Size = new GSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
 				,MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true)
 			};
 			request.Markers.Add(request.Center);
@@ -68,7 +70,7 @@ namespace SearchAddressMap
 			{
 				Location = location
 				//,Zoom = Convert.ToInt32(zoomSlider.Value),
-				, Size = new MapSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
+				, Size = new GSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
 				//,MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true)
 				, Heading = Convert.ToInt16(Convert.ToInt16(headingSlider.Value) + 180)
 				, Pitch = Convert.ToInt16(Convert.ToInt16(pitchSlider.Value))

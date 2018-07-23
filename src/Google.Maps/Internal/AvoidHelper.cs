@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Google.Maps
+using Google.Maps.Common;
+
+namespace Google.Maps.Internal
 {
 	internal static class AvoidHelper
 	{

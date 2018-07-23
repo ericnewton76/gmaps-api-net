@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Google.Maps
+namespace Google.Maps.Common
 {
 	/// <summary>
 	/// Directions may be calculated that adhere to certain restrictions.

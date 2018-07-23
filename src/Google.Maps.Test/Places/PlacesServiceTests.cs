@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 using NUnit.Framework;
+using Google.Maps.Common;
 
 namespace Google.Maps.Places
 {

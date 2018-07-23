@@ -18,6 +18,10 @@
 using System;
 using System.Linq;
 
+using Google.Maps;
+using Google.Maps.Common;
+
+
 namespace Google.Maps.Places
 {
 	public abstract class PlacesRequest : BaseRequest

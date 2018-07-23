@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
 
+using Google.Maps;
+using Google.Maps.Common;
+
 namespace Google.Maps.Roads
 {
 	public class SnapToRoadsRequest: BaseRequest
-	{
+	{ 
 		/// <summary>
 		/// The path to be snapped.
 		/// </summary>

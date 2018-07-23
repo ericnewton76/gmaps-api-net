@@ -18,7 +18,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace Google.Maps.Shared
+namespace Google.Maps.Common
 {
 	public class AddressComponent : IEquatable<AddressComponent>
 	{

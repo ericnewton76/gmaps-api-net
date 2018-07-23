@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 
 using NUnit.Framework;
+using Google.Maps.Common;
 
 namespace Google.Maps.StaticMaps
 {
@@ -46,7 +47,7 @@ namespace Google.Maps.StaticMaps
 			var map = new StaticMapRequest();
 			map.Paths.Add(new Path(new LatLng(30.0, -60.0))
 			{
-				Color = MapColor.FromArgb(0x80, 0xA0, 0xC0)
+				Color = GColor.FromArgb(0x80, 0xA0, 0xC0)
 			});
 			string color = ExtractColorFromUri(map.ToUri());
 			Assert.AreEqual("0X80A0C0FF", color.ToUpper());
@@ -89,7 +90,7 @@ namespace Google.Maps.StaticMaps
 				new LatLng(47.3017, -96.5299)
 			)
 			{
-				Color =  MapColor.FromName("green")
+				Color =  GColor.FromName("green")
 			};
 		}
 
@@ -102,7 +103,7 @@ namespace Google.Maps.StaticMaps
 				new LatLng(47.3105, -96.5326)
 			)
 			{
-				Color = MapColor.FromName("red")
+				Color = GColor.FromName("red")
 			};
 		}
 
