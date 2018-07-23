@@ -1,0 +1,13 @@
+## Release
+- Bump up version number in package.json/appveyor.yml
+- Commit the version change with the following message: chore(release): [version number]
+- tag `git tag [version number]` maybe after listing tags with `git tag`
+- push changes and a tag (git push --tags)
+- [future] switch to the gh-pages branch: git checkout gh-pages
+- [future] copy content of the dist folder to the main folder
+- [future] Commit the version change with the following message: chore(release): [version number]
+- [future] push changes
+- [future] switch back to the main branch
+- modify package.json/appveyor.yml to bump up version for the next iteration
+- commit (chore(release): starting [version number]) and push
+- publish Bower and NuGet packages

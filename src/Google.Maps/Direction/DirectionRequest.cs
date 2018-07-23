@@ -38,6 +38,11 @@ namespace Google.Maps.Direction
 		/// Note that providing route alternatives may increase the response time from the server.
 		/// </summary>
 		public bool? Alternatives { get; set; }
+		
+		/// <summary>
+		/// (optional) If set to true, specifies that the Directions service should optimize the order of the waypoints in the response.
+		/// </summary>
+		public bool? Optimize { get; set; }
 
 		/// <summary>The region code, specified as a ccTLD ("top-level domain") two-character value. See also Region biasing.</summary>
 		/// <see href="http://code.google.com/apis/maps/documentation/directions/#RequestParameters"/>
@@ -98,6 +103,7 @@ namespace Google.Maps.Direction
 			if(this._waypoints == null || this._waypoints.Count == 0) return null;
 
 			StringBuilder sb = new StringBuilder();
+			if(Optimize == true) sb.Append("optimize:true");
 
 			foreach(Location waypoint in this._waypoints)
 			{

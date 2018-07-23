@@ -54,6 +54,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GetGeocodingForAddress1()
 		{
 			// Arrange
@@ -82,6 +83,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GetGeocodingForAddress2()
 		{
 			// test
@@ -99,6 +101,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Geocode_With_AddressComponent_Locking()
 		{
 			var requestGB = new GeocodingRequest
@@ -131,6 +134,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Geocode_Without_AddressComponent_Locking()
 		{
 			var request = new GeocodingRequest
@@ -147,6 +151,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GeocodeResult_Has_BoundsProperty()
 		{
 			var request = new GeocodingRequest
@@ -163,6 +168,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GeocodeResult_Supports_PostalTownAndPostalCodePrefix()
 		{
 			var request = new GeocodingRequest
@@ -180,6 +186,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Utf8_Request_And_Response()
 		{
 			var request = new GeocodingRequest

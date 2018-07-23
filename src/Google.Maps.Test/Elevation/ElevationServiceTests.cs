@@ -40,6 +40,15 @@ namespace Google.Maps.Elevation
 		}
 
 		[Test]
+		[Category("ValueTesting")]
+		public void SHOULD_NOT_RUN()
+		{
+			Console.WriteLine("SHOULD NOT RUN!!!");
+		}
+
+
+		[Test]
+		[Category("ValueTesting")]
 		public void GetElevationForOneLocation()
 		{
 			// expectations
@@ -64,6 +73,7 @@ namespace Google.Maps.Elevation
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GetElevationForTwoLocations()
 		{
 			// expectations

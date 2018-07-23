@@ -68,7 +68,7 @@ namespace Google.Maps.StaticMaps
 			{
 				if(value != null)
 				{
-					if(value < Constants.ZOOM_LEVEL_MIN) throw new ArgumentOutOfRangeException(string.Format("value cannot be less than 0.", Constants.ZOOM_LEVEL_MIN));
+					if(value < Constants.ZOOM_LEVEL_MIN) throw new ArgumentOutOfRangeException(string.Format("value cannot be less than {0}.", Constants.ZOOM_LEVEL_MIN));
 				}
 				_zoom = value;
 			}

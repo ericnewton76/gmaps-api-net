@@ -23,10 +23,17 @@ namespace Google.Maps.Roads
 	[TestFixture]
 	class RoadsServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
+		}
+
+		private RoadsService CreateService()
+		{
+			return new RoadsService(TestingApiKey);
 		}
 
 		[Test]
@@ -35,7 +42,7 @@ namespace Google.Maps.Roads
 			Assert.Throws<InvalidOperationException>(() =>
 			{
 				var request = new SnapToRoadsRequest { Path = Array.Empty<LatLng>() };
-				new RoadsService().GetResponse(request);
+				CreateService().GetResponse(request);
 			});
 		}
 
@@ -54,7 +61,7 @@ namespace Google.Maps.Roads
 				Interpolate = false
 			};
 
-			var response = new RoadsService().GetResponse(req);
+			var response = CreateService().GetResponse(req);
 
 			Assert.AreEqual(4, response.SnappedPoints.Length);
 		}

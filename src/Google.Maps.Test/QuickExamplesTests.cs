@@ -19,6 +19,7 @@ namespace Google.Maps
 	{
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GeocodingRequest_Example()
 		{
 			var request = new GeocodingRequest();
@@ -33,6 +34,8 @@ namespace Google.Maps
 			Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 37.4230180
 			Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -122.0818530
 
+			//dont assert on actual values sent from google, these can vary!!!
+
 			Assert.Pass();
 		}
 
@@ -46,10 +49,13 @@ namespace Google.Maps
 
 			var imgTagSrc = map.ToUri();
 
-			Assert.Pass();
+			//check program functional outputs, not google's returned values
+
+			Assert.That(imgTagSrc.Query.Contains("zoom=14"));
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void PartialMatchTest()
 		{
 			// invalid address results in partial match
