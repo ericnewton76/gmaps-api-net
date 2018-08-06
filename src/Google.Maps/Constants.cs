@@ -88,6 +88,12 @@ namespace Google.Maps
 			if(value < -90 || value > 90) throw new ArgumentOutOfRangeException(PITCH_PARAMETER_RANGE, parameterName);
 		}
 
+		internal static void CheckFieldOfViewRange(short value, string parameterName)
+		{
+			const string FIELD_OF_VIEW_PARAMETER_RANGE = "Field of view value must be greater or equal to 1 and less than or equal to 120.";
+			if (value < 1 || value > 120) throw new ArgumentOutOfRangeException(FIELD_OF_VIEW_PARAMETER_RANGE, parameterName);
+		}
+
 		#endregion
 
 	}
