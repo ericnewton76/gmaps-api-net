@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Google.Maps
 {
@@ -16,6 +14,8 @@ namespace Google.Maps
 	{
 		private byte[] _privateKeyBytes;
 		private string _clientId;
+		private string _channelId;
+		private string _referralUrl;
 		private string _apiKey;
 		private GoogleSignedType _signType = GoogleSignedType.ApiKey;
 
@@ -30,11 +30,13 @@ namespace Google.Maps
 			_signType = GoogleSignedType.ApiKey;
 		}
 
-		public GoogleSigned(string clientId, string usablePrivateKey)
+		public GoogleSigned(string clientId, string usablePrivateKey, string channelId = "", string referralUrl = "")
 		{
 			usablePrivateKey = usablePrivateKey.Replace("-", "+").Replace("_", "/");
 			_privateKeyBytes = Convert.FromBase64String(usablePrivateKey);
 			_clientId = clientId;
+			_referralUrl = referralUrl;
+			_channelId = channelId;
 			_signType = GoogleSignedType.Business;
 		}
 
@@ -47,6 +49,9 @@ namespace Google.Maps
 		}
 
 		public string ClientId { get { return _clientId; } }
+
+		public string ReferralUrl { get { return _referralUrl; } }
+
 
 		/// <summary>
 		/// Assigns the given SigningInstance to all services that can utilize it.  Note that some of the services do not currently use the signature method.
@@ -62,8 +67,14 @@ namespace Google.Maps
 			var builder = new UriBuilder(uri); if(_signType == GoogleSignedType.Business)
 			{
 				builder.Query = builder.Query.Substring(1) + "&client=" + _clientId;
-				uri = builder.Uri;
+				
 
+				if (!string.IsNullOrEmpty(_channelId))
+				{
+					builder.Query = builder.Query.Substring(1) + "&channel=" + _channelId;
+				}
+
+				uri = builder.Uri;
 				string signature = GetSignature(uri);
 				signature = signature.Replace("+", "-").Replace("/", "_");
 
