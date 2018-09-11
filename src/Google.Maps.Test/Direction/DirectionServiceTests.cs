@@ -26,7 +26,7 @@ using Google.Maps.Shared;
 namespace Google.Maps.Direction
 {
 	[TestFixture]
-	class DirectionServiceTests
+	class DirectionServiceTests 
 	{
 		GoogleSigned TestingApiKey;
 
@@ -43,6 +43,7 @@ namespace Google.Maps.Direction
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Empty_Address_Fails()
 		{
 			Assert.Throws<HttpRequestException>(() =>
@@ -70,6 +71,11 @@ namespace Google.Maps.Direction
 			var response = CreateService().GetResponse(request);
 
 			// Assert
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+			
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status, "Status");
 			Assert.AreEqual(1, response.Routes.Length, "ResultCount");
 

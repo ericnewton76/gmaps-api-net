@@ -23,6 +23,7 @@ namespace Google.Maps.DistanceMatrix
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void DrivingDistancebyLngLat()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -35,10 +36,16 @@ namespace Google.Maps.DistanceMatrix
 
 			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void DrivingDistancebyAddressAndLngLat()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -51,10 +58,16 @@ namespace Google.Maps.DistanceMatrix
 
 			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void DrivingDistancebyAddress()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -67,10 +80,16 @@ namespace Google.Maps.DistanceMatrix
 
 			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void DrivingDistancebyLngLatHasOneOriginAndDestinationAdresses()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -84,12 +103,18 @@ namespace Google.Maps.DistanceMatrix
 
 			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual(1, response.DestinationAddresses.Length);
 			Assert.AreEqual(1, response.OriginAddresses.Length);
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void DrivingDistancebyAddressHasOneOriginAndDestinationAdresses()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -103,6 +128,11 @@ namespace Google.Maps.DistanceMatrix
 
 			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual(1, response.DestinationAddresses.Length);
 			Assert.AreEqual(1, response.OriginAddresses.Length);
@@ -111,6 +141,7 @@ namespace Google.Maps.DistanceMatrix
 
 
 		[Test]
+		[Category("ValueTesting")]
 		public void DrivingDistancebyLngLatHasOneOriginAndMultipleDestinationAdresses()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -125,12 +156,18 @@ namespace Google.Maps.DistanceMatrix
 
 			DistanceMatrixResponse response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.Greater(response.DestinationAddresses.Length, 1);
 			Assert.AreEqual(1, response.OriginAddresses.Length, 1);
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void DrivingDistancebyAddressHasOneOriginAndMultipleDestinationAdresses()
 		{
 			DistanceMatrixRequest request = new DistanceMatrixRequest();
@@ -144,6 +181,11 @@ namespace Google.Maps.DistanceMatrix
 			request.Mode = TravelMode.driving;
 
 			DistanceMatrixResponse response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.Greater(response.DestinationAddresses.Length, 1);

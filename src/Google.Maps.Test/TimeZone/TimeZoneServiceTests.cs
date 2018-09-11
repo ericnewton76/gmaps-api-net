@@ -52,6 +52,11 @@ namespace Google.Maps.TimeZone
 			// Act
 			var response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual("Europe/London", response.TimeZoneID);
@@ -72,6 +77,11 @@ namespace Google.Maps.TimeZone
 
 			// Act
 			var response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);

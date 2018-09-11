@@ -33,6 +33,11 @@ namespace Google.Maps.Places
 			};
 			PlacesResponse response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 
 			// Google requires a delay before resending page token value
@@ -46,6 +51,11 @@ namespace Google.Maps.Places
 				PageToken = response.NextPageToken
 			};
 			response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 
@@ -61,10 +71,16 @@ namespace Google.Maps.Places
 			};
 			response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.InvalidRequest, response.Status);
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void PlacesTest_Text()
 		{
 			PlacesRequest request = new TextSearchRequest()
@@ -74,6 +90,11 @@ namespace Google.Maps.Places
 			};
 			PlacesResponse response = new PlacesService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 
 			// Google requires a delay before resending page token value
@@ -88,6 +109,11 @@ namespace Google.Maps.Places
 			};
 			response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 
 			// Google requires a delay before resending page token value
@@ -101,6 +127,11 @@ namespace Google.Maps.Places
 				PageToken = response.NextPageToken + "A" // invalid token
 			};
 			response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			Assert.AreEqual(ServiceResponseStatus.InvalidRequest, response.Status);
 		}
