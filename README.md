@@ -112,7 +112,7 @@ this.imageControl.Image = img;
 
 ```c#
 //enterprise users to use your supplied information for requests.  Do this in App_Start.
-GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key"));
+GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key", signType: GoogleSignedType.Business));
 
 // Then do as many requests as you like...
 var request = new GeocodingRequest();
