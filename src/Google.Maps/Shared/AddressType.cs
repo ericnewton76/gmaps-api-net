@@ -197,6 +197,11 @@ namespace Google.Maps.Shared
 		/// <summary>
 		/// (Not documented) First half of postcode for the UK
 		/// </summary>
-		PostalCodePrefix = 25
+		PostalCodePrefix = 25,
+
+        /// <summary>
+        /// The last 4 digits of postcode for the US
+        /// </summary>
+        PostalCodeSuffix = 40
 	}
 }
