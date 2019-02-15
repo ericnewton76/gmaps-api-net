@@ -47,6 +47,15 @@ namespace Google.Maps.Places.Details
         public string[] Fields { get; set; }
 
 		/// <summary>
+		/// A random string which identifies an autocomplete session for billing purposes. Use this for Place Details requests that are called following an autocomplete request in the same user session.
+		/// </summary>
+		/// <remarks>
+		/// Optional.
+		/// </remarks>
+		/// <see href="https://developers.google.com/places/web-service/details" />
+		public string SessionToken { get; set; }
+
+		/// <summary>
 		/// The language in which to return results. If language is not
 		/// supplied, the geocoder will attempt to use the native language of
 		/// the domain from which the request is sent wherever possible.
@@ -84,6 +93,9 @@ namespace Google.Maps.Places.Details
 
 			if(!String.IsNullOrEmpty(Language))
 				qsb.Append("language", Language);
+
+			if(!string.IsNullOrEmpty(SessionToken))
+				qsb.Append("sessiontoken", SessionToken);
 
 			var url = "json?" + qsb.ToString();
 
