@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Google.Maps
 {
@@ -16,6 +14,8 @@ namespace Google.Maps
 	{
 		private byte[] _privateKeyBytes;
 		private string _idString;
+		private string _channelId;
+		private string _referralUrl;
 		private GoogleSignedType _signType = GoogleSignedType.ApiKey;
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace Google.Maps
 		/// </summary>
 		private static GoogleSigned S_universalSigningInstance;
 
-		public GoogleSigned(string apiKey, string usablePrivateKey = null, GoogleSignedType signType = GoogleSignedType.ApiKey)
+		public GoogleSigned(string apiKey, string usablePrivateKey, GoogleSignedType signType = GoogleSignedType.ApiKey)
 		{
 			if(usablePrivateKey != null)
 			{
@@ -106,6 +106,9 @@ namespace Google.Maps
 		}
 
 
+		public string ReferralUrl { get { return _referralUrl; } }
+
+
 		/// <summary>
 		/// Assigns the given SigningInstance to all services that can utilize it.  Note that some of the services do not currently use the signature method.
 		/// </summary>
@@ -130,6 +133,13 @@ namespace Google.Maps
 			if(_signType == GoogleSignedType.Business)
 			{
 				builder.Query = builder.Query.Substring(1) + "&client=" + _idString;
+				
+
+				if (!string.IsNullOrEmpty(_channelId))
+				{
+					builder.Query = builder.Query.Substring(1) + "&channel=" + _channelId;
+				}
+
 			}
 			else
 			{
