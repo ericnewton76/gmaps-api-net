@@ -114,6 +114,9 @@ namespace Google.Maps
 				case "postal_code_prefix":
 					result = AddressType.PostalCodePrefix;
 					break;
+                case "postal_code_suffix":
+                    result = AddressType.PostalCodeSuffix;
+                    break;
 				case "natural_feature":
 					result = AddressType.NaturalFeature;
 					break;

@@ -37,6 +37,24 @@ namespace Google.Maps.Places.Details
 		/// <see href="http://code.google.com/apis/maps/documentation/geocoding/#RegionCodes"/>
 		public string Extensions { get; set; }
 
+        /// <summary>
+        /// Use the fields parameter to specify a comma-separated list of place data types to return
+        /// </summary>
+        /// <remarks>
+        /// Optional.
+        /// </remarks>
+        /// <see href="https://developers.google.com/places/web-service/details#fields" />
+        public string[] Fields { get; set; }
+
+		/// <summary>
+		/// A random string which identifies an autocomplete session for billing purposes. Use this for Place Details requests that are called following an autocomplete request in the same user session.
+		/// </summary>
+		/// <remarks>
+		/// Optional.
+		/// </remarks>
+		/// <see href="https://developers.google.com/places/web-service/details" />
+		public string SessionToken { get; set; }
+
 		/// <summary>
 		/// The language in which to return results. If language is not
 		/// supplied, the geocoder will attempt to use the native language of
@@ -68,8 +86,16 @@ namespace Google.Maps.Places.Details
 			if(!String.IsNullOrEmpty(Extensions))
 				qsb.Append("extensions", Extensions);
 
+            if ((Fields != null && Fields.Any()))
+            {
+                qsb.Append("fields", string.Join("|", Fields));
+            }
+
 			if(!String.IsNullOrEmpty(Language))
 				qsb.Append("language", Language);
+
+			if(!string.IsNullOrEmpty(SessionToken))
+				qsb.Append("sessiontoken", SessionToken);
 
 			var url = "json?" + qsb.ToString();
 

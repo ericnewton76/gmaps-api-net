@@ -60,6 +60,15 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Components { get; set; }
 
+		/// <summary>
+		/// A random string which identifies an autocomplete session for billing purposes. If this parameter is omitted from an autocomplete request, the request is billed independently.
+		/// </summary>
+		/// <remarks>
+		/// Optional.
+		/// </remarks>
+		/// <see href="https://developers.google.com/places/web-service/autocomplete#session_tokens" />
+		public string SessionToken { get; set; }
+
 		public override Uri ToUri()
 		{
 			ValidateRequest();
@@ -96,6 +105,11 @@ namespace Google.Maps.Places
 			if(!string.IsNullOrEmpty(Components))
 			{
 				qsb.Append(string.Format("components=country:{0}", Components.ToLowerInvariant()));
+			}
+
+			if(!string.IsNullOrEmpty(SessionToken))
+			{
+				qsb.Append("sessiontoken", SessionToken);
 			}
 
 			var url = "autocomplete/json?" + qsb.ToString();
