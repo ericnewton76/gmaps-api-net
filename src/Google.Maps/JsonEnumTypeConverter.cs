@@ -96,6 +96,21 @@ namespace Google.Maps
 				case "sublocality":
 					result = AddressType.Sublocality;
 					break;
+				case "sublocality_level_1":
+					result = AddressType.SublocalityLevel1;
+					break;
+				case "sublocality_level_2":
+					result = AddressType.SublocalityLevel2;
+					break;
+				case "sublocality_level_3":
+					result = AddressType.SublocalityLevel3;
+					break;
+				case "sublocality_level_4":
+					result = AddressType.SublocalityLevel4;
+					break;
+				case "sublocality_level_5":
+					result = AddressType.SublocalityLevel5;
+					break;
 				case "neighborhood":
 					result = AddressType.Neighborhood;
 					break;
