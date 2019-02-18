@@ -16,13 +16,26 @@ namespace Google.Maps
 	[TestFixture]
 	class QuickExamplesTests
 	{
+		static GoogleSigned TestingApiKey;
+
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
+		{
+			TestingApiKey = SigningHelper.GetApiKey();
+			GoogleSigned.AssignAllServices(TestingApiKey);
+		}
+		[OneTimeTearDown]
+		public void OneTimeTearDown()
+		{
+			GoogleSigned.AssignAllServices(null);
+		}
 
 		[Test]
 		[Category("ValueTesting")]
 		public void GeocodingRequest_Example()
 		{
 			var request = new GeocodingRequest();
-			request.Address = "1600 Amphitheatre Parkway";
+			request.Address = "1600 Amphitheatre Parkway Mountain View, CA 94043";
 			var response = new GeocodingService().GetResponse(request);
 
 			// --break in the online version here-- //
