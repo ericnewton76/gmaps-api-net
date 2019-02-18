@@ -39,7 +39,7 @@ namespace Google.Maps.Internal
 			this.signingSvc = signingSvc;
 			this.client = new HttpClient();
 
-			if (!string.IsNullOrEmpty(signingSvc.ReferralUrl))
+			if (signingSvc != null && string.IsNullOrEmpty(signingSvc.ReferralUrl) == false)
 			{
 				client.DefaultRequestHeaders.Add("Referer", signingSvc.ReferralUrl);
 			}

@@ -23,7 +23,7 @@ namespace Google.Maps
 		/// </summary>
 		private static GoogleSigned S_universalSigningInstance;
 
-		public GoogleSigned(string apiKey, string usablePrivateKey, GoogleSignedType signType = GoogleSignedType.ApiKey)
+		public GoogleSigned(string apiKey, string usablePrivateKey = null, GoogleSignedType signType = GoogleSignedType.ApiKey)
 		{
 			if(usablePrivateKey != null)
 			{

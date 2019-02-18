@@ -48,7 +48,8 @@ namespace Google.Maps.StreetView
 
 		[Test]
 		[TestCase(121)]
-		[TestCase(91)]
+		[TestCase(-1)]
+		[TestCase(0)]
 		public void FieldOfView_argumentoutofrange(short badvalue)
 		{
 			Assert.Throws<ArgumentOutOfRangeException>(() =>
