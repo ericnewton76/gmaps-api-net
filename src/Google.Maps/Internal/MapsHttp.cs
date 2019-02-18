@@ -15,13 +15,12 @@
  * limitations under the License.
  */
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.IO;
-
-using Newtonsoft.Json;
 
 namespace Google.Maps.Internal
 {
@@ -39,6 +38,11 @@ namespace Google.Maps.Internal
 		{
 			this.signingSvc = signingSvc;
 			this.client = new HttpClient();
+
+			if (signingSvc != null && string.IsNullOrEmpty(signingSvc.ReferralUrl) == false)
+			{
+				client.DefaultRequestHeaders.Add("Referer", signingSvc.ReferralUrl);
+			}
 		}
 
 		public async Task<T> GetAsync<T>(Uri uri) where T : class

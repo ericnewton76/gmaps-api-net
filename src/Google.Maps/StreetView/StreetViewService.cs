@@ -56,6 +56,13 @@ namespace Google.Maps.StreetView
 			return StreamToArray(stream);
 		}
 
+		public StreetViewMetadataResponse GetMetadataResponse(StreetViewMetadataRequest request)
+		{
+			var uri = new Uri(baseUri, request.ToUri());
+
+			return http.Get<StreetViewMetadataResponse>(uri);
+		}
+
 		public Stream GetStream(StreetViewRequest request)
 		{
 			var uri = new Uri(baseUri, request.ToUri());
