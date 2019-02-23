@@ -17,6 +17,7 @@ namespace Google.Maps
 	[TestFixture]
 	class QuickExamplesTests
 	{
+		static GoogleSigned TestingApiKey;
 
 		[OneTimeSetUp]
 		public void OneTimeSetup()
@@ -24,16 +25,23 @@ namespace Google.Maps
 			this.TestingApiKey = SigningHelper.GetApiKey();
 			this.GMaps = new Services(TestingApiKey);
 		}
-		GoogleSigned TestingApiKey;
+		[OneTimeTearDown]
+		public void OneTimeTearDown()
+		{
+			GoogleSigned.AssignAllServices(null);
+		}
+
+
 		Google.Maps.Services GMaps;
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GeocodingRequest_Example()
 		{
-			//var GMaps = new Google.Maps.Services("YOUR_API_KEY");
+			var GMaps = new Google.Maps.Services("YOUR_API_KEY");
 			
 			var request = new GeocodingRequest();
-			request.Address = "1600 Amphitheatre Parkway";
+			request.Address = "1600 Amphitheatre Parkway Mountain View, CA 94043";
 			var response = GMaps.GeocodingService.GetResponse(request);
 
 			// --break in the online version here-- //
@@ -43,6 +51,8 @@ namespace Google.Maps
 			Console.WriteLine("Full Address: " + result.FormattedAddress);         // "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"
 			Console.WriteLine("Latitude: " + result.Geometry.Location.Latitude);   // 37.4230180
 			Console.WriteLine("Longitude: " + result.Geometry.Location.Longitude); // -122.0818530
+
+			//dont assert on actual values sent from google, these can vary!!!
 
 			Assert.Pass();
 		}
@@ -57,10 +67,13 @@ namespace Google.Maps
 
 			var imgTagSrc = map.ToUri();
 
-			Assert.Pass();
+			//check program functional outputs, not google's returned values
+
+			Assert.That(imgTagSrc.Query.Contains("zoom=14"));
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void PartialMatchTest()
 		{
 			// invalid address results in partial match

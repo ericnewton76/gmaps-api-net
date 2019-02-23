@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Google.Maps.Internal;
 
 using Google.Maps.ApiCore;
 
 namespace Google.Maps.Places
 {
-	public class AutocompleteRequest : BaseRequest
-	{
+	public class AutocompleteRequest : BaseRequest {
+		private readonly Dictionary<PlaceType, string> _specialTypeTranslations
+			= new Dictionary<PlaceType, string> {
+				{PlaceType.CitiesCollection, "(cities)"},
+				{PlaceType.RegionsCollection, "(regions)"},
+			};
+
 		/// <summary>
 		/// The text string on which to search. The Place Autocomplete service
 		/// will return candidate matches based on this string and order
@@ -56,6 +62,15 @@ namespace Google.Maps.Places
 		/// </summary>
 		public string Components { get; set; }
 
+		/// <summary>
+		/// A random string which identifies an autocomplete session for billing purposes. If this parameter is omitted from an autocomplete request, the request is billed independently.
+		/// </summary>
+		/// <remarks>
+		/// Optional.
+		/// </remarks>
+		/// <see href="https://developers.google.com/places/web-service/autocomplete#session_tokens" />
+		public string SessionToken { get; set; }
+
 		public override Uri ToUri()
 		{
 			ValidateRequest();
@@ -94,6 +109,11 @@ namespace Google.Maps.Places
 				qsb.Append(string.Format("components=country:{0}", Components.ToLowerInvariant()));
 			}
 
+			if(!string.IsNullOrEmpty(SessionToken))
+			{
+				qsb.Append("sessiontoken", SessionToken);
+			}
+
 			var url = "autocomplete/json?" + qsb.ToString();
 			return new Uri(url, UriKind.Relative);
 		}
@@ -105,7 +125,14 @@ namespace Google.Maps.Places
 
 		protected string TypesToUri()
 		{
-			return string.Join("|", Types.Select(t => t.ToString().ToLowerInvariant()).ToArray<string>());
+			return string.Join("|", Types.Select(TranslatePlaceType).ToArray<string>());
+		}
+
+		private string TranslatePlaceType(PlaceType t)
+		{
+			return _specialTypeTranslations.ContainsKey(t)
+				? _specialTypeTranslations[t]
+				: t.ToString().ToSnakeCase();
 		}
 	}
 }

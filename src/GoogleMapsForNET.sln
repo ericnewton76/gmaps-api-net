@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google.Maps.Test", "Google.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{81703210-2D39-4A33-8F6B-7E1689F65B9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9C1B8BBB-362C-4D4B-8D94-FBA657706AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D98DFE5A-BB2C-4439-A0F6-B4E64987DDDE} = {B74E7466-5EBB-4FB1-9AF0-B0C57C139612}
+		{C2E1656D-A708-4240-8E67-EA97BAD208F4} = {9C1B8BBB-362C-4D4B-8D94-FBA657706AE6}
+		{81703210-2D39-4A33-8F6B-7E1689F65B9E} = {B74E7466-5EBB-4FB1-9AF0-B0C57C139612}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C033920-B14E-4E99-BE83-45EC87FEA965}

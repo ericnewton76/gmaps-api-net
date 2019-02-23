@@ -49,6 +49,15 @@ namespace Google.Maps.Elevation
 		}
 
 		[Test]
+		[Category("ValueTesting")]
+		public void SHOULD_NOT_RUN()
+		{
+			Console.WriteLine("SHOULD NOT RUN!!!");
+		}
+
+
+		[Test]
+		[Category("ValueTesting")]
 		public void GetElevationForOneLocation()
 		{
 			// expectations
@@ -63,6 +72,11 @@ namespace Google.Maps.Elevation
 			request.AddLocations(expectedLocation);
 			var response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);
 			Assert.AreEqual(expectedResultCount, response.Results.Length);
@@ -73,6 +87,7 @@ namespace Google.Maps.Elevation
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GetElevationForTwoLocations()
 		{
 			// expectations
@@ -89,6 +104,12 @@ namespace Google.Maps.Elevation
 
 			request.AddLocations(expectedLocation1, expectedLocation2);
 			var response = CreateService().GetResponse(request);
+
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			// asserts
 			Assert.AreEqual(expectedStatus, response.Status);

@@ -16,22 +16,30 @@
  */
 
 using System;
-
+using Google.Maps.Common;
 using Newtonsoft.Json;
 using Google.Maps.Common;
 
 namespace Google.Maps.Geocoding
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GeocodeResponse
+	public class GeocodeResponse : IServiceResponse
 	{
+		/// <summary>
+		/// Contains the ServiceResponseStatus.
+		/// </summary>
 		[JsonProperty("status")]
 		public ServiceResponseStatus Status { get; set; }
+
+		/// <summary>
+		/// More detailed information about the reasons behind the given status code, if other than OK.
+		/// </summary>
+		[JsonProperty("error_message")]
+		public string ErrorMessage { get; set; }
+
 
 		[JsonProperty("results")]
 		public Result[] Results { get; set; }
 
-		[JsonProperty("error_message")]
-		public string ErrorMessage { get; set; }
 	}
 }

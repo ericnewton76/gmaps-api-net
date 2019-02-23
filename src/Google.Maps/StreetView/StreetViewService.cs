@@ -47,6 +47,13 @@ namespace Google.Maps.StreetView
 			return StreamToArray(stream);
 		}
 
+		public StreetViewMetadataResponse GetMetadataResponse(StreetViewMetadataRequest request)
+		{
+			var uri = new Uri(baseUri, request.ToUri());
+
+			return http.Get<StreetViewMetadataResponse>(uri);
+		}
+
 		public Stream GetStream(StreetViewRequest request)
 		{
 			var uri = new Uri(BaseUri, request.ToUri());
@@ -76,7 +83,9 @@ namespace Google.Maps.StreetView
 			}
 			while (bytesRead > 0);
 
-			return outputStream.ToArray();
+			var result = outputStream.ToArray();
+			outputStream.Dispose();
+			return result;
 		}
 
 	}

@@ -68,7 +68,7 @@ namespace Google.Maps.StaticMaps
 			{
 				if(value != null)
 				{
-					if(value < Constants.ZOOM_LEVEL_MIN) throw new ArgumentOutOfRangeException(string.Format("value cannot be less than 0.", Constants.ZOOM_LEVEL_MIN));
+					if(value < Constants.ZOOM_LEVEL_MIN) throw new ArgumentOutOfRangeException(string.Format("value cannot be less than {0}.", Constants.ZOOM_LEVEL_MIN));
 				}
 				_zoom = value;
 			}
@@ -245,6 +245,22 @@ namespace Google.Maps.StaticMaps
 			var url = "staticmap?" + qs.ToString();
 
 			return new Uri(BaseUri, new Uri(url, UriKind.Relative));
+		}
+
+		/// <summary>
+		/// Gets a Uri with a signature calculated.
+		/// See https://developers.google.com/maps/documentation/maps-static/get-api-key
+		/// for more info.
+		/// </summary>
+		/// <param name="signingInfo"></param>
+		/// <returns></returns>
+		public string ToUriSigned(GoogleSigned signingInfo = null)
+		{
+			if(signingInfo == null)
+				signingInfo = GoogleSigned.SigningInstance;
+
+			Uri reqUri = this.ToUri();
+			return signingInfo.GetSignedUri(reqUri);
 		}
 
 		/// <summary>

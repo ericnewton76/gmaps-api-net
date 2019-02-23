@@ -45,6 +45,7 @@ namespace Google.Maps.Roads
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void EmptyPathShouldThrow()
 		{
 			Assert.Throws<InvalidOperationException>(() =>
@@ -55,6 +56,7 @@ namespace Google.Maps.Roads
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void SnapToRoadWithoutInterpolationShouldReturnTheSameAmountOfPoints()
 		{
 			var req = new SnapToRoadsRequest
@@ -70,6 +72,11 @@ namespace Google.Maps.Roads
 			};
 
 			var response = CreateService().GetResponse(req);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			Assert.AreEqual(4, response.SnappedPoints.Length);
 		}

@@ -82,7 +82,9 @@ namespace Google.Maps.StaticMaps
 			}
 			while (bytesRead > 0);
 
-			return outputStream.ToArray();
+			var result = outputStream.ToArray();
+			outputStream.Dispose();
+			return result;
 		}
 
 	}

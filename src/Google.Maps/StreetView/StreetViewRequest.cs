@@ -34,28 +34,12 @@ namespace Google.Maps.StreetView
 	/// the type of map, and the placement of optional markers at locations on
 	/// the map.
 	/// </summary>
-	public class StreetViewRequest : BaseRequest
+	public class StreetViewRequest : StreetViewBase
 	{
 		public StreetViewRequest()
 		{
 			this.Size = new GSize(512, 512); //default size is 512x512
 		}
-
-		/// <summary>
-		/// Defines the center of the map, equidistant from all edges of the
-		/// map. This parameter takes an <see cref="Location" />-derived instance identifying a
-		/// unique location on the face of the earth. Use <see cref="LatLng" /> for a
-		/// {latitude,longitude} pair (e.g. 40.714728,-73.998672) or use <see cref="Location" /> for a
-		/// string address (e.g. "city hall, new york, ny"). Either Location or PanoramaId is required.
-		/// </summary>
-		public Location Location { get; set; }
-
-		/// <summary>
-		/// PanoramaId is a specific panorama ID. These are generally stable.
-		/// Either Location or PanoramaId is required.
-		/// </summary>
-		public string PanoramaId { get; set; }
-
 
 		/// <summary>
 		/// Size specifies the output size of the image in pixels.
@@ -127,6 +111,20 @@ namespace Google.Maps.StreetView
 		}
 		private short _pitch;
 
+		/// <summary>
+		/// Field of view
+		/// </summary>
+		[DefaultValue(90)]
+		public short FieldOfView
+		{
+			get { return _fieldOfView; }
+			set
+			{
+				Constants.CheckFieldOfViewRange(value, "value");
+				_fieldOfView = value;
+			}
+		}
+		private short _fieldOfView;
 
 		/// <summary>
 		/// Builds the request uri parameters

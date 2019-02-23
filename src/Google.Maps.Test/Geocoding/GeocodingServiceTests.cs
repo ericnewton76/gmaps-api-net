@@ -62,6 +62,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GetGeocodingForAddress1()
 		{
 			// Arrange
@@ -69,6 +70,11 @@ namespace Google.Maps.Geocoding
 
 			// Act
 			var response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
@@ -90,23 +96,31 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GetGeocodingForAddress2()
 		{
 			// test
 			var request = new GeocodingRequest();
 			request.Address = "11 Wall Street New York NY 10005";
-			var actual = CreateService().GetResponse(request);
+
+			var response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			// asserts
-			Assert.AreEqual(ServiceResponseStatus.Ok, actual.Status);
-			Assert.AreEqual(1, actual.Results.Length);
+			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
+			Assert.AreEqual(1, response.Results.Length);
 
-			var actualResult = actual.Results.Single();
+			var actualResult = response.Results.Single();
 			Assert.AreEqual(new AddressType[] { AddressType.StreetAddress }, actualResult.Types);
 			Assert.AreEqual("11 Wall St, New York, NY 10005, USA", actualResult.FormattedAddress);
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Geocode_With_AddressComponent_Locking()
 		{
 			var requestGB = new GeocodingRequest
@@ -122,7 +136,18 @@ namespace Google.Maps.Geocoding
 			};
 
 			var responseGB = CreateService().GetResponse(requestGB);
+
+			if(responseGB.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			var responseUS = CreateService().GetResponse(requestUS);
+
+			if(responseUS.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, responseGB.Status);
 			Assert.AreEqual(ServiceResponseStatus.Ok, responseUS.Status);
@@ -139,6 +164,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Geocode_Without_AddressComponent_Locking()
 		{
 			var request = new GeocodingRequest
@@ -148,13 +174,19 @@ namespace Google.Maps.Geocoding
 
 			var response = CreateService().GetResponse(request);
 
-			foreach (var r in response.Results)
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
+			foreach(var r in response.Results)
 			{
 				Assert.IsTrue(r.FormattedAddress.EndsWith("USA"));
 			}
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GeocodeResult_Has_BoundsProperty()
 		{
 			var request = new GeocodingRequest
@@ -164,6 +196,11 @@ namespace Google.Maps.Geocoding
 
 			var response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds);
 			Assert.IsNotNull(response.Results[0].Geometry.Bounds.Southwest);
@@ -171,6 +208,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void GeocodeResult_Supports_PostalTownAndPostalCodePrefix()
 		{
 			var request = new GeocodingRequest
@@ -180,6 +218,11 @@ namespace Google.Maps.Geocoding
 
 			var response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			var postalTown = response.Results[0].AddressComponents.First(x => x.ShortName == "Melton Mowbray");
 			Assert.IsFalse(postalTown.Types.Contains(AddressType.Unknown), postalTown.ShortName + " should be AddressType PostalTown");
 
@@ -188,6 +231,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Utf8_Request_And_Response()
 		{
 			var request = new GeocodingRequest
@@ -196,6 +240,11 @@ namespace Google.Maps.Geocoding
 			};
 
 			var response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual(LocationType.Rooftop, response.Results[0].Geometry.LocationType);

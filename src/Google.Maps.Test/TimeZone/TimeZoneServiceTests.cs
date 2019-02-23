@@ -48,6 +48,7 @@ namespace Google.Maps.TimeZone
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void TimeZoneService_Works_During_DST()
 		{
 			// Arrange
@@ -60,6 +61,11 @@ namespace Google.Maps.TimeZone
 			// Act
 			var response = CreateService().GetResponse(request);
 
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
+
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.AreEqual("Europe/London", response.TimeZoneID);
@@ -68,6 +74,7 @@ namespace Google.Maps.TimeZone
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void TimeZoneService_Works_Outside_DST()
 		{
 			// Arrange
@@ -79,6 +86,11 @@ namespace Google.Maps.TimeZone
 
 			// Act
 			var response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			// Assert
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);

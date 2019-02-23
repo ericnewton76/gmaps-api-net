@@ -51,6 +51,7 @@ namespace Google.Maps.Geocoding
 		//}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void Implicit_Address_set_from_string()
 		{
 			var req = new GeocodingRequest();
@@ -63,6 +64,7 @@ namespace Google.Maps.Geocoding
 		}
 
 		[Test]
+		[Category("ValueTesting")]
 		public void LatLng_for_address_will_invoke_reverse_geocoding()
 		{
 			var req = new GeocodingRequest();
@@ -70,6 +72,20 @@ namespace Google.Maps.Geocoding
 			req.Address = new LatLng(-30.1d, 40.2d); //using -30.1f,40.2f gives precision error beyond 6 digits when using format "R". strange.
 
 			Uri expected = new Uri("json?latlng=-30.1,40.2", UriKind.Relative);
+			Uri actual = req.ToUri();
+
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		[Category("ValueTesting")]
+		public void Implicit_PlaceId_set_from_string()
+		{
+			var req = new GeocodingRequest();
+
+			req.PlaceId = "ChIJN1t_tDeuEmsRUsoyG83frY4"; // Google
+
+			Uri expected = new Uri("json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4", UriKind.Relative);
 			Uri actual = req.ToUri();
 
 			Assert.AreEqual(expected, actual);

@@ -1,6 +1,8 @@
 # Google Maps API for .NET
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ni8ha94ofk7acjmf/branch/master)](https://ci.appveyor.com/project/EricNewton/gmaps-api-net)
+[![AppVeyor](https://img.shields.io/appveyor/ci/EricNewton/gmaps-api-net.svg)](https://ci.appveyor.com/project/EricNewton/gmaps-api-net)
+[![Nuget](https://img.shields.io/nuget/v/gmaps-api-net.svg)](https://www.nuget.org/packages/gmaps-api-net/)
+[![Join the chat at https://gitter.im/gmaps-api-net/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gmaps-api-net/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A .NET library for interacting with the Google Maps API suite.
 
@@ -10,7 +12,12 @@ PS> Install-Package gmaps-api-net
 ```
 
 ## Overview
-This project attempts to provide all the features available in the Google Maps API. It is being developed in C# for the Microsoft .NET including .Net Framework v4.6.1+ and .Net Standard v1.3+. *gmaps-api-net* is a fully featured API client library, providing strongly typed access to the API.  Recently added was stronger support for Dependency Injection for better support of mocking the requests and responses.
+This project attempts to provide all the features available in the Google Maps API. It is being developed in C# for the Microsoft .NET including .Net Framework v4.6.1+ and .Net Standard v1.3+. *gmaps-api-net* is a fully featured API client library, providing strongly typed access to the API.
+
+## Notable Upcoming 
+* Trying to achieve a formal v1.0 release. File any major issues quickly to get addressed before v1.0!
+* Planning a slight namespace/usage change for v2.0 release soon thereafter to support dependency injection and mocking away the library in your own testing apparatus.  Intention here is to isolate away the library returning values to returning known values during your testing. See branch [feat/support-dependency-injection](https://github.com/ericnewton76/gmaps-api-net/tree/feat/support-dependency-injection)
+* In relation to above, we will begin removing our tests for specific values, and testing instead for schema changes that Google is pushing through.
 
 ## API Support
 
@@ -28,7 +35,7 @@ Currently the library supports full coverage of the following Google Maps APIs:
 Using Google Maps API for .NET is designed to be really easy.
 
 ### Quick Note about the Google Maps API Key
-Google is now requiring a proper API key for accessing the service.  Use the Google Developers Console to create one for your project.  
+Google is now requiring a proper API key for accessing the service. Create a key [here](https://developers.google.com/maps/documentation/geocoding/get-api-key), or create/find an existing one in your Google Developers Console.
 
 ### Getting an address from the Geocoding service
 Let's suppose we want to search an address and get more information about it. We can write:

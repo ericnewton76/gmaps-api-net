@@ -32,6 +32,7 @@ namespace Google.Maps.Places.Details
 
 		[TestCase("ChIJN1t_tDeuEmsRUsoyG83frY4", "Google")]
 		[Test]
+		[Category("ValueTesting")]
 		public void PlacesDetailsTest(string placeID, string placeName)
 		{
 			PlaceDetailsRequest request = new PlaceDetailsRequest()
@@ -39,6 +40,11 @@ namespace Google.Maps.Places.Details
 				PlaceID = placeID
 			};
 			var response = CreateService().GetResponse(request);
+
+			if(response.Status == ServiceResponseStatus.OverQueryLimit)
+			{
+				Assert.Ignore("OverQueryLimit");
+			}
 
 			Assert.AreEqual(ServiceResponseStatus.Ok, response.Status);
 			Assert.IsNotNull(response.Result.URL);
