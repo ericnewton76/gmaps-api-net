@@ -6,7 +6,7 @@ pull_requests:
 configuration: Release
 
 #shallow_clone: true
-clone_depth: 10
+#clone_depth: 10
 
 image: Visual Studio 2017
 
