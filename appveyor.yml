@@ -1,31 +1,31 @@
-version: 0.25.{build}
+version: 0.30.{build}
 
 pull_requests:
   do_not_increment_build_number: true
 
 configuration: Release
 
-shallow_clone: true
+#shallow_clone: true
+clone_depth: 10
 
 image: Visual Studio 2017
 
-init:
-- ps: >
-    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+install:
+  - choco install gitversion.portable -pre -y
 
-    if($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_TAG_NAME.StartsWith("v") -eq $true) {
-
-      Set-AppVeyorBuildVariable -Name APPVEYOR_BUILD_VERSION -Value $env:APPVEYOR_REPO_TAG_NAME.Substring(1)
-
-    }
-  
+#init:
+#- ps: >
+#    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#
+#    if($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_TAG_NAME.StartsWith("v") -eq $true) {
+#
+#      Set-AppVeyorBuildVariable -Name APPVEYOR_BUILD_VERSION -Value $env:APPVEYOR_REPO_TAG_NAME.Substring(1)
+#
+#    }
+#  
 
 assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
+  patch: false
 
 environment:
   GOOGLE_API_KEY:
@@ -34,13 +34,17 @@ environment:
     secure: tXLj55KTiLnAgoQp6lXCHg==
 
 before_build:
+#  - nuget restore
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo
   - msbuild src\GoogleMapsForNET.sln /t:restore
 
-build_script:
-- cmd: msbuild src\GoogleMapsForNET.sln /t:build /p:Configuration=Release /verbosity:minimal
+build:
+  project: src\GoogleMapsForNET.sln
 
 after_build:
-- cmd: nuget pack gmaps-api-net.nuspec -version %APPVEYOR_BUILD_VERSION%
+#- cmd: nuget pack gmaps-api-net.nuspec -version %APPVEYOR_BUILD_VERSION%
+  - cmd: ECHO nuget pack gmaps-api-net.nuspec -version "%GitVersion_NuGetVersion%" 
+  - cmd: nuget pack gmaps-api-net.nuspec -version "%GitVersion_NuGetVersion%" 
 
 test_script:
 - ps: >-
@@ -65,7 +69,7 @@ deploy:
     secure: 2SwDMmXZZtgoLWsldKZ8GCu9rZXpO5quTYtSNJQSeeiqDjnmo0OfutNVcH3jsfpj
   artifact: NugetPackage
   on:
-    APPVEYOR_REPO_TAG: true
+    APPVEYOR_REPO_TAG: true1
 - provider: GitHub
   tag: v$(APPVEYOR_BUILD_VERSION)
   auth_token:
@@ -74,7 +78,7 @@ deploy:
   draft: true
   force_update: true
   on:
-    APPVEYOR_REPO_TAG: true
+    APPVEYOR_REPO_TAG: true1
 
 notifications:
 - provider: Email
@@ -84,7 +88,3 @@ notifications:
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true
-
-# Temporary workaround for AppVeyor -> NuGet connectivity issues
-hosts:
-  api.nuget.org: 93.184.221.200
