@@ -69,7 +69,7 @@ deploy:
     secure: 2SwDMmXZZtgoLWsldKZ8GCu9rZXpO5quTYtSNJQSeeiqDjnmo0OfutNVcH3jsfpj
   artifact: NugetPackage
   on:
-    APPVEYOR_REPO_TAG: true1
+    APPVEYOR_REPO_TAG: true
 - provider: GitHub
   tag: v$(APPVEYOR_BUILD_VERSION)
   auth_token:
@@ -78,7 +78,7 @@ deploy:
   draft: true
   force_update: true
   on:
-    APPVEYOR_REPO_TAG: true1
+    APPVEYOR_REPO_TAG: true
 
 notifications:
 - provider: Email
