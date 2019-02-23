@@ -18,6 +18,7 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.ApiCore;
 
 namespace Google.Maps.Places
 {
@@ -27,41 +28,19 @@ namespace Google.Maps.Places
 	/// points of interest, geographic locations, and more. You can search 
 	/// for places either by proximity or a text string.
 	/// </summary>
-	public class PlacesService : IDisposable
+	public class PlacesService : ApiCore.BaseGmapsServiceTypedResponse<PlacesRequest, PlacesResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/");
-		public static readonly Uri HttpUri = new Uri("http://maps.googleapis.com/maps/api/place/");
 
 		Uri baseUri;
 		MapsHttp http;
 
-		public PlacesService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public PlacesService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
-		/// <summary>
-		/// Sends the specified request to the Google Maps Geocoding web
-		/// service and parses the response as an GeocodingResponse
-		/// object.
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		public PlacesResponse GetResponse<TRequest>(TRequest request) where TRequest : PlacesRequest
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return http.Get<PlacesResponse>(url);
-		}
-
-		public async Task<PlacesResponse> GetResponseAsync<TRequest>(TRequest request) where TRequest : PlacesRequest
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return await http.GetAsync<PlacesResponse>(url);
-		}
 
 		/// <summary>
 		/// Sends the specified request to the Google Maps Places Autocomplate web
@@ -84,13 +63,5 @@ namespace Google.Maps.Places
 			return await http.GetAsync<AutocompleteResponse>(url);
 		}
 
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }

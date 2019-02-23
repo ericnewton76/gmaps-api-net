@@ -19,6 +19,7 @@ using System.IO;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.ApiCore;
 
 namespace Google.Maps.StaticMaps
 {
@@ -28,19 +29,14 @@ namespace Google.Maps.StaticMaps
 	/// map as an image you can display on your web page.
 	/// </summary>
 	/// <see href="https://developers.google.com/maps/documentation/staticmaps/"/>
-	public class StaticMapService : IDisposable
+	public class StaticMapService : ApiCore.BaseGmapsService<StaticMapRequest>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api");
 
-		Uri baseUri;
-		MapsHttp http;
-
-		public StaticMapService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public StaticMapService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
 		public byte[] GetImage(StaticMapRequest request)
@@ -59,16 +55,16 @@ namespace Google.Maps.StaticMaps
 
 		public Stream GetStream(StaticMapRequest request)
 		{
-			var uri = new Uri(baseUri, request.ToUri());
+			var uri = new Uri(BaseUri, request.ToUri());
 
-			return http.GetStream(uri);
+			return HttpService.GetStream(uri);
 		}
 
 		public Task<Stream> GetStreamAsync(StaticMapRequest request)
 		{
-			var uri = new Uri(baseUri, request.ToUri());
+			var uri = new Uri(BaseUri, request.ToUri());
 
-			return http.GetStreamAsync(uri);
+			return HttpService.GetStreamAsync(uri);
 		}
 
 		Byte[] StreamToArray(Stream inputStream)
@@ -89,13 +85,5 @@ namespace Google.Maps.StaticMaps
 			return outputStream.ToArray();
 		}
 
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }

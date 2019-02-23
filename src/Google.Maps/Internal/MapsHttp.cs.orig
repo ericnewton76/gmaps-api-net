@@ -22,7 +22,11 @@ using System.Threading.Tasks;
 using System.IO;
 
 using Newtonsoft.Json;
+<<<<<<< HEAD
+using Google.Maps.Internal.Serialization;
+=======
 using Google.ApiCore;
+>>>>>>> e91f2e8018faee002b2d7a56f846fa0818b123ca
 
 namespace Google.Maps.Internal
 {
@@ -30,9 +34,16 @@ namespace Google.Maps.Internal
 	{
 		JsonSerializerSettings settings = new JsonSerializerSettings
 		{
+<<<<<<< HEAD
+			Converters = new List<JsonConverter>
+			{
+				new JsonEnumTypeConverter(),
+				new JsonLatLngConverter()
+=======
 			Converters = new List<JsonConverter> {
 				new JsonEnumTypeConverter(),
 				new JsonLocationConverter()
+>>>>>>> e91f2e8018faee002b2d7a56f846fa0818b123ca
 			}
 		};
 

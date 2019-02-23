@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net461;netstandard1.3</TargetFrameworks>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <DelaySign>False</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
+    <DefineConstants>HAS_SYSTEMDRAWING</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <Compile Remove="Shared\**" />
+    <EmbeddedResource Remove="Shared\**" />
+    <None Remove="Shared\**" />
+=======
+    <Compile Remove="Internal\AsyncHelper.cs" />
+>>>>>>> e91f2e8018faee002b2d7a56f846fa0818b123ca
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+</Project>
