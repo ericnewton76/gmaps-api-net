@@ -19,7 +19,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Google.Maps;
+using Google.Maps.ApiCore;
 using Google.Maps.Common;
 using Google.Maps.Internal;
 using System.ComponentModel;

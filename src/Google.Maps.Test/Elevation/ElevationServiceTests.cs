@@ -18,7 +18,8 @@
 using System;
 
 using NUnit.Framework;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
+using Google.Maps.Common;
 
 namespace Google.Maps.Elevation
 {

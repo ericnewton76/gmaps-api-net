@@ -18,14 +18,14 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Places.Details
 {
 	/// <summary>
 	/// Provides a direct way to access Places Details via an HTTP request.
 	/// </summary>
-	public class PlaceDetailsService : ApiCore.BaseGmapsServiceTypedResponse<PlaceDetailsRequest, PlaceDetailsResponse>
+	public class PlaceDetailsService : BaseGmapsServiceTypedResponse<PlaceDetailsRequest, PlaceDetailsResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/details/");
 

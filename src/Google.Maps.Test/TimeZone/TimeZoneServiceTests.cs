@@ -19,7 +19,8 @@ using System;
 using System.Collections.Generic;
 
 using NUnit.Framework;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
+using Google.Maps.Common;
 
 namespace Google.Maps.TimeZone
 {

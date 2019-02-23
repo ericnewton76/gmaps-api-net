@@ -21,7 +21,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Linq;
 
-using Google.Maps;
+using Google.Maps.ApiCore;
 using Google.Maps.Common;
 using Google.Maps.Internal;
 

@@ -18,14 +18,14 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.TimeZone
 {
 	/// <summary>
 	/// Provides a direct way to access a time zone service via an HTTP request.
 	/// </summary>
-	public class TimeZoneService : ApiCore.BaseGmapsServiceTypedResponse<TimeZoneRequest, TimeZoneResponse>
+	public class TimeZoneService : BaseGmapsServiceTypedResponse<TimeZoneRequest, TimeZoneResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/timezone/outputFormat?parameters");
 

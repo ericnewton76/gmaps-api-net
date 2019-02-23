@@ -18,7 +18,7 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Places
 {
@@ -28,7 +28,7 @@ namespace Google.Maps.Places
 	/// points of interest, geographic locations, and more. You can search 
 	/// for places either by proximity or a text string.
 	/// </summary>
-	public class PlacesService : ApiCore.BaseGmapsServiceTypedResponse<PlacesRequest, PlacesResponse>
+	public class PlacesService : BaseGmapsServiceTypedResponse<PlacesRequest, PlacesResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/");
 

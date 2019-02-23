@@ -19,7 +19,7 @@ using System.IO;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.StaticMaps
 {

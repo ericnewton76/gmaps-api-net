@@ -18,7 +18,7 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Elevation
 {
@@ -28,7 +28,7 @@ namespace Google.Maps.Elevation
 	/// using the four nearest locations.
 	/// </summary>
 	/// <see href="http://code.google.com/apis/maps/documentation/elevation/"/>
-	public class ElevationService : ApiCore.BaseGmapsServiceTypedResponse<ElevationRequest, ElevationResponse>
+	public class ElevationService : BaseGmapsServiceTypedResponse<ElevationRequest, ElevationResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/elevation/");
 

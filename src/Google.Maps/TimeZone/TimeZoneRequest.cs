@@ -16,8 +16,7 @@
 */
 using System;
 
-using Google.Maps;
-using Google.Maps.Common;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.TimeZone
 {

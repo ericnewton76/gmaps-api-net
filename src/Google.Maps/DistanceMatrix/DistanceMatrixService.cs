@@ -18,7 +18,7 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.DistanceMatrix
 {
@@ -28,7 +28,7 @@ namespace Google.Maps.DistanceMatrix
 	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
 	/// <see href="http://developers.google.com/maps/documentation/distancematrix/"/>
-	public class DistanceMatrixService : ApiCore.BaseGmapsServiceTypedResponse<DistanceMatrixRequest, DistanceMatrixResponse>
+	public class DistanceMatrixService : BaseGmapsServiceTypedResponse<DistanceMatrixRequest, DistanceMatrixResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/distancematrix/");
 

@@ -17,7 +17,7 @@
 
 using System;
 using NUnit.Framework;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Roads
 {

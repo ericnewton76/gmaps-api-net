@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.ApiCore
 {

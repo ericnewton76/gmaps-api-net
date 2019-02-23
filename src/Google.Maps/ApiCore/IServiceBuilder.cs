@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Google.ApiCore
+namespace Google.Maps.ApiCore
 {
 
 	public interface IServiceBuilder<TService>

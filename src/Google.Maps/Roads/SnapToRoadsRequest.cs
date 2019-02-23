@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-using Google.Maps;
-using Google.Maps.Common;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Roads
 {

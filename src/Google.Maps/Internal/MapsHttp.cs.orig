@@ -25,7 +25,7 @@ using Newtonsoft.Json;
 <<<<<<< HEAD
 using Google.Maps.Internal.Serialization;
 =======
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 >>>>>>> e91f2e8018faee002b2d7a56f846fa0818b123ca
 
 namespace Google.Maps.Internal

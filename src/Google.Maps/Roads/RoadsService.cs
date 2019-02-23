@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Roads
 {
 
-	public class RoadsService : ApiCore.BaseGmapsServiceTypedResponse<SnapToRoadsRequest, SnapToRoadsResponse>
+	public class RoadsService : BaseGmapsServiceTypedResponse<SnapToRoadsRequest, SnapToRoadsResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://roads.googleapis.com/v1/");
 

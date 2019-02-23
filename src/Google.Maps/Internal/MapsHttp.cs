@@ -22,7 +22,8 @@ using System.Threading.Tasks;
 using System.IO;
 
 using Newtonsoft.Json;
-using Google.ApiCore;
+using Google.Maps.ApiCore;
+using Google.Maps.Internal.Serialization;
 
 namespace Google.Maps.Internal
 {
@@ -32,7 +33,7 @@ namespace Google.Maps.Internal
 		{
 			Converters = new List<JsonConverter> {
 				new JsonEnumTypeConverter(),
-				new JsonLocationConverter()
+				new JsonLatLngConverter()
 			}
 		};
 
