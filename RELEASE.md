@@ -11,3 +11,13 @@
 - modify package.json/appveyor.yml to bump up version for the next iteration
 - commit (chore(release): starting [version number]) and push
 - publish Bower and NuGet packages
+
+bash commands:
+```bash
+export BUILD_VERSION={{major}}.{{minor}}
+sed -i '1s/.*/version: $BUILD_VERSION\.{build}/' appveyor.yml
+git tag $BUILD_VERSION.0
+git add appveyor.yml && git commit -m "chore(release): $BUILD_VERSION.0"
+git push 
+git push --tags
+```
