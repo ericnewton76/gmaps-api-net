@@ -1,4 +1,4 @@
-version: 0.30.{build}
+version: 0.31.{build}
 
 pull_requests:
   do_not_increment_build_number: true
@@ -46,18 +46,25 @@ after_build:
   - cmd: ECHO nuget pack gmaps-api-net.nuspec -version "%GitVersion_NuGetVersion%" 
   - cmd: nuget pack gmaps-api-net.nuspec -version "%GitVersion_NuGetVersion%" 
 
-test_script:
-- ps: >-
-    
-    $DLL_LOCATION=".\src\Google.Maps.Test\bin\Release\net461\Google.Maps.Test.dll"
-    
-    nunit3-console $DLL_LOCATION --labels=All --where:"cat!=ValueTesting" "--result=testresults.xml;format=AppVeyor"
+#test_script:
+#- ps: >-
+#    
+#    $DLL_LOCATION=".\src\Google.Maps.Test\bin\Release\net461\Google.Maps.Test.dll"
+#    
+#    nunit3-console $DLL_LOCATION --labels=All --where:"cat!=ValueTesting" "--result=testresults.xml;format=AppVeyor"
+#
+#    if($? -eq $true) {
+#
+#      nunit3-console $DLL_LOCATION --labels=All --where:"cat!=ValueTesting" "--result=testresults2.xml;format=AppVeyor"
+#
+#    }
+test:
+  categories:
+    except:
+    - ValueTesting
+after_test:
+- cmd: curl 'https://api.ipify.org?format=json'
 
-    if($? -eq $true) {
-
-      nunit3-console $DLL_LOCATION --labels=All --where:"cat!=ValueTesting" "--result=testresults2.xml;format=AppVeyor"
-
-    }
 
 artifacts:
 - path: '*.nupkg'
@@ -71,7 +78,7 @@ deploy:
   on:
     APPVEYOR_REPO_TAG: true
 - provider: GitHub
-  tag: v$(APPVEYOR_BUILD_VERSION)
+  tag: $(APPVEYOR_REPO_TAG_NAME)
   auth_token:
     secure: bupArXj8lz6RLLO8GPwyRnbGwcmyjg4MvmlBsYD8x+euC9YS5G5y9jaSPCpS7tsX
   artifact: NugetPackage
