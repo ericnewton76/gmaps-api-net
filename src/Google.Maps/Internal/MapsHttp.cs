@@ -22,19 +22,25 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+using Google.Maps.ApiCore;
+using Google.Maps.Internal.Serialization;
+
 namespace Google.Maps.Internal
 {
-	public class MapsHttp : IDisposable
+	public class MapsHttp : IHttpService, IDisposable
 	{
 		JsonSerializerSettings settings = new JsonSerializerSettings
 		{
-			Converters = new List<JsonConverter> { new JsonEnumTypeConverter(), new JsonLocationConverter() }
+			Converters = new List<JsonConverter> {
+				new JsonEnumTypeConverter(),
+				new JsonLatLngConverter()
+			}
 		};
 
-		GoogleSigned signingSvc;
+		ISigningService signingSvc;
 		HttpClient client;
 
-		public MapsHttp(GoogleSigned signingSvc)
+		public MapsHttp(ISigningService signingSvc)
 		{
 			this.signingSvc = signingSvc;
 			this.client = new HttpClient();
@@ -47,7 +53,10 @@ namespace Google.Maps.Internal
 
 		public async Task<T> GetAsync<T>(Uri uri) where T : class
 		{
-			uri = SignUri(uri);
+			if(this.signingSvc != null)
+			{
+				uri = signingSvc.GetSignedUri(uri);
+			}
 
 			var json = await client.GetStringAsync(uri).ConfigureAwait(false);
 
@@ -63,7 +72,10 @@ namespace Google.Maps.Internal
 
 		public async Task<Stream> GetStreamAsync(Uri uri)
 		{
-			uri = SignUri(uri);
+			if(this.signingSvc != null)
+			{
+				uri = signingSvc.GetSignedUri(uri);
+			}
 
 			return await client.GetStreamAsync(uri).ConfigureAwait(false);
 		}
@@ -71,13 +83,6 @@ namespace Google.Maps.Internal
 		public Stream GetStream(Uri uri)
 		{
 			return GetStreamAsync(uri).GetAwaiter().GetResult();
-		}
-
-		Uri SignUri(Uri uri)
-		{
-			if (signingSvc == null) return uri;
-
-			return new Uri(signingSvc.GetSignedUri(uri));
 		}
 
 		public void Dispose()

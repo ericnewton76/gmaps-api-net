@@ -4,7 +4,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Google.Maps
+namespace Google.Maps.Internal.Serialization
 {
 	public abstract class JsonCreationConverter<T> : JsonConverter
 	{
@@ -31,11 +31,5 @@ namespace Google.Maps
 		}
 	}
 
-	public class JsonLocationConverter : JsonCreationConverter<Location>
-	{
-		protected override Location Create(Type objectType, JObject jsonObject)
-		{
-			return new LatLng(jsonObject.Value<double>("lat"), jsonObject.Value<double>("lng"));
-		}
-	}
+
 }

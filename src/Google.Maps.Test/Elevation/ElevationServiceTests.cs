@@ -18,6 +18,8 @@
 using System;
 
 using NUnit.Framework;
+using Google.Maps.ApiCore;
+using Google.Maps.Common;
 
 namespace Google.Maps.Elevation
 {
@@ -28,7 +30,15 @@ namespace Google.Maps.Elevation
 
 		ElevationService CreateService()
 		{
-			var svc = new ElevationService(TestingApiKey);
+			var svc = new ElevationService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri:null
+			);
+
 			return svc;
 		}
 

@@ -6,6 +6,7 @@ using Google.Maps.StreetView;
 using FluentAssertions.Collections;
 using FluentAssertions;
 using Google.Maps.Test;
+using Google.Maps.Common;
 
 namespace Google.Maps.StreetView
 {
@@ -24,7 +25,7 @@ namespace Google.Maps.StreetView
 			StreetViewRequest sm = new StreetViewRequest()
 			{
 				Location = new LatLng(30.1, -60.2)
-				,Size = new MapSize(512, 512)
+				,Size = new GSize(512, 512)
 			};
 
 			//act
@@ -44,7 +45,7 @@ namespace Google.Maps.StreetView
 			StreetViewRequest sm = new StreetViewRequest()
 			{
 				Location = new LatLng(30.1, -60.2)
-				,Size = new MapSize(512, 512)
+				,Size = new GSize(512, 512)
 				,Heading = 15
 			};
 
@@ -65,7 +66,7 @@ namespace Google.Maps.StreetView
 			StreetViewRequest sm = new StreetViewRequest()
 			{
 				Location = new LatLng(30.1, -60.2)
-				,Size = new MapSize(512, 512)
+				,Size = new GSize(512, 512)
 				,Pitch = 15
 			};
 

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Google.Maps;
 using System.ComponentModel;
+
+using Google.Maps.ApiCore;
+using Google.Maps.Common;
+using Google.Maps.Internal;
 
 namespace Google.Maps.Direction
 {

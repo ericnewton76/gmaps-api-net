@@ -18,6 +18,9 @@
 using System;
 using System.Linq;
 
+using Google.Maps.ApiCore;
+
+
 namespace Google.Maps.Places
 {
 	public abstract class PlacesRequest : BaseRequest

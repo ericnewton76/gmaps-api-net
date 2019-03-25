@@ -21,7 +21,9 @@ using System.Net.Http;
 
 using NUnit.Framework;
 
-using Google.Maps.Shared;
+using Google.Maps.Common;
+using Google.Maps.ApiCore;
+using Google.Maps.Internal;
 
 namespace Google.Maps.Geocoding
 {
@@ -32,7 +34,14 @@ namespace Google.Maps.Geocoding
 
 		GeocodingService CreateService()
 		{
-			var svc = new GeocodingService(TestingApiKey);
+			var svc = new GeocodingService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri: null
+			);
 			return svc;
 		}
 
@@ -230,7 +239,7 @@ namespace Google.Maps.Geocoding
 				Address = "AL. GRUNWALDZKA 141, Gdańsk, 80 - 264, POLAND"
 			};
 
-			var response = new GeocodingService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			if(response.Status == ServiceResponseStatus.OverQueryLimit)
 			{

@@ -1,5 +1,6 @@
-﻿using Google.Maps.Shared;
+﻿
 using Newtonsoft.Json;
+using Google.Maps.Common;
 
 namespace Google.Maps.Places.Details
 {

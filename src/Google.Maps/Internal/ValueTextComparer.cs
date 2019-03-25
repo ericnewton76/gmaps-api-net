@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Google.Maps
+using Newtonsoft.Json;
+using Google.Maps.Common;
+
+namespace Google.Maps.Internal
 {
 	public class ValueTextComparer : IComparer<ValueText>
 	{

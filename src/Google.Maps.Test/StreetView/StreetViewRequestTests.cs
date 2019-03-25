@@ -2,6 +2,7 @@
 
 using NUnit.Framework;
 using Google.Maps.StreetView;
+using Google.Maps.Common;
 
 namespace Google.Maps.StreetView
 {
@@ -15,7 +16,7 @@ namespace Google.Maps.StreetView
 			{
 				StreetViewRequest sm = new StreetViewRequest()
 				{
-					Size = new MapSize(-1, -1)
+					Size = new GSize(-1, -1)
 				};
 			});
 		}
@@ -27,7 +28,7 @@ namespace Google.Maps.StreetView
 			{
 				StreetViewRequest sm = new StreetViewRequest()
 				{
-					Size = new MapSize(4097, 4097)
+					Size = new GSize(4097, 4097)
 				};
 			});
 		}

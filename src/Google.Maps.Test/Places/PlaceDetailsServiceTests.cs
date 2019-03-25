@@ -2,16 +2,32 @@
 using System.Collections.Generic;
 
 using NUnit.Framework;
+using Google.Maps.ApiCore;
+using Google.Maps.Common;
 
 namespace Google.Maps.Places.Details
 {
 	[TestFixture]
 	class PlaceDetailsServiceTests
 	{
+		GoogleSigned TestingApiKey;
+
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			GoogleSigned.AssignAllServices(SigningHelper.GetApiKey());
+			TestingApiKey = SigningHelper.GetApiKey();
+		}
+
+		private PlaceDetailsService CreateService()
+		{
+			return new PlaceDetailsService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri: null
+			);
 		}
 
 		[TestCase("ChIJN1t_tDeuEmsRUsoyG83frY4", "Google")]
@@ -23,7 +39,7 @@ namespace Google.Maps.Places.Details
 			{
 				PlaceID = placeID
 			};
-			var response = new PlaceDetailsService().GetResponse(request);
+			var response = CreateService().GetResponse(request);
 
 			if(response.Status == ServiceResponseStatus.OverQueryLimit)
 			{

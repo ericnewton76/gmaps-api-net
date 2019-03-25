@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Google.Maps.Internal;
+using Google.Maps.Common;
+
 namespace Google.Maps.Test
 {
 	[TestFixture]

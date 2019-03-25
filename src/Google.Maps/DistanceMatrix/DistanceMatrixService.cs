@@ -18,6 +18,7 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.DistanceMatrix
 {
@@ -27,42 +28,15 @@ namespace Google.Maps.DistanceMatrix
 	/// <para>This service does not return detailed route information. Route information can be obtained by passing the desired single origin and destination to the Directions API.</para>
 	/// </summary>
 	/// <see href="http://developers.google.com/maps/documentation/distancematrix/"/>
-	public class DistanceMatrixService : IDisposable
+	public class DistanceMatrixService : BaseGmapsServiceTypedResponse<DistanceMatrixRequest, DistanceMatrixResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/distancematrix/");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/distancematrix/");
 
-		Uri baseUri;
-		MapsHttp http;
-
-		public DistanceMatrixService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public DistanceMatrixService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
-		public DistanceMatrixResponse GetResponse(DistanceMatrixRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return http.Get<DistanceMatrixResponse>(url);
-		}
-
-		public async Task<DistanceMatrixResponse> GetResponseAsync(DistanceMatrixRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return await http.GetAsync<DistanceMatrixResponse>(url);
-		}
-
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }

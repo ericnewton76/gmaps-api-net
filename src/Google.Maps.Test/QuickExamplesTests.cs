@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Google.Maps.Direction;
 using Google.Maps.Geocoding;
 using Google.Maps.StaticMaps;
+using Google.Maps.Common;
 
 namespace Google.Maps
 {
@@ -19,10 +20,10 @@ namespace Google.Maps
 		static GoogleSigned TestingApiKey;
 
 		[OneTimeSetUp]
-		public void OneTimeSetUp()
+		public void OneTimeSetup()
 		{
-			TestingApiKey = SigningHelper.GetApiKey();
-			GoogleSigned.AssignAllServices(TestingApiKey);
+			this.TestingApiKey = SigningHelper.GetApiKey();
+			this.GMaps = new Services(TestingApiKey);
 		}
 		[OneTimeTearDown]
 		public void OneTimeTearDown()
@@ -30,13 +31,18 @@ namespace Google.Maps
 			GoogleSigned.AssignAllServices(null);
 		}
 
+
+		Google.Maps.Services GMaps;
+
 		[Test]
 		[Category("ValueTesting")]
 		public void GeocodingRequest_Example()
 		{
+			var GMaps = new Google.Maps.Services("YOUR_API_KEY");
+			
 			var request = new GeocodingRequest();
 			request.Address = "1600 Amphitheatre Parkway Mountain View, CA 94043";
-			var response = new GeocodingService().GetResponse(request);
+			var response = GMaps.GeocodingService.GetResponse(request);
 
 			// --break in the online version here-- //
 
@@ -56,7 +62,7 @@ namespace Google.Maps
 		{
 			var map = new StaticMapRequest();
 			map.Center = new Location("1600 Amphitheatre Parkway Mountain View, CA 94043");
-			map.Size = new MapSize(400, 400);
+			map.Size = new GSize(400, 400);
 			map.Zoom = 14;
 
 			var imgTagSrc = map.ToUri();
@@ -76,7 +82,7 @@ namespace Google.Maps
 				Origin = new Location("410 Beeeeeechwood Rd, NJ 07450"),
 				Destination = new Location("204 Powell Ave, CA 94523")
 			};
-			var response = new DirectionService().GetResponse(request);
+			var response = GMaps.DirectionService.GetResponse(request);
 
 			Assert.True(response.Waypoints.Any(wp => wp.PartialMatch));
 		}

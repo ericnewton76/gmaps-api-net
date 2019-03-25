@@ -15,7 +15,7 @@ PS> Install-Package gmaps-api-net
 This project attempts to provide all the features available in the Google Maps API. It is being developed in C# for the Microsoft .NET including .Net Framework v4.6.1+ and .Net Standard v1.3+. *gmaps-api-net* is a fully featured API client library, providing strongly typed access to the API.
 
 ## Notable Upcoming 
-* Trying to achieve a formal v1.0 release for 2018. This is basically on-track for first week of January. File any major issues quickly to get addressed before v1.0!
+* Trying to achieve a formal v1.0 release. File any major issues quickly to get addressed before v1.0!
 * Planning a slight namespace/usage change for v2.0 release soon thereafter to support dependency injection and mocking away the library in your own testing apparatus.  Intention here is to isolate away the library returning values to returning known values during your testing. See branch [feat/support-dependency-injection](https://github.com/ericnewton76/gmaps-api-net/tree/feat/support-dependency-injection)
 * In relation to above, we will begin removing our tests for specific values, and testing instead for schema changes that Google is pushing through.
 
@@ -41,12 +41,12 @@ Google is now requiring a proper API key for accessing the service. Create a key
 Let's suppose we want to search an address and get more information about it. We can write:
 
 ```c#
-//always need to use YOUR_API_KEY for requests.  Do this in App_Start.
-GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
+//always need to use YOUR_API_KEY for requests.
+var GMaps = new Google.Maps.Services("YOUR_API_KEY");
 
 var request = new GeocodingRequest();
 request.Address = "1600 Pennsylvania Ave NW, Washington, DC 20500";
-var response = new GeocodingService().GetResponse(request);
+var response = GMaps.GeocodingService.GetResponse(request);
 
 //The GeocodingService class submits the request to the API web service, and returns the
 //response strongly typed as a GeocodeResponse object which may contain zero, one or more results.
@@ -71,11 +71,12 @@ else
 Static Maps API support allows you to get a valid url or a streamed bitmap which you can use:
 
 ```c#
-//always need to use YOUR_API_KEY for requests.  Do this in App_Start.
-GoogleSigned.AssignAllServices(new GoogleSigned("YOUR_API_KEY"));
+//always need to use YOUR_API_KEY for requests.
+var GMaps = new Google.Maps.Services("YOUR_API_KEY");
+
 var map = new StaticMapRequest();
 map.Center = new Location("1600 Pennsylvania Ave NW, Washington, DC 20500");
-map.Size = new System.Drawing.Size(400, 400);
+map.Size = new GSize(400, 400);
 map.Zoom = 14;
 ```
 
@@ -112,33 +113,35 @@ this.imageControl.Image = img;
 
 ```c#
 //enterprise users to use your supplied information for requests.  Do this in App_Start.
-GoogleSigned.AssignAllServices(new GoogleSigned("gme-your-client-id", "your-signing-key", signType: GoogleSignedType.Business));
+var GMaps = new Google.Maps.Services(new GoogleSigned("gme-your-client-id", "your-signing-key"));
 
 // Then do as many requests as you like...
 var request = new GeocodingRequest();
 //...
-var response = GeocodingService.GetResponse(request);
+var response = GMaps.GeocodingService.GetResponse(request);
 ```
 
 ### Using a Google Maps API key
 
 ```c#
 //always need to use YOUR_API_KEY for requests.  Do this in App_Start.
-GoogleSigned.AssignAllServices(new GoogleSigned("your-api-key"));
+var GMaps = new Google.Maps.Services("YOUR_API_KEY");
 
 // Then do as many requests as you like...
 var request = new GeocodingRequest();
 //...
-var response = GeocodingService.GetResponse(request);
+var response = GMaps.GeocodingService.GetResponse(request);
 ```
 
 You can also use a particular key for a single request:
 
 ```c#
-const GoogleSigned apikey = new GoogleSigned("special_api_key_here");
+var GMaps = new Google.Maps.Services("YOUR_API_KEY");
+
+var GMapsSecretKey = GMaps.WithSigningService(new GoogleApiSigningService(new GoogleSigned("special_api_key_here"));
 var request = new GeocodingRequest();
 //...
-var service = new GeocodingService(request, apikey);
+var service = GMapsSecretKey.GeocodingService.GetResponse(request);
 ```
 
 ## Contact
@@ -150,6 +153,7 @@ Questions, comments and/or suggestions are welcome! Please raise an [issue](http
 ## Contributors
 A big thank you to all of our [contributors](https://github.com/ericnewton76/gmaps-api-net/graphs/contributors) including:
 
+- [Luis Farzati](https://github.com/luisfarzati)
 - [Eric Newton](https://github.com/ericnewton76)
 - [Sheepzez](https://github.com/Sheepzez)
 - [Mieliespoor](https://github.com/mieliespoor)

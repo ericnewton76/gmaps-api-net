@@ -19,6 +19,8 @@ using System;
 using System.Collections.Generic;
 
 using NUnit.Framework;
+using Google.Maps.ApiCore;
+using Google.Maps.Common;
 
 namespace Google.Maps.TimeZone
 {
@@ -28,7 +30,14 @@ namespace Google.Maps.TimeZone
 
 		TimeZoneService CreateService()
 		{
-			var svc = new TimeZoneService(TestingApiKey);
+			var svc = new TimeZoneService(
+				new Internal.MapsHttp(
+					new GoogleApiSigningService(
+						TestingApiKey
+					)
+				),
+				baseUri: null
+			);
 			return svc;
 		}
 

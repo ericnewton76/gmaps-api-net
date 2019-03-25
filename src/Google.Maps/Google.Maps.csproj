@@ -10,6 +10,11 @@
     <DefineConstants>HAS_SYSTEMDRAWING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Shared\**" />
+    <EmbeddedResource Remove="Shared\**" />
+    <None Remove="Shared\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
   <ItemGroup>

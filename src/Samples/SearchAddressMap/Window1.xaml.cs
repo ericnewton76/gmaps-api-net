@@ -12,6 +12,8 @@ using Google.Maps.StreetView;
 using System.Net.Http;
 using System.IO;
 
+using Google.Maps.Common;
+
 namespace SearchAddressMap
 {
 	/// <summary>
@@ -46,12 +48,12 @@ namespace SearchAddressMap
 			{
 				Center = location
 				,Zoom = Convert.ToInt32(zoomSlider.Value)
-				,Size = new MapSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
+				,Size = new GSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
 				,MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true)
 			};
 			request.Markers.Add(request.Center);
 
-			var mapSvc = new StaticMapService();
+			var mapSvc = GMaps.StaticMapsService;
 
 			var imageSource = new BitmapImage();
 			imageSource.BeginInit();
@@ -68,7 +70,7 @@ namespace SearchAddressMap
 			{
 				Location = location
 				//,Zoom = Convert.ToInt32(zoomSlider.Value),
-				, Size = new MapSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
+				, Size = new GSize(Convert.ToInt32(imageControl.Width), Convert.ToInt32(imageControl.Height))
 				//,MapType = (MapTypes)Enum.Parse(typeof(MapTypes), ((ComboBoxItem)mapTypeComboBox.SelectedItem).Content.ToString(), true)
 				, Heading = Convert.ToInt16(Convert.ToInt16(headingSlider.Value) + 180)
 				, Pitch = Convert.ToInt16(Convert.ToInt16(pitchSlider.Value))
@@ -95,7 +97,7 @@ namespace SearchAddressMap
 			var request = new GeocodingRequest();
 			request.Address = searchTextBox.Text;
 
-			var response = await new GeocodingService().GetResponseAsync(request);
+			var response = await GMaps.GeocodingService.GetResponseAsync(request);
 
 			if(response.Status == ServiceResponseStatus.Ok)
 			{
@@ -149,8 +151,10 @@ namespace SearchAddressMap
 
 		private void txtGoogleApiKey_LostFocus(object sender, RoutedEventArgs e)
 		{
-			GoogleSigned.AssignAllServices(new GoogleSigned(txtGoogleApiKey.Text));
+			GMaps = new Services(txtGoogleApiKey.Text);
 		}
+
+		Google.Maps.Services GMaps = new Services("YOUR_API_KEY");
 
 		private void btnTestUrl_Click(object sender, RoutedEventArgs e)
 		{

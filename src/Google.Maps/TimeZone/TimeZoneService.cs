@@ -18,54 +18,22 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.TimeZone
 {
 	/// <summary>
 	/// Provides a direct way to access a time zone service via an HTTP request.
 	/// </summary>
-	public class TimeZoneService : IDisposable
+	public class TimeZoneService : BaseGmapsServiceTypedResponse<TimeZoneRequest, TimeZoneResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/timezone/outputFormat?parameters");
 
-		Uri baseUri;
-		MapsHttp http;
-
-		public TimeZoneService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public TimeZoneService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
-		/// <summary>
-		/// Sends the specified request to the Google Maps Time Zone web
-		/// service and parses the response as an TimeZoneResponse
-		/// object.
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		public TimeZoneResponse GetResponse(TimeZoneRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return http.Get<TimeZoneResponse>(url);
-		}
-
-		public async Task<TimeZoneResponse> GetResponseAsync(TimeZoneRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return await http.GetAsync<TimeZoneResponse>(url);
-		}
-
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }

@@ -18,6 +18,7 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Elevation
 {
@@ -27,49 +28,15 @@ namespace Google.Maps.Elevation
 	/// using the four nearest locations.
 	/// </summary>
 	/// <see href="http://code.google.com/apis/maps/documentation/elevation/"/>
-	public class ElevationService : IDisposable
+	public class ElevationService : BaseGmapsServiceTypedResponse<ElevationRequest, ElevationResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/elevation/");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/elevation/");
 
-		Uri baseUri;
-		MapsHttp http;
-
-		public ElevationService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public ElevationService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
-		/// <summary>
-		/// Sends the specified request to the Google Maps Elevation web
-		/// service and parses the response as an ElevationResponse
-		/// object.
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		public ElevationResponse GetResponse(ElevationRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return http.Get<ElevationResponse>(url);
-		}
-
-		public async Task<ElevationResponse> GetResponseAsync(ElevationRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return await http.GetAsync<ElevationResponse>(url);
-		}
-
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }

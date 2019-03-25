@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Google.Maps
+namespace Google.Maps.Common
 {
 	/// <summary>
 	/// In a geocoding response, the Google Maps Geocoding API can return address results restricted to a specific area.

@@ -18,55 +18,22 @@ using System;
 using System.Threading.Tasks;
 
 using Google.Maps.Internal;
+using Google.Maps.ApiCore;
 
 namespace Google.Maps.Places.Details
 {
 	/// <summary>
 	/// Provides a direct way to access Places Details via an HTTP request.
 	/// </summary>
-	public class PlaceDetailsService : IDisposable
+	public class PlaceDetailsService : BaseGmapsServiceTypedResponse<PlaceDetailsRequest, PlaceDetailsResponse>
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.googleapis.com/maps/api/place/details/");
 
-		Uri baseUri;
-		MapsHttp http;
-
-		public PlaceDetailsService(GoogleSigned signingSvc = null, Uri baseUri = null)
+		public PlaceDetailsService(IHttpService httpService, Uri baseUri)
 		{
-			this.baseUri = baseUri ?? HttpsUri;
-
-			this.http = new MapsHttp(signingSvc ?? GoogleSigned.SigningInstance);
+			this.HttpService = httpService;
+			this.BaseUri = (baseUri != null ? baseUri : HttpsUri);
 		}
 
-
-		/// <summary>
-		/// Sends the specified request to the Google Maps Places web
-		/// service and parses the response as an PlaceDetailsResponse
-		/// object.
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		public PlaceDetailsResponse GetResponse(PlaceDetailsRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return http.Get<PlaceDetailsResponse>(url);
-		}
-
-		public async Task<PlaceDetailsResponse> GetResponseAsync(PlaceDetailsRequest request)
-		{
-			var url = new Uri(baseUri, request.ToUri());
-
-			return await http.GetAsync<PlaceDetailsResponse>(url);
-		}
-
-		public void Dispose()
-		{
-			if (http != null)
-			{
-				http.Dispose();
-				http = null;
-			}
-		}
 	}
 }

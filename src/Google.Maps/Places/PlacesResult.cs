@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-using Google.Maps.Shared;
 using Newtonsoft.Json;
 using System;
+using Google.Maps.Common;
 
 namespace Google.Maps.Places
 {

@@ -18,6 +18,8 @@
 using System;
 using System.Linq;
 
+using Google.Maps.Common;
+
 namespace Google.Maps.Places
 {
 	/// <summary>
@@ -77,7 +79,7 @@ namespace Google.Maps.Places
 
 			qsb.Append("location", Location.GetAsUrlParameter());
 
-			if(RankBy.GetValueOrDefault(Maps.RankBy.Prominence) != Maps.RankBy.Distance)
+			if(RankBy.GetValueOrDefault(Google.Maps.Common.RankBy.Prominence) != Google.Maps.Common.RankBy.Distance)
 			{
 				// Note that radius must not be included if rankby=distance
 				qsb.Append("radius", Radius.ToString());
@@ -142,11 +144,11 @@ namespace Google.Maps.Places
 
 			if(Location == null) throw new InvalidOperationException("Location property is not set");
 
-			if(RankBy != null && RankBy != Maps.RankBy.Distance)
+			if(RankBy != null && RankBy != Google.Maps.Common.RankBy.Distance)
 			{
 				if(!Radius.HasValue) throw new ArgumentException("Radius property is not set.");
 			}
-			else if(RankBy != null && RankBy == Maps.RankBy.Distance)
+			else if(RankBy != null && RankBy == Google.Maps.Common.RankBy.Distance)
 			{
 				if(string.IsNullOrEmpty(Keyword) && string.IsNullOrEmpty(Name) && (Types == null || !Types.Any()))
 				{

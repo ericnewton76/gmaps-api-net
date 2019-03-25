@@ -17,7 +17,8 @@
 
 using System;
 
-using Google.Maps.Shared;
+using Google.Maps.ApiCore;
+using Google.Maps.Common;
 
 namespace Google.Maps.Geocoding
 {

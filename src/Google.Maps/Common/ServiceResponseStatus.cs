@@ -15,38 +15,50 @@
  * limitations under the License.
  */
 
-namespace Google.Maps.Shared
+namespace Google.Maps.Common
 {
-	public enum LocationType
+	public enum ServiceResponseStatus
 	{
-		/// <summary>
-		/// Unknown
-		/// </summary>
 		Unknown = 0,
 
 		/// <summary>
-		/// Indicates that the returned result is a precise geocode for which we have
-		/// location information accurate down to street address precision.
+		/// Indicates that no errors occurred; the address was successfully 
+		/// parsed and at least one geocode was returned.
 		/// </summary>
-		Rooftop = 1,
+		Ok = -1,
 
 		/// <summary>
-		/// Indicates that the returned result reflects an approximation (usually on
-		/// a road) interpolated between two precise points (such as intersections).
-		/// Interpolated results are generally returned when rooftop geocodes are
-		/// unavailable for a street address.
+		/// Indicating the service request was malformed.
 		/// </summary>
-		RangeInterpolated = 2,
+		InvalidRequest = 1,
 
 		/// <summary>
-		/// Indicates that the returned result is the geometric center of a result
-		/// such as a polyline (for example, a street) or polygon (region).
+		/// Indicates that the geocode was successful but returned no results.
+		/// This may occur if the geocode was passed a non-existent address or
+		/// a latlng in a remote location.
 		/// </summary>
-		GeometricCenter = 3,
+		ZeroResults = 2,
 
 		/// <summary>
-		/// Indicates that the returned result is approximate.
+		/// Indicates that you are over your quota.
 		/// </summary>
-		Approximate = 4
+		OverQueryLimit = 3,
+
+		/// <summary>
+		/// Indicates that your request was denied.
+		/// </summary>
+		RequestDenied = 4,
+
+		/// <summary>
+		/// At least one of the provided locations in the request could not
+		/// be geocoded.
+		/// </summary>
+		NotFound = 5,
+
+		/// <summary>
+		/// Indicates that too many waypoints were provided in the request.
+		/// Without an API key the maximum number is 8.
+		/// </summary>
+		MaxWaypointsExceeded = 6
 	}
 }

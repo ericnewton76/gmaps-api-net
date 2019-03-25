@@ -16,6 +16,8 @@
  */
 using System;
 using System.Collections.Generic;
+
+using Google.Maps.ApiCore;
 using Google.Maps.Internal;
 
 namespace Google.Maps.Elevation
