@@ -15,7 +15,7 @@ namespace Google.Maps.Direction
 		public ValueText Duration { get; set; }
 		
 		[JsonProperty("duration_in_traffic")]
-		public ValueText Duration { get; set; }
+		public ValueText DurationInTraffic { get; set; }
 
 		[JsonProperty("distance")]
 		public ValueText Distance { get; set; }
