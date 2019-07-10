@@ -28,10 +28,9 @@ namespace Google.Maps.Geocoding
 	/// (turning coordinates into addresses); this process is known as
 	/// "reverse geocoding."
 	/// </summary>
-	public class GeocodingService : IDisposable
+	public class GeocodingService : IGeocodingService
 	{
 		public static readonly Uri HttpsUri = new Uri("https://maps.google.com/maps/api/geocode/");
-		public static readonly Uri HttpUri = new Uri("http://maps.google.com/maps/api/geocode/");
 
 		Uri baseUri;
 		MapsHttp http;
