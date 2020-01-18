@@ -42,7 +42,7 @@ namespace Google.Maps.DistanceMatrix
 
 		/// <summary>
 		///  (optional) Specifies the unit system to use when expressing distance as text.
-		///   <see href="http://code.google.com/intl/it-IT/apis/maps/documentation/distancematrix/#unit_systems"/>
+		///   <see href="https://developers.google.com/maps/documentation/distance-matrix/intro#unit_systems"/>
 		/// </summary>
 		public Units Units { get; set; }
 
@@ -51,6 +51,42 @@ namespace Google.Maps.DistanceMatrix
 		/// <see href="http://code.google.com/apis/maps/faq.html#languagesupport" />
 		/// </summary>
 		public string Language { get; set; }
+
+		/// <summary>
+		/// (optional) Specifies the desired time of arrival for transit requests, in seconds since midnight, January 1, 1970 UTC.
+		/// You can specify either departure_time or arrival_time, but not both.
+		/// Note that arrival_time must be specified as an integer.
+		/// <see href="https://developers.google.com/maps/documentation/distance-matrix/intro" />
+		/// </summary>
+		public int? DepartureTime { get; set; }
+
+		/// <summary>
+		/// (optional) The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC.
+		/// Alternatively, you can specify a value of now, which sets the departure time to the current time (correct to the nearest second).
+		/// <see href="https://developers.google.com/maps/documentation/distance-matrix/intro" />
+		/// </summary>
+		public int? ArrivalTime { get; set; }
+
+		/// <summary>
+		/// (optional) Specifies the assumptions to use when calculating time in traffic.
+		/// This setting affects the value returned in the duration_in_traffic field in the response, which contains the predicted time in traffic based on historical averages.
+		/// The traffic_model parameter may only be specified for requests where the travel mode is driving, and where the request includes a departure_time, and only if the request includes an API key or a Google Maps Platform Premium Plan client ID
+		/// <see href="https://developers.google.com/maps/documentation/distance-matrix/intro" />
+		/// </summary>
+		public TrafficModels TrafficModel { get; set; }
+
+		/// <summary>
+		/// (optional) Specifies one or more preferred modes of transit. This parameter may only be specified for requests where the mode is transit
+		/// <see href="https://developers.google.com/maps/documentation/distance-matrix/intro" />
+		/// </summary>
+		public TransitModes TransitMode { get; set; }
+
+		/// <summary>
+		/// (optional) Specifies preferences for transit requests. Using this parameter, you can bias the options returned, rather than accepting the default best route chosen by the API.
+		/// This parameter may only be specified for requests where the mode is transit.
+		/// <see href="https://developers.google.com/maps/documentation/distance-matrix/intro" />
+		/// </summary>
+		public TransitRoutingPreferences TransitRoutingPreference { get; set; }
 
 		/// <summary>
 		///  List of origin waypoints
@@ -158,7 +194,20 @@ namespace Google.Maps.DistanceMatrix
 				.Append("mode", Mode.ToString())
 				.Append("language", Language)
 				.Append("units", Units.ToString())
-				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid));
+				.Append("avoid", AvoidHelper.MakeAvoidString(Avoid))
+				.Append("departure_time", DepartureTime.ToString());
+
+			if(DepartureTime == null)
+				qsb.Append("arrival_time", ArrivalTime.ToString());
+
+			if (DepartureTime != null && Mode.Equals(TravelMode.driving))
+				qsb.Append("traffic_model ", TrafficModel.ToString());
+
+			if (Mode.Equals(TravelMode.transit))
+			{
+				qsb.Append("transit_mode", TransitMode.ToString());
+				qsb.Append("transit_routing_preference ", TransitRoutingPreference.ToString());
+			}
 
 			var url = "json?" + qsb.ToString();
 
