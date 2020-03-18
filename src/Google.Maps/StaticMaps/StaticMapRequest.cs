@@ -277,8 +277,14 @@ namespace Google.Maps.StaticMaps
 			{
 				sb.Length = 0;
 
+				if(currentPath.Weight.HasValue)
+				{
+					sb.Append("weight:").Append(currentPath.Weight.ToString());
+				}
+
 				if(!currentPath.Color.IsUndefined)
 				{
+					if (sb.Length > 0) sb.Append(Constants.PIPE_URL_ENCODED);
 					sb.Append("color:").Append(currentPath.Color.To32BitColorString());
 				}
 
