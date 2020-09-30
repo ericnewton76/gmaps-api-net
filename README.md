@@ -14,7 +14,7 @@ PS> Install-Package gmaps-api-net
 ## Overview
 This project attempts to provide all the features available in the Google Maps API. It is being developed in C# for the Microsoft .NET including .Net Framework v4.6.1+ and .Net Standard v1.3+. *gmaps-api-net* is a fully featured API client library, providing strongly typed access to the API.
 
-## Notable Upcoming 
+## Coming soon
 * Trying to achieve a formal v1.0 release for 2018. This is basically on-track for first week of January. File any major issues quickly to get addressed before v1.0!
 * Planning a slight namespace/usage change for v2.0 release soon thereafter to support dependency injection and mocking away the library in your own testing apparatus.  Intention here is to isolate away the library returning values to returning known values during your testing. See branch [feat/support-dependency-injection](https://github.com/ericnewton76/gmaps-api-net/tree/feat/support-dependency-injection)
 * In relation to above, we will begin removing our tests for specific values, and testing instead for schema changes that Google is pushing through.
