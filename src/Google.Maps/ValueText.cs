@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Google.Maps
@@ -18,5 +16,11 @@ namespace Google.Maps
 		{
 			return String.Format("{0} ({1})", Text, Value);
 		}
+	}
+
+	public class FareValueText: ValueText
+	{
+		[JsonProperty("currency")]
+		public string Currency { get; set; }
 	}
 }
