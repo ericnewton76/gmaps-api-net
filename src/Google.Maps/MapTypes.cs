@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Google.Maps
+﻿namespace Google.Maps
 {
 	/// <summary>
 	/// The available map types for the current Google Maps API.

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Google.Maps {
+﻿namespace Google.Maps {
 	/// <summary>
 	/// Specifies the assumptions to use when calculating time in traffic. This setting affects the value returned in the duration_in_traffic field in the response,
 	/// which contains the predicted time in traffic based on historical averages. The traffic_model parameter may only be specified for driving directions where

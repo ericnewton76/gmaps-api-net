@@ -16,9 +16,6 @@
  */
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
-
 using Google.Maps.Internal;
 using System.ComponentModel;
 

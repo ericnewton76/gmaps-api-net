@@ -17,7 +17,6 @@
 
 using Google.Maps.Shared;
 using Newtonsoft.Json;
-using System;
 
 namespace Google.Maps.Places
 {

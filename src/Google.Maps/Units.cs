@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Google.Maps
+﻿namespace Google.Maps
 {
 	/// <summary>
 	///  When you calculate Directions Matrix, you may specify which Unit system mode to use. 

@@ -1,10 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+	  <TargetFramework>net7.0</TargetFramework>
+	  <LangVersion>latest</LangVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <DelaySign>False</DelaySign>
+    <Configurations>Debug;Release;Release_PathDiagnostics</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
     <DefineConstants>HAS_SYSTEMDRAWING</DefineConstants>
