@@ -16,7 +16,6 @@
  */
 
 using Newtonsoft.Json;
-using System;
 using Google.Maps.Common;
 
 namespace Google.Maps.TimeZone

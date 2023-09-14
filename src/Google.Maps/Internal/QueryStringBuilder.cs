@@ -15,8 +15,6 @@
  * limitations under the License.
  */
 
-using System;
-
 namespace Google.Maps.Internal
 {
 	internal class QueryStringBuilder

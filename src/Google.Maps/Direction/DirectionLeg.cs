@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Google.Maps.Direction
 {
@@ -13,6 +10,9 @@ namespace Google.Maps.Direction
 
 		[JsonProperty("duration")]
 		public ValueText Duration { get; set; }
+		
+		[JsonProperty("duration_in_traffic")]
+		public ValueText DurationInTraffic { get; set; }
 
 		[JsonProperty("distance")]
 		public ValueText Distance { get; set; }

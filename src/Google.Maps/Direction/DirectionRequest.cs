@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Google.Maps;
 using System.ComponentModel;
 
 namespace Google.Maps.Direction
@@ -23,6 +22,15 @@ namespace Google.Maps.Direction
 		//TODO: add transit TravelMode and add to summary: If you set the mode to "transit" you must also specify either a departure_time or an arrival_time.
 		[DefaultValue(TravelMode.driving)]
 		public TravelMode Mode { get; set; }
+
+
+		/// <summary>
+		/// Specifies the assumptions to use when calculating time in traffic. This setting affects the value returned in the duration_in_traffic field in the response,
+		/// which contains the predicted time in traffic based on historical averages. The traffic_model parameter may only be specified for driving directions where
+		/// the request includes a departure_time, and only if the request includes an API key or a Google Maps Platform Premium Plan client ID. 
+		/// </summary>
+		[DefaultValue(TrafficModel.best_guess)]
+		public TrafficModel TrafficModel { get; set; }
 
 		/// <summary>
 		/// (optional) Directions may be calculated that adhere to certain restrictions.
@@ -119,6 +127,7 @@ namespace Google.Maps.Direction
 				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
 				.Append("destination", (Destination == null ? (string)null : Destination.GetAsUrlParameter()))
 				.Append("mode", (Mode != TravelMode.driving ? Mode.ToString() : (string)null))
+				.Append("traffic_model", (TrafficModel!=TrafficModel.best_guess ? TrafficModel.ToString():(string)null))
 				.Append("departure_time", (DepartureTime == null ? null : DepartureTime.Value.ToString()))
 				.Append("arrival_time", (ArrivalTime == null ? null : ArrivalTime.Value.ToString()))
 				.Append("waypoints", WaypointsToUri())

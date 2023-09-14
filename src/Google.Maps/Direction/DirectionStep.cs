@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Google.Maps.Direction
@@ -22,6 +20,9 @@ namespace Google.Maps.Direction
 
 		[JsonProperty("duration")]
 		public ValueText Duration { get; set; }
+
+		[JsonProperty("duration_in_traffic")]
+		public ValueText DurationInTraffic { get; set; }
 
 		[Obsolete("maneuver is obsolete", false)]
 		public string Maneuver { get; set; }

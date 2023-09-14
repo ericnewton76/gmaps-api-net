@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Google.Maps
+﻿namespace Google.Maps
 {
 	/// <summary>
 	/// Represents the different image formats available from the Google Maps API.

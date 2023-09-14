@@ -16,7 +16,6 @@
  */
 
 using Newtonsoft.Json;
-using System;
 
 namespace Google.Maps.Shared
 {

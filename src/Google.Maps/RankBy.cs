@@ -15,12 +15,6 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace Google.Maps
 {
 	public enum RankBy
